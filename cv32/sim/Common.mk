@@ -66,10 +66,10 @@ BANNER=*************************************************************************
 #      *_TAG:    Not yet supported (TODO).
 #                
 
-CV32E40P_REPO   ?= https://github.com/openhwgroup/cv32e40p
-CV32E40P_BRANCH ?= master
+CV32E40P_REPO   ?= https://github.com/RISKVFT/cv32e40p
+CV32E40P_BRANCH ?= FT_Marcello
 #2020-10-08
-CV32E40P_HASH   ?= f6196bf
+CV32E40P_HASH   ?= head
 
 FPNEW_REPO      ?= https://github.com/pulp-platform/fpnew
 FPNEW_BRANCH    ?= master

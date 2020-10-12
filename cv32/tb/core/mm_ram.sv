@@ -183,16 +183,16 @@ module mm_ram
             rnd_stall_regs[RND_STALL_DATA_MAX]    = $urandom_range(3,0);
         end
 
-        `uvm_info("RNDSTALL", $sformatf("INSTR stall enable: %0d", rnd_stall_regs[RND_STALL_INSTR_EN]), UVM_LOW)
-        `uvm_info("RNDSTALL", $sformatf("INSTR stall mode:   %0d", rnd_stall_regs[RND_STALL_INSTR_MODE]), UVM_LOW)
-        `uvm_info("RNDSTALL", $sformatf("INSTR stall gnt:    %0d", rnd_stall_regs[RND_STALL_INSTR_GNT]), UVM_LOW)
-        `uvm_info("RNDSTALL", $sformatf("INSTR stall valid:  %0d", rnd_stall_regs[RND_STALL_INSTR_VALID]), UVM_LOW)
-        `uvm_info("RNDSTALL", $sformatf("INSTR stall max:    %0d", rnd_stall_regs[RND_STALL_INSTR_MAX]), UVM_LOW)
-        `uvm_info("RNDSTALL", $sformatf("DATA stall enable:  %0d", rnd_stall_regs[RND_STALL_DATA_EN]), UVM_LOW)
-        `uvm_info("RNDSTALL", $sformatf("DATA stall mode:    %0d", rnd_stall_regs[RND_STALL_DATA_MODE]), UVM_LOW)
-        `uvm_info("RNDSTALL", $sformatf("DATA stall gnt:     %0d", rnd_stall_regs[RND_STALL_DATA_GNT]), UVM_LOW)
-        `uvm_info("RNDSTALL", $sformatf("DATA stall valid:   %0d", rnd_stall_regs[RND_STALL_DATA_VALID]), UVM_LOW)
-        `uvm_info("RNDSTALL", $sformatf("DATA stall max:     %0d", rnd_stall_regs[RND_STALL_DATA_MAX]), UVM_LOW)
+        uvm_report_info("RNDSTALL", $sformatf("INSTR stall enable: %0d", rnd_stall_regs[RND_STALL_INSTR_EN]), UVM_LOW);
+        uvm_report_info("RNDSTALL", $sformatf("INSTR stall mode:   %0d", rnd_stall_regs[RND_STALL_INSTR_MODE]), UVM_LOW);
+        uvm_report_info("RNDSTALL", $sformatf("INSTR stall gnt:    %0d", rnd_stall_regs[RND_STALL_INSTR_GNT]), UVM_LOW);
+        uvm_report_info("RNDSTALL", $sformatf("INSTR stall valid:  %0d", rnd_stall_regs[RND_STALL_INSTR_VALID]), UVM_LOW);
+        uvm_report_info("RNDSTALL", $sformatf("INSTR stall max:    %0d", rnd_stall_regs[RND_STALL_INSTR_MAX]), UVM_LOW);
+        uvm_report_info("RNDSTALL", $sformatf("DATA stall enable:  %0d", rnd_stall_regs[RND_STALL_DATA_EN]), UVM_LOW);
+        uvm_report_info("RNDSTALL", $sformatf("DATA stall mode:    %0d", rnd_stall_regs[RND_STALL_DATA_MODE]), UVM_LOW);
+        uvm_report_info("RNDSTALL", $sformatf("DATA stall gnt:     %0d", rnd_stall_regs[RND_STALL_DATA_GNT]), UVM_LOW);
+        uvm_report_info("RNDSTALL", $sformatf("DATA stall valid:   %0d", rnd_stall_regs[RND_STALL_DATA_VALID]), UVM_LOW);
+        uvm_report_info("RNDSTALL", $sformatf("DATA stall max:     %0d", rnd_stall_regs[RND_STALL_DATA_MAX]), UVM_LOW);
 `endif
     end
 

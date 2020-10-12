@@ -125,6 +125,8 @@ TBSRC       := $(TBSRC_CORE)/tb_top.sv \
                $(TBSRC_CORE)/mm_ram.sv \
                $(TBSRC_CORE)/dp_ram.sv \
                $(TBSRC_CORE)/tb_riscv/riscv_random_stall.sv \
+               $(TBSRC_CORE)/tb_riscv/riscv_rvalid_stall.sv \
+               $(TBSRC_CORE)/tb_riscv/riscv_gnt_stall.sv \
                $(TBSRC_CORE)/tb_riscv/riscv_random_interrupt_generator.sv
 
 RTLSRC_VLOG_TB_TOP	:= $(basename $(notdir $(TBSRC_TOP)))
@@ -324,7 +326,7 @@ vsim-run-gui: vsim-all
 .PHONY: questa-hello-world
 questa-hello-world: vsim-all $(CUSTOM)/hello-world.hex
 questa-hello-world: ALL_VSIM_FLAGS += +firmware=$(CUSTOM)/hello-world.hex
-questa-hello-world: vsim-run
+questa-hello-world: vsim-run-gui &
 
 .PHONY: questa-cv32_riscv_tests
 questa-cv32_riscv_tests: vsim-all $(CV32_RISCV_TESTS_FIRMWARE)/cv32_riscv_tests_firmware.hex
