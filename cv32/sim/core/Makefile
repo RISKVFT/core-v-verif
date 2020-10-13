@@ -72,7 +72,7 @@ ALL_VSIM_FLAGS    = $(VSIM_FLAGS)
 VSIM_DEBUG_FLAGS  = -debugdb
 VSIM_GUI_FLAGS    = -gui -debugdb
 VSIM_SCRIPT_DIR	  = ../questa
-VSIM_SCRIPT       = $(VSIM_SCRIPT_DIR)/vsim.tcl
+VSIM_SCRIPT       = $(VSIM_SCRIPT_DIR)/vsim.tcl #cambiare con ../tools/vsim/vsim.tcl oppure creare la cartella ../questa e copiare il contenuto di vsim
 
 # vcs configuration (hopelessly out of date)
 VCS_VERSION             = O-2018.09-SP1-1
