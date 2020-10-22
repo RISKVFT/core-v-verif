@@ -1,0 +1,71 @@
+#!/bin/bash
+
+UsageExit () {
+	echo "Help of ..."
+	exit 1
+}
+
+TEMP=`getopt -o hd:t:c:s: --long help,default-test-dir:,test-dir:,compile:,simulation: -- "$@"`
+eval set -- "$TEMP"
+echo $TEMP
+## General variable
+CUR_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+SIM_FT="$CUR_DIR/sim_FT"
+
+## Variable for parametrization
+COMPILE=0
+COMPILE_FILE="" # file to compile *.c without extension
+SIMULATION=0
+SIMULATION_FILE="" # file to simulate *.hex without extension
+TEST_DIR="$CUR_DIR/../../tests/programs/custom_FT"
+
+while true; do
+	case $1 in
+		-h|--help)
+			UsageExit 		
+			shift	
+			;;
+		-d|--default-test-dir)
+			shift
+			TEST_DIR=$1
+			shift
+			;;
+		-t|--test-dir)
+			shift
+			TEST_DIR=$1
+			shift
+			;;
+		-c|--compile)
+			COMPILE=1
+			shift
+			COMPILE_FILE=$1
+			shift
+			;;
+		-s|--simulation)
+			SIMULATION=1
+			shift
+			if [[ $COMPILE -ne 1 ]]; then
+				SIMULATION_FILE=$1
+			else
+				SIMULATION_FILE=$COMPILE_FILE
+			fi
+			shift
+			;;
+		--)
+			break;;
+		*)
+			echo "Wrong argument!!!!"
+			UsageExit
+			;;
+	esac
+done
+# 
+if [[ $COMPILE -eq 1 ]]; then
+	echo "huquin"
+	make -C $SIM_FT compile COMPILE_FILE="$TEST_DIR/$COMPILE_FILE/$COMPILE_FILE"
+fi
+
+if [[ $SIMULATION -eq 1 ]]; then
+	touch cacca
+	
+fi
