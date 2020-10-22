@@ -36,7 +36,7 @@
 ###############################################################################
 
 # "Constants"
-COMPILE_FILE=hello-world
+TEST_FILE=hello-world
 MAKE           = make
 MAKE_DIR      = $(PWD)
 MAKE_PATH     := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
@@ -50,9 +50,8 @@ WAVES         = 0
 
 # Compile compile flags for all simulators
 SV_CMP_FLAGS = 
-
 # vsim configuration
-VVERSION  = "10.6c"
+VVERSION  = "10.7c"
 
 VLIB      = vlib
 VWORK     = work
@@ -162,7 +161,7 @@ unit-test-gui: $(SIMULATOR)-unit-test-gui
 # Common Makefile:
 #    - Core Firmware and the RISCV GCC Toolchain (SDK)
 #    - Variables for RTL dependencies
-include $(PROJ_ROOT_DIR)/cv32/sim/Common.mk
+include $(PROJ_ROOT_DIR)/cv32/sim/core/sim_FT/Common.mk
 
 
 # assume verilator if no target chosen
@@ -176,6 +175,7 @@ all: clean_all sanity-veri-run dsim-sanity
 
 
 .lib-rtl:
+	$(info $a)
 	$(VLIB) $(VWORK)
 	touch .lib-rtl
 
@@ -196,7 +196,7 @@ vsim-all:  .opt-rtl
 	touch .opt-rtl
 
 compile: 
-	./compile.sh $(COMPILE_FILE) 
+	./compile.sh $(TEST_FILE) 
 
 # run tb and exit
 .PHONY: vsim-run
@@ -223,9 +223,15 @@ vsim-run-gui: vsim-all
 
 
 .PHONY: questa-hello-world
-questa-hello-world: vsim-all $(CUSTOM)/hello-world.hex
+questa-hello-world: vsim-all $(CUSTOM)/$1/hello-world.hex
 questa-hello-world: ALL_VSIM_FLAGS += +firmware=$(CUSTOM)/hello-world.hex
 questa-hello-world: vsim-run-gui &
+
+# General target smulation
+.PHONY: questa-sim
+questa-sim: vsim-all $(TEST_FILE).hex
+questa-sim: ALL_VSIM_FLAGS += +firmware=$(TEST_FILE).hex
+questa-sim: vsim-run-gui &
 
 .PHONY: questa-cv32_riscv_tests
 questa-cv32_riscv_tests: vsim-all $(CV32_RISCV_TESTS_FIRMWARE)/cv32_riscv_tests_firmware.hex

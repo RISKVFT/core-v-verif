@@ -19,12 +19,12 @@
 #      *_TAG:    Not yet supported (TODO).
 #                
 
-CV32E40P_REPO   ?= https://github.com/RISKVFT/cv32e40p
+CV32E40P_REPO   ?= https://github.com/RISKVFT/cv32e40p.git
 CV32E40P_BRANCH ?= FT_Marcello
 #2020-10-08
 CV32E40P_HASH   ?= head
 
-FPNEW_REPO      ?= https://github.com/pulp-platform/fpnew
+FPNEW_REPO      ?= https://github.com/pulp-platform/fpnew.git
 FPNEW_BRANCH    ?= master
 #2020-09-23
 FPNEW_HASH      ?= a0c021c360abcc94e434d41974a52bdcbf14d156
@@ -55,6 +55,8 @@ ifeq ($(CV32E40P_HASH), head)
 else
   CLONE_CV32E40P_CMD = $(TMP); cd $(CV32E40P_PKG); git checkout $(CV32E40P_HASH)
 endif
+a=$(shell echo $(CLONE_CV32E40P_CMD))
+$(info "$a -----------------------------------------------------------------------------------------------------------------------_")
 
 # Generate command to clone the FPNEW RTL
 ifeq ($(FPNEW_BRANCH), master)
@@ -162,11 +164,11 @@ endif
 # Note that the DSIM targets allow for writing the log-files to arbitrary
 # locations, so all of these paths are absolute, except those used by Verilator.
 # TODO: clean this mess up!
-CORE_TEST_DIR                        = $(PROJ_ROOT_DIR)/cv32/tests/core
+CORE_TEST_DIR                        = $(PROJ_ROOT_DIR)/cv32/tests/programs/custom_FT
 BSP                                  = $(PROJ_ROOT_DIR)/cv32/bsp
 FIRMWARE                             = $(CORE_TEST_DIR)/firmware
 VERI_FIRMWARE                        = ../../tests/core/firmware
-CUSTOM                               = $(CORE_TEST_DIR)/custom
+CUSTOM                               = $(CORE_TEST_DIR)
 CUSTOM_DIR                          ?= $(CUSTOM)
 CUSTOM_PROG                         ?= my_hello_world
 VERI_CUSTOM                          = ../../tests/programs/custom

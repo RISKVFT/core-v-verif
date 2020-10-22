@@ -1,0 +1,46 @@
+-c 'hello-world' -- '2'
+huquin
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p
+"https://github.com/RISKVFT/cv32e40p.git,  /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p ------------------------------------------------_"
+make: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT'
+./compile.sh /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/../../tests/programs/custom_FT/hello-world/hello-world 
+dove sto? /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT, /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/../../tests/programs/custom_FT/hello-world/hello-world, 
+make[1]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp'
+Using built-in specs.
+COLLECT_GCC=/software/pulp/riscv/bin/riscv32-unknown-elf-gcc
+COLLECT_LTO_WRAPPER=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper
+Target: riscv32-unknown-elf
+Configured with: /software/pulp/master/riscv-gcc/configure --target=riscv32-unknown-elf --prefix=/software/pulp/riscv --disable-shared --disable-threads --enable-languages=c,c++ --with-system-zlib --enable-tls --with-newlib --with-headers=/software/pulp/riscv/riscv32-unknown-elf/include --disable-libmudflap --disable-libssp --disable-libquadmath --disable-libgomp --disable-nls --enable-checking=yes --enable-multilib --with-abi=ilp32 --with-arch=rv32imc 'CFLAGS_FOR_TARGET=-Os  -mcmodel=medlow'
+Thread model: single
+gcc version 7.1.1 20170509 (GCC) 
+COLLECT_GCC_OPTIONS='-v' '-o' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/../../tests/programs/custom_FT/hello-world/hello-world.elf' '-nostartfiles' '-T' './../../../bsp/link.ld' '-L./../../../bsp' '-march=rv32imc' '-mabi=ilp32'
+ /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/cc1 -quiet -v /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/../../tests/programs/custom_FT/hello-world/hello-world.c -quiet -dumpbase hello-world.c -march=rv32imc -mabi=ilp32 -auxbase hello-world -version -o /tmp/ccYyTEHc.s
+GNU C11 (GCC) version 7.1.1 20170509 (riscv32-unknown-elf)
+	compiled by GNU C version 4.8.5 20150623 (Red Hat 4.8.5-39), GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+GGC heuristics: --param ggc-min-expand=30 --param ggc-min-heapsize=4096
+#include "..." search starts here:
+#include <...> search starts here:
+ /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/include
+ /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/include-fixed
+ /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/sys-include
+ /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/include
+End of search list.
+GNU C11 (GCC) version 7.1.1 20170509 (riscv32-unknown-elf)
+	compiled by GNU C version 4.8.5 20150623 (Red Hat 4.8.5-39), GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+GGC heuristics: --param ggc-min-expand=30 --param ggc-min-heapsize=4096
+Compiler executable checksum: 62e0915a9202b56ca38b2b56f37e24f0
+COLLECT_GCC_OPTIONS='-v' '-o' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/../../tests/programs/custom_FT/hello-world/hello-world.elf' '-nostartfiles' '-T' './../../../bsp/link.ld' '-L./../../../bsp' '-march=rv32imc' '-mabi=ilp32'
+ /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/as -v --traditional-format -march=rv32imc -mabi=ilp32 -o /tmp/ccOKJcXv.o /tmp/ccYyTEHc.s
+GNU assembler version 2.28.0 (riscv32-unknown-elf) using BFD version (GNU Binutils) 2.28.0.20170505
+COMPILER_PATH=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/
+LIBRARY_PATH=/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib/:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/../../tests/programs/custom_FT/hello-world/hello-world.elf' '-nostartfiles' '-T' './../../../bsp/link.ld' '-L./../../../bsp' '-march=rv32imc' '-mabi=ilp32'
+ /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/collect2 -plugin /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/liblto_plugin.so -plugin-opt=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccGx81eP.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgloss -plugin-opt=-pass-through=-lgcc -melf32lriscv --march=rv32imc -o /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/../../tests/programs/custom_FT/hello-world/hello-world.elf -L./../../../bsp -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1 -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib /tmp/ccOKJcXv.o -lcv-verif -lgcc --start-group -lc -lgloss --end-group -lgcc -T ./../../../bsp/link.ld
+COLLECT_GCC_OPTIONS='-v' '-o' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/../../tests/programs/custom_FT/hello-world/hello-world.elf' '-nostartfiles' '-T' './../../../bsp/link.ld' '-L./../../../bsp' '-march=rv32imc' '-mabi=ilp32'
+/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
+/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
+/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
+/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
+make: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT'

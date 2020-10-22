@@ -60,12 +60,12 @@ while true; do
 	esac
 done
 # 
+source /software/europractice-release-2019/scripts/init_questa10.7c
 if [[ $COMPILE -eq 1 ]]; then
 	echo "huquin"
-	make -C $SIM_FT compile COMPILE_FILE="$TEST_DIR/$COMPILE_FILE/$COMPILE_FILE"
+	make -C $SIM_FT compile TEST_FILE="$TEST_DIR/$COMPILE_FILE/$COMPILE_FILE"
 fi
 
 if [[ $SIMULATION -eq 1 ]]; then
-	touch cacca
-	
+	make -C $SIM_FT questa-sim TEST_FILE="$TEST_DIR/$SIMULATION_FILE/$SIMULATION_FILE"
 fi
