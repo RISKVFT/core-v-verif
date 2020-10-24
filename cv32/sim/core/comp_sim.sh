@@ -1,8 +1,17 @@
-#!/bin/bash
+#!/bin/sh
 
 UsageExit () {
 	echo "Help of ..."
 	exit 1
+}
+
+FileToPath (){
+	# $1 path in which find
+	# $2 filename to find
+	# find the corect path and return it
+	var=$(find $1 -name "$2.c")
+	l=$(( ${#var}-2 ))
+	echo ${var:0:$l}
 }
 
 TEMP=`getopt -o hd:t:c:s: --long help,default-test-dir:,test-dir:,compile:,simulation: -- "$@"`
@@ -13,11 +22,13 @@ CUR_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 SIM_FT="$CUR_DIR/sim_FT"
 
 ## Variable for parametrization
-COMPILE=0
-COMPILE_FILE="" # file to compile *.c without extension
+COMPILATION=0
+COMPILATION_FILE="" # file to compile *.c without extension
 SIMULATION=0
 SIMULATION_FILE="" # file to simulate *.hex without extension
-TEST_DIR="$CUR_DIR/../../tests/programs/custom_FT"
+#TEST_DIR="$CUR_DIR/../../tests/programs/custom_FT"
+TEST_DIR="$CUR_DIR/../../tests/programs/MiBench"
+
 
 while true; do
 	case $1 in
@@ -36,18 +47,18 @@ while true; do
 			shift
 			;;
 		-c|--compile)
-			COMPILE=1
+			COMPILATION=1
 			shift
-			COMPILE_FILE=$1
+			COMPILATION_FILE=$1
 			shift
 			;;
 		-s|--simulation)
 			SIMULATION=1
 			shift
-			if [[ $COMPILE -ne 1 ]]; then
+			if [[ $COMPILATION -ne 1 ]]; then
 				SIMULATION_FILE=$1
 			else
-				SIMULATION_FILE=$COMPILE_FILE
+				SIMULATION_FILE=$COMPILATION_FILE
 			fi
 			shift
 			;;
@@ -59,13 +70,19 @@ while true; do
 			;;
 	esac
 done
-# 
+
+
 source /software/europractice-release-2019/scripts/init_questa10.7c
-if [[ $COMPILE -eq 1 ]]; then
+if [[ $COMPILATION -eq 1 ]]; then
+	# full compilation path without extension
+	echo "$TEST_DIR $COMPILATION_FILE"
+	FULL_FILE_CPATH=$(FileToPath $TEST_DIR $COMPILATION_FILE)
 	echo "huquin"
-	make -C $SIM_FT compile TEST_FILE="$TEST_DIR/$COMPILE_FILE/$COMPILE_FILE"
+	make -C $SIM_FT compile TEST_FILE="$FULL_FILE_CPATH"
 fi
 
-if [[ $SIMULATION -eq 1 ]]; then
-	make -C $SIM_FT questa-sim TEST_FILE="$TEST_DIR/$SIMULATION_FILE/$SIMULATION_FILE"
+if [[ $SIMULATION -eq 1 ]]; then	
+	# full simulation path without extension 
+	FULL_FILE_SPATH=$(FileToPath $TEST_DIR $SIMULATION_FILE)	
+	make -C $SIM_FT questa-sim TEST_FILE="$FULL_FILE_SPATH"
 fi
