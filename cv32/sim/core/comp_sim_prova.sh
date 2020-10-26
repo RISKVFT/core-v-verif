@@ -5,16 +5,6 @@ UsageExit () {
 	exit 1
 }
 
-replace_TEST_DIR () {
-	awk -v old="^TEST_DIR=\".*\"" -v new="TEST_DIR=\"Ciao\"" \
-	'{if ($0 ~ old) \
-			print new; \
-		else \
-			print $0}' \
-	 $1 > $1.t
-	 mv $1{.t,}
-}
-
 FileToPath (){
 	# $1 path in which find
 	# $2 filename to find
@@ -37,7 +27,7 @@ COMPILATION_FILE="" # file to compile *.c without extension
 SIMULATION=0
 SIMULATION_FILE="" # file to simulate *.hex without extension
 #TEST_DIR="$CUR_DIR/../../tests/programs/custom_FT"
-TEST_DIR="$CUR_DIR/../../tests/programs/MiBench"
+TEST_DIR="Ciao"
 
 
 while true; do
