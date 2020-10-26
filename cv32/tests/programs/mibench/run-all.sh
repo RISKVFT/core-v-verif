@@ -27,7 +27,7 @@
 #          automotive/susan"
 
 #SRCDIRS="consumer/jpeg/jpeg-6a telecomm/adpcm/src security/rijndael security/sha telecomm/fft"
-SRCDIRS="telecomm/fft"
+SRCDIRS="automotive/basicmath"
 
 
 CURRDIR=$(pwd)

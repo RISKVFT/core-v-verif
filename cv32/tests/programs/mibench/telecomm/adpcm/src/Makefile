@@ -16,7 +16,8 @@ LFLAGS = $(LFLAGS) -static
 #
 # End of addition
 ######################################################################
-CFLAGS = -static -O3
+CFLAGS = -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -v
+
 
 # May need this on a sun:
 # CFLAGS=-O -I/usr/demo/SOUND
@@ -34,25 +35,25 @@ sun: all suncaudio sundaudio
 adpcm.o: adpcm.h
 
 suncaudio: suncaudio.o adpcm.o
-	$(CC) adpcm.o suncaudio.o -o suncaudio -L/usr/demo/SOUND -laudio
+	$(CC) adpcm.o suncaudio.o -o suncaudio -nostartfiles ${LD} -L/usr/demo/SOUND -laudio
 
 sundaudio: suncaudio
 	cp suncaudio sundaudio
 
 sgicaudio: sgicaudio.o adpcm.o
-	$(CC) sgicaudio.o adpcm.o -o sgicaudio -laudiofile -lm
+	$(CC) sgicaudio.o adpcm.o -o sgicaudio -nostartfiles ${LD} -laudiofile -lm
 
 sgidaudio: sgidaudio.o adpcm.o
 	$(CC) sgidaudio.o adpcm.o -o sgidaudio -laudiofile -lm
 
 rawcaudio: rawcaudio.o adpcm.o
-	$(CC) $(CFLAGS) rawcaudio.o adpcm.o -o rawcaudio
+	$(CC) $(CFLAGS) rawcaudio.o adpcm.o -o rawcaudio -nostartfiles ${LD}
 
 rawdaudio: rawdaudio.o adpcm.o
-	$(CC) $(CFLAGS) rawdaudio.o adpcm.o -o rawdaudio
+	$(CC) $(CFLAGS) rawdaudio.o adpcm.o -o rawdaudio -nostartfiles ${LD}
 
 timing: timing.o adpcm.o
-	$(CC) $(CFLAGS) timing.o adpcm.o -o timing
+	$(CC) $(CFLAGS) timing.o adpcm.o -o timing -nostartfiles ${LD}
 
 adpcm.shar: $(ALLSRC)
 	shar $(ALLSRC) > adpcm.shar
