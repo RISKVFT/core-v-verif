@@ -17,15 +17,18 @@ sim:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem
 # Definition of error type
 #set default
 
-set signal "/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21]"
+set signal "/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[5]"
 
-for {set i 0} {$i < 32} {incr i} {
-	set force_signal_element $signal
-  	append force_signal_element "[$i]"
-	puts $force_signal_element
-	# This command set value to 1 @ 1000ns and release it a 1100ns
-	#force -freeze  sim:$force_signal_element 1 1000 ns -cancel 1100 ns
-	force -deposit  sim:$force_signal_element 1 1000 ns
+for {set t 0} {$t < 100} {incr t} {
+	for {set i 0} {$i < 1} {incr i} {
+		set force_signal_element $signal
+		append force_signal_element "[$i]"
+		puts $force_signal_element
+		# This command set value to 1 @ 1000ns and release it a 1100ns
+		#force -freeze  sim:$force_signal_element 1 1000 ns -cancel 1100 ns
+		force -freeze  sim:$force_signal_element 1 1000, 0 1050 -r 2000 
+		#force -deposit  sim:$force_signal_element 1 1000 ns
+	}
 }
 
 run -all

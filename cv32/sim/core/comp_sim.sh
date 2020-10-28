@@ -18,13 +18,14 @@ replace_TEST_DIR () {
 FileToPath (){
 	# $1 path in which find
 	# $2 filename to find
+	# $3 file extension
 	# find the corect path and return it
-	var=$(find $1 -name "$2.c")
-	l=$(( ${#var}-2 ))
+	var=$(find $1 -name "$2.$3")
+	l=$(( ${#var}-${#3}-1 ))
 	echo ${var:0:$l}
 }
 
-TEMP=`getopt -o hfd:t:c:s: --long help,fault-injection,default-test-dir:,test-dir:,compile:,simulation: -- "$@"`
+TEMP=`getopt -o hf:d:t:c:s: --long help,file-vsim,default-test-dir:,test-dir:,compile:,simulation: -- "$@"`
 eval set -- "$TEMP"
 echo $TEMP
 ## General variable
@@ -36,8 +37,9 @@ COMPILATION=0
 COMPILATION_FILE="" # file to compile *.c without extension
 SIMULATION=0
 SIMULATION_FILE="" # file to simulate *.hex without extension
-TEST_DIR="$CUR_DIR/../../tests/programs/custom_FT"
-#TEST_DIR="$CUR_DIR/../../tests/programs/MiBench"
+#TEST_DIR="$CUR_DIR/../../tests/programs/custom_FT"
+#TEST_DIR="$CUR_DIR/../../tests/programs/MiBench/"
+TEST_DIR="$CUR_DIR/../../tests/programs/riscv-toolchain-blogpost/out"
 FAULT_INJECTION=""
 
 
@@ -47,8 +49,9 @@ while true; do
 			UsageExit 		
 			shift	
 			;;
-		-f|--fault-injection)
-			FAULT_INJECTION="_FT"
+		-f|--file-vsim)
+			shift
+			FAULT_INJECTION=$1
 			shift
 			;;
 		-d|--default-test-dir)
@@ -92,13 +95,13 @@ source /software/europractice-release-2019/scripts/init_questa10.7c
 if [[ $COMPILATION -eq 1 ]]; then
 	# full compilation path without extension
 	echo "$TEST_DIR $COMPILATION_FILE"
-	FULL_FILE_CPATH=$(FileToPath $TEST_DIR $COMPILATION_FILE)
+	FULL_FILE_CPATH=$(FileToPath $TEST_DIR $COMPILATION_FILE "riscv32gcc")
 	echo "path to file: $FULL_FILE_CPATH"
 	make -C $SIM_FT compile TEST_FILE="$FULL_FILE_CPATH"
 fi
 
 if [[ $SIMULATION -eq 1 ]]; then	
 	# full simulation path without extension 
-	FULL_FILE_SPATH=$(FileToPath $TEST_DIR $SIMULATION_FILE)	
-	make -C $SIM_FT questa-sim TEST_FILE="$FULL_FILE_SPATH" FT="$FAULT_INJECTION"
+	FULL_FILE_SPATH=$(FileToPath $TEST_DIR $SIMULATION_FILE "riscv32gcc")	
+	make -C $SIM_FT questa-sim TEST_FILE="$FULL_FILE_SPATH" FT="$FAULT_INJECTION"	
 fi
