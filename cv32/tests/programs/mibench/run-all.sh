@@ -27,7 +27,7 @@
 #          automotive/susan"
 
 #SRCDIRS="consumer/jpeg/jpeg-6a telecomm/adpcm/src security/rijndael security/sha telecomm/fft"
-SRCDIRS="automotive/basicmath"
+SRCDIRS="automotive/basicmath telecomm/fft"
 
 
 CURRDIR=$(pwd)
@@ -55,10 +55,11 @@ export MIBENCH_FAST=true
 # path passed to run scripts in directories
 export MIBENCH_RUN="$CURRDIR/$RUNIT"
 
+
 for d in ${SRCDIRS}
 do
     echo ${d}
     cd ${d}
-    ./run-all.sh
+    ./run-all.sh 
     cd ${CURRDIR}
 done

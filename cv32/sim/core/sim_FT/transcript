@@ -13,9 +13,9 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-# vsim "+firmware=/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/../../tests/programs/custom_FT/hello-world/hello-world.hex" -gui -debugdb tb_top_vopt -do "../questa/vsim.tcl" 
-# Start time: 16:24:00 on Oct 22,2020
-# Loading /tmp/elia.ribaldone@vlsi21_dpi_29670/linux_x86_64_gcc-5.3.0/export_tramp.so
+# vsim "+firmware=/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/../../tests/programs/custom_FT/hello-world/hello-world.hex" -gui -debugdb tb_top_vopt -do "../../questa/vsim_FT.tcl" 
+# Start time: 13:05:54 on Oct 28,2020
+# Loading /tmp/elia.ribaldone@vlsi21_dpi_18870/linux_x86_64_gcc-5.3.0/export_tramp.so
 # Loading sv_std.std
 # Loading work.tb_top(fast)
 # Loading work.cv32e40p_tb_wrapper(fast)
@@ -64,9 +64,106 @@
 #    Time: 0 ns  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/ram_i File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 136
 # ** Warning: (vsim-3015) [PCDPC] - Port size (32) does not match connection size (1) for port 'irq_o'. The port definition is at: /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/mm_ram.sv(52).
 #    Time: 0 ns  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/ram_i File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 136
-# Compiling /tmp/elia.ribaldone@vlsi21_dpi_29670/linux_x86_64_gcc-5.3.0/exportwrapper.c
-# Loading /tmp/elia.ribaldone@vlsi21_dpi_29670/linux_x86_64_gcc-5.3.0/vsim_auto_compile.so
+# Compiling /tmp/elia.ribaldone@vlsi21_dpi_18870/linux_x86_64_gcc-5.3.0/exportwrapper.c
+# Loading /tmp/elia.ribaldone@vlsi21_dpi_18870/linux_x86_64_gcc-5.3.0/vsim_auto_compile.so
 # Loading /software/europractice-release-2019/mentor/questa10.7c/questasim/uvm-1.1d/linux_x86_64/uvm_dpi.so
 # ** Note: (vsim-8900) Creating design debug database vsim.dbg.
-# ../questa/vsim.tcl
-# invalid command name "../questa/vsim.tcl"
+# do ../../questa/vsim_FT.tcl
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][0]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][1]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][2]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][3]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][4]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][5]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][6]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][7]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][8]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][9]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][10]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][11]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][12]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][13]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][14]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][15]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][16]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][17]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][18]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][19]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][20]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][21]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][22]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][23]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][24]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][25]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][26]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][27]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][28]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][29]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][30]
+# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/register_file_i/mem[21][31]
+# ----------------------------------------------------------------
+# UVM-1.1d
+# (C) 2007-2013 Mentor Graphics Corporation
+# (C) 2007-2013 Cadence Design Systems, Inc.
+# (C) 2006-2013 Synopsys, Inc.
+# (C) 2011-2013 Cypress Semiconductor Corp.
+# ----------------------------------------------------------------
+# 
+#   ***********       IMPORTANT RELEASE NOTES         ************
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_NO_DEPRECATED undefined.
+#   See http://www.eda.org/svdb/view.php?id=3313 for more details.
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_OBJECT_MUST_HAVE_CONSTRUCTOR undefined.
+#   See http://www.eda.org/svdb/view.php?id=3770 for more details.
+# 
+#       (Specify +UVM_NO_RELNOTES to turn off this notice)
+# 
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(215) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(216) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/load_store_unit_i/#ALWAYS#471 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_load_store_unit.sv Line: 472
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#768 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 769
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#758 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 759
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#752 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 753
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#743 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 744
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#737 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 738
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#601(immediate_a_mux) File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 602
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#516 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 517
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 2  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/load_store_unit_i/#ALWAYS#471 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_load_store_unit.sv Line: 472
+# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall enable: 0
+# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall mode:   0
+# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall gnt:    0
+# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall valid:  0
+# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall max:    0
+# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall enable:  0
+# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall mode:    0
+# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall gnt:     0
+# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall valid:   0
+# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall max:     0
+# Unimplemented system call called!
+# 
+# HELLO WORLD!!!
+# This is the OpenHW Group CV32E40P CORE-V processor core.
+# CV32E40P is a RISC-V ISA compliant core with the following attributes:
+# 	misa      = 0x40801104
+# 	XLEN is 32-bits
+# 	Supported Instructions: XMIC
+# 	This machine supports non-standard instructions.
+# 
+# EXIT SUCCESS
+# ** Note: $finish    : /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/tb_top.sv(143)
+#    Time: 149460 ns  Iteration: 1  Instance: /tb_top
+# 1
+# Break in Module tb_top at /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/tb_top.sv line 143

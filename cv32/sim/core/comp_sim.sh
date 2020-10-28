@@ -24,7 +24,7 @@ FileToPath (){
 	echo ${var:0:$l}
 }
 
-TEMP=`getopt -o hd:t:c:s: --long help,default-test-dir:,test-dir:,compile:,simulation: -- "$@"`
+TEMP=`getopt -o hfd:t:c:s: --long help,fault-injection,default-test-dir:,test-dir:,compile:,simulation: -- "$@"`
 eval set -- "$TEMP"
 echo $TEMP
 ## General variable
@@ -36,8 +36,9 @@ COMPILATION=0
 COMPILATION_FILE="" # file to compile *.c without extension
 SIMULATION=0
 SIMULATION_FILE="" # file to simulate *.hex without extension
-#TEST_DIR="$CUR_DIR/../../tests/programs/custom_FT"
-TEST_DIR="$CUR_DIR/../../tests/programs/MiBench"
+TEST_DIR="$CUR_DIR/../../tests/programs/custom_FT"
+#TEST_DIR="$CUR_DIR/../../tests/programs/MiBench"
+FAULT_INJECTION=""
 
 
 while true; do
@@ -45,6 +46,10 @@ while true; do
 		-h|--help)
 			UsageExit 		
 			shift	
+			;;
+		-f|--fault-injection)
+			FAULT_INJECTION="_FT"
+			shift
 			;;
 		-d|--default-test-dir)
 			shift
@@ -88,11 +93,12 @@ if [[ $COMPILATION -eq 1 ]]; then
 	# full compilation path without extension
 	echo "$TEST_DIR $COMPILATION_FILE"
 	FULL_FILE_CPATH=$(FileToPath $TEST_DIR $COMPILATION_FILE)
+	echo "path to file: $FULL_FILE_CPATH"
 	make -C $SIM_FT compile TEST_FILE="$FULL_FILE_CPATH"
 fi
 
 if [[ $SIMULATION -eq 1 ]]; then	
 	# full simulation path without extension 
 	FULL_FILE_SPATH=$(FileToPath $TEST_DIR $SIMULATION_FILE)	
-	make -C $SIM_FT questa-sim TEST_FILE="$FULL_FILE_SPATH"
+	make -C $SIM_FT questa-sim TEST_FILE="$FULL_FILE_SPATH" FT="$FAULT_INJECTION"
 fi
