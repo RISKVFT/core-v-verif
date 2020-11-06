@@ -11,13 +11,13 @@
 # Also, on Sun machines, in order to use the SPIXTOOLS and SHADE,
 # uncomment this option: -static.
 #
-#LFLAGS = -mv8
+CC = gcc
+LFLAGS = -mv8
 LFLAGS = $(LFLAGS) -static
 #
 # End of addition
 ######################################################################
-CFLAGS = -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -v
-
+CFLAGS = -static -O3
 
 # May need this on a sun:
 # CFLAGS=-O -I/usr/demo/SOUND
@@ -35,25 +35,25 @@ sun: all suncaudio sundaudio
 adpcm.o: adpcm.h
 
 suncaudio: suncaudio.o adpcm.o
-	$(CC) adpcm.o suncaudio.o -o suncaudio -nostartfiles ${LD} -L/usr/demo/SOUND -laudio
+	$(CC) adpcm.o suncaudio.o -o suncaudio -L/usr/demo/SOUND -laudio
 
 sundaudio: suncaudio
 	cp suncaudio sundaudio
 
 sgicaudio: sgicaudio.o adpcm.o
-	$(CC) sgicaudio.o adpcm.o -o sgicaudio -nostartfiles ${LD} -laudiofile -lm
+	$(CC) sgicaudio.o adpcm.o -o sgicaudio -laudiofile -lm
 
 sgidaudio: sgidaudio.o adpcm.o
 	$(CC) sgidaudio.o adpcm.o -o sgidaudio -laudiofile -lm
 
 rawcaudio: rawcaudio.o adpcm.o
-	$(CC) $(CFLAGS) rawcaudio.o adpcm.o -o rawcaudio -nostartfiles ${LD}
+	$(CC) $(CFLAGS) rawcaudio.o adpcm.o -o rawcaudio
 
 rawdaudio: rawdaudio.o adpcm.o
-	$(CC) $(CFLAGS) rawdaudio.o adpcm.o -o rawdaudio -nostartfiles ${LD}
+	$(CC) $(CFLAGS) rawdaudio.o adpcm.o -o rawdaudio
 
 timing: timing.o adpcm.o
-	$(CC) $(CFLAGS) timing.o adpcm.o -o timing -nostartfiles ${LD}
+	$(CC) $(CFLAGS) timing.o adpcm.o -o timing
 
 adpcm.shar: $(ALLSRC)
 	shar $(ALLSRC) > adpcm.shar

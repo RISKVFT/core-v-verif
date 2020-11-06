@@ -1,8 +1,5 @@
-CFLAGS = -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -v
-
-
 rijndael: aes.c aes.h aestab.h aesxam.c Makefile
-	${CC} ${CFLAGS} aes.c aesxam.c -o rijndael -nostartfiles ${LD}
+	${CC} -static ${OPT} -o ../../out/rijndael.${TGT} aes.c aesxam.c
 
-clean:z
+clean:
 	rm -rf rijndael output*

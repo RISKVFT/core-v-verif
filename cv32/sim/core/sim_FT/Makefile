@@ -222,16 +222,27 @@ vsim-run-gui: vsim-all
 	$(RTLSRC_VOPT_TB_TOP) -do $(VSIM_SCRIPT)
 
 
+
 .PHONY: questa-hello-world
 questa-hello-world: vsim-all $(CUSTOM)/$1/hello-world.hex
 questa-hello-world: ALL_VSIM_FLAGS += +firmware=$(CUSTOM)/hello-world.hex
 questa-hello-world: vsim-run-gui &
 
-# General target smulation
+###############################################
+
+# General target smulation without GUI
 .PHONY: questa-sim
 questa-sim: vsim-all $(TEST_FILE).hex
 questa-sim: ALL_VSIM_FLAGS += +firmware=$(TEST_FILE).hex
-questa-sim: vsim-run-gui &
+questa-sim: vsim-run
+
+# General target smulation with GUI
+.PHONY: questa-sim-gui
+questa-sim-gui: vsim-all $(TEST_FILE).hex
+questa-sim-gui: ALL_VSIM_FLAGS += +firmware=$(TEST_FILE).hex
+questa-sim-gui: vsim-run-gui &
+
+###############################################
 
 .PHONY: questa-cv32_riscv_tests
 questa-cv32_riscv_tests: vsim-all $(CV32_RISCV_TESTS_FIRMWARE)/cv32_riscv_tests_firmware.hex

@@ -30,14 +30,27 @@ if [[ $1 =~ "riscv-toolchain-blogpost" ]];then
 		--change-section-address  .debugger=0x3FC000 \
 		--change-section-address  .debugger_exception=0x3FC800	
 else
-	# Compilation of .c argument file
+	if# Compilation of .c argument file
 	"$RISCV_EXE_PREFIX"gcc $CFLAGS -v -o $1.elf -nostartfiles $1.c -T $BSP/link.ld -L $BSP -lcv-verif
 
-	# Tranform .elf in .hex file changing address
-	"$RISCV_EXE_PREFIX"objcopy -O verilog $1.elf $1.hex \
-		--change-section-address  .debugger=0x3FC000 \
-		--change-section-address  .debugger_exception=0x3FC800
+"$RISCV_EXE_PREFIX"gcc $CFLAGS -v -o $1.elf -nostartfiles -I $ASM $1.S -T ./../../bsp/link.ld -L ./../../bsp -lcv-verif
+
+# Tranform .elf in .hex file changing address
+"$RISCV_EXE_PREFIX"objcopy -O verilog $1.elf $1.hex \
+	--change-section-address  .debugger=0x3FC000 \
+	--change-section-address  .debugger_exception=0x3FC800
 # Save elf properties
 "$RISCV_EXE_PREFIX"readelf -a $1.elf > $1.readelf
 "$RISCV_EXE_PREFIX"objdump -D -S $1.elf > $1.objdump
+
 fi
+
+
+
+
+
+
+
+
+
+

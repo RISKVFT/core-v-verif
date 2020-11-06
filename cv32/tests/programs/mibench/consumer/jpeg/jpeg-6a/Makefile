@@ -18,9 +18,9 @@ binprefix =
 manprefix =
 manext = 1
 mandir = $(prefix)/man/man$(manext)
-CFLAGS = -static
+
 # The name of your C compiler:
-CC= /software/pulp/riscv/bin/riscv32-unknown-elf-gcc
+CC= gcc
 
 # You may need to adjust these cc options:
 CFLAGS= -O  -I$(srcdir)
