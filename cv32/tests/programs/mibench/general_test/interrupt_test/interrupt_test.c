@@ -147,7 +147,7 @@ void m_fast14_irq_handler(void) { generic_irq_handler(FAST14_IRQ_ID); }
 void m_fast15_irq_handler(void) { generic_irq_handler(FAST15_IRQ_ID); }
 
 // A Special version of the SW Handler (vector 0) used in the direct mode
-__attribute__((interrupt ("machine"))) void u_sw_direct_irq_handler(void)  {
+void u_sw_direct_irq_handler(void)  {
     in_direct_handler = 1;
     asm volatile("csrr %0, mcause" : "=r" (mmcause));
 }

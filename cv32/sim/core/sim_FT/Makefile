@@ -224,8 +224,8 @@ vsim-run-gui: vsim-all
 
 
 .PHONY: questa-hello-world
-questa-hello-world: vsim-all $(CUSTOM)/$1/hello-world.hex
-questa-hello-world: ALL_VSIM_FLAGS += +firmware=$(CUSTOM)/hello-world.hex
+questa-hello-world: vsim-all $(CUSTOM)/hello-world/hello-world.hex
+questa-hello-world: ALL_VSIM_FLAGS += +firmware=$(CUSTOM)/hello-world/hello-world.hex
 questa-hello-world: vsim-run-gui &
 
 ###############################################

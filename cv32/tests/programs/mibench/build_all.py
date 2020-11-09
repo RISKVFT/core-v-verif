@@ -30,7 +30,8 @@ def make_env():
     e['OPT'] = toolchain_args
     e['CC'] = toolchain_cc
     e['BSP'] = '%s/../../../bsp' % os.getcwd()
-    e['LD'] = "-nostartfiles -T ${BSP}/link.ld  -L ${BSP} -lcv-verif"
+    #e['LD'] = "-nostartfiles -T /software/pulp/riscv/riscv32-unknown-elf/bin/ld"
+    e['LD'] = "-nostartfiles -T ${BSP}/link.ld -L ${BSP} -lcv-verif" #-nostdlib -lgcc -lc"
     return e
 
 

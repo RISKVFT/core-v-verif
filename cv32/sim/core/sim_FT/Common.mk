@@ -164,7 +164,7 @@ endif
 # Note that the DSIM targets allow for writing the log-files to arbitrary
 # locations, so all of these paths are absolute, except those used by Verilator.
 # TODO: clean this mess up!
-CORE_TEST_DIR                        = $(PROJ_ROOT_DIR)/cv32/tests/programs/custom_FT
+CORE_TEST_DIR                        = $(PROJ_ROOT_DIR)/cv32/tests/programs/mibench/general_test
 BSP                                  = $(PROJ_ROOT_DIR)/cv32/bsp
 FIRMWARE                             = $(CORE_TEST_DIR)/firmware
 VERI_FIRMWARE                        = ../../tests/core/firmware

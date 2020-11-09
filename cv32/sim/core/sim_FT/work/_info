@@ -10,7 +10,7 @@ cModel Technology
 Z0 d/home/thesis/luca.fiore/Repos/core-v-verif/cv32/sim/core/sim_FT
 vcv32e40p_aligner
 Z1 DXx6 sv_std 3 std 0 22 d=_JfHTnXCN[H5FjiaJJc0
-Z2 !s110 1604679752
+Z2 !s110 1604933279
 !i10b 1
 !s100 L7V?l^<FGc0ijcJ08_Lo;3
 IUXf;ZYXoYkn`G8aZ05@>40
@@ -18,7 +18,7 @@ Z3 VDg1SIo80bB@j0V0VzS_@n1
 !s105 cv32e40p_aligner_sv_unit
 S1
 R0
-Z4 w1604678433
+Z4 w1604932622
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_aligner.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_aligner.sv
 Z5 L0 23
@@ -26,7 +26,7 @@ Z6 OL;L;10.7c;67
 r1
 !s85 0
 31
-Z7 !s108 1604679751.000000
+Z7 !s108 1604933278.000000
 Z8 !s107 /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/../bhv/cv32e40p_core_log.sv|/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_interrupt_generator.sv|/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_gnt_stall.sv|/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_rvalid_stall.sv|/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_stall.sv|/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/dp_ram.sv|/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/mm_ram.sv|/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv|/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_top.sv|/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/include/perturbation_defines.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/../bhv/cv32e40p_wrapper.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/../bhv/cv32e40p_sim_clock_gate.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_core.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_sleep_unit.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_prefetch_controller.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_obi_interface.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_controller.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_apu_disp.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_popcnt.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_ff_one.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_alu.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_alu_div.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_ex_stage.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_int_controller.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_mult.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_hwloop_regs.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_prefetch_buffer.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_fifo.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_compressed_decoder.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_decoder.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_aligner.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_load_store_unit.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_register_file_ff.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_cs_registers.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_if_stage.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/../bhv/include/cv32e40p_tracer_pkg.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/include/cv32e40p_pkg.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/fpnew/src/fpnew_pkg.sv|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/include/cv32e40p_apu_core_pkg.sv|
 Z9 !s90 -work|work|-pedanticerrors|-suppress|2577|-suppress|2583|-f|/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/cv32e40p_manifest.flist|/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/include/perturbation_defines.sv|/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_top.sv|/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv|/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/mm_ram.sv|/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/dp_ram.sv|/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_stall.sv|/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_rvalid_stall.sv|/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_gnt_stall.sv|/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_interrupt_generator.sv|
 !i113 0
@@ -37,7 +37,7 @@ vcv32e40p_alu
 R1
 Z13 DXx4 work 9 fpnew_pkg 0 22 aLhjR58O0Ti`hOClNd63A1
 Z14 DXx4 work 12 cv32e40p_pkg 0 22 gY4Y@:Ri96CSnJ^?59QC`2
-R2
+Z15 !s110 1604933280
 !i10b 1
 !s100 j;9`io<@c9GVXg3ajTSfi3
 ISbN^]cM:S5>jSF_fdOZjF1
@@ -48,7 +48,7 @@ R0
 R4
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_alu.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_alu.sv
-Z15 L0 28
+Z16 L0 28
 R6
 r1
 !s85 0
@@ -62,7 +62,7 @@ R11
 R12
 vcv32e40p_alu_div
 R1
-R2
+R15
 !i10b 1
 !s100 92X86?:oeV;[9zHFo1Sn=3
 I>?A<NHSiH<Ra>XSc8]a@V1
@@ -70,10 +70,10 @@ R3
 !s105 cv32e40p_alu_div_sv_unit
 S1
 R0
-R4
+Z17 w1604932623
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_alu_div.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_alu_div.sv
-Z16 L0 26
+Z18 L0 26
 R6
 r1
 !s85 0
@@ -94,7 +94,7 @@ Ic9d`B^a<d20=00T0a;@^X0
 Vc9d`B^a<d20=00T0a;@^X0
 S1
 R0
-R4
+Z19 w1604932629
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/include/cv32e40p_apu_core_pkg.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/include/cv32e40p_apu_core_pkg.sv
 L0 22
@@ -111,7 +111,7 @@ R11
 R12
 vcv32e40p_apu_disp
 R1
-R2
+R15
 !i10b 1
 !s100 E[SDY?2TQ=oS>I=8Ag2RG1
 I6fi<bDS>z6ij?<>lm`IWj2
@@ -119,10 +119,10 @@ R3
 !s105 cv32e40p_apu_disp_sv_unit
 S1
 R0
-R4
+R17
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_apu_disp.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_apu_disp.sv
-Z17 L0 25
+Z20 L0 25
 R6
 r1
 !s85 0
@@ -136,7 +136,7 @@ R11
 R12
 vcv32e40p_clock_gate
 R1
-R2
+R15
 !i10b 1
 !s100 91`=6Wa1W_Mf[J7OY6J8g0
 IEDTABBXk`V@gCOo`h<1Wo3
@@ -144,10 +144,10 @@ R3
 !s105 cv32e40p_sim_clock_gate_sv_unit
 S1
 R0
-Z18 w1604678432
+Z21 w1604932609
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/../bhv/cv32e40p_sim_clock_gate.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/../bhv/cv32e40p_sim_clock_gate.sv
-Z19 L0 15
+Z22 L0 15
 R6
 r1
 !s85 0
@@ -171,10 +171,10 @@ R3
 !s105 cv32e40p_compressed_decoder_sv_unit
 S1
 R0
-R4
+R17
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_compressed_decoder.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_compressed_decoder.sv
-Z20 L0 27
+Z23 L0 27
 R6
 r1
 !s85 0
@@ -190,7 +190,7 @@ vcv32e40p_controller
 R1
 R13
 R14
-R2
+R15
 !i10b 1
 !s100 ki5SWBQ>AE`MT5;6mW>3F1
 IhKHaEFBWdLE<0SY>Gk4ji0
@@ -198,10 +198,10 @@ R3
 !s105 cv32e40p_controller_sv_unit
 S1
 R0
-R4
+R17
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_controller.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_controller.sv
-Z21 L0 31
+Z24 L0 31
 R6
 r1
 !s85 0
@@ -215,10 +215,10 @@ R11
 R12
 vcv32e40p_core
 R1
-Z22 DXx4 work 21 cv32e40p_apu_core_pkg 0 22 c9d`B^a<d20=00T0a;@^X0
+Z25 DXx4 work 21 cv32e40p_apu_core_pkg 0 22 c9d`B^a<d20=00T0a;@^X0
 R13
 R14
-R2
+R15
 !i10b 1
 !s100 i:TiK74=T^XkaJUG_S[LN1
 IH2Y6OcPPmC:T9VVN37dRi2
@@ -226,10 +226,10 @@ R3
 !s105 cv32e40p_core_sv_unit
 S1
 R0
-R4
+Z26 w1604932624
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_core.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_core.sv
-R21
+R24
 R6
 r1
 !s85 0
@@ -243,15 +243,15 @@ R11
 R12
 vcv32e40p_core_log
 R1
-R2
+R15
 !i10b 1
 !s100 >LBFQL6TKQnz4z]m^c>F>3
 IYD0o`mKgMgEHN0C3k9a@`0
 R3
-Z23 !s105 cv32e40p_wrapper_sv_unit
+Z27 !s105 cv32e40p_wrapper_sv_unit
 S1
 R0
-R18
+w1604932608
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/../bhv/cv32e40p_core_log.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/../bhv/cv32e40p_core_log.sv
 L0 39
@@ -278,10 +278,10 @@ R3
 !s105 cv32e40p_cs_registers_sv_unit
 S1
 R0
-R4
+R26
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_cs_registers.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_cs_registers.sv
-Z24 L0 30
+Z28 L0 30
 R6
 r1
 !s85 0
@@ -297,7 +297,7 @@ vcv32e40p_decoder
 R1
 R13
 R14
-R22
+R25
 R2
 !i10b 1
 !s100 47E[<ld0^YG:5X5ld72az2
@@ -306,10 +306,10 @@ R3
 !s105 cv32e40p_decoder_sv_unit
 S1
 R0
-R4
+R26
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_decoder.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_decoder.sv
-R15
+R16
 R6
 r1
 !s85 0
@@ -325,8 +325,8 @@ vcv32e40p_ex_stage
 R1
 R13
 R14
-R22
-R2
+R25
+R15
 !i10b 1
 !s100 P9[`2W1lBkNSgzoEgLX4K1
 I;^f]V^:><<H>f@bm4bCRg1
@@ -334,7 +334,7 @@ R3
 !s105 cv32e40p_ex_stage_sv_unit
 S1
 R0
-R4
+Z29 w1604932625
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_ex_stage.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_ex_stage.sv
 L0 32
@@ -351,7 +351,7 @@ R11
 R12
 vcv32e40p_ff_one
 R1
-R2
+R15
 !i10b 1
 !s100 jU;8zk@h^BA9WokzoI5U@3
 IcHFh`?F>FbGg^4RNmUfGf2
@@ -359,10 +359,10 @@ R3
 !s105 cv32e40p_ff_one_sv_unit
 S1
 R0
-R4
+R29
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_ff_one.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_ff_one.sv
-R17
+R20
 R6
 r1
 !s85 0
@@ -376,7 +376,7 @@ R11
 R12
 vcv32e40p_fifo
 R1
-R2
+R15
 !i10b 1
 !s100 `[HXhZXD@zhP6I86ToMF[1
 I338QHR5Ab0^8X3]99<1SK3
@@ -384,10 +384,10 @@ R3
 !s105 cv32e40p_fifo_sv_unit
 S1
 R0
-R4
+R29
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_fifo.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_fifo.sv
-R19
+R22
 R6
 r1
 !s85 0
@@ -401,7 +401,7 @@ R11
 R12
 vcv32e40p_hwloop_regs
 R1
-R2
+R15
 !i10b 1
 !s100 dClGZWnL^cR`^bnzh`G8o1
 ISQ>6UC2M>G2]AShC9me:z2
@@ -409,10 +409,10 @@ R3
 !s105 cv32e40p_hwloop_regs_sv_unit
 S1
 R0
-R4
+R29
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_hwloop_regs.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_hwloop_regs.sv
-R17
+R20
 R6
 r1
 !s85 0
@@ -428,7 +428,7 @@ vcv32e40p_id_stage
 R1
 R13
 R14
-R22
+R25
 R2
 !i10b 1
 !s100 7B>OCzE0L7SMRBJ:h4FY20
@@ -437,10 +437,10 @@ R3
 !s105 cv32e40p_id_stage_sv_unit
 S1
 R0
-R4
+Z30 w1604932626
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv
-R24
+R28
 R6
 r1
 !s85 0
@@ -464,10 +464,10 @@ R3
 !s105 cv32e40p_if_stage_sv_unit
 S1
 R0
-R4
+R30
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_if_stage.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_if_stage.sv
-R15
+R16
 R6
 r1
 !s85 0
@@ -483,7 +483,7 @@ vcv32e40p_int_controller
 R1
 R13
 R14
-R2
+R15
 !i10b 1
 !s100 GC4KVcL315LCOU<^c9l<h3
 IJ1jh11704cM00HD`jo`dO2
@@ -491,7 +491,7 @@ R3
 !s105 cv32e40p_int_controller_sv_unit
 S1
 R0
-R4
+R30
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_int_controller.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_int_controller.sv
 L0 24
@@ -516,10 +516,10 @@ R3
 !s105 cv32e40p_load_store_unit_sv_unit
 S1
 R0
-R4
+R30
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_load_store_unit.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_load_store_unit.sv
-R16
+R18
 R6
 r1
 !s85 0
@@ -535,7 +535,7 @@ vcv32e40p_mult
 R1
 R13
 R14
-R2
+R15
 !i10b 1
 !s100 l>:L^8bnY[<He]XeOVEgS0
 Ija6bH:]Y@><ZHYAQZ2g510
@@ -543,10 +543,10 @@ R3
 !s105 cv32e40p_mult_sv_unit
 S1
 R0
-R4
+Z31 w1604932627
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_mult.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_mult.sv
-R16
+R18
 R6
 r1
 !s85 0
@@ -560,7 +560,7 @@ R11
 R12
 vcv32e40p_obi_interface
 R1
-R2
+R15
 !i10b 1
 !s100 kzzHW[_V]mN;Q37T;7bOE3
 I>d6m8ZiKzH;PTIVW<4=^I1
@@ -568,7 +568,7 @@ R3
 !s105 cv32e40p_obi_interface_sv_unit
 S1
 R0
-R4
+R31
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_obi_interface.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_obi_interface.sv
 L0 38
@@ -593,10 +593,10 @@ IgY4Y@:Ri96CSnJ^?59QC`2
 VgY4Y@:Ri96CSnJ^?59QC`2
 S1
 R0
-R4
+R19
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/include/cv32e40p_pkg.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/include/cv32e40p_pkg.sv
-R16
+R18
 R6
 r1
 !s85 0
@@ -610,7 +610,7 @@ R11
 R12
 vcv32e40p_popcnt
 R1
-R2
+R15
 !i10b 1
 !s100 @z9bZI8X;74i2T`LND_HE2
 Im?kbZ@2_VXCc=1__];z`k2
@@ -618,10 +618,10 @@ R3
 !s105 cv32e40p_popcnt_sv_unit
 S1
 R0
-R4
+R31
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_popcnt.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_popcnt.sv
-R17
+R20
 R6
 r1
 !s85 0
@@ -635,7 +635,7 @@ R11
 R12
 vcv32e40p_prefetch_buffer
 R1
-R2
+R15
 !i10b 1
 !s100 <a]IolQPRHY5Yd^zRR2@?1
 IZ^AN;lIRmO^ZhU<O_J0]J2
@@ -643,10 +643,10 @@ R3
 !s105 cv32e40p_prefetch_buffer_sv_unit
 S1
 R0
-R4
+Z32 w1604932628
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_prefetch_buffer.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_prefetch_buffer.sv
-R20
+R23
 R6
 r1
 !s85 0
@@ -660,7 +660,7 @@ R11
 R12
 vcv32e40p_prefetch_controller
 R1
-R2
+R15
 !i10b 1
 !s100 f65g2><65A_=oTJzPgYo01
 I?dN^A12d[E?i7[bYEg^5`1
@@ -668,7 +668,7 @@ R3
 !s105 cv32e40p_prefetch_controller_sv_unit
 S1
 R0
-R4
+R32
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_prefetch_controller.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_prefetch_controller.sv
 L0 40
@@ -693,10 +693,10 @@ R3
 !s105 cv32e40p_register_file_ff_sv_unit
 S1
 R0
-R4
+R32
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_register_file_ff.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_register_file_ff.sv
-R24
+R28
 R6
 r1
 !s85 0
@@ -712,7 +712,7 @@ vcv32e40p_sleep_unit
 R1
 R13
 R14
-R2
+R15
 !i10b 1
 !s100 I0@7__YG;Y?c1`z`2E1[W3
 I_GTH=bI`=MSFDl7l;4M@L0
@@ -720,7 +720,7 @@ R3
 !s105 cv32e40p_sleep_unit_sv_unit
 S1
 R0
-R4
+R19
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_sleep_unit.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_sleep_unit.sv
 L0 56
@@ -737,7 +737,7 @@ R11
 R12
 vcv32e40p_tb_wrapper
 R1
-R2
+R15
 !i10b 1
 !s100 4=WcRoT]Oo8o[5nAKCBH91
 IGim[]W54aeX3Gm4lM^gOl2
@@ -745,7 +745,7 @@ R3
 !s105 cv32e40p_tb_wrapper_sv_unit
 S1
 R0
-Z25 w1604673237
+Z33 w1604673237
 8/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv
 L0 16
@@ -771,10 +771,10 @@ Ib:`;Qf8IdVP?zQTEEoE9=3
 Vb:`;Qf8IdVP?zQTEEoE9=3
 S1
 R0
-R18
+w1604932610
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/../bhv/include/cv32e40p_tracer_pkg.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/../bhv/include/cv32e40p_tracer_pkg.sv
-Z26 L0 12
+Z34 L0 12
 R6
 r1
 !s85 0
@@ -788,19 +788,19 @@ R11
 R12
 vcv32e40p_wrapper
 R1
-R22
-R2
+R25
+R15
 !i10b 1
 !s100 RC8?lEA2JbN;89jPVkVfK0
 IYFdZ3h2mYPjzle5bQc9RO1
 R3
-R23
+R27
 S1
 R0
-R18
+R21
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/../bhv/cv32e40p_wrapper.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/../bhv/cv32e40p_wrapper.sv
-R15
+R16
 R6
 r1
 !s85 0
@@ -814,7 +814,7 @@ R11
 R12
 vdp_ram
 R1
-Z27 !s110 1604679753
+Z35 !s110 1604933281
 !i10b 1
 !s100 oT`H6[Ck]bbme3K6QkgGW0
 IBJ92b5IKB9K[7n:`EES]81
@@ -822,10 +822,10 @@ R3
 !s105 dp_ram_sv_unit
 S1
 R0
-R25
+R33
 8/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/dp_ram.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/dp_ram.sv
-R26
+R34
 R6
 r1
 !s85 0
@@ -846,7 +846,7 @@ IaLhjR58O0Ti`hOClNd63A1
 VaLhjR58O0Ti`hOClNd63A1
 S1
 R0
-w1604678436
+w1604932654
 8/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/fpnew/src/fpnew_pkg.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p/rtl/fpnew/src/fpnew_pkg.sv
 L0 14
@@ -864,7 +864,7 @@ R12
 vmm_ram
 R1
 DXx6 mtiUvm 7 uvm_pkg 0 22 3zPkj@YUcM=M^m3zCLh<H1
-R27
+R35
 !i10b 1
 !s100 a:HLNSK;C:ED^B2JAo5<10
 ICh?>dd_>Ml2bW3ibfIbWi0
@@ -872,10 +872,10 @@ R3
 !s105 mm_ram_sv_unit
 S1
 R0
-R25
+R33
 8/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/mm_ram.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/mm_ram.sv
-Z28 L0 18
+Z36 L0 18
 R6
 r1
 !s85 0
@@ -889,14 +889,14 @@ R11
 R12
 Xperturbation_defines
 R1
-R2
+R15
 !i10b 1
 !s100 hDlLjn^Emc^jQ3jU9I]MG1
 IhK0S=a]PcRYeV<Ra3[[2_2
 VhK0S=a]PcRYeV<Ra3[[2_2
 S1
 R0
-R25
+R33
 8/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/include/perturbation_defines.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/include/perturbation_defines.sv
 R5
@@ -913,8 +913,8 @@ R11
 R12
 vriscv_gnt_stall
 R1
-Z29 DXx4 work 20 perturbation_defines 0 22 hK0S=a]PcRYeV<Ra3[[2_2
-R27
+Z37 DXx4 work 20 perturbation_defines 0 22 hK0S=a]PcRYeV<Ra3[[2_2
+R35
 !i10b 1
 !s100 N0:nS^j0;b7GlSk3VXO6m2
 Ikgn`aRNzlYH?1LVFI?]VU0
@@ -922,10 +922,10 @@ R3
 !s105 riscv_gnt_stall_sv_unit
 S1
 R0
-R25
+R33
 8/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_gnt_stall.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_gnt_stall.sv
-R24
+R28
 R6
 r1
 !s85 0
@@ -939,7 +939,7 @@ R11
 R12
 vriscv_random_interrupt_generator
 R1
-R29
+R37
 DXx4 work 40 riscv_random_interrupt_generator_sv_unit 0 22 Z0BN1[oAWT1i]`7^MAJln3
 R3
 r1
@@ -950,9 +950,9 @@ ImU^O>R_ZnmQU5m3cKF[JX2
 !s105 riscv_random_interrupt_generator_sv_unit
 S1
 R0
-R25
-Z30 8/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_interrupt_generator.sv
-Z31 F/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_interrupt_generator.sv
+R33
+Z38 8/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_interrupt_generator.sv
+Z39 F/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_interrupt_generator.sv
 L0 29
 R6
 31
@@ -965,7 +965,7 @@ R11
 R12
 Xriscv_random_interrupt_generator_sv_unit
 R1
-R29
+R37
 VZ0BN1[oAWT1i]`7^MAJln3
 r1
 !s85 0
@@ -975,10 +975,10 @@ IZ0BN1[oAWT1i]`7^MAJln3
 !i103 1
 S1
 R0
-R25
-R30
-R31
-R20
+R33
+R38
+R39
+R23
 R6
 31
 R7
@@ -990,7 +990,7 @@ R11
 R12
 vriscv_random_stall
 R1
-R29
+R37
 DXx4 work 26 riscv_random_stall_sv_unit 0 22 ?h2f1<G8::[eVeWLk`M<=0
 R3
 r1
@@ -1001,10 +1001,10 @@ I6IAE7Z6mA5>M21AmK[bM]1
 !s105 riscv_random_stall_sv_unit
 S1
 R0
-R25
-Z32 8/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_stall.sv
-Z33 F/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_stall.sv
-R15
+R33
+Z40 8/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_stall.sv
+Z41 F/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_stall.sv
+R16
 R6
 31
 R7
@@ -1016,7 +1016,7 @@ R11
 R12
 Xriscv_random_stall_sv_unit
 R1
-R29
+R37
 V?h2f1<G8::[eVeWLk`M<=0
 r1
 !s85 0
@@ -1026,10 +1026,10 @@ I?h2f1<G8::[eVeWLk`M<=0
 !i103 1
 S1
 R0
-R25
-R32
 R33
-R16
+R40
+R41
+R18
 R6
 31
 R7
@@ -1041,8 +1041,8 @@ R11
 R12
 vriscv_rvalid_stall
 R1
-R29
-R27
+R37
+R35
 !i10b 1
 !s100 [bz3UI]Z`[g:Jf:zD``P<3
 ICnYz`Gi<35<=4`H6<C5M60
@@ -1050,10 +1050,10 @@ R3
 !s105 riscv_rvalid_stall_sv_unit
 S1
 R0
-R25
+R33
 8/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_rvalid_stall.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_rvalid_stall.sv
-R24
+R28
 R6
 r1
 !s85 0
@@ -1067,7 +1067,7 @@ R11
 R12
 vtb_top
 R1
-R2
+R15
 !i10b 1
 !s100 RM>Lf@8]60c:Kkm78BJg^1
 IkUFR:3fn]ZAEJ1m3A7a961
@@ -1075,10 +1075,10 @@ R3
 !s105 tb_top_sv_unit
 S1
 R0
-R25
+R33
 8/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_top.sv
 F/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_top.sv
-R28
+R36
 R6
 r1
 !s85 0
@@ -1091,8 +1091,8 @@ R10
 R11
 R12
 Ttb_top_vopt
-!s110 1604679755
-VI3aZzo]1hA=QiYGRRHU4Q0
+!s110 1604933285
+Vh?l8ZDgf]_OX9f>Ldn@L70
 04 6 4 work tb_top fast 0
 o-work work -debugdb -fsmdebug -pedanticerrors +acc
 R12

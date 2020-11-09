@@ -66,28 +66,28 @@ extern void __no_irq_handler();
 void nested_irq_handler(uint32_t id);
 void generic_irq_handler(uint32_t id);
 
-__attribute__((interrupt ("machine"))) void m_software_irq_handler(void);
-__attribute__((interrupt ("machine"))) void m_timer_irq_handler(void);
-__attribute__((interrupt ("machine"))) void m_external_irq_handler(void);
-__attribute__((interrupt ("machine"))) void m_fast0_irq_handler(void);
-__attribute__((interrupt ("machine"))) void m_fast1_irq_handler(void);
-__attribute__((interrupt ("machine"))) void m_fast2_irq_handler(void);
-__attribute__((interrupt ("machine"))) void m_fast3_irq_handler(void);
-__attribute__((interrupt ("machine"))) void m_fast4_irq_handler(void);
-__attribute__((interrupt ("machine"))) void m_fast5_irq_handler(void);
-__attribute__((interrupt ("machine"))) void m_fast6_irq_handler(void);
-__attribute__((interrupt ("machine"))) void m_fast7_irq_handler(void);
-__attribute__((interrupt ("machine"))) void m_fast8_irq_handler(void);
-__attribute__((interrupt ("machine"))) void m_fast9_irq_handler(void);
-__attribute__((interrupt ("machine"))) void m_fast10_irq_handler(void);
-__attribute__((interrupt ("machine"))) void m_fast11_irq_handler(void);
-__attribute__((interrupt ("machine"))) void m_fast12_irq_handler(void);
-__attribute__((interrupt ("machine"))) void m_fast13_irq_handler(void);
-__attribute__((interrupt ("machine"))) void m_fast14_irq_handler(void);
-__attribute__((interrupt ("machine"))) void m_fast15_irq_handler(void);
+void m_software_irq_handler(void);
+void m_timer_irq_handler(void);
+void m_external_irq_handler(void);
+void m_fast0_irq_handler(void);
+void m_fast1_irq_handler(void);
+void m_fast2_irq_handler(void);
+void m_fast3_irq_handler(void);
+void m_fast4_irq_handler(void);
+void m_fast5_irq_handler(void);
+void m_fast6_irq_handler(void);
+void m_fast7_irq_handler(void);
+void m_fast8_irq_handler(void);
+void m_fast9_irq_handler(void);
+void m_fast10_irq_handler(void);
+void m_fast11_irq_handler(void);
+void m_fast12_irq_handler(void);
+void m_fast13_irq_handler(void);
+void m_fast14_irq_handler(void);
+void m_fast15_irq_handler(void);
 
 // A Special version of the SW Handler (vector 0) used in the direct mode
-__attribute__((interrupt ("machine"))) void u_sw_direct_irq_handler(void);
+void u_sw_direct_irq_handler(void);
 
 extern void alt_vector_table();
 extern void alt_direct_vector_table();
