@@ -88,7 +88,7 @@ COMPILATION=0
 COMPILATION_FILE="" # file to compile *.c without extension
 SIMULATION=0
 SIMULATION_FILE="" # file to simulate *.hex without extension
-TEST_DIR="$CUR_DIR/../../tests/programs/custom_FT"
+TEST_DIR="/home/thesis/luca.fiore/Repos/core-v-verif/cv32/sim/core/../../tests/programs/mibench/general_test"
 #TEST_DIR="$CUR_DIR/../../tests/programs/MiBench/"
 #TEST_DIR="$CUR_DIR/../../tests/programs/riscv-toolchain-blogpost/out"
 FAULT_INJECTION=""
@@ -164,26 +164,26 @@ done
 
 vecho $TEMP
 
-source /software/europractice-release-2019/scripts/init_questa10.7c
-
 if [[ $COMPILATION -eq 1 ]]; then
 	# full compilation path without extension
 	vecho "$TEST_DIR $COMPILATION_FILE"
 	FULL_FILE_CPATH=$(FileToPath $TEST_DIR $COMPILATION_FILE "c")
 	vecho "path to file: $FULL_FILE_CPATH"
-	make -C $SIM_FT compile TEST_FILE="$FULL_FILE_CPATH"
+	#make -C $SIM_FT compile TEST_FILE="$FULL_FILE_CPATH"
+	make -C "$FULL_FILE_CPATH" -f $SIM_FT/Makefile_Compile.mk 
 fi
 
-if [[ $SIMULATION -eq 1 ]]; then	
+if [[ $SIMULATION -eq 1 ]]; then
+	source /software/europractice-release-2019/scripts/init_questa10.7c	
 	# full simulation path without extension 
 	FULL_FILE_SPATH=$(FileToPath $TEST_DIR $SIMULATION_FILE "c")
 	make -C $SIM_FT questa-sim$GUI TEST_FILE="$FULL_FILE_SPATH" FT="$FAULT_INJECTION"	
 fi
 
-#benchmarking 
-if [[  ]]; then
-	
-fi
+##benchmarking 
+#if [[  ]]; then
+#	make -C $SIM_FT compile TEST_FILE="$FULL_FILE_CPATH" "c"
+#fi
 
 
 

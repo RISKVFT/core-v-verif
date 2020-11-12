@@ -75,6 +75,9 @@ VSIM_SCRIPT       = $(VSIM_SCRIPT_DIR)/vsim$(FT).tcl #cambiare con ../tools/vsim
 SIMV                    = ./simv
 
 
+
+
+
 # TB source files for the CV32E core
 TBSRC_HOME  := $(PROJ_ROOT_DIR)/$(COREV_PROJ)/tb
 TBSRC_TOP   := $(TBSRC_HOME)/core/tb_top.sv
@@ -195,9 +198,7 @@ vsim-all:  .opt-rtl
 	$(VOPT) -work $(VWORK) $(VOPT_FLAGS) $(RTLSRC_VLOG_TB_TOP) -o $(RTLSRC_VOPT_TB_TOP)
 	touch .opt-rtl
 
-compile: 
-	./compile.sh $(TEST_FILE) 
-
+	
 # run tb and exit
 .PHONY: vsim-run
 vsim-run: ALL_VSIM_FLAGS += -c  

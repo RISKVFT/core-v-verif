@@ -10,6 +10,7 @@ TOPDIR = os.path.abspath(os.path.dirname(__file__))
 # edit the appropriate value in here. If no additional paths need prepending
 # for a given configuration, use the empty string ''.
 toolchain_paths ='/software/pulp/riscv/bin'
+#toolchain_paths ='/home/thesis/luca.fiore/Desktop/riscv/bin'
 
 
 # The compiler flags for each configuration are given here. Some compilers
@@ -20,6 +21,7 @@ toolchain_args = '-Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic'
 
 # The name of the compiler for each configuration.
 toolchain_cc = 'riscv32-unknown-elf-gcc'
+#toolchain_cc = '/home/thesis/luca.fiore/Desktop/riscv/bin'
 
 
 
@@ -30,9 +32,10 @@ def make_env():
     e['OPT'] = toolchain_args
     e['CC'] = toolchain_cc
     e['BSP'] = '%s/../../../bsp' % os.getcwd()
-    #e['LD'] = "-nostartfiles -T /software/pulp/riscv/riscv32-unknown-elf/bin/ld"
-    e['LD'] = "-nostartfiles -T ${BSP}/link.ld -L ${BSP} -lcv-verif" #-nostdlib -lgcc -lc"
+    #e['LD'] = "-nostartfiles -T ${BSP}/link.ld -L ${BSP} -lcv-verif"
+    e['LD'] = "-nostartfiles --specs=nosys.specs -nostdlib -L ${BSP} -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L ${BSP} -lcv-verif -T ${BSP}/link.ld"
     return e
+
 
 
 
