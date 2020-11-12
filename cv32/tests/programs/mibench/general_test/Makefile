@@ -1,16 +1,13 @@
-BASEDIR=/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tests/programs/mibench/general_test
-#BASEDIR=$(realpath $(pwd))	
+#BASEDIR=$(realpath pwd)	
+BASEDIR=${CURDIR}
+#BASEDIR=/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/mibench/general_test
 
 
-
-#all:
-	#cd illegal && $(MAKE);
-	#cd hello-world && $(MAKE);
 .ONESHELL:
 list: $(BASEDIR)/*
 	for dir in $^; do \
 	echo $$dir; \
-	if test -d $$dir; then \	
+	if test -d $$dir; then \
 	echo "\e[0;91m$$dir\e[0m"; \
 	cd $$dir && $(MAKE); \
 	fi \

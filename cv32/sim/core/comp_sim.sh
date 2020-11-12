@@ -1,4 +1,5 @@
 #!/bin/bash
+CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
 
 red="\e[0;91m\e[1m"
 reset="\e[0m"
@@ -63,20 +64,20 @@ replace_TEST_DIR () {
 			print $0}' \
 	 $1 > $1.t
 	 mv $1{.t,}
+	 chmod 777 $1
 }
 
 FileToPath (){
 	# $1 path in which find
 	# $2 filename to find
-	# $3 file extension
 	# find the corect path and return it
-	var=$(find $1 -name "$2.$3")
-	l=$(( ${#var}-${#3}-1 ))
-	echo ${var:0:$l}
-	
+	var=$(find $1 -name "$2.[c\|S]")
+	#l=$(( ${#var}-${#3}-1 ))
+	#echo ${var:0:$l}
+	echo $(dirname $var)
 }
 
-TEMP=`getopt -o hf:d:t:c:s:gk:v --long help,file-vsim,default-test-dir:,test-dir:,compile:,simulation:,gui,kompile_simulate:,verbose -- "$@"`
+TEMP=`getopt -o hf:d:t:c:s:gk:vb --long help,file-vsim,default-test-dir:,test-dir:,compile:,simulation:,gui,kompile_simulate:,verbose,benchmark -- "$@"`
 eval set -- "$TEMP"
 
 ## General variable
@@ -91,9 +92,11 @@ SIMULATION_FILE="" # file to simulate *.hex without extension
 TEST_DIR="/home/thesis/luca.fiore/Repos/core-v-verif/cv32/sim/core/../../tests/programs/mibench/general_test"
 #TEST_DIR="$CUR_DIR/../../tests/programs/MiBench/"
 #TEST_DIR="$CUR_DIR/../../tests/programs/riscv-toolchain-blogpost/out"
+BENCHMARK_DIR="$CUR_DIR/../../tests/programs/mibench"
 FAULT_INJECTION=""
 GUI=""
 VERBOSE=0
+BENCHMARK=0
 
 while true; do
 	case $1 in
@@ -151,7 +154,7 @@ while true; do
 			;;
 		-b|--benchmark)
 			shift			
-		
+			BENCHMARK=1	
 			;;	
 		--)
 			break;;
@@ -167,12 +170,12 @@ vecho $TEMP
 if [[ $COMPILATION -eq 1 ]]; then
 	# full compilation path without extension
 	vecho "$TEST_DIR $COMPILATION_FILE"
-	FULL_FILE_CPATH=$(FileToPath $TEST_DIR $COMPILATION_FILE "c")
-	vecho "path to file: $FULL_FILE_CPATH"
+	# PATH/file to compile without c extension
+	FULL_CPATH=$(FileToPath $TEST_DIR $COMPILATION_FILE)
+	vecho "path to file: $FULL_CPATH"
 	#make -C $SIM_FT compile TEST_FILE="$FULL_FILE_CPATH"
-	make -C "$FULL_FILE_CPATH" -f $SIM_FT/Makefile_Compile.mk 
+	make -C $FULL_CPATH -f $SIM_FT/Makefile_Compile.mk
 fi
-
 if [[ $SIMULATION -eq 1 ]]; then
 	source /software/europractice-release-2019/scripts/init_questa10.7c	
 	# full simulation path without extension 
@@ -180,10 +183,11 @@ if [[ $SIMULATION -eq 1 ]]; then
 	make -C $SIM_FT questa-sim$GUI TEST_FILE="$FULL_FILE_SPATH" FT="$FAULT_INJECTION"	
 fi
 
-##benchmarking 
-#if [[  ]]; then
-#	make -C $SIM_FT compile TEST_FILE="$FULL_FILE_CPATH" "c"
-#fi
+#benchmarking 
+if [[ $BENCHMARK -eq 1 ]]; then
+	cd $BENCHMARK_DIR 
+	./build_all.py
+fi
 
 
 

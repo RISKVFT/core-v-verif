@@ -1,7 +1,5 @@
 *~
 *.nm
-*.elf
-*.hex
 *.map
 *.o
 *.objdump
@@ -10,6 +8,7 @@
 *.vcd
 *.vsif
 *.sve
+*.wlf
 dsim.env
 dsim.log
 dsim_results

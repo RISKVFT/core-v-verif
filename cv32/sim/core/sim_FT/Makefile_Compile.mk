@@ -1,5 +1,6 @@
-DIRNAME=$(shell basename $(CURDIR))
-ASM="./../../../../core/asm"
+CORE_V_VERIF=/home/thesis/elia.ribaldone/Desktop/core-v-verif
+DIRNAME=${CURDIR}
+ASM="$(CORE_V_VERIF)/cv32/sim/core/asm"
 $(info $(DIRNAME))
 $(info $(ASM))
 
@@ -14,7 +15,12 @@ else
 OBJ=$(DIRNAME)_S 
 endif
 
-all: verify clean ${OBJ}
+all: verify clean ${OBJ} elf-to-hex
+
+BSP="$(CORE_V_VERIF)/cv32/sim/bsp"
+OPT='-Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic'
+CC='/software/pulp/riscv/bin/riscv32-unknown-elf-'
+LD="-nostartfiles --specs=nosys.specs -nostdlib -L ${BSP} -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L ${BSP} -lcv-verif -T ${BSP}/link.ld"
 
 
 verify:
@@ -25,18 +31,26 @@ verify:
 $(DIRNAME)_C: $(DIRNAME).c $(SRCH)
 	make -C ${BSP}
 	test_asm_src=$(basename )
-	${CC} ${OPT} -o ./../../out/$(DIRNAME).elf $^ ${LD}
+	${CC}gcc ${OPT} -o $(DIRNAME).elf $^ ${LD}
 
 $(DIRNAME)_CS: $(DIRNAME).c $(SRCS) $(SRCH)
 	make -C ${BSP}
 	test_asm_src=$(basename )
-	${CC} ${OPT} -o ./../../out/$(DIRNAME).elf $^ ${LD}
+	${CC}gcc ${OPT} -o $(DIRNAME).elf $^ ${LD}
 
 $(DIRNAME)_S: $(SRCS) $(SRCH)
 	make -C ${BSP}
 	#echo -e "\e[0;91m ${CC} ${OPT} -v -o ./../../out/$@.elf -I $(ASM) $^ ${LD} \e[0m"
-	${CC} ${OPT} -v -o ./../../out/$(DIRNAME).elf -I $(ASM) $^ ${LD}
+	${CC}gcc ${OPT} -v -o $(DIRNAME).elf -I $(ASM) $^ ${LD}
 
+elf-to-hex:
+	$(CC)objcopy -O verilog $(DIRNAME).elf $(DIRNAME).hex \
+        	--change-section-address  .debugger=0x3FC000 \
+        	--change-section-address  .debugger_exception=0x3FC800
+	# Save elf properties
+	$(CC)readelf -a $(DIRNAME).elf > $(DIRNAME).readelf
+	$(CC)objdump -D -S $(DIRNAME).elf > $(DIRNAME).objdump
+	
 
 .PHONY: clean
 clean:

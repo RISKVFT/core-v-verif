@@ -3,6 +3,9 @@
 import os
 from subprocess import Popen
 
+if not os.path.exists('out'):
+    os.mkdir("out")
+
 TOPDIR = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -47,10 +50,13 @@ if retcode != 0:
 	raise RuntimeError("Make failed with retcode %s" % ( retcode))
 
 
+os.chdir("out")
 for hexfile in os.listdir("."):	
 	if ".elf" in hexfile:
-		os.chdir("out")
-		cmd="{0}objcopy -O verilog {1}.elf {1}.hex --change-section-address  .debugger=0x3FC000 --change-section-address  .debugger_exception=0x3FC800; {0}readelf -a {1}.elf > {1}.readelf; {0}objdump -D -S {1}.elf > {1}.objdump".format(toolchain_path+toolchain_cc[0:-4],hex)
+		cmd="{0}objcopy -O verilog {1}.elf {1}.hex \
+		--change-section-address  .debugger=0x3FC000\
+		 --change-section-address  .debugger_exception=0x3FC800".\
+		format(toolchain_paths+"/"+toolchain_cc[0:-3],hexfile[0:-4])
 		os.system(cmd)
 
 

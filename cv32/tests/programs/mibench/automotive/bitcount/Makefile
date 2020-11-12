@@ -5,9 +5,9 @@ all: bitcnts
 
 bitcnts: ${FILE} Makefile *.h
 	make -C ${BSP}
-	${CC} ${OPT} ${FILE} -o ../../out/bitcnts.${TGT} ${LD} #-bind_at_load -lm  -static 
+	${CC} ${OPT} ${FILE} -o ./../../out/bitcnts.${TGT} ${LD} #-bind_at_load -lm  -static 
 	#${CC} -v -Wl,--trace ${OPT} ${FILE} -o ../../out/bitcnts.${TGT} ${LD} #-bind_at_load -lm  -static 
-objects:-L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1 -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib /tmp/ccjbdS1T.o
+objects:
 	${CC} ${OPT} bitcnt_1.c -c -o bitcnt_1.o ${LD} -lm
 	${CC} ${OPT} bitcnt_2.c -c -o bitcnt_2.o ${LD} -lm
 	${CC} ${OPT} bitcnt_3.c -c -o bitcnt_3.o ${LD} -lm

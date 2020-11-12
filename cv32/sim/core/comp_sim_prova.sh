@@ -1,4 +1,5 @@
 #!/bin/bash
+CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
 
 UsageExit () {
 	echo "Help of ..."
