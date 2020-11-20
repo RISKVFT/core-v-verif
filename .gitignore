@@ -9,6 +9,7 @@
 *.vsif
 *.sve
 *.wlf
+*.dbg
 dsim.env
 dsim.log
 dsim_results
@@ -34,3 +35,4 @@ cva6/tests/riscv-compliance/
 cva6/tests/riscv-tests/
 tools/
 uvm/riscv-dv/
+cv32/sim/core/sim_FT/work/

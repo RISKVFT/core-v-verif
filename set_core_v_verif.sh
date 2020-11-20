@@ -9,6 +9,14 @@ replace_CORE_V_VERIF () {
                         print $0}' \
          $1 > $1.t
          mv $1{.t,}
+
+		awk -v old="^CORE_V_VERIF=/.*" -v new="CORE_V_VERIF=$2" \
+        '{if ($0 ~ old) \
+                        print new; \
+                else \
+                        print $0}' \
+         $1 > $1.t
+         mv $1{.t,}
 }
 
 bash_script="./cv32/sim/core/comp_sim.sh ./cv32/sim/core/comp_sim_prova.sh "

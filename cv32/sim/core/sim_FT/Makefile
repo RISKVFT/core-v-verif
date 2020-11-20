@@ -198,6 +198,8 @@ vsim-all:  .opt-rtl
 	$(VOPT) -work $(VWORK) $(VOPT_FLAGS) $(RTLSRC_VLOG_TB_TOP) -o $(RTLSRC_VOPT_TB_TOP)
 	touch .opt-rtl
 
+
+
 	
 # run tb and exit
 .PHONY: vsim-run
@@ -205,7 +207,6 @@ vsim-run: ALL_VSIM_FLAGS += -c
 vsim-run: vsim-all
 	$(VSIM) -work $(VWORK) $(DPILIB_VSIM_OPT) $(ALL_VSIM_FLAGS)\
 	$(RTLSRC_VOPT_TB_TOP) -do 'source $(VSIM_SCRIPT); exit -f'
-
 
 
 # run tb and drop into interactive shell
@@ -235,7 +236,7 @@ questa-hello-world: vsim-run-gui &
 .PHONY: questa-sim
 questa-sim: vsim-all $(TEST_FILE).hex
 questa-sim: ALL_VSIM_FLAGS += +firmware=$(TEST_FILE).hex
-questa-sim: vsim-run
+questa-sim: vsim-run-sh
 
 # General target smulation with GUI
 .PHONY: questa-sim-gui

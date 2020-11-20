@@ -1,0 +1,6 @@
+5:	-pedanticerrors -suppress 2577 -suppress 2583 \
+10:vlog -work work -pedanticerrors -suppress 2577 -suppress 2583 -f /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/cv32e40p_manifest.flist /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/tb_riscv/include/perturbation_defines.sv /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/tb_top.sv /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/mm_ram.sv /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/dp_ram.sv /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_stall.sv /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/tb_riscv/riscv_rvalid_stall.sv /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/tb_riscv/riscv_gnt_stall.sv /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_interrupt_generator.sv 
+65:Errors: 0, Warnings: 0, Suppressed Warnings: 483
+66:vopt -work work -debugdb -fsmdebug -pedanticerrors +acc  tb_top -o tb_top_vopt
+69:vopt -work work -debugdb -fsmdebug -pedanticerrors "+acc" tb_top -o tb_top_vopt 
+115:Errors: 0, Warnings: 0
