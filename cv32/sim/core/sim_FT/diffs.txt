@@ -1,0 +1,6 @@
+1
+{Internal Model Technology file format, subject to change without notice}
+1 1
+{0 ns} 0 {600 ns} 11
+1 /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/\\apu_perf_dep_o<>apu_perf_dep_o\\ {100 ns} 0 {400 ns} 3 1'h1 1'h0 0 0
+

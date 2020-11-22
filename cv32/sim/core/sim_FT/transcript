@@ -1,9 +1,7 @@
-# Reading pref.tcl
-# ** Warning: License feature 'msimviewer' will expire in 10 days.
-# vsim "+firmware=/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/mibench/out/hello-world.hex" -gui -debugdb tb_top_vopt -do "../../questa/vsim_gold.tcl" 
-# Start time: 18:57:33 on Nov 20,2020
-# Loading /tmp/elia.ribaldone@vlsi21_dpi_27305/linux_x86_64_gcc-5.3.0/export_tramp.so
-# ** Warning: License feature 'msimhdlsim' will expire in 10 days.
+# vsim "+firmware=/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/mibench/out/hello-world.hex" -c tb_top_vopt -do "../../questa/vsim.tcl" 
+# Start time: 10:17:10 on Nov 22,2020
+# Loading /tmp/elia.ribaldone@vlsi21_dpi_21329/linux_x86_64_gcc-5.3.0/export_tramp.so
+# ** Warning: License feature 'msimhdlsim' will expire in 8 days.
 # Loading sv_std.std
 # Loading work.tb_top(fast)
 # Loading work.cv32e40p_tb_wrapper(fast)
@@ -44,7 +42,7 @@
 # Loading work.riscv_random_interrupt_generator_sv_unit(fast)
 # Loading work.riscv_random_interrupt_generator(fast)
 # Loading mtiUvm.questa_uvm_pkg(fast)
-# ** Warning: License feature 'mtiverification' will expire in 10 days.
+# ** Warning: License feature 'mtiverification' will expire in 8 days.
 # ** Warning: (vsim-3015) [PCDPC] - Port size (32) does not match connection size (64) for port 'irq_i'. The port definition is at: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_core.sv(87).
 #    Time: 0 ns  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 77
 # ** Warning: (vsim-3015) [PCDPC] - Port size (5) does not match connection size (6) for port 'irq_id_o'. The port definition is at: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_core.sv(89).
@@ -53,13 +51,10 @@
 #    Time: 0 ns  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/ram_i File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 136
 # ** Warning: (vsim-3015) [PCDPC] - Port size (32) does not match connection size (1) for port 'irq_o'. The port definition is at: /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/mm_ram.sv(52).
 #    Time: 0 ns  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/ram_i File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 136
-# Compiling /tmp/elia.ribaldone@vlsi21_dpi_27305/linux_x86_64_gcc-5.3.0/exportwrapper.c
-# Loading /tmp/elia.ribaldone@vlsi21_dpi_27305/linux_x86_64_gcc-5.3.0/vsim_auto_compile.so
+# Compiling /tmp/elia.ribaldone@vlsi21_dpi_21329/linux_x86_64_gcc-5.3.0/exportwrapper.c
+# Loading /tmp/elia.ribaldone@vlsi21_dpi_21329/linux_x86_64_gcc-5.3.0/vsim_auto_compile.so
 # Loading /software/europractice-release-2019/mentor/questa10.7c/questasim/uvm-1.1d/linux_x86_64/uvm_dpi.so
-# ** Note: (vsim-8900) Creating design debug database vsim.dbg.
-# do ../../questa/vsim_gold.tcl
-# /home/thesis/elia.ribaldone/Desktop/core-v-verif
-# sim:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i
+# do ../../questa/vsim.tcl
 # ----------------------------------------------------------------
 # UVM-1.1d
 # (C) 2007-2013 Mentor Graphics Corporation
@@ -110,8 +105,5 @@
 # UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall gnt:     0
 # UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall valid:   0
 # UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall max:     0
-# Dataset "sim" exported as WLF file: gold.wlf.
-# End time: 18:58:45 on Nov 20,2020, Elapsed time: 0:01:12
+# End time: 10:20:44 on Nov 22,2020, Elapsed time: 0:03:34
 # Errors: 0, Warnings: 13
-dataset open gold.wlf
-# gold.wlf opened as dataset "gold"

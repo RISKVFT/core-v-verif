@@ -40,15 +40,16 @@ B_LOG_DIR="/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/bench_
 # common parameter
 CHEX_FILE=" "
 VSIM_EXT=""
-GUI=""
+export GUI=""
 VERBOSE=1
 
 #TEST_DIR="$CUR_DIR/../../tests/programs/MiBench/"
 #TEST_DIR="$CUR_DIR/../../tests/programs/riscv-toolchain-blogpost/out"
 
 # vector of parameter -[a-zA-Z]
-par=$(echo "$@" | awk 'BEGIN{RS=" "};{if ($0 ~ /^-[a-zA-Z]*$/) print $0; if ($0 ~ /^-[a-zA-Z]*\n/) print $0}')
+par=$(echo "$@" | awk 'BEGIN{RS=" "};{if ($0 ~ /^-[a-zA-Z\-]*$/) print $0; if ($0 ~ /^-[a-zA-Z\-]*\n/) print $0}')
 echo $par
+
 for p1 in $par; do
 	case $p1 in
 		-h|--help)
@@ -57,12 +58,15 @@ for p1 in $par; do
 			;;
 		-g|--gui)
 			db_becho "Set Gui"
-			GUI=-gui
+			export GUI="-gui"
 			shift
 			;;
 		-q|--quiet)
 			VERBOSE=0
 			shift
+			;;
+		-a|-arch)
+			# Thi soptio i
 			;;
 		-u|--unique-program)
 			# BASE:

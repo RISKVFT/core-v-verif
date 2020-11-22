@@ -1,0 +1,36 @@
+make: *** /home/thesis/elia.ribaldone/../../../bsp: No such file or directory.  Stop.
+make[2]: *** [riscv_ebreak_test_0_S] Error 2
+make: *** /home/thesis/elia.ribaldone/../../../bsp: No such file or directory.  Stop.
+make[2]: *** [riscv_arithmetic_basic_test_1_S] Error 2
+make: *** /home/thesis/elia.ribaldone/../../../bsp: No such file or directory.  Stop.
+make[2]: *** [hello-world_C] Error 2
+make: *** /home/thesis/elia.ribaldone/../../../bsp: No such file or directory.  Stop.
+make[2]: *** [perf_counters_instructions_C] Error 2
+make: *** /home/thesis/elia.ribaldone/../../../bsp: No such file or directory.  Stop.
+make[2]: *** [counters_C] Error 2
+make: *** /home/thesis/elia.ribaldone/../../../bsp: No such file or directory.  Stop.
+make[2]: *** [csr_instructions_C] Error 2
+make: *** /home/thesis/elia.ribaldone/../../../bsp: No such file or directory.  Stop.
+make[2]: *** [cv32e40p_csr_access_test_S] Error 2
+make: *** /home/thesis/elia.ribaldone/../../../bsp: No such file or directory.  Stop.
+make[2]: *** [dhrystone_C] Error 2
+make: *** /home/thesis/elia.ribaldone/../../../bsp: No such file or directory.  Stop.
+make[2]: *** [illegal_C] Error 2
+make: *** /home/thesis/elia.ribaldone/../../../bsp: No such file or directory.  Stop.
+make[2]: *** [requested_csr_por_C] Error 2
+make: *** /home/thesis/elia.ribaldone/../../../bsp: No such file or directory.  Stop.
+make[2]: *** [interrupt_bootstrap_CS] Error 2
+make: *** /home/thesis/elia.ribaldone/../../../bsp: No such file or directory.  Stop.
+make[2]: *** [interrupt_test_C] Error 2
+make: *** /home/thesis/elia.ribaldone/../../../bsp: No such file or directory.  Stop.
+make[2]: *** [modeled_csr_por_C] Error 2
+make: *** /home/thesis/elia.ribaldone/../../../bsp: No such file or directory.  Stop.
+make[2]: *** [generic_exception_test_S] Error 2
+make: *** /home/thesis/elia.ribaldone/../../../bsp: No such file or directory.  Stop.
+make[2]: *** [misalign_C] Error 2
+make: *** /home/thesis/elia.ribaldone/../../../bsp: No such file or directory.  Stop.
+make[2]: *** [riscv_arithmetic_basic_test_0_S] Error 2
+make: *** /home/thesis/elia.ribaldone/../../../bsp: No such file or directory.  Stop.
+make[2]: *** [debug_test_CS] Error 2
+make: *** /home/thesis/elia.ribaldone/../../../bsp: No such file or directory.  Stop.
+make[2]: *** [fibonacci_C] Error 2

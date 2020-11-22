@@ -1,0 +1,4 @@
+compare start gold sim
+compare add -tolLead {0 ns} -tolTrail {0 ns} sim:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/apu_perf_dep_o gold:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/apu_perf_dep_o
+compare add -tolLead {0 ns} -tolTrail {0 ns} sim:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/controller_i/apu_en_i gold:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/controller_i/apu_en_i
+
