@@ -1,7 +1,9 @@
-# vsim "+firmware=/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/mibench/out/hello-world.hex" -c tb_top_vopt -do "../../questa/vsim.tcl" 
-# Start time: 10:17:10 on Nov 22,2020
-# Loading /tmp/elia.ribaldone@vlsi21_dpi_21329/linux_x86_64_gcc-5.3.0/export_tramp.so
-# ** Warning: License feature 'msimhdlsim' will expire in 8 days.
+# Reading pref.tcl
+# ** Warning: License feature 'msimviewer' will expire in 5 days.
+# vsim "+firmware=/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/mibench/out/hello-world.hex" -gui -debugdb tb_top_vopt -do "../../questa/vsim_gold.tcl" 
+# Start time: 09:59:26 on Nov 25,2020
+# Loading /tmp/elia.ribaldone@vlsi21_dpi_12912/linux_x86_64_gcc-5.3.0/export_tramp.so
+# ** Warning: License feature 'msimhdlsim' will expire in 5 days.
 # Loading sv_std.std
 # Loading work.tb_top(fast)
 # Loading work.cv32e40p_tb_wrapper(fast)
@@ -42,7 +44,7 @@
 # Loading work.riscv_random_interrupt_generator_sv_unit(fast)
 # Loading work.riscv_random_interrupt_generator(fast)
 # Loading mtiUvm.questa_uvm_pkg(fast)
-# ** Warning: License feature 'mtiverification' will expire in 8 days.
+# ** Warning: License feature 'mtiverification' will expire in 5 days.
 # ** Warning: (vsim-3015) [PCDPC] - Port size (32) does not match connection size (64) for port 'irq_i'. The port definition is at: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_core.sv(87).
 #    Time: 0 ns  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 77
 # ** Warning: (vsim-3015) [PCDPC] - Port size (5) does not match connection size (6) for port 'irq_id_o'. The port definition is at: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_core.sv(89).
@@ -51,59 +53,20 @@
 #    Time: 0 ns  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/ram_i File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 136
 # ** Warning: (vsim-3015) [PCDPC] - Port size (32) does not match connection size (1) for port 'irq_o'. The port definition is at: /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/mm_ram.sv(52).
 #    Time: 0 ns  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/ram_i File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 136
-# Compiling /tmp/elia.ribaldone@vlsi21_dpi_21329/linux_x86_64_gcc-5.3.0/exportwrapper.c
-# Loading /tmp/elia.ribaldone@vlsi21_dpi_21329/linux_x86_64_gcc-5.3.0/vsim_auto_compile.so
+# Compiling /tmp/elia.ribaldone@vlsi21_dpi_12912/linux_x86_64_gcc-5.3.0/exportwrapper.c
+# Loading /tmp/elia.ribaldone@vlsi21_dpi_12912/linux_x86_64_gcc-5.3.0/vsim_auto_compile.so
 # Loading /software/europractice-release-2019/mentor/questa10.7c/questasim/uvm-1.1d/linux_x86_64/uvm_dpi.so
-# do ../../questa/vsim.tcl
-# ----------------------------------------------------------------
-# UVM-1.1d
-# (C) 2007-2013 Mentor Graphics Corporation
-# (C) 2007-2013 Cadence Design Systems, Inc.
-# (C) 2006-2013 Synopsys, Inc.
-# (C) 2011-2013 Cypress Semiconductor Corp.
-# ----------------------------------------------------------------
-# 
-#   ***********       IMPORTANT RELEASE NOTES         ************
-# 
-#   You are using a version of the UVM library that has been compiled
-#   with `UVM_NO_DEPRECATED undefined.
-#   See http://www.eda.org/svdb/view.php?id=3313 for more details.
-# 
-#   You are using a version of the UVM library that has been compiled
-#   with `UVM_OBJECT_MUST_HAVE_CONSTRUCTOR undefined.
-#   See http://www.eda.org/svdb/view.php?id=3770 for more details.
-# 
-#       (Specify +UVM_NO_RELNOTES to turn off this notice)
-# 
-# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(215) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
-# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(216) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/load_store_unit_i/#ALWAYS#471 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_load_store_unit.sv Line: 472
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#768 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 769
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#758 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 759
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#752 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 753
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#743 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 744
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#737 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 738
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#601(immediate_a_mux) File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 602
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#516 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 517
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 2  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/load_store_unit_i/#ALWAYS#471 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_load_store_unit.sv Line: 472
-# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall enable: 0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall mode:   0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall gnt:    0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall valid:  0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall max:    0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall enable:  0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall mode:    0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall gnt:     0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall valid:   0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall max:     0
-# End time: 10:20:44 on Nov 22,2020, Elapsed time: 0:03:34
-# Errors: 0, Warnings: 13
+# ** Note: (vsim-8900) Creating design debug database vsim.dbg.
+# do ../../questa/vsim_gold.tcl
+# /home/thesis/elia.ribaldone/Desktop/core-v-verif
+# sim:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i
+# sim:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/apu_perf_dep_o sim:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/controller_i/apu_stall_o sim:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/controller_i/apu_en_i
+# ** Error: (vish-4014) No objects found matching 'sim:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/apu_perf_dep_o sim:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/controller_i/apu_stall_o sim:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/controller_i/apu_en_i'.
+# Error in macro ./../../questa/vsim_gold.tcl line 11
+# (vish-4014) No objects found matching 'sim:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/apu_perf_dep_o sim:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/controller_i/apu_stall_o sim:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/controller_i/apu_en_i'.
+#     while executing
+# "add wave $CheckSignals"
+#     invoked from within
+# "if { "$env(GUI)" == "-gui"}  {
+# 	add wave $CheckSignals
+# }"

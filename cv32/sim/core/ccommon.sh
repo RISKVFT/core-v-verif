@@ -49,7 +49,28 @@ gecho_exit () {
 }
 wecho () { echo -e  ${white}${bold}$1${reset} ; }
 
+## Returns errlvl 0 if $1 is a reachable git remote url 
+gitRepoExist() {
+	git ls-remote "$1" CHECK_GIT_REMOTE_URL_REACHABILITY >/dev/null 2>&1
+}
+gitRepoBranchExist() {
+	REPO=$1
+	BRANCH=$2
+	git ls-remote --heads ${REPO} ${BRANCH} | grep ${BRANCH} >/dev/null
+}
 
+repMakeFile () {
+        key=$1 # keyword
+        file=$2 # file with absolute path
+        to_rep=$3 # word to replace
+        awk -v old="^$key.*=.*$" -v new="$key ?= $to_rep" \
+        '{if ($0 ~ old) \
+                        print new; \
+                else \
+                        print $0}' \
+         $file > $file.t
+         mv $file{.t,}	
+}
 # Replace default TEST_DIR with desired directory 
 repfile () {
         key=$1 # keyword

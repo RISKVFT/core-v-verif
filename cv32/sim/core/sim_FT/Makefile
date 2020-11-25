@@ -99,7 +99,7 @@ TBSRC_VERI  := $(TBSRC_CORE)/tb_top_verilator.sv \
                $(TBSRC_CORE)/cv32e40p_tb_wrapper.sv \
                $(TBSRC_CORE)/mm_ram.sv \
                $(TBSRC_CORE)/dp_ram.sv
-SIM_LIBS    := $(PROJ_ROOT_DIR)/lib/sim_libs
+SIM_LIBS    := \$(PROJ_ROOT_DIR)/lib/sim_libs
 
 # RTL source files for the CV32E core
 # DESIGN_RTL_DIR is used by CV32E40P_MANIFEST file
@@ -178,11 +178,12 @@ all: clean_all sanity-veri-run dsim-sanity
 
 
 .lib-rtl:
-	$(info $a)
 	$(VLIB) $(VWORK)
 	touch .lib-rtl
 
 
+a=$(shell echo "-$(CV32E40P_PKG)-$(TBSRC_PKG)-$(TBSRC)-" )
+$(info $(a))
 .build-rtl: .lib-rtl $(CV32E40P_PKG) $(TBSRC_PKG) $(TBSRC)
 	$(VLOG) \
 		-work $(VWORK) \

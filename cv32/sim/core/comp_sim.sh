@@ -3,6 +3,7 @@
 source ccommon.sh
 
 CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
+COMMONMK="$CORE_V_VERIF/cv32/sim/core/sim_FT/Common.mk"
 
 isnumber='^[0-9]+$'
 
@@ -11,6 +12,33 @@ db_recho() { if [[ $VERBOSE ]]; then echo -e "${red}${bold}${1}${reset}"; fi }
 db_becho() { if [[ $VERBOSE ]]; then echo -e "${blue}${bold}${1}${reset}"; fi }
 db_gecho() { if [[ $VERBOSE ]]; then echo -e "${green}${bold}${1}${reset}"; fi }
 db_lgecho() { if [[ $VERBOSE ]]; then lgecho "$1"; fi }
+
+# FUNCTIONS #########################
+refGitIsSet () { if [[ $A_REF_REPO == " " && $A_REF_BRANCH == " " ]]; then echo 0; else echo 1; fi ; }
+ftGitIsSet () { if [[ $A_FT_REPO == " " && $A_FT_BRANCH == " " ]]; then echo 0; else echo 1; fi ;}
+setRepoBranch () {
+	ref_or_ft=$1
+	if [[ $ref_or_ft != "ref" && $ref_or_ft != "ft" ]];then
+		recho_exit "Error, arch can be only ref or ft"
+	fi	
+	if [[ $ref_or_ft == "ref" ]]; then
+		if [[ $(refGitIsSet) -eq 0 ]]; then
+			recho_exit "Error, repo and branch of ref arch isn't setted"
+		fi
+		db_gecho "Setted ref arch repo=$A_REF_REPO branch=$A_REF_BRANCH"
+		repMakeFile "CV32E40P_REPO" $COMMONMK "$A_REF_REPO"
+		repMakeFile "CV32E40P_BRANCH" $COMMONMK "$A_REF_BRANCH"
+	else
+		if [[ $(ftGitIsSet) -eq 0 ]]; then
+			recho_exit "Error, repo and branch of ft arch isn't setted"
+		fi
+		db_gecho "Setted ft arch repo=$A_FT_REPO branch=$A_FT_BRANCH"
+		repMakeFile "CV32E40P_REPO" $COMMONMK "$A_FT_REPO"
+		repMakeFile "CV32E40P_BRANCH" $COMMONMK "$A_FT_BRANCH"
+	fi
+}
+#####################################
+
 
 ## General variable
 CUR_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
@@ -43,12 +71,26 @@ VSIM_EXT=""
 export GUI=""
 VERBOSE=1
 
+# ARCH
+A_REF_REPO="https://github.com/openhwgroup/cv32e40p.git"
+A_REF_BRANCH="master"
+A_FT_REPO="https://github.com/RISKVFT/cv32e40p.git"
+A_FT_BRANCH="FT_Elia"
+
+# Set variable are used to correctly end program if only
+# this action are done, for example if only git repo 
+# is setted the program should ended since all is done
+ARCH=0
+SET_ARCH=0
+SET_DIR=0
+SET_LOG=0
+
 #TEST_DIR="$CUR_DIR/../../tests/programs/MiBench/"
 #TEST_DIR="$CUR_DIR/../../tests/programs/riscv-toolchain-blogpost/out"
 
 # vector of parameter -[a-zA-Z]
 par=$(echo "$@" | awk 'BEGIN{RS=" "};{if ($0 ~ /^-[a-zA-Z\-]*$/) print $0; if ($0 ~ /^-[a-zA-Z\-]*\n/) print $0}')
-echo $par
+echo "Argument taken: $par"
 
 for p1 in $par; do
 	case $p1 in
@@ -66,7 +108,49 @@ for p1 in $par; do
 			shift
 			;;
 		-a|-arch)
-			# Thi soptio i
+			ARCH=1
+			# This option set the ref git REPO and the derivated ft git REPO and their 
+			# relative branch, the ref git REPO can be used in the script to create
+			# a fisrt comparison in order to verify correct working of FT arch.
+			# BASE   "-a ref|ft REPO BRANCH"
+			#   ref     save the ref git REPO and BRANCH 
+			#		"-a ref https://github.com/openhwgroup/cv32e40p.git master"
+			#   ft     save the dut git REPO and BRANCH
+			#		"-a dut https://github.com/RISKVFT/cv32e40p.git FT_Marcello"
+			#   s [ft|ref]     set current arch , default is ft
+			#		"-a s ref -b s a" -> simula tutto il benchmark utilizzando l'arch ft
+			shift # delete -a
+			if [[ $1 == "ref" || $1 == "ft" ]];then
+				if ! gitRepoExist "$2"; then
+					recho_exit "Error: git repo don't exist!!!"
+				fi
+				if ! gitRepoBranchExist $2 $3; then
+					recho_exit "Error: branch of $2 don't exist!!"
+				fi
+			fi
+	
+			case $1 in
+				ref)
+					db_becho "Setted \n	REF_REPO=$2 and \n	REF_BRANCH=$3"
+					A_REF_REPO=$2
+					repfile "A_REF_REPO" "$CUR_DIR/$(basename $0)" $2
+					A_REF_BRANCH=$3
+					repfile "A_REF_BRANCH" "$CUR_DIR/$(basename $0)" $3 
+					shift 3;;	
+				ft)
+					db_becho "Setted \n	FT_REPO=$2 and \n	FT_BRANCH=$3"
+					A_FT_REPO=$2
+					repfile "A_FT_REPO" "$CUR_DIR/$(basename $0)" $2
+					A_FT_BRANCH=$3
+					repfile "A_FT_BRANCH" "$CUR_DIR/$(basename $0)" $3
+					shift 3;;
+				s)
+					SET_ARCH=1
+					setRepoBranch $2
+					shift 2;;
+				*)
+					recho_exit "Error; \"-a\" option needs correct parameter [ref|ft|s] ";;
+			esac
 			;;
 		-u|--unique-program)
 			# BASE:
@@ -117,11 +201,15 @@ for p1 in $par; do
 					  	db_becho "Set vsim extension to _$1"
 					  	VSIM_EXT="_$1"; shift;;
 					d)# 
+						SET_DIR=1
+						UNIQUE_CHEX_DIR=$1
 						dfSetVar d $1 "UNIQUE_CHEX_DIR" "Set hex/c file directory" \
 							"give a correct directory for executable and hex!!"
 						shift
 						exit 1;;
 					l)
+						SET_LOG=1
+						U_LOG_DIR=$1
 						dfSetVar d $1 "U_LOG_DIR" "Set log file directory" \
 							"give a correct directory for log file!!" CREATE
 						shift
@@ -137,12 +225,6 @@ for p1 in $par; do
 			if [[ $CHEX_FILE == " " ]]; then
 				recho_exit "Error: program file to compile or simulate should be\n \
 					alway specified, for example:\n \
-					-u cf file_to_compile\n -u sf file_to_simulate\n\
-					-u csf file_to_compile&simulate\n\
-					-u csfv file_to_comp&sim vsim_script_extension\n"
-			fi
-			if [[ $COMPILATION -eq 0 && $SIMULATION -eq 0 ]]; then
-				recho_exit "Error: select simulation (s) or/and compilation (c) at least\n\
 					-u cf file_to_compile\n -u sf file_to_simulate\n\
 					-u csf file_to_compile&simulate\n\
 					-u csfv file_to_comp&sim vsim_script_extension\n"
@@ -216,16 +298,20 @@ for p1 in $par; do
 					  	db_becho "Set vsim file extension, vsim_$1.tcl will be run"
 					  	VSIM_EXT="_$1"; shift;;
 					d)# set build file, dir of out *.hex file and exit
+						SET_DIR=1
+						BENCH_BUILD_FILE=$1
 						dfSetVar d "$1" "BENCH_BUILD_FILE" "Set benchmark build file" \
 							"give a correct path/name for build file!!"
 						shift
-
+						BENCH_HEX_DIR=$1
 						dfSetVar d "$1" "BENCH_HEX_DIR" "Set benchmark hex file dir"\
 							"give a correct directory of hex directory !!" 
 						shift
 						# if user set d variables can't do nothing else
 						exit 1;;
 					l)
+						SET_LOG=1
+						B_LOG_DIR=$1
 						dfSetVar d $1 "B_LOG_DIR" "Set log bench file directory" \
 							"give a correct directory for log file of benchmark!!"\
 							CREATE
@@ -246,17 +332,43 @@ for p1 in $par; do
 	esac
 done
 
-
-if [[ $COMPILATION -eq 0 && $SIMULATION -eq 0 ]]; then
-	recho_exit "Error: select simulation (s) or/and compilation (c) at least\n\
-	\tFirst of all set unique directory or benchmark build-file & hex-dir\n\
-	\tAll path wil be appended to CORE_V_VERIF=$CORE_V_VERIF path:\n\
-	\t\t-b d path/to/build_all.py path/to/hex/file \n\
-	\t\t-u d path/to/c/dir\n\
-	\tThen you could compile and simulate\n\
-	\t\t-b c a -> compile all benchmark file using build script passed with 'd' option\n\
-	\t\t-b s a -> simulate all benchmark *.hex file\n\
-	\t\t-u cf filename -> compile filename file in directory passed wirh 'd' option\n"
+# CONTROLS !!
+if [[ $BENCHMARK -eq 0 && $UNIQUE -eq 0 ]]; then
+	if [[ $ARCH -eq 1 ]]; then
+		exit 1 # exit since arch is setted and all is already done
+	else
+		recho_exit "Error: you sould use at least one option between -u,-b,-a"
+	fi
+else
+	if [[ $SET_DIR -eq 1 || $SET_LOG -eq 1 ]]; then
+		exit 1 # exit since dir or log dir is setted and no other should be done
+	else
+		if [[ $COMPILATION -eq 0 && $SIMULATION -eq 0 ]]; then
+			recho_exit "Error: select simulation (s) or/and compilation (c) at least\n\
+			\tFirst of all set unique directory or benchmark build-file & hex-dir\n\
+			\tAll path wil be appended to CORE_V_VERIF=$CORE_V_VERIF path:\n\
+			\t\t-b d path/to/build_all.py path/to/hex/file \n\
+			\t\t-u d path/to/c/dir\n\
+			\tThen you could compile and simulate\n\
+			\t\t-b c a -> compile all benchmark file using build script passed with 'd' option\n\
+			\t\t-b s a -> simulate all benchmark *.hex file\n\
+			\t\t-u cf filename -> compile filename file in directory passed wirh 'd' option\n"
+		fi
+		if [[ $SET_ARCH -eq 0 ]];then
+			if [[ $A_FT_REPO == " " || $A_REF_REPO == " " ]]; then
+				recho_exit "Error: you should setat least FT repo and branch aof arch using \n\
+					 	\t\t-a ft https://github.com/ft_repo ft_branch_name\n"
+			else
+				if [[ $A_FT_REPO != " " ]]; then
+					db_gecho "Setted ft arch (default) repo=$A_FT_REPO branch=$A_FT_BRANCH"
+					setRepoBranch ft
+				else
+					db_gecho "Setted ref arch repo=$A_REF_REPO branch=$A_REF_BRANCH"
+					setRepoBranch ref
+				fi
+			fi
+		fi	
+	fi
 fi
 
 if [[ $VSIM_FILE == " " ]]; then
@@ -267,7 +379,7 @@ if [[ $VSIM_FILE == " " ]]; then
 	fi
 fi	 
 
-
+# EXECUTION
 if [[ $UNIQUE -eq 1 ]]; then
 	if [[ $UNIQUE_CHEX_DIR == " " ]]; then	
 		recho_exit "Error: you should set dir/build_all program \
@@ -300,6 +412,7 @@ fi
 
 #benchmarking 
 if [[ $BENCHMARK -eq 1 ]]; then
+	# Controls
 	if [[ $B_LOG_DIR == " " ]]; then
 		recho_exit "Error: Set log directory with -b l /path/to/log/dir"
 	        exit 1
@@ -380,7 +493,19 @@ Program Usage:
 	-g|--gui)
 		GUI=-gui --> if -g then use Questasim GUI
 
-	-u|unique-file)
+	-a|--arch)
+		ref https://github.com/path/to/repo.git branch_name
+			This option is used to set the repo and the branch of the reference arch
+			for current fault tolerant arch. This repo will be uploaded using "-a s ref"
+		ft https://github.com/path/to/repo.git branch_name
+			This option is used to set the repo and the branch of the fault tolerant arch
+			for current fault tolerant arch. This repo will be uploaded using "-a s ft"
+		s [ft|ref]   (ft as default)
+			This option is used to set the desired arch between ref (reference arch) and 
+			ft arch, this setting can only be done after providing the repositories and 
+			the branches for both architectures using "-a ref repo branch" and "-a ft repo branch"
+
+	-u|--unique-file)
 		d   directory setting
 			First of all set directory of *.c file to compile with:
 				-u d dir/to/c/file
@@ -420,14 +545,37 @@ Program Usage:
 		verbose prints				
 
 	Usage example:
-	1) set default application dir: 
-		./comp_sim.sh -d /abs/path/to/test/dir
-	2) compile only: 
-		./comp_sim.sh -c /abs/path/to/test/dir
-	3) simulate only hello_world.c with GUI: 
-		./comp_sim.sh -s hello_world -g
-	4) compile and simulate hello_world.c: 
-		./comp_sim.sh -k hello_world
+	1) set the reference and fault tolerant architectures:
+		./comp_sim.sh -a ref https://github.com/openhwgroup/cv32e40p.git master
+		./comp_sim.sh -a ft https://github.com/RISKVFT/cv32e40p.git FT_Elia
+	   now we could use ref or ft arch using "-a s [ft|ref]"
+	2) Compile and simulate an application program for our architecture:
+		1) set application *.c/*.S code directory:
+			./comp_sim.sh -u d cv32/tests/programs/custom_FT/hello-world
+		   The use of relative path is because we use the variable CORE_V_VERIF to
+		   have the core-v-verif path.
+		2) set log file directory
+			./comp_sim.sh -u l cv32/sim/core/log
+		   Will be created the log dir and used to save log file
+		3) Compile program
+			./comp_sim.sh -u c hello-world
+		4) Simulation using vsim_gold.tcl script in cv32/sim/questa directory
+		   and using gui (-g) and using ref architecture.
+			./comp_sim.sh -a ref -u sv hello-world gold -g 
+		   The same but with the ref arch
+			./comp_sim.sh -a ref -u sv hello-world gold -g 
+	3) Compile and simulate a testbench:
+		1) Set build program and directory of output *.hex file
+			./comp_sim.sh -b d cv32/tests/programs/mibench/build_all.py \
+						cv32/tests/programs/mibench/out
+		2) Set log dir
+			./comp_sim.sh -b l cv32/sim/core/bench_log
+		3) Compile all benchmark
+			./comp_sim.sh -b c a
+		4) Simulate only counters.hex program using reference arch and vsim_gold.tcl script:
+			./comp_sim.sh -a ref -b sv counters gold
+		5) Simulate my arch and compare using vsim_compare.tcl script:
+			./comp_sim.sh -a ft -b sv counters compare
 '
 	exit 1
 }
