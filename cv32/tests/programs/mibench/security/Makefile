@@ -1,2 +1,0 @@
-all:
-	cd rijndael && $(MAKE)
