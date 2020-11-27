@@ -12,5 +12,5 @@
 # Description: TCL scripts to facilitate simulations
 
 
-run 600ns
+run -all
 

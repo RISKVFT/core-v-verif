@@ -3,7 +3,7 @@
 source ccommon.sh
 
 UsageExit () {
-	becho '
+	echo '
 Program Usage:
 	!!!!!!!!! ALL DIRECTORY will be appended to CORE_V_VERIF path !!!!!!!!
 	-h|--help)
@@ -99,7 +99,7 @@ Program Usage:
 	exit 1
 }
 
-CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
+CORE_V_VERIF="/home/thesis/marcello.neri/Desktop/core-v-verif"
 COMMONMK="$CORE_V_VERIF/cv32/sim/core/sim_FT/Common.mk"
 
 isnumber='^[0-9]+$'
@@ -150,17 +150,17 @@ SIMULATION=0
 
 # Folder that contain *.c file (and after compilation the *.hex file) of
 # unique program to use as architecture firmware
-UNIQUE_CHEX_DIR="/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/hello-world"
+UNIQUE_CHEX_DIR="$CORE_V_VERIF/cv32/tests/programs/custom_FT/general_tests/hello-world"
 U_LOG_DIR=" "
 
 # Folder that contain the build_all.py program runned to compile all benchmark
-BENCH_BUILD_FILE="/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/mibench/build_all.py"
+BENCH_BUILD_FILE="$CORE_V_VERIF/cv32/tests/programs/custom_FT/build_all.py"
 # Folder that contain *.hex file of benchmar
-BENCH_HEX_DIR="/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/mibench/out"
+BENCH_HEX_DIR="$CORE_V_VERIF/cv32/tests/programs/custom_FT/out"
 B_TYPE=" "
 B_FILE=" "
 B_NUM=0
-B_LOG_DIR="/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/bench_log"
+B_LOG_DIR="$CORE_V_VERIF/cv32/sim/core/bench_log"
 
 # common parameter
 CHEX_FILE=" "
@@ -172,7 +172,7 @@ VERBOSE=1
 A_REF_REPO="https://github.com/openhwgroup/cv32e40p.git"
 A_REF_BRANCH="master"
 A_FT_REPO="https://github.com/RISKVFT/cv32e40p.git"
-A_FT_BRANCH="FT_Elia"
+A_FT_BRANCH="master"
 
 # Set variable are used to correctly end program if only
 # this action are done, for example if only git repo 
@@ -181,7 +181,7 @@ ARCH=0
 SET_ARCH=0
 SET_DIR=0
 SET_LOG=0
-
+SET_BLOCK=0
 #TEST_DIR="$CUR_DIR/../../tests/programs/MiBench/"
 #TEST_DIR="$CUR_DIR/../../tests/programs/riscv-toolchain-blogpost/out"
 
@@ -376,7 +376,7 @@ for p1 in $par; do
 							SIMULATION=1
 						fi
 						if [[ $1 == "a" ]]; then 
-							db_echo "Bench all"
+							db_becho "Bench all"
 							B_TYPE="all";
 						else 
 							if [[ $1 =~ $isnumber ]]; then 
@@ -389,15 +389,15 @@ for p1 in $par; do
 						fi
 						shift
 						;;
-					v)# parameter to give extension to append to the vsim file 
+					v) # parameter to give extension to append to the vsim file 
 					  # used to execute simulation in vsim and stored in
 					  # core-v-verif/cv32/sim/questa
 					  	db_becho "Set vsim file extension, vsim_$1.tcl will be run"
 					  	VSIM_EXT="_$1"; shift;;
-					d)# set build file, dir of out *.hex file and exit
+					d) # set build file, dir of out *.hex file and exit
 						SET_DIR=1
 						BENCH_BUILD_FILE=$1
-						dfSetVar d "$1" "BENCH_BUILD_FILE" "Set benchmark build file" \
+						dfSetVar f "$1" "BENCH_BUILD_FILE" "Set benchmark build file" \
 							"give a correct path/name for build file!!"
 						shift
 						BENCH_HEX_DIR=$1
@@ -414,6 +414,10 @@ for p1 in $par; do
 							CREATE
 						shift
 						exit 1;;
+					b)
+						SET_BLOCK=1
+						B_STAGE=$1
+						shift;;
 					*)			
 					;;
 				esac
@@ -434,8 +438,7 @@ if [[ $BENCHMARK -eq 0 && $UNIQUE -eq 0 ]]; then
 	if [[ $ARCH -eq 1 ]]; then
 		exit 1 # exit since arch is setted and all is already done
 	else
-		echo "ciao"
-		#recho_exit "Error: you sould use at least one option between -u,-b,-a" #se uso --help questo comando non fa stampare nulla
+		recho_exit "Error: you sould use at least one option between -u,-b,-a" #se uso --help questo comando non fa stampare nulla
 	fi
 else
 	if [[ $SET_DIR -eq 1 || $SET_LOG -eq 1 ]]; then

@@ -3,26 +3,28 @@ set SIM_BASE "sim:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
 
 ##################################################################
 ####### Selezione dei segnali da loggare nel file gold.wlf
-set CheckSignals "$SIM_BASE/id_stage_i/apu_perf_dep_o $SIM_BASE/id_stage_i/controller_i/apu_stall_o $SIM_BASE/id_stage_i/controller_i/apu_en_i"
+set InSignals [ find signals "$SIM_BASE/id_stage_i/*" -in ]
+set OutSignals [ find signals "$SIM_BASE/id_stage_i/*" -out ]
 
-log $CheckSignals
 if { "$env(GUI)" == "-gui"}  {
-	add wave $CheckSignals
+	add wave $InSignals
+	add wave $OutSignals
 }
 
 
 ##################################################################
 ####### Simulation run
+vcd add -dumpports -file gold_out.vcd -out $SIM_BASE/id_stage_i/*
+vcd add -dumpports -file gold_in.vcd -in $SIM_BASE/id_stage_i/*
+
 
 run 0
-run 600ns
+run -all
 
 
 ##################################################################
 ####### Save dataset in gold wlf file 
 
-dataset save sim gold.wlf
-
-
+#puts [pwd]
 
 quit -f

@@ -7,7 +7,7 @@ CM_FOLDER=coremark
 
 ITERATIONS=$1
 if [[ -z  $ITERATIONS ]]; then
-	ITERATIONS=1800
+	ITERATIONS=1
 fi
 
 echo "Number of iterations: ${ITERATIONS}"

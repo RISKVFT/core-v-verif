@@ -119,6 +119,14 @@ CV32E40P_MANIFEST    := $(CV32E40P_PKG)/cv32e40p_manifest.flist
 #CV32E40P_MANIFEST    := cv32e40p_temp_manifest.flist
 export DESIGN_RTL_DIR = $(CV32E40P_PKG)/rtl
 
+
+### Creation of variables for benchmark tasks
+STAGE ?= id_stage_i
+SV_STAGE := $(PROJ_ROOT_DIR)/core-v-cores/cv32e40p/rtl/$(STAGE)
+VLOG_SV_STAGE := $(basename $(notdir $(SV_STAGE)))
+VOPT_SV_STAGE := $(addsuffix _vopt, $(VLOG_SV_STAGE))
+DPILIB_VSIM_OPT := +dumpports+nocollapse
+
 # Default "custom test-program"
 CUSTOM_PROG  ?= requested_csr_por
 
@@ -245,6 +253,20 @@ questa-sim-gui: vsim-all $(TEST_FILE).hex
 questa-sim-gui: ALL_VSIM_FLAGS += +firmware=$(TEST_FILE).hex
 questa-sim-gui: vsim-run-gui &
 
+# $(VSIM_GUI_FLAGS) 
+
+.PHONY: questa-sim-stage
+questa-sim-stage: ALL_VSIM_FLAGS += $(VSIM_GUI_FLAGS)
+questa-sim-stage: ALL_VSIM_FLAGS += -vcdstim /id_stage=gold_in.vcd
+questa-sim-stage:
+				$(VLIB) $(VWORK)
+				touch .lib-rtl
+				$(VLOG) -work $(VWORK) $(VLOG_FLAGS) -f $(CV32E40P_MANIFEST)
+				$(VOPT) -work $(VWORK) $(VOPT_FLAGS) $(VLOG_SV_STAGE) -o $(VOPT_SV_STAGE)
+				touch .opt-rtl
+				$(VSIM) -work $(VWORK) $(ALL_VSIM_FLAGS) $(VOPT_SV_STAGE) -do $(VSIM_SCRIPT)
+
+	
 ###############################################
 
 .PHONY: questa-cv32_riscv_tests

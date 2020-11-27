@@ -180,7 +180,7 @@ dfSetVar (){
 		db_becho "$settext: $CORE_V_VERIF/$dirorfile"
 		repfile "$var" \
 			"$CUR_DIR/$(basename $0)" \
-			"$CORE_V_VERIF/$dirorfile"
+			"\$CORE_V_VERIF/$dirorfile"
 		if [[ $df == "d" ]]; then
 			mkdir -p $CORE_V_VERIF/$dirorfile
 		fi
@@ -190,7 +190,7 @@ dfSetVar (){
 			path buth I need path from \
 			CORE_V_VERIF=$CORE_V_VERIF dir"
 		fi
-		recho_exit "Error: $errtext!!"
+		recho_exit "Error: $df $dirorfile $errtext!!"
 	fi
 }
 
@@ -258,7 +258,11 @@ f_make () {
         #mon_run "make -C $SIM_FT questa-sim$GUI \
         #        TEST_FILE=\"$BENCH_HEX_DIR/${firmware:0:-4}\" FT=\"$VSIM_EXT\"" "$logfile" "$override" "$lineno"
 	echo "---------------$GUI"
-        make -C $SIM_FT questa-sim$GUI TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}" FT="$VSIM_EXT"
+	if [[ $SET_BLOCK -eq 0 ]]; then
+    	make -C $SIM_FT questa-sim$GUI TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}" FT="$VSIM_EXT"
+	else 
+		make -C $SIM_FT questa-sim-stage STAGE=$B_STAGE TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}" FT="$VSIM_EXT"
+	fi
 }
 
 export_path (){

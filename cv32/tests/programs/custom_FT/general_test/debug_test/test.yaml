@@ -1,8 +1,0 @@
-# Test definition YAML for test
-
-# Debug directed test
-name: debug_test
-uvm_test: uvmt_cv32_firmware_test_c
-description: >
-    Debug directed test
-
