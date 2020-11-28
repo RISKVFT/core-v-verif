@@ -256,13 +256,19 @@ f_make () {
 	override=$3
 	lineno=$4
         #mon_run "make -C $SIM_FT questa-sim$GUI \
-        #        TEST_FILE=\"$BENCH_HEX_DIR/${firmware:0:-4}\" FT=\"$VSIM_EXT\"" "$logfile" "$override" "$lineno"
+        #TEST_FILE=\"$BENCH_HEX_DIR/${firmware:0:-4}\" FT=\"$VSIM_EXT\"" "$logfile" "$override" "$lineno"
 	echo "---------------$GUI"
 	if [[ $SET_BLOCK -eq 0 ]]; then
-    	make -C $SIM_FT questa-sim$GUI TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}" FT="$VSIM_EXT"
+    		make -C $SIM_FT questa-sim$GUI TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}" FT="$VSIM_EXT"
 	else 
-		make -C $SIM_FT questa-sim-stage STAGE=$B_STAGE TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}" FT="$VSIM_EXT"
+		make -C $SIM_FT questa-sim-stage$GUI STAGE=$B_STAGE \
+			TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}" FT="$VSIM_EXT"
 	fi
+}
+
+get_git_branch (){
+	gitd=$1
+	git --git-dir=$gitd/.git --work-tree=$gitd status | grep branch | cut -d " " -f 4
 }
 
 export_path (){

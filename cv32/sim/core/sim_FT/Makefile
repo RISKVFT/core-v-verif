@@ -190,8 +190,8 @@ all: clean_all sanity-veri-run dsim-sanity
 	touch .lib-rtl
 
 
-a=$(shell echo "-$(CV32E40P_PKG)-$(TBSRC_PKG)-$(TBSRC)-" )
-$(info $(a))
+#a=$(shell echo "-$(CV32E40P_PKG)-$(TBSRC_PKG)-$(TBSRC)-" )
+#$(info $(a))
 .build-rtl: .lib-rtl $(CV32E40P_PKG) $(TBSRC_PKG) $(TBSRC)
 	$(VLOG) \
 		-work $(VWORK) \
@@ -200,15 +200,15 @@ $(info $(a))
 		$(TBSRC_PKG) $(TBSRC) 
 		
 
-vsim-all:  .opt-rtl
+checkout-arch: 
+	$(CV32E40P_CKECHOUT_CMD)
+
+vsim-all:  .opt-rtl 
 	
 
 .opt-rtl: .build-rtl
 	$(VOPT) -work $(VWORK) $(VOPT_FLAGS) $(RTLSRC_VLOG_TB_TOP) -o $(RTLSRC_VOPT_TB_TOP)
 	touch .opt-rtl
-
-
-
 	
 # run tb and exit
 .PHONY: vsim-run
@@ -243,6 +243,7 @@ questa-hello-world: vsim-run-gui &
 
 # General target smulation without GUI
 .PHONY: questa-sim
+questa-sim: checkout-arch
 questa-sim: vsim-all $(TEST_FILE).hex
 questa-sim: ALL_VSIM_FLAGS += +firmware=$(TEST_FILE).hex
 questa-sim: vsim-run-sh
@@ -255,13 +256,24 @@ questa-sim-gui: vsim-run-gui &
 
 # $(VSIM_GUI_FLAGS) 
 
+.PHONY: questa-sim-stage-gui
+questa-sim-stage-gui: ALL_VSIM_FLAGS += $(VSIM_GUI_FLAGS)
+questa-sim-stage-gui: ALL_VSIM_FLAGS += -vcdstim cv32e40p_id_stage=gold_in.vcd
+questa-sim-stage-gui:
+				$(VLIB) $(VWORK)
+				touch .lib-rtl
+				$(VLOG) -work $(VWORK)  $(VLOG_FLAGS) -f $(CV32E40P_MANIFEST)
+				$(VOPT) -work $(VWORK) $(VOPT_FLAGS) $(VLOG_SV_STAGE) -o $(VOPT_SV_STAGE)
+				touch .opt-rtl
+				$(VSIM) -work $(VWORK) $(ALL_VSIM_FLAGS) $(VOPT_SV_STAGE) -do $(VSIM_SCRIPT)
+
 .PHONY: questa-sim-stage
-questa-sim-stage: ALL_VSIM_FLAGS += $(VSIM_GUI_FLAGS)
-questa-sim-stage: ALL_VSIM_FLAGS += -vcdstim /id_stage=gold_in.vcd
+questa-sim-stage: ALL_VSIM_FLAGS += -c
+questa-sim-stage: ALL_VSIM_FLAGS += -vcdstim cv32e40p_id_stage=gold_in.vcd
 questa-sim-stage:
 				$(VLIB) $(VWORK)
 				touch .lib-rtl
-				$(VLOG) -work $(VWORK) $(VLOG_FLAGS) -f $(CV32E40P_MANIFEST)
+				$(VLOG) -work $(VWORK)  $(VLOG_FLAGS) -f $(CV32E40P_MANIFEST)
 				$(VOPT) -work $(VWORK) $(VOPT_FLAGS) $(VLOG_SV_STAGE) -o $(VOPT_SV_STAGE)
 				touch .opt-rtl
 				$(VSIM) -work $(VWORK) $(ALL_VSIM_FLAGS) $(VOPT_SV_STAGE) -do $(VSIM_SCRIPT)

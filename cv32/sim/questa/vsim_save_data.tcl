@@ -1,4 +1,4 @@
-set CORE_V_VERIF "/home/thesis/marcello.neri/Desktop/core-v-verif"
+set CORE_V_VERIF "/home/thesis/elia.ribaldone/Desktop/core-v-verif"
 set SIM_BASE "sim:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
 
 ##################################################################
@@ -6,15 +6,19 @@ set SIM_BASE "sim:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
 set InSignals [ find signals "$SIM_BASE/id_stage_i/*" -in ]
 set OutSignals [ find signals "$SIM_BASE/id_stage_i/*" -out ]
 
+
 if { "$env(GUI)" == "-gui"}  {
-	add wave $InSignals
-	add wave $OutSignals
+	foreach sig $InSignals {
+		add wave sim:/$sig
+	}
+	foreach sig $OutSignals {
+		add wave sim:/$sig
+	}
 }
 
 
 ##################################################################
 ####### Simulation run
-vcd add -dumpports -file gold_out.vcd -out $SIM_BASE/id_stage_i/*
 vcd add -dumpports -file gold_in.vcd -in $SIM_BASE/id_stage_i/*
 
 
@@ -24,6 +28,8 @@ run -all
 
 ##################################################################
 ####### Save dataset in gold wlf file 
+
+dataset save $SIM_BASE/id_stage_i/* gold_out.wlf
 
 #puts [pwd]
 

@@ -99,7 +99,7 @@ Program Usage:
 	exit 1
 }
 
-CORE_V_VERIF="/home/thesis/marcello.neri/Desktop/core-v-verif"
+CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
 COMMONMK="$CORE_V_VERIF/cv32/sim/core/sim_FT/Common.mk"
 
 isnumber='^[0-9]+$'
@@ -172,7 +172,7 @@ VERBOSE=1
 A_REF_REPO="https://github.com/openhwgroup/cv32e40p.git"
 A_REF_BRANCH="master"
 A_FT_REPO="https://github.com/RISKVFT/cv32e40p.git"
-A_FT_BRANCH="master"
+A_FT_BRANCH="FT_Elia"
 
 # Set variable are used to correctly end program if only
 # this action are done, for example if only git repo 
@@ -233,7 +233,17 @@ for p1 in $par; do
 					repfile "A_REF_REPO" "$CUR_DIR/$(basename $0)" $2
 					A_REF_BRANCH=$3
 					repfile "A_REF_BRANCH" "$CUR_DIR/$(basename $0)" $3 
-					shift 3;;	
+					shift 2;;
+				refb)
+					db_becho "Setted \n	REF_BRANCH=$2"
+					A_REF_BRANCH=$2
+					repfile "A_REF_BRANCH" "$CUR_DIR/$(basename $0)" $2
+					shift 2;;	
+				refr)
+					db_becho "Setted \n	REF_REPO=$2"
+					A_REF_REPO=$2
+					repfile "A_REF_REPO" "$CUR_DIR/$(basename $0)" $2
+					shift 2;;	
 				ft)
 					db_becho "Setted \n	FT_REPO=$2 and \n	FT_BRANCH=$3"
 					A_FT_REPO=$2
@@ -241,10 +251,23 @@ for p1 in $par; do
 					A_FT_BRANCH=$3
 					repfile "A_FT_BRANCH" "$CUR_DIR/$(basename $0)" $3
 					shift 3;;
+				ftr)
+					db_becho "Setted \n	FT_REPO=$2"
+					A_FT_REPO=$2
+					repfile "A_FT_REPO" "$CUR_DIR/$(basename $0)" $2
+					shift 2;;
+				ftb)
+					db_becho "Setted \n	FT_BRANCH=$2"
+					A_FT_BRANCH=$2
+					repfile "A_FT_BRANCH" "$CUR_DIR/$(basename $0)" $2
+					shift 3;;
 				s)
 					SET_ARCH=1
 					setRepoBranch $2
 					shift 2;;
+				i) # info
+					db_becho "Info about archs\nFT branch = $A_FT_BRANCH\nTF repo = $A_FT_REPO\nREF branch = $A_REF_BRANCH\nREF repo = $A_REF_REPO\n"	
+					exit 1 ;;
 				*)
 					recho_exit "Error; \"-a\" option needs correct parameter [ref|ft|s] ";;
 			esac
@@ -433,6 +456,8 @@ for p1 in $par; do
 	esac
 done
 
+export CV32E40P_CUR_BRANCH=$(get_git_branch $CORE_V_VERIF/core-v-cores/cv32e40p)
+
 # CONTROLS !!
 if [[ $BENCHMARK -eq 0 && $UNIQUE -eq 0 ]]; then
 	if [[ $ARCH -eq 1 ]]; then
@@ -470,6 +495,11 @@ else
 			fi
 		fi	
 	fi
+fi
+
+if ! [[ -z ${CV32E40P_CUR_BRANCH+x} ]]; then
+	export CV32E40P_CUR_BRANCH=$(get_git_branch $CORE_V_VERIF/core-v-cores/cv32e40p)
+	echo $CV32E40P_CUR_BRANH
 fi
 
 if [[ $VSIM_FILE == " " ]]; then

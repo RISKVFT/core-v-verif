@@ -21,7 +21,7 @@
 
 CV32E40P_REPO ?= https://github.com/RISKVFT/cv32e40p.git
 #CV32E40P_REPO   ?= https://github.com/RISKVFT/cv32e40p.git
-CV32E40P_BRANCH ?= master
+CV32E40P_BRANCH ?= FT_Elia
 #CV32E40P_BRANCH ?= FT_Marcello
 #2020-10-08
 CV32E40P_HASH   ?= head
@@ -49,11 +49,18 @@ COMPLIANCE_HASH   ?= c21a2e86afa3f7d4292a2dd26b759f3f29cde497
 ifeq ($(CV32E40P_BRANCH), master)
   TMP = git clone $(CV32E40P_REPO) --recurse $(CV32E40P_PKG)
 else
-  #ifeq (, $(wildcard $(PROJ_ROOT_DIR)/core-v-cores/cv32e40p)) # If the directory doesn't esist
-  	TMP = git clone -b $(CV32E40P_BRANCH) --single-branch $(CV32E40P_REPO) --recurse $(CV32E40P_PKG)
-  #else
-  	#TMP = git --git-dir=$(CV32E40P_PKG)/.git --work-tree=$(CV32E40P_PKG) checkout $(CV32E40P_BRANCH)  
-  #endif
+  # ifeq (, $(wildcard $(PROJ_ROOT_DIR)/core-v-cores/cv32e40p)) # If the directory doesn't esist
+  TMP = git clone -b $(CV32E40P_BRANCH) --single-branch $(CV32E40P_REPO) --recurse $(CV32E40P_PKG)
+  #TMP = git --git-dir=$(CV32E40P_PKG)/.git --work-tree=$(CV32E40P_PKG) checkout $(CV32E40P_BRANCH)  
+  #TMP = git checkout $(CV32E40P_BRANCH)  
+endif
+
+ifeq ($(CV32E40P_CUR_BRANCH), $(CV32E40P_BRANCH))
+  CV32E40P_CKECHOUT_CMD = 
+else
+  a=$(shell echo "Switch from branch: $(CV32E40P_CUR_BRANCH) to branch: $(CV32E40P_BRANCH)")
+  $(info "$a")
+  CV32E40P_CKECHOUT_CMD = git --git-dir=$(CV32E40P_PKG)/.git --work-tree=$(CV32E40P_PKG) checkout $(CV32E40P_BRANCH)
 endif
 
 ifeq ($(CV32E40P_HASH), head)
@@ -61,8 +68,6 @@ ifeq ($(CV32E40P_HASH), head)
 else
   CLONE_CV32E40P_CMD = $(TMP); cd $(CV32E40P_PKG); git checkout $(CV32E40P_HASH)
 endif
-a=$(shell echo $(CV32E40P_BRANCH))
-$(info "$a -----------------------------------------------------------------------------------------------------------------------_")
 
 # Generate command to clone the FPNEW RTL
 ifeq ($(FPNEW_BRANCH), master)
