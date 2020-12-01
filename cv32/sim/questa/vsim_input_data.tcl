@@ -1,14 +1,34 @@
 set SIM_BASE "sim:"
 set GOLD_BASE "gold_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
 
+gold_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/ciccio
+gold_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/wrapper/cicciopasticcio
 
-proc list_to_sig {lista} {
-	foreach l1 $lista {
-		set l2 [ split $l1 / ]
-		lappend lista_out [lindex $l2 [expr [ llength $l2] -1]]
-	}
-	return [lsort $lista_out]
+sim:/cv32e40p_core_i/id_stage_i/ciccio
+sim:/cv32e40p_core_i/id_stage_i/wrapper/cicciopasticcio
+
+ciccio
+wrapper/cicciopasticcio
+
+gold_out: tb_top cv32e40p_tb_wrapper_i cv32e40p_core_i safgdasfgb
+
+proc ord_list {lista} {
+        foreach l1 $lista {
+                set l2 [ split $l1 / ]
+                lappend lista_sig [lindex $l2 [expr [ llength $l2] -1]]
+        }
+        set l_ord_sig [lsort $lista_sig]
+        set l_index_sig [lsort -indices $lista_sig]
+        foreach index_sig $l_index_sig {
+                lappend lista_out [lindex $lista $index_sig]
+        }
+        #foreach l $lista_out {
+        #       puts $l
+        #}
+        return $lista_out
+
 }
+
 proc reopenStdout {file} {
 	close stdout
 	open $file w        ;# The standard channels are special
@@ -58,9 +78,9 @@ if { "$env(GUI)" == "-gui"}  {
 
 # bisogna provare a comparare segnali che hanno dimensioni diverse (parallelismo diverso)
 compare start sim gold_out
-foreach s_sig [ list_to_sig $OutSignals ] g_sig [list_to_sig $GOutSignals ] {
-	puts "sim:/cv32e40p_id_stage/$s_sig gold_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/$g_sig"
-	compare add sim:/cv32e40p_id_stage/$s_sig gold_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/$g_sig
+foreach s_sig [ list_to_sig $OutSignals ] g_sig [ ord_list $GOutSignals ]{
+	puts $s_sig $g_sig
+	compare $s_sig $g_sig
 }
 compare run
 compare savediffs diffs_id_stage.txt
