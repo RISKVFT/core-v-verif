@@ -1,16 +1,6 @@
-set SIM_BASE "sim:"
-set GOLD_BASE "gold_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
-
-gold_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/ciccio
-gold_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/wrapper/cicciopasticcio
-
-sim:/cv32e40p_core_i/id_stage_i/ciccio
-sim:/cv32e40p_core_i/id_stage_i/wrapper/cicciopasticcio
-
-ciccio
-wrapper/cicciopasticcio
-
-gold_out: tb_top cv32e40p_tb_wrapper_i cv32e40p_core_i safgdasfgb
+set SIM_BASE "$env(SIM_BASE)"
+set GOLD_NAME "$env(GOLD_NAME)"
+set STAGE_NAME "$env(STAGE_NAME)"
 
 proc ord_list {lista} {
         foreach l1 $lista {
@@ -46,8 +36,8 @@ proc compare_sig {} {
 
 #vsim top -vcdstim /top/p=proc.vcd -vcdstim /top/c=cache.vcd
 
-set InSignals [ find nets "$SIM_BASE/cv32e40p_id_stage/*" -in ]
-set OutSignals [ find nets "$SIM_BASE/cv32e40p_id_stage/*" -out ]
+set InSignals [ find nets "sim:/cv32e40p_${STAGE_NAME}/*" -in ]
+set OutSignals [ find nets "sim:/cv32e40p_${STAGE_NAME}/*" -out ]
 
 foreach sig $OutSignals {
 	puts sim:/$sig
@@ -65,22 +55,22 @@ run -all
 ##################################################################
 ####### Save dataset in gold wlf file 
 
-dataset open gold_out.wlf
+dataset open ${GOLD_NAME}_out.wlf
 
-set GOutSignals [ find nets "$GOLD_BASE/id_stage_i/*_o" ]
+set GOutSignals [ find nets "${GOLD_NAME}_out:/$SIM_BASE/${STAGE_NAME}_i/*_o" ]
 
 if { "$env(GUI)" == "-gui"}  {
 	foreach sig $GOutSignals {
 		puts $sig
-		add wave gold_out:/$sig
+		add wave ${GOLD_NAME}_out:/$sig
 	}
 }
 
 # bisogna provare a comparare segnali che hanno dimensioni diverse (parallelismo diverso)
-compare start sim gold_out
+compare start sim ${GOLD_NAME}_out
 foreach s_sig [ list_to_sig $OutSignals ] g_sig [ ord_list $GOutSignals ]{
-	puts $s_sig $g_sig
-	compare $s_sig $g_sig
+	puts sim:/$s_sig ${GOLD_NAME}_out:/$g_sig
+	compare sim:/$s_sig ${GOLD_NAME}_out:/$g_sig
 }
 compare run
 compare savediffs diffs_id_stage.txt

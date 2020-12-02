@@ -163,7 +163,13 @@ monitor_file () {
 	   printf "[i]  %-50s]:%-5d \n" "${str:0:50}" "$res"
 }
 
-
+Setvar () {
+	var=$1
+	var_value=$2
+	repfile "$var" \		
+		"$CUR_DIR/$(basename $0)" \
+		"$var_value"
+}
 
 dfSetVar (){
 	df=$1
@@ -252,6 +258,7 @@ mon_run (){
 }
 f_make () {
         firmware=$1
+	export GOLD_NAME="gold_${STAGE_NAME}_${firmware}"
 	logfile=$2
 	override=$3
 	lineno=$4

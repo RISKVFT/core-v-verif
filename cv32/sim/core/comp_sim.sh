@@ -166,6 +166,9 @@ B_LOG_DIR="$CORE_V_VERIF/cv32/sim/core/bench_log"
 CHEX_FILE=" "
 VSIM_EXT=""
 export GUI=""
+export SIM_BASE="tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
+export STAGE_NAME="id_stage"
+
 VERBOSE=1
 
 # ARCH
@@ -266,8 +269,14 @@ for p1 in $par; do
 					setRepoBranch $2
 					shift 2;;
 				i) # info
-					db_becho "Info about archs\nFT branch = $A_FT_BRANCH\nTF repo = $A_FT_REPO\nREF branch = $A_REF_BRANCH\nREF repo = $A_REF_REPO\n"	
+					db_becho "Info about archs\nFT branch = $A_FT_BRANCH\nTF repo = $A_FT_REPO\nREF branch = $A_REF_BRANCH\nREF repo = $A_REF_REPO\nSIM BASE = $SIM_BASE\n"	
 					exit 1 ;;
+				simbase)
+					db_echo "Sim base set SIM_BASE=$2"
+					export SIM_BASE="$2"
+					SetVar "SIM_BASE" "$2"
+					shift 2;;
+
 				*)
 					recho_exit "Error; \"-a\" option needs correct parameter [ref|ft|s] ";;
 			esac
@@ -439,7 +448,9 @@ for p1 in $par; do
 						exit 1;;
 					b)
 						SET_BLOCK=1
-						B_STAGE=$1
+						B_STAGE=cv32e40p_$1 # ex: id_stage
+						export STAGE_NAME="$1"
+						SetVar "STAGE_NAME" "$1"
 						shift;;
 					*)			
 					;;
