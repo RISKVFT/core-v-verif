@@ -99,7 +99,7 @@ Program Usage:
 	exit 1
 }
 
-CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
+CORE_V_VERIF="/home/thesis/marcello.neri/Desktop/core-v-verif"
 COMMONMK="$CORE_V_VERIF/cv32/sim/core/sim_FT/Common.mk"
 
 isnumber='^[0-9]+$'
@@ -157,8 +157,8 @@ U_LOG_DIR=" "
 BENCH_BUILD_FILE="$CORE_V_VERIF/cv32/tests/programs/custom_FT/build_all.py"
 # Folder that contain *.hex file of benchmar
 BENCH_HEX_DIR="$CORE_V_VERIF/cv32/tests/programs/custom_FT/out"
-B_TYPE=" "
-B_FILE=" "
+B_TYPE=""
+B_FILE=""
 B_NUM=0
 B_LOG_DIR="$CORE_V_VERIF/cv32/sim/core/bench_log"
 
@@ -410,7 +410,8 @@ for p1 in $par; do
 						if [[ $1 == "a" ]]; then 
 							db_becho "Bench all"
 							B_TYPE="all";
-						else 
+							shift
+						elif [[ ! -z $1 && -z $B_FILE ]]; then 
 							if [[ $1 =~ $isnumber ]]; then 
 								db_becho "Bench Number: $1"
 								B_NUM=$1; B_TYPE="number";
@@ -418,8 +419,8 @@ for p1 in $par; do
 								db_becho "Bench File: $1"
 								B_FILE=$1; B_TYPE="name";
 							fi
+							shift
 						fi
-						shift
 						;;
 					v) # parameter to give extension to append to the vsim file 
 					  # used to execute simulation in vsim and stored in

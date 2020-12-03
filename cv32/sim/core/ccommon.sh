@@ -258,7 +258,7 @@ mon_run (){
 }
 f_make () {
         firmware=$1
-	export GOLD_NAME="gold_${STAGE_NAME}_${firmware}"
+	export GOLD_NAME="gold_${STAGE_NAME}_${firmware:0:-4}"
 	logfile=$2
 	override=$3
 	lineno=$4

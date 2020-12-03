@@ -121,8 +121,8 @@ export DESIGN_RTL_DIR = $(CV32E40P_PKG)/rtl
 
 
 ### Creation of variables for benchmark tasks
-STAGE ?= id_stage_i
-SV_STAGE := $(PROJ_ROOT_DIR)/core-v-cores/cv32e40p/rtl/$(STAGE)
+STAGE ?= cv32e40p_id_stage
+SV_STAGE := $(PROJ_ROOT_DIR)/core-v-cores/cv32e40p/rtl/$(STAGE).sv
 VLOG_SV_STAGE := $(basename $(notdir $(SV_STAGE)))
 VOPT_SV_STAGE := $(addsuffix _vopt, $(VLOG_SV_STAGE))
 DPILIB_VSIM_OPT := +dumpports+nocollapse
@@ -258,7 +258,7 @@ questa-sim-gui: vsim-run-gui &
 
 .PHONY: questa-sim-stage-gui
 questa-sim-stage-gui: ALL_VSIM_FLAGS += $(VSIM_GUI_FLAGS)
-questa-sim-stage-gui: ALL_VSIM_FLAGS += -vcdstim cv32e40p_id_stage=gold_in.vcd
+questa-sim-stage-gui: ALL_VSIM_FLAGS += -vcdstim $(STAGE)=./dataset/$(GOLD_NAME)_in.vcd
 questa-sim-stage-gui:
 				$(VLIB) $(VWORK)
 				touch .lib-rtl
@@ -269,7 +269,7 @@ questa-sim-stage-gui:
 
 .PHONY: questa-sim-stage
 questa-sim-stage: ALL_VSIM_FLAGS += -c
-questa-sim-stage: ALL_VSIM_FLAGS += -vcdstim cv32e40p_id_stage=gold_in.vcd
+questa-sim-stage: ALL_VSIM_FLAGS += -vcdstim $(STAGE)=./dataset/$(GOLD_NAME)_in.vcd
 questa-sim-stage:
 				$(VLIB) $(VWORK)
 				touch .lib-rtl
