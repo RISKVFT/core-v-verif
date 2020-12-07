@@ -99,7 +99,7 @@ Program Usage:
 	exit 1
 }
 
-CORE_V_VERIF="/home/thesis/marcello.neri/Desktop/core-v-verif"
+CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
 COMMONMK="$CORE_V_VERIF/cv32/sim/core/sim_FT/Common.mk"
 
 isnumber='^[0-9]+$'

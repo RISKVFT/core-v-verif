@@ -246,19 +246,21 @@ questa-hello-world: vsim-run-gui &
 questa-sim: checkout-arch
 questa-sim: vsim-all $(TEST_FILE).hex
 questa-sim: ALL_VSIM_FLAGS += +firmware=$(TEST_FILE).hex
+questa-sim: ALL_VSIM_FLAGS += +dumpports+nocollpse
 questa-sim: vsim-run-sh
 
 # General target smulation with GUI
 .PHONY: questa-sim-gui
 questa-sim-gui: vsim-all $(TEST_FILE).hex
 questa-sim-gui: ALL_VSIM_FLAGS += +firmware=$(TEST_FILE).hex
+questa-sim-gui: ALL_VSIM_FLAGS += +dumpports+nocollpse
 questa-sim-gui: vsim-run-gui &
 
 # $(VSIM_GUI_FLAGS) 
 
 .PHONY: questa-sim-stage-gui
 questa-sim-stage-gui: ALL_VSIM_FLAGS += $(VSIM_GUI_FLAGS)
-questa-sim-stage-gui: ALL_VSIM_FLAGS += -vcdstim $(STAGE)=./dataset/$(GOLD_NAME)_in.vcd
+questa-sim-stage-gui: ALL_VSIM_FLAGS += -vcdstim ./dataset/$(GOLD_NAME)_in.vcd
 questa-sim-stage-gui:
 				$(VLIB) $(VWORK)
 				touch .lib-rtl
@@ -269,7 +271,7 @@ questa-sim-stage-gui:
 
 .PHONY: questa-sim-stage
 questa-sim-stage: ALL_VSIM_FLAGS += -c
-questa-sim-stage: ALL_VSIM_FLAGS += -vcdstim $(STAGE)=./dataset/$(GOLD_NAME)_in.vcd
+questa-sim-stage: ALL_VSIM_FLAGS += -vcdstim ./dataset/$(GOLD_NAME)_in.vcd
 questa-sim-stage:
 				$(VLIB) $(VWORK)
 				touch .lib-rtl

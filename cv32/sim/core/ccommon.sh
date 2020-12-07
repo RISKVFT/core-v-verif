@@ -258,7 +258,8 @@ mon_run (){
 }
 f_make () {
         firmware=$1
-	export GOLD_NAME="gold_${STAGE_NAME}_${firmware:0:-4}"
+	firmware_converted="$(echo $firmware | tr '-' '_')"
+	export GOLD_NAME="gold_${STAGE_NAME}_${firmware_converted:0:-4}"
 	logfile=$2
 	override=$3
 	lineno=$4
@@ -271,6 +272,11 @@ f_make () {
 		make -C $SIM_FT questa-sim-stage$GUI STAGE=$B_STAGE \
 			TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}" FT="$VSIM_EXT"
 	fi
+	#for file in $(ls ./sim_FT/dataset | grep .*_out.vcd); do
+	#	if ! test -f ./sim_FT/dataset/${file:0:-4}.wlf; then
+	#			vsim -c -do "vcd2wlf ./sim_FT/dataset/$file ./sim_FT/dataset/${file:0:-4}.wlf ; quit -f"
+	#	fi
+	#done
 }
 
 get_git_branch (){

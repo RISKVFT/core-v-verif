@@ -3,12 +3,14 @@ set GOLD_NAME "$env(GOLD_NAME)"
 set STAGE_NAME "$env(STAGE_NAME)"
 
 proc ord_list {lista} {
+	set lista_sig []
         foreach l1 $lista {
                 set l2 [ split $l1 / ]
                 lappend lista_sig [lindex $l2 [expr [ llength $l2] -1]]
         }
         set l_ord_sig [lsort $lista_sig]
         set l_index_sig [lsort -indices $lista_sig]
+	set lista_out []
         foreach index_sig $l_index_sig {
                 lappend lista_out [lindex $lista $index_sig]
         }
@@ -40,12 +42,19 @@ set InSignals [ find nets "sim:/cv32e40p_${STAGE_NAME}/*" -in ]
 set OutSignals [ find nets "sim:/cv32e40p_${STAGE_NAME}/*" -out ]
 
 foreach sig $OutSignals {
-	puts sim:/$sig
-	log sim:/$sig
+	puts sim:$sig
+	log sim:$sig
 	if { "$env(GUI)" == "-gui"}  {
 		add wave sim:/$sig
 	}
 }
+
+
+##################################################################
+####### fault injection
+
+force -freeze [lindex $OutSignals 1] 0
+
 
 run 0
 run -all
@@ -55,25 +64,33 @@ run -all
 ##################################################################
 ####### Save dataset in gold wlf file 
 
-dataset open ${GOLD_NAME}_out.wlf
+dataset open ./dataset/${GOLD_NAME}_out.wlf
 
-set GOutSignals [ find nets "${GOLD_NAME}_out:/$SIM_BASE/${STAGE_NAME}_i/*_o" ]
+set GOutSignals [ find nets "${GOLD_NAME}_out:/$SIM_BASE/${STAGE_NAME}_i/*" ]
 
 if { "$env(GUI)" == "-gui"}  {
 	foreach sig $GOutSignals {
 		puts $sig
-		add wave ${GOLD_NAME}_out:/$sig
+		add wave ${GOLD_NAME}_out:$sig
 	}
 }
 
 # bisogna provare a comparare segnali che hanno dimensioni diverse (parallelismo diverso)
-compare start sim ${GOLD_NAME}_out
-foreach s_sig [ list_to_sig $OutSignals ] g_sig [ ord_list $GOutSignals ]{
-	puts sim:/$s_sig ${GOLD_NAME}_out:/$g_sig
-	compare sim:/$s_sig ${GOLD_NAME}_out:/$g_sig
+compare start ${GOLD_NAME}_out sim
+puts "ciccio__:[llength $OutSignals]"
+puts "ciccio__:[llength $GOutSignals]"
+set s_sig_list [ ord_list $OutSignals ]
+set g_sig_list [ ord_list $GOutSignals ]
+foreach s_sig $s_sig_list  g_sig $g_sig_list {
+	puts "sim:$s_sig ${GOLD_NAME}_out:$g_sig"
+	compare add sim:$s_sig ${GOLD_NAME}_out:$g_sig
 }
+
 compare run
 compare savediffs diffs_id_stage.txt
 compare saverules rules_id_stage.txt
+compare end
 
-quit -f
+if { "$env(GUI)" == "-gui"}  {
+	quit -f
+}

@@ -1,4 +1,4 @@
-set CORE_V_VERIF "/home/thesis/marcello.neri/Desktop/core-v-verif"
+set CORE_V_VERIF "/home/thesis/elia.ribaldone/Desktop/core-v-verif"
 set SIM_BASE "sim:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
 set GOLD_BASE "gold:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
 
