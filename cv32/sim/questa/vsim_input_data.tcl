@@ -2,11 +2,14 @@ set SIM_BASE "$env(SIM_BASE)"
 set GOLD_NAME "$env(GOLD_NAME)"
 set STAGE_NAME "$env(STAGE_NAME)"
 
-proc ord_list {lista} {
+proc ord_list {listain} {
 	set lista_sig []
-        foreach l1 $lista {
-                set l2 [ split $l1 / ]
-                lappend lista_sig [lindex $l2 [expr [ llength $l2] -1]]
+ 	set stagename [ lindex $listain 0]
+	set lista [ lrange $listain 1 end ]
+	foreach l1 $lista {
+		lappend lista_sig [ splitPath $l1 $stagename ]
+                #set l2 [ split $l1 / ]
+                #lappend lista_sig [lindex $l2 [expr [ llength $l2] -1]]
         }
         set l_ord_sig [lsort $lista_sig]
         set l_index_sig [lsort -indices $lista_sig]
@@ -19,6 +22,16 @@ proc ord_list {lista} {
         #}
         return $lista_out
 
+}
+proc splitPath {stringa stagename} {
+	puts "ciccio si spera sia caduto sullo stagename: $stagename"
+	puts "ciccio si spera sia caduto sulla stringa: $stringa"
+        set l2 [ split $stringa / ]
+	set val_stage [ expr [ lsearch $l2 $stagename ] + 1 ]
+        #return [lindex $l2 [expr [ llength $l2] -1]]
+	puts "luca si spera sia caduto sulla stringa: $l2"
+	puts "luca si spera sia caduto sulla stringa: [join [lrange $l2 $val_stage end] /]"
+        return  [join [lrange $l2 $val_stage end] /]
 }
 
 proc reopenStdout {file} {
@@ -37,26 +50,34 @@ proc compare_sig {} {
 ####### Selezione dei segnali da loggare nel file gold.wlf
 
 #vsim top -vcdstim /top/p=proc.vcd -vcdstim /top/c=cache.vcd
-
-set InSignals [ find nets "sim:/cv32e40p_${STAGE_NAME}/*" -in ]
-set OutSignals [ find nets "sim:/cv32e40p_${STAGE_NAME}/*" -out ]
-
-foreach sig $OutSignals {
-	puts sim:$sig
-	log sim:$sig
-	if { "$env(GUI)" == "-gui"}  {
-		add wave sim:/$sig
-	}
+#
+if { ${STAGE_NAME} == "cv32e40p_core" } {
+	set REAL_STAGE_NAME "cv32e40p_core"
+} else {
+	set REAL_STAGE_NAME "cv32e40p_${STAGE_NAME}"
 }
+
+set InSignals [ find nets "sim:/${REAL_STAGE_NAME}/*_i" ]
+set OutSignals [ find nets "sim:/${REAL_STAGE_NAME}/*_o" ]
+
+log -r sim:/${REAL_STAGE_NAME}/*
+
+#foreach sig $OutSignals {
+#	puts sim:$sig
+#	log sim:$sig
+#	if { "$env(GUI)" == "-gui"}  {
+#		add wave sim:/$sig
+#	}
+#}
+#
 
 
 ##################################################################
 ####### fault injection
 
-force -freeze [lindex $OutSignals 1] 0
+#force -freeze [lindex $OutSignals 1] 0
 
 
-run 0
 run -all
 
 
@@ -66,31 +87,70 @@ run -all
 
 dataset open ./dataset/${GOLD_NAME}_out.wlf
 
-set GOutSignals [ find nets "${GOLD_NAME}_out:/$SIM_BASE/${STAGE_NAME}_i/*" ]
+set GOutSignals [ find nets  "${GOLD_NAME}_out:/$SIM_BASE/${STAGE_NAME}_i/*_o" ]
+set GInSignals [ find nets "${GOLD_NAME}_out:/$SIM_BASE/${STAGE_NAME}_i/*_i" ]
 
-if { "$env(GUI)" == "-gui"}  {
+if { "$env(GUI)" != "-gui"}  {
 	foreach sig $GOutSignals {
 		puts $sig
 		add wave ${GOLD_NAME}_out:$sig
 	}
+	foreach sig $GInSignals {
+		puts $sig
+		add wave ${GOLD_NAME}_out:$sig
+	}
 }
+#add wave -position insertpoint  \
+#sim:/cv32e40p_core/PULP_XPULP \
+#sim:/cv32e40p_core/PULP_CLUSTER \
+#sim:/cv32e40p_core/FPU \
+#sim:/cv32e40p_core/PULP_ZFINX \
+#sim:/cv32e40p_core/NUM_MHPMCOUNTERS \
+#sim:/cv32e40p_core/PULP_SECURE \
+#sim:/cv32e40p_core/N_PMP_ENTRIES \
+#sim:/cv32e40p_core/USE_PMP \
+#sim:/cv32e40p_core/A_EXTENSION \
+#sim:/cv32e40p_core/DEBUG_TRIGGER_EN \
+#sim:/cv32e40p_core/PULP_OBI \
+#sim:/cv32e40p_core/N_HWLP \
+#sim:/cv32e40p_core/N_HWLP_BITS \
+#sim:/cv32e40p_core/APU
 
-# bisogna provare a comparare segnali che hanno dimensioni diverse (parallelismo diverso)
 compare start ${GOLD_NAME}_out sim
-puts "ciccio__:[llength $OutSignals]"
-puts "ciccio__:[llength $GOutSignals]"
-set s_sig_list [ ord_list $OutSignals ]
-set g_sig_list [ ord_list $GOutSignals ]
+#set s_sig_list_in [ ord_list $InSignals ]
+#set g_sig_list_in [ ord_list $GInSignals ]
+set fp_sim [ open "signal_sim.txt" w ]
+set fp_gold [ open "signal_gold.txt" w ]
+#puts "ciccio è caduto 1 : [ llength $s_sig_list_in ]"
+#puts "ciccio è caduto 2 : [ llength $g_sig_list_in ]"
+#foreach s_sig $s_sig_list_in  g_sig $g_sig_list_in {
+#	puts "$s_sig $g_sig"
+#	#compare add sim:$s_sig ${GOLD_NAME}_out:$g_sig
+#}
+# bisogna provare a comparare segnali che hanno dimensioni diverse (parallelismo diverso)
+#puts "ciccio__:[llength $OutSignals]"
+#puts "ciccio__:[llength $GOutSignals]"
+#set s_sig_list [ ord_list $OutSignals ]
+#set g_sig_list [ ord_list $GOutSignals ]
+set s_sig_list [ ord_list " ${REAL_STAGE_NAME} [find nets -r "sim:/${REAL_STAGE_NAME}/*" ] " ] 
+# $OutSignals ]
+set g_sig_list [ ord_list " ${STAGE_NAME}_i  [find nets -r "${GOLD_NAME}_out:/$SIM_BASE/${STAGE_NAME}_i/*" ] " ] 
+# $GOutSignals ]
 foreach s_sig $s_sig_list  g_sig $g_sig_list {
-	puts "sim:$s_sig ${GOLD_NAME}_out:$g_sig"
+	#puts $fp_sim "[ splitPath $s_sig ${REAL_STAGE_NAME} ]" 
+ 	##puts $fp_gold "[ splitPath $g_sig ${STAGE_NAME}_i ]"
+	puts "sim:$s_sig      ${GOLD_NAME}_out:$g_sig"
 	compare add sim:$s_sig ${GOLD_NAME}_out:$g_sig
 }
+
+close $fp_sim
+close $fp_gold
 
 compare run
 compare savediffs diffs_id_stage.txt
 compare saverules rules_id_stage.txt
-compare end
 
-if { "$env(GUI)" == "-gui"}  {
+if { "$env(GUI)" != "-gui"}  {
+	compare end
 	quit -f
 }

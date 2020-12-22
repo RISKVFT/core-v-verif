@@ -193,7 +193,7 @@ all: clean_all sanity-veri-run dsim-sanity
 #a=$(shell echo "-$(CV32E40P_PKG)-$(TBSRC_PKG)-$(TBSRC)-" )
 #$(info $(a))
 .build-rtl: .lib-rtl $(CV32E40P_PKG) $(TBSRC_PKG) $(TBSRC)
-	$(VLOG) \
+	$(VLOG) -O0 \
 		-work $(VWORK) \
 		$(VLOG_FLAGS) \
 		-f $(CV32E40P_MANIFEST) \
@@ -201,7 +201,7 @@ all: clean_all sanity-veri-run dsim-sanity
 		
 
 checkout-arch: 
-	$(CV32E40P_CKECHOUT_CMD)
+	$(CV32E40P_CHECKOUT_CMD)
 
 vsim-all:  .opt-rtl 
 	
@@ -246,36 +246,38 @@ questa-hello-world: vsim-run-gui &
 questa-sim: checkout-arch
 questa-sim: vsim-all $(TEST_FILE).hex
 questa-sim: ALL_VSIM_FLAGS += +firmware=$(TEST_FILE).hex
-questa-sim: ALL_VSIM_FLAGS += +dumpports+nocollpse
+questa-sim: ALL_VSIM_FLAGS += +dumpports+nocollapse
 questa-sim: vsim-run-sh
 
 # General target smulation with GUI
 .PHONY: questa-sim-gui
 questa-sim-gui: vsim-all $(TEST_FILE).hex
 questa-sim-gui: ALL_VSIM_FLAGS += +firmware=$(TEST_FILE).hex
-questa-sim-gui: ALL_VSIM_FLAGS += +dumpports+nocollpse
+questa-sim-gui: ALL_VSIM_FLAGS += +dumpports+nocollapse
 questa-sim-gui: vsim-run-gui &
 
 # $(VSIM_GUI_FLAGS) 
 
 .PHONY: questa-sim-stage-gui
 questa-sim-stage-gui: ALL_VSIM_FLAGS += $(VSIM_GUI_FLAGS)
-questa-sim-stage-gui: ALL_VSIM_FLAGS += -vcdstim ./dataset/$(GOLD_NAME)_in.vcd
+questa-sim-stage-gui: ALL_VSIM_FLAGS += -vcdstim ./dataset/$(GOLD_NAME)_in.vcd -debugDB
+questa-sim-stage-gui: ALL_VSIM_FLAGS += +dumpports+nocollapse
 questa-sim-stage-gui:
 				$(VLIB) $(VWORK)
 				touch .lib-rtl
-				$(VLOG) -work $(VWORK)  $(VLOG_FLAGS) -f $(CV32E40P_MANIFEST)
+				$(VLOG) -O0 -work $(VWORK)  $(VLOG_FLAGS) -f $(CV32E40P_MANIFEST)
 				$(VOPT) -work $(VWORK) $(VOPT_FLAGS) $(VLOG_SV_STAGE) -o $(VOPT_SV_STAGE)
 				touch .opt-rtl
 				$(VSIM) -work $(VWORK) $(ALL_VSIM_FLAGS) $(VOPT_SV_STAGE) -do $(VSIM_SCRIPT)
 
 .PHONY: questa-sim-stage
 questa-sim-stage: ALL_VSIM_FLAGS += -c
-questa-sim-stage: ALL_VSIM_FLAGS += -vcdstim ./dataset/$(GOLD_NAME)_in.vcd
+questa-sim-stage: ALL_VSIM_FLAGS += -vcdstim ./dataset/$(GOLD_NAME)_in.vcd -debugDB
+questa-sim-stage: ALL_VSIM_FLAGS += +dumpports+nocollapse
 questa-sim-stage:
 				$(VLIB) $(VWORK)
 				touch .lib-rtl
-				$(VLOG) -work $(VWORK)  $(VLOG_FLAGS) -f $(CV32E40P_MANIFEST)
+				$(VLOG) -O0 -work $(VWORK)  $(VLOG_FLAGS) -f $(CV32E40P_MANIFEST)
 				$(VOPT) -work $(VWORK) $(VOPT_FLAGS) $(VLOG_SV_STAGE) -o $(VOPT_SV_STAGE)
 				touch .opt-rtl
 				$(VSIM) -work $(VWORK) $(ALL_VSIM_FLAGS) $(VOPT_SV_STAGE) -do $(VSIM_SCRIPT)

@@ -79,8 +79,8 @@ module cv32e40p_tb_wrapper
          .clk_i                  ( clk_i                 ),
          .rst_ni                 ( rst_ni                ),
 
-         .pulp_clock_en_i        ( '1                    ),
-         .scan_cg_en_i           ( '0                    ),
+         .pulp_clock_en_i        ( 1'b1                    ),
+         .scan_cg_en_i           ( 1'b0                    ),
 
          .boot_addr_i            ( BOOT_ADDR             ),
          .dm_halt_addr_i         ( DM_HALTADDRESS        ),

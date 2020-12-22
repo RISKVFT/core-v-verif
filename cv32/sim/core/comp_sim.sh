@@ -167,7 +167,7 @@ CHEX_FILE=" "
 VSIM_EXT=""
 export GUI=""
 export SIM_BASE="tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
-export STAGE_NAME="id_stage"
+export STAGE_NAME="if_stage"
 
 VERBOSE=1
 
@@ -175,7 +175,7 @@ VERBOSE=1
 A_REF_REPO="https://github.com/openhwgroup/cv32e40p.git"
 A_REF_BRANCH="master"
 A_FT_REPO="https://github.com/RISKVFT/cv32e40p.git"
-A_FT_BRANCH="FT_Elia"
+A_FT_BRANCH="master"
 
 # Set variable are used to correctly end program if only
 # this action are done, for example if only git repo 
@@ -185,6 +185,7 @@ SET_ARCH=0
 SET_DIR=0
 SET_LOG=0
 SET_BLOCK=0
+SET_UPI=0
 #TEST_DIR="$CUR_DIR/../../tests/programs/MiBench/"
 #TEST_DIR="$CUR_DIR/../../tests/programs/riscv-toolchain-blogpost/out"
 
@@ -274,7 +275,7 @@ for p1 in $par; do
 				simbase)
 					db_echo "Sim base set SIM_BASE=$2"
 					export SIM_BASE="$2"
-					SetVar "SIM_BASE" "$2"
+					SetVar "export SIM_BASE" "$2"
 					shift 2;;
 
 				*)
@@ -450,14 +451,27 @@ for p1 in $par; do
 					b)
 						SET_BLOCK=1
 						B_STAGE=cv32e40p_$1 # ex: id_stage
-						export STAGE_NAME="$1"
-						SetVar "STAGE_NAME" "$1"
+						if [[ $1 =~ "core" ]]; then
+							export STAGE_NAME="cv32e40p_$1"
+							SetVar "export STAGE_NAME" "cv32e40p_$1"
+							export SIM_BASE="tb_top/cv32e40p_tb_wrapper_i"
+						else
+							export STAGE_NAME="$1"
+							SetVar "export STAGE_NAME" "$1"
+						fi
 						shift;;
 					*)			
 					;;
 				esac
 			done
 
+			;;
+		-upi|--use-previous-input)
+			# This option enable the use of .vcd file as input of simulation
+			# the .vcd file should be previously create using a tcl script in simulation
+			# and will be located in ./dataset/ 
+			SET_UPI=1
+			shift
 			;;
 		--)
 			break;;

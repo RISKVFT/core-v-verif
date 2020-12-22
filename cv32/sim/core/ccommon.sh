@@ -163,12 +163,11 @@ monitor_file () {
 	   printf "[i]  %-50s]:%-5d \n" "${str:0:50}" "$res"
 }
 
-Setvar () {
+SetVar () {
 	var=$1
 	var_value=$2
-	repfile "$var" \		
-		"$CUR_DIR/$(basename $0)" \
-		"$var_value"
+	echo "ciccio1"
+	repfile "$var" "$CUR_DIR/$(basename $0)" "$var_value"
 }
 
 dfSetVar (){
@@ -266,9 +265,10 @@ f_make () {
         #mon_run "make -C $SIM_FT questa-sim$GUI \
         #TEST_FILE=\"$BENCH_HEX_DIR/${firmware:0:-4}\" FT=\"$VSIM_EXT\"" "$logfile" "$override" "$lineno"
 	echo "---------------$GUI"
-	if [[ $SET_BLOCK -eq 0 ]]; then
+	if [[ $SET_UPI -eq 0 ]]; then
     		make -C $SIM_FT questa-sim$GUI TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}" FT="$VSIM_EXT"
 	else 
+		echo "-------B_STAGE:  $B_STAGE"
 		make -C $SIM_FT questa-sim-stage$GUI STAGE=$B_STAGE \
 			TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}" FT="$VSIM_EXT"
 	fi
