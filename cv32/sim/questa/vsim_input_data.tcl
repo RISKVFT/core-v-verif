@@ -62,7 +62,7 @@ set OutSignals [ find nets "sim:/${REAL_STAGE_NAME}/*_o" ]
 
 log -r sim:/${REAL_STAGE_NAME}/*
 
-#foreach sig $OutSignals {
+set Clock "sim:/${REAL_STAGE_NAME}/clk"
 #	puts sim:$sig
 #	log sim:$sig
 #	if { "$env(GUI)" == "-gui"}  {
@@ -78,9 +78,12 @@ log -r sim:/${REAL_STAGE_NAME}/*
 #force -freeze [lindex $OutSignals 1] 0
 
 
+force -freeze $Clock 1'hx 0 -can 5
+run 5 ns
+force -freeze $Clock 0 0 -can {@60}
+run 50 ns
+force -freeze $Clock 0 0 , 1 5 -r 10 -can {@156020 ns}
 run -all
-
-
 
 ##################################################################
 ####### Save dataset in gold wlf file 

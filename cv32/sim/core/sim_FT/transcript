@@ -13,9 +13,9 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-# vsim -gui -debugdb -vcdstim ./dataset/gold_if_stage_hello_world_in.vcd -debugDB "+dumpports+nocollapse" cv32e40p_if_stage_vopt -do "../../questa/vsim_input_data.tcl" 
-# Start time: 18:23:33 on Dec 21,2020
-# Loading /tmp/elia.ribaldone@vlsi21_dpi_29090/linux_x86_64_gcc-5.3.0/export_tramp.so
+# vsim -nowlfcollapse -gui -debugdb -vcdstim ./dataset/gold_if_stage_hello_world_in.vcd -debugDB "+dumpports+nocollapse" cv32e40p_if_stage_vopt -do "../../questa/vsim_input_data.tcl" 
+# Start time: 23:12:48 on Dec 22,2020
+# Loading /tmp/elia.ribaldone@vlsi21_dpi_12973/linux_x86_64_gcc-5.3.0/export_tramp.so
 # Loading sv_std.std
 # Loading work.fpnew_pkg(fast)
 # Loading work.cv32e40p_pkg(fast)
@@ -34,6 +34,7 @@
 # cv32e40p_if_stage
 # /cv32e40p_if_stage/trap_addr_mux_i /cv32e40p_if_stage/instr_rdata_i /cv32e40p_if_stage/m_exc_vec_pc_mux_i /cv32e40p_if_stage/uepc_i /cv32e40p_if_stage/hwlp_jump_i /cv32e40p_if_stage/jump_target_ex_i /cv32e40p_if_stage/jump_target_id_i /cv32e40p_if_stage/halt_if_i /cv32e40p_if_stage/m_trap_base_addr_i /cv32e40p_if_stage/id_ready_i /cv32e40p_if_stage/exc_pc_mux_i /cv32e40p_if_stage/dm_halt_addr_i /cv32e40p_if_stage/u_exc_vec_pc_mux_i /cv32e40p_if_stage/pc_mux_i /cv32e40p_if_stage/depc_i /cv32e40p_if_stage/instr_err_pmp_i /cv32e40p_if_stage/mepc_i /cv32e40p_if_stage/clear_instr_valid_i /cv32e40p_if_stage/pc_set_i /cv32e40p_if_stage/boot_addr_i /cv32e40p_if_stage/u_trap_base_addr_i /cv32e40p_if_stage/req_i /cv32e40p_if_stage/instr_gnt_i /cv32e40p_if_stage/instr_err_i /cv32e40p_if_stage/hwlp_target_i /cv32e40p_if_stage/dm_exception_addr_i /cv32e40p_if_stage/instr_rvalid_i
 # /cv32e40p_if_stage/is_compressed_id_o /cv32e40p_if_stage/instr_rdata_id_o /cv32e40p_if_stage/pc_id_o /cv32e40p_if_stage/pc_if_o /cv32e40p_if_stage/is_fetch_failed_o /cv32e40p_if_stage/csr_mtvec_init_o /cv32e40p_if_stage/instr_addr_o /cv32e40p_if_stage/instr_valid_id_o /cv32e40p_if_stage/instr_req_o /cv32e40p_if_stage/illegal_c_insn_id_o /cv32e40p_if_stage/if_busy_o /cv32e40p_if_stage/perf_imiss_o
+# sim:/cv32e40p_if_stage/clk
 # ./dataset/gold_if_stage_hello_world_out.wlf opened as dataset "gold_if_stage_hello_world_out"
 # /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/instr_req_o /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/instr_addr_o /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/instr_valid_id_o /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/instr_rdata_id_o /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/is_compressed_id_o /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/illegal_c_insn_id_o /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/pc_if_o /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/pc_id_o /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/is_fetch_failed_o /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/csr_mtvec_init_o /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/if_busy_o /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/perf_imiss_o
 # /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/m_trap_base_addr_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/u_trap_base_addr_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/trap_addr_mux_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/boot_addr_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/dm_exception_addr_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/dm_halt_addr_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/req_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/instr_gnt_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/instr_rvalid_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/instr_rdata_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/instr_err_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/instr_err_pmp_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/clear_instr_valid_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/pc_set_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/mepc_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/uepc_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/depc_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/pc_mux_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/exc_pc_mux_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/m_exc_vec_pc_mux_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/u_exc_vec_pc_mux_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/jump_target_id_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/jump_target_ex_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/hwlp_jump_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/hwlp_target_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/halt_if_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/id_ready_i
@@ -2142,8 +2143,6 @@
 # sim:/cv32e40p_if_stage/uepc_i      gold_if_stage_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/if_stage_i/uepc_i
 # Created 1 comparison.
 # Computing waveform differences from time 0 ns to 156030 ns
-# 
-# Max total difference limit of 1000 reached.
-# Comparison reached total difference limit at time 240 ns
-# Found 1244 differences.
-# Break key hit
+# Found 5 differences.
+# End time: 23:19:31 on Dec 22,2020, Elapsed time: 0:06:43
+# Errors: 48, Warnings: 0
