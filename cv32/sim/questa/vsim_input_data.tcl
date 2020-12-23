@@ -82,7 +82,7 @@ force -freeze $Clock 1'hx 0 -can 5
 run 5 ns
 force -freeze $Clock 0 0 -can {@60}
 run 50 ns
-force -freeze $Clock 0 0 , 1 5 -r 10 -can {@156020 ns}
+force -freeze $Clock 0 0 , 1 5 -r 10 -can {@156030 ns}
 run -all
 
 ##################################################################
@@ -149,9 +149,28 @@ foreach s_sig $s_sig_list  g_sig $g_sig_list {
 close $fp_sim
 close $fp_gold
 
-compare run
-compare savediffs diffs_id_stage.txt
-compare saverules rules_id_stage.txt
+set compare_filename_tmp [ split ${GOLD_NAME} _ ]
+set compare_filename [join [lrange $compare_filename_tmp 1 end] _]
+
+puts ${compare_filename}
+
+compare run {0 ns} {156029 ns}
+
+set comp_info [ lindex [ compare info ] 12 ]
+
+if { "$comp_info" == "0" } {
+	set fp_compare [ open "${compare_filename}.txt" "r" ]
+	set num_error [ expr [ gets $fp_compare ] +1 ]
+	close $fp_compare
+	set fp_compare [ open "${compare_filename}.txt" "w+" ]
+	puts $fp_compare $num_error
+	close $fp_compare	
+}
+
+
+
+#compare savediffs diffs_${compare_filename}.txt
+#compare saverules rules_${compare_filename}.txt
 
 if { "$env(GUI)" != "-gui"}  {
 	compare end
