@@ -625,10 +625,6 @@ for p1 in $par; do
 			done
 			exit
 			;;
-		-quiet)
-			export SILENT_COMP="-nostdout"
-			export SILENT_SIM="-nostdout"
-			;;
 		--)
 			break;;
 		*)

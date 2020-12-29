@@ -181,7 +181,7 @@ CHEX_FILE=" "
 VSIM_EXT=""
 export GUI=""
 export SIM_BASE="tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
-export STAGE_NAME="id_stage"
+export STAGE_NAME=""
 
 VERBOSE=1
 
@@ -624,10 +624,6 @@ for p1 in $par; do
 				db_gecho "		$i"
 			done
 			exit
-			;;
-		-quiet)
-			export SILENT_COMP="-nostdout"
-			export SILENT_SIM="-nostdout"
 			;;
 		--)
 			break;;

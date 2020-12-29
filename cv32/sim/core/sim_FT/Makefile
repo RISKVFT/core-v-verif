@@ -65,7 +65,7 @@ VOPT_FLAGS    = -debugdb -fsmdebug -pedanticerrors +acc #=mnprft
 
 VSIM              = vsim
 VSIM_HOME         = /usr/pack/modelsim-$(VVERSION)-kgf/questasim
-VSIM_FLAGS       ?= -nowlfcollapse # user defined
+VSIM_FLAGS       ?= -nowlfcollapse -quiet # user defined
 ALL_VSIM_FLAGS    = $(VSIM_FLAGS)
 VSIM_DEBUG_FLAGS  = -debugdb
 VSIM_GUI_FLAGS    = -gui -debugdb
@@ -129,6 +129,7 @@ DPILIB_VSIM_OPT := +dumpports+nocollapse
 
 # Default "custom test-program"
 CUSTOM_PROG  ?= requested_csr_por
+
 
 # Shorthand rules for convience
 cv32e40p_pkg: $(CV32E40P_PKG)
@@ -275,12 +276,12 @@ questa-sim-stage: ALL_VSIM_FLAGS += -c
 questa-sim-stage: ALL_VSIM_FLAGS += -vcdstim ./dataset/$(GOLD_NAME)_in.vcd -debugDB
 questa-sim-stage: ALL_VSIM_FLAGS += +dumpports+nocollapse
 questa-sim-stage:
-				$(VLIB) $(VWORK)
+				$(VLIB) $(VWORK) $(SILENT_COMP)
 				touch .lib-rtl
-				$(VLOG) -O0 -work $(VWORK)  $(VLOG_FLAGS) -f $(CV32E40P_MANIFEST)
-				$(VOPT) -work $(VWORK) $(VOPT_FLAGS) $(VLOG_SV_STAGE) -o $(VOPT_SV_STAGE)
+				$(VLOG) -O0 -work $(VWORK)  $(VLOG_FLAGS) -f $(CV32E40P_MANIFEST) $(SILENT_COMP)
+				$(VOPT) -work $(VWORK) $(VOPT_FLAGS) $(VLOG_SV_STAGE) -o $(VOPT_SV_STAGE) $(SILENT_COMP)
 				touch .opt-rtl
-				$(VSIM) -work $(VWORK) $(ALL_VSIM_FLAGS) $(VOPT_SV_STAGE) -do $(VSIM_SCRIPT)
+				$(VSIM) -work $(VWORK) $(ALL_VSIM_FLAGS) $(VOPT_SV_STAGE) -do $(VSIM_SCRIPT) $(SILENT_SIM)
 
 	
 ###############################################
