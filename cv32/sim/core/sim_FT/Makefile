@@ -129,7 +129,8 @@ DPILIB_VSIM_OPT := +dumpports+nocollapse
 
 # Default "custom test-program"
 CUSTOM_PROG  ?= requested_csr_por
-
+SILENT_COMP ?= ""
+SILENT_SIM ?= ""
 
 # Shorthand rules for convience
 cv32e40p_pkg: $(CV32E40P_PKG)

@@ -1,0 +1,3 @@
+signal_name:/cv32e40p_id_stage/ex_ready_i[0]  value:0  fi_instant:709724
+signal_name:/cv32e40p_id_stage/ex_valid_i[0]  value:0  fi_instant:131885
+signal_name:/cv32e40p_id_stage/apu_busy_i[0]  value:1  fi_instant:223907

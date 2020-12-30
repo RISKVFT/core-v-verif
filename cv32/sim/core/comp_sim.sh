@@ -149,6 +149,24 @@ idExists () {
 	echo "1"
 
 }
+fileTimestamp () {
+	echo $(($(($(stat -c %y $1 | cut -d ":" -f 2 | bc -l )*60))+$(stat -c %y $1 | \
+	                                cut -d ":" -f 3 | cut -d " " -f 1 | cut -d "." -f 1 | bc -l)))
+}
+findEndsim () {
+	sw=$1
+	stg=$2
+	echo "${REAL_STG}_${sw}_in.vcd $stg"
+	echo "$(( $(tail -n 2 ./sim_FT/dataset/gold_${REAL_STG}_${sw}_in.vcd | head -n 1 | tr -d "#") - 1 ))" > ciccio.txt
+	if [[ -f ./sim_FT/dataset/gold_${REAL_STG}_${sw}_in.vcd ]]; then
+		echo "$(( $(tail -n 2 ./sim_FT/dataset/gold_${REAL_STG}_${sw}_in.vcd | head -n 1 | tr -d "#") - 1 ))" > ciccio.txt
+	else
+		#./comp_sim.sh -b sbv $sw $stg save_data_in 
+		#./comp_sim.sh -b sbv $sw $stg save_data_out -g 
+	fi
+	exit
+}
+
 #####################################
 
 
@@ -205,9 +223,12 @@ SET_UPI=0
 
 # Error variale
 ERROR_DIR="$CORE_V_VERIF/cv32/sim/core/sim_FT/sim_out"
-SIM_IDS="--1-0 id_stage-fibonacci-1000-1 id_stage-fibonacci-5-1 id_stage-fibonacci-10000-1 id_stage-hello_world-10000-1 id_stage-hello_world-100-1 id_stage-hello_world-1-1"
+SIM_IDS="id_stage-fibonacci-30-1 id_stage-fibonacci-3000-1 id_stage-fibonacci-7-1 id_stage-fibonacci-2-1 --1- id_stage-fibonacci-3-1 id_stage-fibonacci-100-1 id_stage-fibonacci-10-1 id_stage-all-4-1 id_stage-all-5-1 id_stage-hello_world-13-1 id_stage-hello_world-7-1 id_stage-hello_world-20-1 id_stage-hello_world-5-1 id_stage-hello_world-4-1 id_stage-hello_world-2-1 -sbfc-1-hello-world id_stage-hello_world-10-1 --1-0 id_stage-fibonacci-1000-1 id_stage-fibonacci-5-1 id_stage-fibonacci-10000-1 id_stage-hello_world-10000-1 id_stage-hello_world-100-1 id_stage-hello_world-1-1"
 compare_error_file_prefix="cnt_error_"
 info_file_prefix="info_"
+cycle_file_prefix="cycle_"
+signals_fi_file_prefix="signals_fault_injection_"
+export SIM_CYCLE_NUMBER_FILE="$ERROR_DIR/cycles_number_coverage.txt"
 
 
 # vector of parameter -[a-zA-Z]
@@ -447,8 +468,12 @@ for p1 in $par; do
 					v) # parameter to give extension to append to the vsim file 
 					  # used to execute simulation in vsim and stored in
 					  # core-v-verif/cv32/sim/questa
+					  	VSIM_EXT="_$1"; 
+						if [[ $1 == "cov" ]]; then
+							VSIM_EXT="_cycle_to_certain_coverage"
+						fi
 					  	db_becho "Set vsim file extension, vsim_$1.tcl will be run"
-					  	VSIM_EXT="_$1"; shift;;
+						shift;;
 					d) # set build file, dir of out *.hex file and exit
 						SET_DIR=1
 						BENCH_BUILD_FILE=$1
@@ -471,6 +496,7 @@ for p1 in $par; do
 						exit 1;;
 					b)
 						SET_BLOCK=1
+						STG=$1
 						B_STAGE=cv32e40p_$1 # ex: id_stage
 						if [[ $1 =~ "core" ]]; then
 							export STAGE_NAME="cv32e40p_$1"
@@ -485,6 +511,8 @@ for p1 in $par; do
 					;;
 				esac
 			done
+			export SWC="$(echo $B_FILE | tr '-' '_')"
+			export T_ENDSIM=$(findEndsim $B_FILE $STG)
 
 			;;
 		-upi|--use-previous-input)
@@ -501,7 +529,80 @@ for p1 in $par; do
 			./comp_sim.sh -b svb $1 save_data_out $2 -g   
 			exit 1
 			;;
+		-qsfiupi)
+			shift
+			# Save current last modify of log.log 
+			file_timestamp1=$(fileTimestamp log.log)
+			
+			comando="./comp_sim.sh -sfiupi $@"
+	                mate-terminal --window --working-directory="$CUR_DIR" --command="$comando" &	
+			#./comp_sim.sh  -sfiupi $@  &
+
+			# We wait until the file log.log is modified
+			file_timestamp2=$(fileTimestamp log.log)
+			while [[ $file_timestamp2 -eq $file_timestamp1 ]]; do
+				file_timestamp2=$(fileTimestamp log.log)
+				sleep 0.5
+			done
+			sleep 1
+			
+			# We save information from log.log in variables
+			CYCLE=$(cat log.log | grep "cycle:" | cut -d ":" -f 2)
+			CYCLE_FILE=$(cat log.log | grep "cycle_file" | cut -d ":" -f 2)
+			START_TIME=$(cat log.log | grep "start_time" | cut -d ":" -f 2)
+			ID=$(cat log.log | grep "ID" | cut -d ":" -f 2)
+			
+			# We reset the cycle file, this file is written by tcl script
+			# and contain a number correcponding to the  number of
+			# simulation finished
+			echo "0" > "$CYCLE_FILE"
+			echo "2000" >> "$CYCLE_FILE"
+			# mean cycle time in ms
+			cycle_time_mean=2000
+			current_cycle=$(head -n 1 "$CYCLE_FILE")
+			cycle_time=$(tail -n 1 "$CYCLE_FILE")
+			
+			enable_trapping
+			setup_scroll_area
+			while [[ $current_cycle -le $CYCLE ]]; do
+				current_cycle=$(head -n 1 "$CYCLE_FILE")
+				cycle_time=$(tail -n 1 "$CYCLE_FILE")
+
+				# percentage calculated basing on current cycle
+				if [[ ! $current_cycle =~ $isnumber ]]; then
+					current_cycle=$current_cycle_old
+					if [[ $current_cycle == "" ]]; then
+						current_cycle=0
+					fi
+				fi
+				if [[ ! $cycle_time =~ $isnumber ]]; then
+					cycle_time=$cycle_time_old
+					if [[ $cycle_time == "" ]]; then
+						cycle_time=2000
+					fi
+				fi
+				percentage=$(($current_cycle*100/$CYCLE))
+				cycle_time_mean=$( echo "($cycle_time_mean+$cycle_time)/2" | bc -l)
+				#cycle_time_mean=$cycle_time
+				time_left=$( echo "(($CYCLE-$current_cycle)*$cycle_time_mean)/1000" | bc -l | cut -d "." -f 1)
+				cycle_time_mean_sec=$(echo "scale=2; $cycle_time_mean/1000" | bc -l)
+				
+				draw_progress_bar $percentage $time_left "$cycle_time_mean_sec-$cycle_time"
+					
+				if [[ $current_cycle -eq $CYCLE ]]; then
+					break
+				fi
+				current_cycle_old=$current_cycle
+				cycle_time_old=$cycle_time
+				sleep 1
+			done
+			echo "0" > "$CYCLE_FILE"
+			./comp_sim.sh -esfiupi "$ID"
+			destroy_scroll_area
+			exit 
+			;;	
 		-sfiupi|--stage_fault_injection_upi)
+			echo "Argomenti : $@ -------------------------------"
 			# simulate a stage using previous input as stimulus and output saved for comparison
 			shift
 			if [[ $1 == "-h" ]]; then
@@ -517,12 +618,16 @@ for p1 in $par; do
 			
 			export CYCLE=1
 			export FI=0
+			CALC_CYCLE_ON=0
 			# cycle on args string
 			for (( i=0; i< ${#arg}; i++ )) ; do
 				case ${arg:i:1} in
 					c)# cycle
 						# metti solo gli export e' via			
 						export CYCLE=$1
+						if [[ $CYCLE == "cov" ]]; then
+							CALC_CYCLE_ON=1
+						fi
 						db_becho "CYCLE = $1"
 						shift
 					;;
@@ -538,6 +643,12 @@ for p1 in $par; do
 					;;
 					b)
 						STG=$1
+						if [[ $stg =~ "core" ]]; then
+							REAL_STG="cv32e40p_$stg"
+						else
+							REAL_STG=$stg
+						fi
+
 						shift
 					;;
 				esac
@@ -545,39 +656,80 @@ for p1 in $par; do
 			if [[ $FI -eq 0 ]]; then
 				export CYCLE=1
 				echo "Fault injection is equal to 0 so you can't cycle, CYCLE=0"
-			fi
-			# This export takes the end simulation time from the vcd input and set the compare simulation
-			# time equal to this time minus one. We stop the comparison 1ns before the end because we
-			# see that in the last ns there could be fake error. 
-			if [[ $STG =~ "core" ]]; then
-				stagename="cv32e40p_$STG"
 			else
-				stagename=$STG
+				if  [[ $CALC_CYCLE_ON -eq 1 ]]; then
+					CYCLE="cov"	
+					if [[ -f "$SIM_CYCLE_NUMBER_FILE" ]]; then
+						line=$(cat "$SIM_CYCLE_NUMBER_FILE" | grep "$SWC$REAL_STG:")
+						if [[ $line != "" ]]; then
+							CYCLE=$(echo $line | rev | cut -d ":" -f 1 | rev)
+						fi
+					fi
+					if [[ $CYCLE == "cov" ]]; then
+						# execute the tcl script in order to find correct number of cycle
+						./comp_sim.sh -b sbv $SW $STG "cycle_to_certain_coverage"
+					fi
+					
+				fi
 			fi
-			export T_ENDSIM="$(( $(tail -n 2 ./sim_FT/dataset/gold_${stagename}_${SWC}_in.vcd | head -n 1 | tr -d "#") - 1 ))"
-			db_becho "Simulation end time $T_ENDSIM"
 
 			# Set error file used to save number of error of the simulation
 			# each simulation, if at least an error is found in the output signals
 			# the number in this file in increased by one.
 			mkdir -p $ERROR_DIR
 			ID="$STG-$SWC-$CYCLE-$FI"
+			echo "ID:$ID" > log.log 
 			if [[ $(idExists $ID) == "0" ]]; then
 				SetVar "SIM_IDS" "$STG-$SWC-$CYCLE-$FI $SIM_IDS"
 			fi
 			export COMPARE_ERROR_FILE="$ERROR_DIR/$compare_error_file_prefix$ID.txt"
 			export INFO_FILE="$ERROR_DIR/$info_file_prefix$ID.txt"
-			echo 0 > $COMPARE_ERROR_FILE
-			echo "" > $INFO_FILE
+			export CYCLE_FILE="$ERROR_DIR/$cycle_file_prefix$ID.txt"
+			export SIGNALS_FI_FILE="$ERROR_DIR/$signals_fi_file_prefix$ID.txt"
+			echo 0 > "$COMPARE_ERROR_FILE"
+			echo "" > "$INFO_FILE"
 
 			############# RUN SIMULATION #############################
-			timeone=$(date +%s)
-			./comp_sim.sh -b svb $SW stage_compare $STG -upi
-			timetwo=$(date +%s)
-			sim_total_time=$(($timetwo-$timeone))
-			echo "Total_sim_time:$sim_total_time" >> $INFO_FILE
-			echo "SImulation ID:$ID"
-			./comp_sim.sh -esfiupi "$ID"
+			if [[ $SWC == "all" ]]; then
+				hexfile=$(ls $BENCH_HEX_DIR/*.hex)
+				for i in $hexfile;do
+					############ Save parameter in a log file for -qsfiupi ##########
+					echo "cycle:$CYCLE" >> log.log
+					echo "cycle_file:$CYCLE_FILE" >> log.log
+					timeone=$(date +%s)
+					echo "start_time:$timeone" >> log.log
+					SW=$(echo $i | rev | cut -d "/" -f 1 | rev | cut -d "." -f 1)
+					SWC="$(echo $SW | tr '-' '_')"
+
+					export T_ENDSIM=$(findEndsim $SW $STG)
+
+					db_becho "Simulation end time $T_ENDSIM"
+					./comp_sim.sh -b svb $SW stage_compare $STG -upi
+					timetwo=$(date +%s)
+					sim_total_time=$(($timetwo-$timeone))
+					echo "Total_sim_time:$sim_total_time" >> "$INFO_FILE"
+					echo "SImulation ID:$ID"
+					./comp_sim.sh -esfiupi "$ID"
+				done	
+			else
+				############ Save parameter in a log file for -qsfiupi ##########
+				echo "cycle:$CYCLE" >> log.log
+				echo "cycle_file:$CYCLE_FILE" >> log.log
+				timeone=$(date +%s)
+				echo "start_time:$timeone" >> log.log
+				
+				export T_ENDSIM=$(findEndsim $SW $STG)
+				
+				db_becho "Simulation end time $T_ENDSIM"
+
+				./comp_sim.sh -b svb $SW stage_compare $STG -upi
+				
+				timetwo=$(date +%s)
+				sim_total_time=$(($timetwo-$timeone))
+				echo "Total_sim_time:$sim_total_time" >> "$INFO_FILE"
+				echo "SImulation ID:$ID"
+				./comp_sim.sh -esfiupi "$ID"
+			fi
 			exit
 			;; 
 		-esfiupi)
@@ -595,19 +747,20 @@ for p1 in $par; do
 			ERR_FILE="$ERROR_DIR/$compare_error_file_prefix$ID.txt"
 			INFO_FILE="$ERROR_DIR/$info_file_prefix$ID.txt"
 			### Take data from files 
-			error=$(cat $ERR_FILE)
-			sim_total_time=$(cat $INFO_FILE | grep Total_sim_time | cut -d ":" -f 2)
-			n_of_signal=$(cat $INFO_FILE | grep Number_of_signal | cut -d ":" -f 2)
+			error=$(cat "$ERR_FILE")
+			sim_total_time=$(cat "$INFO_FILE" | grep Total_sim_time | cut -d ":" -f 2)
+			n_of_signal=$(cat "$INFO_FILE" | grep Number_of_signal | cut -d ":" -f 2)
 
 
 			############ ELABORATE DATA ##############################
 			
-			time_for_cycle=$(echo "$sim_total_time/$CYCLE" | bc -l)
+			time_for_cycle=$(echo "scale=3; $sim_total_time/$CYCLE" | bc -l)
+			sim_show_time=$(show_time $sim_total_time)
 
 			db_gecho "##############################################################################"
 			db_gecho "##############################################################################"
-			db_gecho "Total simulation time ${sim_total_time}s"
-			db_gecho "Time for cycle ${time_for_cycle:0:6}s"
+			db_gecho "Total simulation time ${sim_show_time}"
+			db_gecho "Time for cycle ${time_for_cycle}s"
 			if [[ $FI > 0 ]]; then 
 				fault_tolerance=$(echo "100*(1-$error/$CYCLE)" | bc -l )
 				db_gecho "Total errors in $CYCLE simulations are $error"
@@ -618,6 +771,9 @@ for p1 in $par; do
 			db_gecho "##############################################################################"
 			exit
 			;;
+		-bf|--bench-fi)
+			
+			;;
 		-asi|--available-sim-info)
 			db_gecho "These are the simulation ids currently available:"
 			for i in $SIM_IDS; do
@@ -626,8 +782,13 @@ for p1 in $par; do
 			exit
 			;;
 		-quiet)
-			export SILENT_COMP="-nostdout"
-			export SILENT_SIM="-nostdout"
+			shift
+			export SILENT_COMP="&>/dev/null"
+			export SILENT_SIM="&>/dev/null"
+			;;
+		-clear-log-file)
+			SIM_IDS=""
+			rm  $ERROR_DIR/*
 			;;
 		--)
 			break;;

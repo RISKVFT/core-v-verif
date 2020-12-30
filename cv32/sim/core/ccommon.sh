@@ -262,15 +262,18 @@ f_make () {
 	logfile=$2
 	override=$3
 	lineno=$4
+	db_gecho "sielnt comp:$SILENT_COMP"
         #mon_run "make -C $SIM_FT questa-sim$GUI \
         #TEST_FILE=\"$BENCH_HEX_DIR/${firmware:0:-4}\" FT=\"$VSIM_EXT\"" "$logfile" "$override" "$lineno"
 	echo "---------------$GUI"
 	if [[ $SET_UPI -eq 0 ]]; then
-    		make -C $SIM_FT questa-sim$GUI TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}" FT="$VSIM_EXT"
+    		make -C $SIM_FT questa-sim$GUI TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}" FT="$VSIM_EXT" \
+		SILENT_COMP=$SILENT_COMP SILENT_SIM=$SILENT_SIM
 	else 
 		echo "-------B_STAGE:  $B_STAGE"
 		make -C $SIM_FT questa-sim-stage$GUI STAGE=$B_STAGE \
-			TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}" FT="$VSIM_EXT"
+			TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}" FT="$VSIM_EXT" \
+			SILENT_COMP=$SILENT_COMP SILENT_SIM=$SILENT_SIM
 	fi
 	#for file in $(ls ./sim_FT/dataset | grep .*_out.vcd); do
 	#	if ! test -f ./sim_FT/dataset/${file:0:-4}.wlf; then
@@ -301,3 +304,224 @@ export_var (){
 	   fi
 
 }
+
+function show_time () {
+    num=$1
+    min=0
+    hour=0
+    day=0
+    if((num>59));then
+        ((sec=num%60))
+        ((num=num/60))
+        if((num>59));then
+            ((min=num%60))
+            ((num=num/60))
+            if((num>23));then
+                ((hour=num%24))
+                ((day=num/24))
+            else
+                ((hour=num))
+            fi
+        else
+            ((min=num))
+        fi
+    else
+        ((sec=num))
+    fi
+    echo "$day"d:"$hour"h:"$min"m:"$sec"s
+}
+
+
+# Usage:
+# Source this script
+# enable_trapping <- optional to clean up properly if user presses ctrl-c
+# setup_scroll_area <- create empty progress bar
+# draw_progress_bar 10 <- advance progress bar
+# draw_progress_bar 40 <- advance progress bar
+# block_progress_bar 45 <- turns the progress bar yellow to indicate some action is requested from the user
+# draw_progress_bar 90 <- advance progress bar
+# destroy_scroll_area <- remove progress bar
+
+# Constants
+CODE_SAVE_CURSOR="\033[s"
+CODE_RESTORE_CURSOR="\033[u"
+CODE_CURSOR_IN_SCROLL_AREA="\033[1A"
+COLOR_FG="\e[30m"
+COLOR_BG="\e[42m"
+COLOR_BG_BLOCKED="\e[43m"
+RESTORE_FG="\e[39m"
+RESTORE_BG="\e[49m"
+LR='\033[1;31m'
+LG='\033[1;32m'
+LY='\033[1;33m'
+LC='\033[1;36m'
+LW='\033[1;37m'
+
+# Variables
+PROGRESS_BLOCKED="false"
+TRAPPING_ENABLED="false"
+TRAP_SET="false"
+
+CURRENT_NR_LINES=0
+
+setup_scroll_area() {
+    # If trapping is enabled, we will want to activate it whenever we setup the scroll area and remove it when we break the scroll area
+    if [ "$TRAPPING_ENABLED" = "true" ]; then
+        trap_on_interrupt
+    fi
+
+    lines=$(tput lines)
+    CURRENT_NR_LINES=$lines
+    let lines=$lines-1
+    # Scroll down a bit to avoid visual glitch when the screen area shrinks by one row
+    echo -en "\n"
+
+    # Save cursor
+    echo -en "$CODE_SAVE_CURSOR"
+    # Set scroll region (this will place the cursor in the top left)
+    echo -en "\033[0;${lines}r"
+
+    # Restore cursor but ensure its inside the scrolling area
+    echo -en "$CODE_RESTORE_CURSOR"
+    echo -en "$CODE_CURSOR_IN_SCROLL_AREA"
+
+    # Start empty progress bar
+    draw_progress_bar 0
+}
+
+destroy_scroll_area() {
+    lines=$(tput lines)
+    # Save cursor
+    echo -en "$CODE_SAVE_CURSOR"
+    # Set scroll region (this will place the cursor in the top left)
+    echo -en "\033[0;${lines}r"
+
+    # Restore cursor but ensure its inside the scrolling area
+    echo -en "$CODE_RESTORE_CURSOR"
+    echo -en "$CODE_CURSOR_IN_SCROLL_AREA"
+
+    # We are done so clear the scroll bar
+    clear_progress_bar
+
+    # Scroll down a bit to avoid visual glitch when the screen area grows by one row
+    echo -en "\n\n"
+
+    # Once the scroll area is cleared, we want to remove any trap previously set. Otherwise, ctrl+c will exit our shell
+    if [ "$TRAP_SET" = "true" ]; then
+        trap - INT
+    fi
+}
+
+draw_progress_bar() {
+    percentage=$1
+    time_left=$2
+    cycle_t=$3
+    lines=$(tput lines)
+    let lines=$lines
+
+    # Check if the window has been resized. If so, reset the scroll area
+    if [ "$lines" -ne "$CURRENT_NR_LINES" ]; then
+        setup_scroll_area
+    fi
+
+    # Save cursor
+    echo -en "$CODE_SAVE_CURSOR"
+
+    # Move cursor position to last row
+    echo -en "\033[${lines};0f"
+
+    # Clear progress bar
+    tput el
+
+    # Draw progress bar
+    PROGRESS_BLOCKED="false"
+    print_bar_text $percentage $time_left $cycle_t
+
+    # Restore cursor position
+    echo -en "$CODE_RESTORE_CURSOR"
+}
+
+block_progress_bar() {
+    percentage=$1
+    time_left=$2
+    cycle_t=$3
+    lines=$(tput lines)
+    let lines=$lines
+    # Save cursor
+    echo -en "$CODE_SAVE_CURSOR"
+
+    # Move cursor position to last row
+    echo -en "\033[${lines};0f"
+
+    # Clear progress bar
+    tput el
+
+    # Draw progress bar
+    PROGRESS_BLOCKED="true"
+    print_bar_text $percentage $time_left $cycle_t
+
+    # Restore cursor position
+    echo -en "$CODE_RESTORE_CURSOR"
+}
+
+clear_progress_bar() {
+    lines=$(tput lines)
+    let lines=$lines
+    # Save cursor
+    echo -en "$CODE_SAVE_CURSOR"
+
+    # Move cursor position to last row
+    echo -en "\033[${lines};0f"
+
+    # clear progress bar
+    tput el
+
+    # Restore cursor position
+    echo -en "$CODE_RESTORE_CURSOR"
+}
+
+print_bar_text() {
+    local percentage=$1
+    local time_left=$2
+    local cycle_t=$3
+    local cols=$(tput cols)
+    let bar_size=$cols-40
+
+    local color="${COLOR_FG}${COLOR_BG}"
+    if [ "$PROGRESS_BLOCKED" = "true" ]; then
+        color="${COLOR_FG}${COLOR_BG_BLOCKED}"
+    fi
+    color="${LG}"
+
+    # Prepare progress bar
+    let complete_size=($bar_size*$percentage)/100
+    let remainder_size=$bar_size-$complete_size
+    progress_bar=$(echo -ne "|"; echo -en "${color}"; printf_new "█" $complete_size; echo -en "${RESTORE_FG}${RESTORE_BG}"; printf_new " " $remainder_size; echo -ne "|");
+
+    # Print progress bar
+    t=$(show_time $time_left)
+    echo -ne "${LR}T left: ${LW}${t} ${RESTORE_FG}${RESTORE_BG}|$cycle_t| ${LC}${percentage}% ${RESTORE_FG}${RESTORE_BG} ${progress_bar}"
+}
+
+enable_trapping() {
+    TRAPPING_ENABLED="true"
+}
+
+trap_on_interrupt() {
+    # If this function is called, we setup an interrupt handler to cleanup the progress bar
+    TRAP_SET="true"
+    trap cleanup_on_interrupt INT
+}
+
+cleanup_on_interrupt() {
+    destroy_scroll_area
+    exit
+}
+
+printf_new() {
+    str=$1
+    num=$2
+    v=$(printf "%-${num}s" "$str")
+    echo -ne "${v// /$str}"
+}
+

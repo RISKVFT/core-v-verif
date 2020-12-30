@@ -7,6 +7,8 @@ set CYCLE "$env(CYCLE)"
 set FI "$env(FI)"
 set compare_filename "$env(COMPARE_ERROR_FILE)"
 set info_filename "$env(INFO_FILE)"
+set cycle_filename "$env(CYCLE_FILE)"
+set signals_filename "$env(SIGNALS_FI_FILE)"
 
 proc ord_list {listain} {
 	set lista_sig []
@@ -28,10 +30,6 @@ proc splitPath {stringa stagename} {
 	set val_stage [ expr [ lsearch $l2 $stagename ] + 1 ]
         return  [join [lrange $l2 $val_stage end] /]
 }
-proc reopenStdout {file} {
-	close stdout
-	open $file w ;# The standard channels are special
-}
 
 # find real name of stage, if we simulate core we should give to comp_sim.sh
 # script the name with cv32e40p (cv32e40p_core) instaead in other cases we
@@ -44,20 +42,42 @@ if { ${STAGE_NAME} == "cv32e40p_core" } {
 
 # Find all signals that we use in fault injection
 # we use _i to filter out clock and reset 
-set sim_fi_sig [ concat  [ find nets  "sim:/${REAL_STAGE_NAME}/*_i" ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ]  ] 
+set sim_fi_sig [ concat [ concat  [ find nets  "sim:/${REAL_STAGE_NAME}/*_i" ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] 
+
+# open file of signal in order to delete previous data
+set fp_sig [ open "${signals_filename}" "w" ]
+foreach sig $sim_fi_sig {
+	puts $fp_sig "All_signals:$sig"
+}
+close $fp_sig
+
 set len_sim_fi_sig [llength $sim_fi_sig]
 
 set fp_info [ open "${info_filename}" "w" ]
 puts $fp_info "Number_of_signal:$len_sim_fi_sig"
 close $fp_info	
 
+
 puts "INFO: before cycle CYCLE=$CYCLE"
 for {set i 0} {$i<$CYCLE} {incr i} {
-
+		
+	# set start time of simulation 
+	set start_time [clock milliseconds]
+		
 	# we log ouput signals of current simulation
 	# -r for log all signals
 	log "sim:/${REAL_STAGE_NAME}/*_o"
 	
+	##################################################################
+	####### Open gold simpulation 
+
+	dataset open ./dataset/${GOLD_NAME}_out.wlf
+
+	set GOutSignals [ find nets  "${GOLD_NAME}_out:/$SIM_BASE/${STAGE_NAME}_i/*_o" ]
+	set GInSignals [ find nets "${GOLD_NAME}_out:/$SIM_BASE/${STAGE_NAME}_i/*_i" ]
+	
+
+
 	##################################################################
 	####### Clock creation
 
@@ -75,12 +95,13 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 	##### FAULT INJECTION
 	##### TODO: salvare i segnali che vengono dai voter per vedere se il
 	########## fault iniettato e' stato corretto  detectato non sentito etc.
+	
+	# Set end of comparison and start to compare
 		
 	if { $FI == 1 } {
 		# Find instant time in which inject, this instant
 		# will be selected between 0 and ENDSIM/2
 		set fi_instant [expr {int(rand()*($ENDSIM-2*10))} ]	
-		puts "INFO: Instant = $fi_instant"
 		run $fi_instant ns
 		
 		puts "INFO: cycle $i"
@@ -128,25 +149,20 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 		set bit_value [string index [lindex [ split [examine -binary -radixenumnumeric sim:$sig_fi] "b" ] 1 ] $bit_choose_real ]
 		puts "INFO: row number = $bit_value"
 		
+		set fp_sig [ open "${signals_filename}" "a" ]
+		puts $fp_sig "sig_fault: signal_name:$sig_fi\[$bit_choose\]  value:[expr ($bit_value+1)%2 ]  fi_instant:$fi_instant"
+		close $fp_sig
 		force -deposit "$sig_fi\[$bit_choose\]" [expr ($bit_value+1)%2 ]
+		
 	}
-
-	run -all
-
-
-	##################################################################
-	####### Open gold simpulation 
-
-	dataset open ./dataset/${GOLD_NAME}_out.wlf
-
-	set GOutSignals [ find nets  "${GOLD_NAME}_out:/$SIM_BASE/${STAGE_NAME}_i/*_o" ]
-	set GInSignals [ find nets "${GOLD_NAME}_out:/$SIM_BASE/${STAGE_NAME}_i/*_i" ]
-
+	
 	#################################################################
 	###### Begin comparation between gold and current simulation
 
 	compare start ${GOLD_NAME}_out sim
-
+	compare options -maxtotal 1
+	compare options -track
+	
 	# These two line find gold and current simulation ouput signal and order it using ord_list function 
 	# If you want to compare all internal signal use -r option
 	set s_sig_list [ ord_list " ${REAL_STAGE_NAME} [find nets  "sim:/${REAL_STAGE_NAME}/*_o"] " ] 
@@ -160,9 +176,34 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 		compare add sim:$s_sig ${GOLD_NAME}_out:$g_sig
 	}
 
-	# Set end of comparison and start to compare
-	puts "Simulation tcl time $ENDSIM"
-	compare run 0 ${ENDSIM}
+	#0 ${ENDSIM}
+	
+	puts "ENDSIM $ENDSIM"
+	puts "INFO: Instant = $fi_instant"
+ 	set remaining [expr $ENDSIM-$now]
+	puts "INFO: remaining = $remaining"
+	compare run $fi_instant $remaining 
+	
+	run 300
+	set error_number [ lindex [ compare info ] 12 ]
+	if { $error_number == 0 } {
+		set clock_period 10
+		set num_run_cycles [expr $ENDSIM/($clock_period*10)]
+		set num_compare [ expr $remaining/($clock_period*$num_run_cycles) ]
+		set run_time [expr $num_run_cycles*$clock_period ]
+		for {set c 0} {$c < $num_compare} { incr c } {
+			run ${run_time}
+			set error_number [ lindex [ compare info ] 12 ]
+			if { $error_number > 0 } {
+				break
+			}
+		}
+	}
+	
+	puts "INFO: current time = $now"
+
+
+
 
 	##############################################################################
 	###### Save error if there are
@@ -187,8 +228,19 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 		compare end
 		restart -force
 	}
-
+	
+	# Save current cycle and cycle simulation time in cycle_file in order
+	# to cumpute remaining time and percentage of total simulations done
+	set end_time [clock milliseconds]
+	set fp_cycle [ open "${cycle_filename}" "w" ]
+	puts $fp_cycle "$i"
+	puts $fp_cycle "[expr $end_time-$start_time]"
+	close $fp_cycle	
+	puts "--------------------------------------------------------\nOpen file: [file channels]\n.------------------------------" 
 }
+set fp_cycle [ open "${cycle_filename}" "w" ]
+puts $fp_cycle "$i"
+close $fp_cycle	
 
 #############################################################################
 ######## Exit from simulation if we are in batch mode

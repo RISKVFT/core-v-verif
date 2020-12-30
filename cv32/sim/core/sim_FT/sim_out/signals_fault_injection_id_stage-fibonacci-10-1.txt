@@ -1,0 +1,64 @@
+All_signals:/cv32e40p_id_stage/mie_bypass_i
+All_signals:/cv32e40p_id_stage/debug_ebreakm_i
+All_signals:/cv32e40p_id_stage/frm_i
+All_signals:/cv32e40p_id_stage/wb_ready_i
+All_signals:/cv32e40p_id_stage/regfile_alu_we_fw_i
+All_signals:/cv32e40p_id_stage/m_irq_enable_i
+All_signals:/cv32e40p_id_stage/irq_sec_i
+All_signals:/cv32e40p_id_stage/data_misaligned_i
+All_signals:/cv32e40p_id_stage/instr_valid_i
+All_signals:/cv32e40p_id_stage/trigger_match_i
+All_signals:/cv32e40p_id_stage/scan_cg_en_i
+All_signals:/cv32e40p_id_stage/is_compressed_i
+All_signals:/cv32e40p_id_stage/clk_ungated_i
+All_signals:/cv32e40p_id_stage/ex_ready_i
+All_signals:/cv32e40p_id_stage/data_err_i
+All_signals:/cv32e40p_id_stage/regfile_alu_wdata_fw_i
+All_signals:/cv32e40p_id_stage/illegal_c_insn_i
+All_signals:/cv32e40p_id_stage/mult_multicycle_i
+All_signals:/cv32e40p_id_stage/regfile_alu_waddr_fw_i
+All_signals:/cv32e40p_id_stage/irq_i
+All_signals:/cv32e40p_id_stage/csr_hwlp_regid_i
+All_signals:/cv32e40p_id_stage/ex_valid_i
+All_signals:/cv32e40p_id_stage/debug_ebreaku_i
+All_signals:/cv32e40p_id_stage/csr_hwlp_we_i
+All_signals:/cv32e40p_id_stage/regfile_wdata_wb_i
+All_signals:/cv32e40p_id_stage/debug_req_i
+All_signals:/cv32e40p_id_stage/u_irq_enable_i
+All_signals:/cv32e40p_id_stage/regfile_waddr_wb_i
+All_signals:/cv32e40p_id_stage/pc_id_i
+All_signals:/cv32e40p_id_stage/mcounteren_i
+All_signals:/cv32e40p_id_stage/current_priv_lvl_i
+All_signals:/cv32e40p_id_stage/apu_busy_i
+All_signals:/cv32e40p_id_stage/apu_write_dep_i
+All_signals:/cv32e40p_id_stage/fetch_enable_i
+All_signals:/cv32e40p_id_stage/regfile_we_wb_i
+All_signals:/cv32e40p_id_stage/apu_read_dep_i
+All_signals:/cv32e40p_id_stage/is_fetch_failed_i
+All_signals:/cv32e40p_id_stage/debug_single_step_i
+All_signals:/cv32e40p_id_stage/csr_hwlp_data_i
+All_signals:/cv32e40p_id_stage/instr_rdata_i
+All_signals:/cv32e40p_id_stage/branch_decision_i
+All_signals:/cv32e40p_id_stage/controller_i/data_err_q
+All_signals:/cv32e40p_id_stage/controller_i/debug_mode_q
+All_signals:/cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_start_q
+All_signals:/cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_counter_q
+All_signals:/cv32e40p_id_stage/controller_i/hwlp_end_4_id_q
+All_signals:/cv32e40p_id_stage/int_controller_i/irq_sec_q
+All_signals:/cv32e40p_id_stage/controller_i/jump_done_q
+All_signals:/cv32e40p_id_stage/controller_i/illegal_insn_q
+All_signals:/cv32e40p_id_stage/controller_i/ebrk_debug_entry_q
+All_signals:/cv32e40p_id_stage/controller_i/debug_req_q
+All_signals:/cv32e40p_id_stage/int_controller_i/irq_q
+All_signals:/cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_end_q
+All_signals:/cv32e40p_id_stage/register_file_i/mem
+sig_fault: signal_name:/cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_counter_q[0][1]  value:1  fi_instant:210792
+sig_fault: signal_name:/cv32e40p_id_stage/irq_sec_i[0]  value:1  fi_instant:934702
+sig_fault: signal_name:/cv32e40p_id_stage/is_compressed_i[0]  value:0  fi_instant:174421
+sig_fault: signal_name:/cv32e40p_id_stage/current_priv_lvl_i[0]  value:0  fi_instant:97728
+sig_fault: signal_name:/cv32e40p_id_stage/controller_i/ebrk_debug_entry_q[0]  value:1  fi_instant:667040
+sig_fault: signal_name:/cv32e40p_id_stage/ex_ready_i[0]  value:0  fi_instant:800152
+sig_fault: signal_name:/cv32e40p_id_stage/fetch_enable_i[0]  value:0  fi_instant:831176
+sig_fault: signal_name:/cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_start_q[0][25]  value:1  fi_instant:466837
+sig_fault: signal_name:/cv32e40p_id_stage/is_compressed_i[0]  value:0  fi_instant:424490
+sig_fault: signal_name:/cv32e40p_id_stage/apu_busy_i[0]  value:1  fi_instant:220272
