@@ -4,6 +4,7 @@ set ENDSIM "$env(T_ENDSIM)"
 set SWC "$env(SWC)" 
 set info_filename "$env(SIM_CYCLE_NUMBER_FILE)"
 
+run 10ns
 # find real name of stage, if we simulate core we should give to comp_sim.sh
 # script the name with cv32e40p (cv32e40p_core) instaead in other cases we
 # only give stage name. This "if" set REAL_STAGE_NAME that should be csv32e40p_STAGENAME
@@ -17,11 +18,12 @@ if { ${STAGE_NAME} == "cv32e40p_core" } {
 # we use _i to filter out clock and reset 
 set sim_fi_sig [ concat [ concat  [ find nets  "sim:/${REAL_STAGE_NAME}/*_i" ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] 
 
+puts "INFO: signals: $sim_fi_sig $REAL_STAGE_NAME"
 
 # Find total number of bits in order to find adequate number of simulation
 # to have a certain coverage 
 set total_bit 0
-foreach sig $sim_fi_sig {	
+foreach sig_fi $sim_fi_sig {	
 	# Print the examine and description command to see all value
 	set exam [examine sim:$sig_fi]
 	set descr [describe sim:$sig_fi]
@@ -46,7 +48,7 @@ foreach sig $sim_fi_sig {
 		for { set j 0} {$j < $array_depth} {incr j} {
 			set array_dim  [ lindex [ split [ lindex $descr [expr {(int($j)*6)+4} ]] "\]" ] 0 ]
 
-			set vector_num [expr $vector_num*$array]
+			set vector_num [expr $vector_num*$array_dim]
 			puts "INFO: array_dim = $array_dim"
 			set array_dim_rand [expr {int(rand())*$array_dim}]
 			append sig_fi "\[$array_dim_rand\]"
@@ -58,8 +60,19 @@ foreach sig $sim_fi_sig {
 
 }
 
+# function to calculate the number of cycle
+set P 0.5
+set E 0.01
+set N [ expr ($total_bit/10)*$ENDSIM ]
+set T 2.5758
+#(1.96 confidence of 95%)
+#(2.5758 confidence of 99%)
+#   N / (1 + (E^2)*(N-1)/(T^2*P*(P-1)))
+set den [expr ( 1 + ($E*$E)*($N-1)/(($T*$T)*$P*(1-$P)) )  ]
+set cycle [ expr {int($N/$den)} ]
 
 # open file of signal in order to delete previous data
 set fp_info [ open "${info_filename}" "a" ]
-puts $fp_sig "$SWC$STAGE_NAME: n_bits:$total_bit n_cycles:$total_bit"
-close $fp_sig
+puts $fp_info "$SWC-$STAGE_NAME: n_bits:$total_bit n_cycles:$cycle"
+close $fp_info
+quit -f
