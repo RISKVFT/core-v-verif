@@ -153,18 +153,26 @@ fileTimestamp () {
 	echo $(($(($(stat -c %y $1 | cut -d ":" -f 2 | bc -l )*60))+$(stat -c %y $1 | \
 	                                cut -d ":" -f 3 | cut -d " " -f 1 | cut -d "." -f 1 | bc -l)))
 }
+executeInTerminal () {
+	mate-terminal --window --working-directory="$CUR_DIR" --command="$1; exec $SHELL"
+	ask_yesno "VCD creation is finished (close window before answer yes) (y/n)?"
+	while [[ $ANS -eq 1 ]] ; do
+		ask_yesno "VCD creation is finished (close window before answer yes) (y/n)?"
+	done
+}
 findEndsim () {
 	sw=$1
 	stg=$2
-	echo "${REAL_STG}_${sw}_in.vcd $stg"
-	echo "$(( $(tail -n 2 ./sim_FT/dataset/gold_${REAL_STG}_${sw}_in.vcd | head -n 1 | tr -d "#") - 1 ))" > ciccio.txt
-	if [[ -f ./sim_FT/dataset/gold_${REAL_STG}_${sw}_in.vcd ]]; then
-		echo "$(( $(tail -n 2 ./sim_FT/dataset/gold_${REAL_STG}_${sw}_in.vcd | head -n 1 | tr -d "#") - 1 ))" > ciccio.txt
-	else
-		#./comp_sim.sh -b sbv $sw $stg save_data_in 
-		#./comp_sim.sh -b sbv $sw $stg save_data_out -g 
+	real_stg=$3
+	swc=$(echo $sw | tr '-' '_')
+	if [[ ! -f ./sim_FT/dataset/gold_${real_stg}_${swc}_in.vcd ]]; then
+		executeInTerminal "./comp_sim.sh -b sbv $sw $stg save_data_in "
+		executeInTerminal "./comp_sim.sh -b sbv $sw $stg save_data_out -g "
 	fi
-	exit
+	db_becho "./sim_FT/dataset/gold_${real_stg}_${swc}_in.vcd"
+	endsim="$(( $(tail -n 2 ./sim_FT/dataset/gold_${real_stg}_${swc}_in.vcd | head -n 1 | tr -d "#") - 1 ))"
+
+	db_becho "endsim: $endsim"
 }
 
 #####################################
@@ -223,7 +231,7 @@ SET_UPI=0
 
 # Error variale
 ERROR_DIR="$CORE_V_VERIF/cv32/sim/core/sim_FT/sim_out"
-SIM_IDS="id_stage-fibonacci-30-1 id_stage-fibonacci-3000-1 id_stage-fibonacci-7-1 id_stage-fibonacci-2-1 --1- id_stage-fibonacci-3-1 id_stage-fibonacci-100-1 id_stage-fibonacci-10-1 id_stage-all-4-1 id_stage-all-5-1 id_stage-hello_world-13-1 id_stage-hello_world-7-1 id_stage-hello_world-20-1 id_stage-hello_world-5-1 id_stage-hello_world-4-1 id_stage-hello_world-2-1 -sbfc-1-hello-world id_stage-hello_world-10-1 --1-0 id_stage-fibonacci-1000-1 id_stage-fibonacci-5-1 id_stage-fibonacci-10000-1 id_stage-hello_world-10000-1 id_stage-hello_world-100-1 id_stage-hello_world-1-1"
+SIM_IDS="id_stage-fibonacci-16600-1 id_stage-fibonacci-cov-1 id_stage-fibonacci-30-1 id_stage-fibonacci-3000-1 id_stage-fibonacci-7-1 id_stage-fibonacci-2-1 --1- id_stage-fibonacci-3-1 id_stage-fibonacci-100-1 id_stage-fibonacci-10-1 id_stage-all-4-1 id_stage-all-5-1 id_stage-hello_world-13-1 id_stage-hello_world-7-1 id_stage-hello_world-20-1 id_stage-hello_world-5-1 id_stage-hello_world-4-1 id_stage-hello_world-2-1 -sbfc-1-hello-world id_stage-hello_world-10-1 --1-0 id_stage-fibonacci-1000-1 id_stage-fibonacci-5-1 id_stage-fibonacci-10000-1 id_stage-hello_world-10000-1 id_stage-hello_world-100-1 id_stage-hello_world-1-1"
 compare_error_file_prefix="cnt_error_"
 info_file_prefix="info_"
 cycle_file_prefix="cycle_"
@@ -472,7 +480,7 @@ for p1 in $par; do
 						if [[ $1 == "cov" ]]; then
 							VSIM_EXT="_cycle_to_certain_coverage"
 						fi
-					  	db_becho "Set vsim file extension, vsim_$1.tcl will be run"
+					  	db_becho "Set vsim file extension, vsim$1.tcl will be run"
 						shift;;
 					d) # set build file, dir of out *.hex file and exit
 						SET_DIR=1
@@ -511,8 +519,12 @@ for p1 in $par; do
 					;;
 				esac
 			done
-			export SWC="$(echo $B_FILE | tr '-' '_')"
-			export T_ENDSIM=$(findEndsim $B_FILE $STG)
+			if  [[ $VSIM_EXT == "_cycle_to_certain_coverage" ]]; then
+				export SWC="$(echo $B_FILE | tr '-' '_')"
+				findEndsim $SWC $STG $STAGE_NAME
+				export T_ENDSIM=$endsim
+				db_becho "ENDSIM = $T_ENDSIM"
+			fi
 
 			;;
 		-upi|--use-previous-input)
@@ -533,7 +545,7 @@ for p1 in $par; do
 			shift
 			# Save current last modify of log.log 
 			file_timestamp1=$(fileTimestamp log.log)
-			
+			sleep 0.5
 			comando="./comp_sim.sh -sfiupi $@"
 	                mate-terminal --window --working-directory="$CUR_DIR" --command="$comando" &	
 			#./comp_sim.sh  -sfiupi $@  &
@@ -551,6 +563,10 @@ for p1 in $par; do
 			CYCLE_FILE=$(cat log.log | grep "cycle_file" | cut -d ":" -f 2)
 			START_TIME=$(cat log.log | grep "start_time" | cut -d ":" -f 2)
 			ID=$(cat log.log | grep "ID" | cut -d ":" -f 2)
+
+			db_becho "INFO: CYCLE_FILE = $CYCLE_FILE"
+			db_becho "INFO: CYCLE = $CYCLE"
+			db_becho "INFO: ID = $ID"
 			
 			# We reset the cycle file, this file is written by tcl script
 			# and contain a number correcponding to the  number of
@@ -561,13 +577,16 @@ for p1 in $par; do
 			cycle_time_mean=2000
 			current_cycle=$(head -n 1 "$CYCLE_FILE")
 			cycle_time=$(tail -n 1 "$CYCLE_FILE")
+			cycle_time_sum=0
 			
 			enable_trapping
 			setup_scroll_area
+			draw_progress_bar 0 $(2*$CYCLE) "2.000-2.000"
 			while [[ $current_cycle -le $CYCLE ]]; do
 				current_cycle=$(head -n 1 "$CYCLE_FILE")
 				cycle_time=$(tail -n 1 "$CYCLE_FILE")
 
+				# If to avoid 0 in that variable 
 				# percentage calculated basing on current cycle
 				if [[ ! $current_cycle =~ $isnumber ]]; then
 					current_cycle=$current_cycle_old
@@ -581,13 +600,22 @@ for p1 in $par; do
 						cycle_time=2000
 					fi
 				fi
-				percentage=$(($current_cycle*100/$CYCLE))
-				cycle_time_mean=$( echo "($cycle_time_mean+$cycle_time)/2" | bc -l)
-				#cycle_time_mean=$cycle_time
-				time_left=$( echo "(($CYCLE-$current_cycle)*$cycle_time_mean)/1000" | bc -l | cut -d "." -f 1)
-				cycle_time_mean_sec=$(echo "scale=2; $cycle_time_mean/1000" | bc -l)
-				
-				draw_progress_bar $percentage $time_left "$cycle_time_mean_sec-$cycle_time"
+
+				# Evaluation of the probable end time
+				if [[ $current_cycle != $current_cycle_old ]]; then
+					if [[ $current_cycle -eq 0 ]]; then
+						cycle_time_mean=2000
+					else
+						cycle_time_sum=$( echo "$cycle_time_sum+$cycle_time" | bc -l)
+						cycle_time_mean=$( echo "$cycle_time_sum/$current_cycle" | bc -l)
+						percentage=$(($current_cycle*100/$CYCLE))
+						time_left=$( echo "(($CYCLE-$current_cycle)*$cycle_time_mean)/1000" \
+								| bc -l | cut -d "." -f 1)
+						cycle_time_mean_sec=$(echo "scale=2; $cycle_time_mean/1000" | bc -l)
+						draw_progress_bar $percentage $time_left "$cycle_time_mean_sec-$(cycle_time/1000)"
+					fi
+					
+				fi
 					
 				if [[ $current_cycle -eq $CYCLE ]]; then
 					break
@@ -599,6 +627,7 @@ for p1 in $par; do
 			echo "0" > "$CYCLE_FILE"
 			./comp_sim.sh -esfiupi "$ID"
 			destroy_scroll_area
+			#sendMailToAll 'Simulation finished'
 			exit 
 			;;	
 		-sfiupi|--stage_fault_injection_upi)
@@ -643,10 +672,10 @@ for p1 in $par; do
 					;;
 					b)
 						STG=$1
-						if [[ $stg =~ "core" ]]; then
-							REAL_STG="cv32e40p_$stg"
+						if [[ $STG =~ "core" ]]; then
+							REAL_STG="cv32e40p_$STG"
 						else
-							REAL_STG=$stg
+							REAL_STG=$STG
 						fi
 
 						shift
@@ -667,7 +696,13 @@ for p1 in $par; do
 					fi
 					if [[ $CYCLE == "cov" ]]; then
 						# execute the tcl script in order to find correct number of cycle
-						./comp_sim.sh -b sbv $SW $STG "cycle_to_certain_coverage"
+						./comp_sim.sh -b sbv $SW $STG "cov" -upi
+						line=$(cat "$SIM_CYCLE_NUMBER_FILE" | grep "$SWC$REAL_STG:")
+						if [[ $line != "" ]]; then
+							CYCLE=$(echo $line | rev | cut -d ":" -f 1 | rev)
+						fi
+						db_becho "CYCLE = $CYCLE"
+						exit
 					fi
 					
 				fi
@@ -677,7 +712,7 @@ for p1 in $par; do
 			# each simulation, if at least an error is found in the output signals
 			# the number in this file in increased by one.
 			mkdir -p $ERROR_DIR
-			ID="$STG-$SWC-$CYCLE-$FI"
+			ID="$STG-$SW-$CYCLE-$FI"
 			echo "ID:$ID" > log.log 
 			if [[ $(idExists $ID) == "0" ]]; then
 				SetVar "SIM_IDS" "$STG-$SWC-$CYCLE-$FI $SIM_IDS"
@@ -701,7 +736,9 @@ for p1 in $par; do
 					SW=$(echo $i | rev | cut -d "/" -f 1 | rev | cut -d "." -f 1)
 					SWC="$(echo $SW | tr '-' '_')"
 
-					export T_ENDSIM=$(findEndsim $SW $STG)
+					findEndsim $SW $STG $REAL_STG
+					export T_ENDSIM=$endsim
+
 
 					db_becho "Simulation end time $T_ENDSIM"
 					./comp_sim.sh -b svb $SW stage_compare $STG -upi
@@ -718,7 +755,8 @@ for p1 in $par; do
 				timeone=$(date +%s)
 				echo "start_time:$timeone" >> log.log
 				
-				export T_ENDSIM=$(findEndsim $SW $STG)
+				findEndsim $SW $STG $REAL_STG
+				export T_ENDSIM=$endsim
 				
 				db_becho "Simulation end time $T_ENDSIM"
 
@@ -957,4 +995,4 @@ if [[ $BENCHMARK -eq 1 ]]; then
 fi
 
 
-
+sendMailToAll 'simulation finished'

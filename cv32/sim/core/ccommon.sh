@@ -524,4 +524,67 @@ printf_new() {
     v=$(printf "%-${num}s" "$str")
     echo -ne "${v// /$str}"
 }
+check_fio () {
+   # check first in others (fio)
+   # $1 argomento da controllare in quelli dopo
+   # 	in or, se $1 è uguale a anche solo uno ritorna 1
+   local first=$1
+   shift
+   for i in $*; do
+		if [[ $i = $first ]]; then
+			echo 1
+			return 
+		fi
+   done
+   echo 0
+}
+yesorno () {
+   # $1 viene controllato essere un si o un no e viene ritornato
+   #	0 -> ne si ne no
+   # 	1 -> no
+   #    2 -> si
+   local answer=$(check_fio $1 yes no n y si no s)
+   if test $answer -eq 0; then
+   		echo 0 # ne si ne no
+		return 
+   fi
+   local is_yes=$(check_fio $1 yes y si s)
+   if test $is_yes -eq 1; then
+   		echo 2  # si
+		return
+   fi
+	echo 1 # no
+}
+ask_yesno () {   
+    # $1 stringa da stampare nella domanda
+    # $3 ... $n argomenti validi
+    local op=0
+    local flag=1
+    local str1=$1
+    shift
+    echo -n -e $str1": "
+    while test $flag -eq 1; do
+        read op
+        let flag=0
+		local answer=$(yesorno $op)
+		case $answer in
+			0) # ne si ne no
+            	echo -n "Only yes or no is avaiable as answer: " 
+				let flag=1;;
+			1) # no
+				let ANS=0;;
+			2) # si
+				let ANS=1;;
+			*) # error
+				echo "errorrrrr";;
+        esac
+    done
+    return $ANS
+}
 
+sendMailToAll () {
+	stringa="Buon*\nOggi è il : $(date)\nQuesto è il log della simulazione:\n$1"
+	echo -e "$stringa"  | mail -s 'DalTuoCaroServer' lucafiore1996@gmail.com 
+	echo -e "$stringa"  | mail -s 'DalTuoCaroServer' ribaldoneelia@gmail.com
+	echo -e "$stringa"  | mail -s 'DalTuoCaroServer_affiliato_di_Ruo_Roch' marcellon96@hotmail.it
+}

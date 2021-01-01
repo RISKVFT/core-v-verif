@@ -58,7 +58,6 @@ puts $fp_info "Number_of_signal:$len_sim_fi_sig"
 close $fp_info	
 
 
-
 puts "INFO: before cycle CYCLE=$CYCLE"
 for {set i 0} {$i<$CYCLE} {incr i} {
 		
@@ -68,16 +67,14 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 	# we log ouput signals of current simulation
 	# -r for log all signals
 	log "sim:/${REAL_STAGE_NAME}/*_o"
-
+	
 	##################################################################
 	####### Open gold simpulation 
-	if { $i == 0 } {	
-		dataset open ./dataset/${GOLD_NAME}_out.wlf
 
-		set GOutSignals [ find nets  "${GOLD_NAME}_out:/$SIM_BASE/${STAGE_NAME}_i/*_o" ]
-		set GInSignals [ find nets "${GOLD_NAME}_out:/$SIM_BASE/${STAGE_NAME}_i/*_i" ]
-	
-	}
+	dataset open ./dataset/${GOLD_NAME}_out.wlf
+
+	set GOutSignals [ find nets  "${GOLD_NAME}_out:/$SIM_BASE/${STAGE_NAME}_i/*_o" ]
+	set GInSignals [ find nets "${GOLD_NAME}_out:/$SIM_BASE/${STAGE_NAME}_i/*_i" ]
 	
 
 

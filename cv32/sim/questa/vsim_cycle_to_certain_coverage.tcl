@@ -70,6 +70,7 @@ set T 2.5758
 #   N / (1 + (E^2)*(N-1)/(T^2*P*(P-1)))
 set den [expr ( 1 + ($E*$E)*($N-1)/(($T*$T)*$P*(1-$P)) )  ]
 set cycle [ expr {int($N/$den)} ]
+echo "ENDSIM=$ENDSIM, total_bit:$total_bit, P: $P, E: $E, N: $N, T: $T, den: $den, cycle: $cycle"
 
 # open file of signal in order to delete previous data
 set fp_info [ open "${info_filename}" "a" ]
