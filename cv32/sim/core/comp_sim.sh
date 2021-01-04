@@ -174,6 +174,11 @@ findEndsim () {
 
 	db_becho "endsim: $endsim"
 }
+sendMailToAll_ifyes () {
+	if [[ $1 -eq 1 ]]; then
+		sendMailToAll $1
+	fi
+}
 
 #####################################
 
@@ -231,17 +236,21 @@ SET_UPI=0
 
 # Error variale
 ERROR_DIR="$CORE_V_VERIF/cv32/sim/core/sim_FT/sim_out"
-SIM_IDS="id_stage-fibonacci-16600-1 id_stage-fibonacci-cov-1 id_stage-fibonacci-30-1 id_stage-fibonacci-3000-1 id_stage-fibonacci-7-1 id_stage-fibonacci-2-1 --1- id_stage-fibonacci-3-1 id_stage-fibonacci-100-1 id_stage-fibonacci-10-1 id_stage-all-4-1 id_stage-all-5-1 id_stage-hello_world-13-1 id_stage-hello_world-7-1 id_stage-hello_world-20-1 id_stage-hello_world-5-1 id_stage-hello_world-4-1 id_stage-hello_world-2-1 -sbfc-1-hello-world id_stage-hello_world-10-1 --1-0 id_stage-fibonacci-1000-1 id_stage-fibonacci-5-1 id_stage-fibonacci-10000-1 id_stage-hello_world-10000-1 id_stage-hello_world-100-1 id_stage-hello_world-1-1"
+SIM_IDS="id_stage-fibonacci-10-1 id_stage-fibonacci-16600-1"
 compare_error_file_prefix="cnt_error_"
 info_file_prefix="info_"
 cycle_file_prefix="cycle_"
 signals_fi_file_prefix="signals_fault_injection_"
 export SIM_CYCLE_NUMBER_FILE="$ERROR_DIR/cycles_number_coverage.txt"
 
+SEND=0
 
 # vector of parameter -[a-zA-Z]
 par=$(echo "$@" | awk 'BEGIN{RS=" "};{if ($0 ~ /^-[a-zA-Z\-]*$/) print $0; if ($0 ~ /^-[a-zA-Z\-]*\n/) print $0}')
 echo "Argument taken: $par"
+if [[ $par =~ "-send" ]]; then
+	SEND=1
+fi
 
 for p1 in $par; do
 	case $p1 in
@@ -581,7 +590,8 @@ for p1 in $par; do
 			
 			enable_trapping
 			setup_scroll_area
-			draw_progress_bar 0 $(2*$CYCLE) "2.000-2.000"
+			var=$(echo "scale=3; 2000/1000" | bc -l)
+			draw_progress_bar 0 $((2*$CYCLE)) "$var|$var"
 			while [[ $current_cycle -le $CYCLE ]]; do
 				current_cycle=$(head -n 1 "$CYCLE_FILE")
 				cycle_time=$(tail -n 1 "$CYCLE_FILE")
@@ -612,7 +622,8 @@ for p1 in $par; do
 						time_left=$( echo "(($CYCLE-$current_cycle)*$cycle_time_mean)/1000" \
 								| bc -l | cut -d "." -f 1)
 						cycle_time_mean_sec=$(echo "scale=2; $cycle_time_mean/1000" | bc -l)
-						draw_progress_bar $percentage $time_left "$cycle_time_mean_sec-$(cycle_time/1000)"
+						cycle_time_sec="$cycle_time_mean_sec|$(echo "scale=2; $cycle_time/1000" | bc -l)"
+						draw_progress_bar $percentage $time_left $cycle_time_sec
 					fi
 					
 				fi
@@ -625,9 +636,11 @@ for p1 in $par; do
 				sleep 1
 			done
 			echo "0" > "$CYCLE_FILE"
-			./comp_sim.sh -esfiupi "$ID"
 			destroy_scroll_area
-			#sendMailToAll 'Simulation finished'
+			
+			sleep 0.5
+			./comp_sim.sh -esfiupi "$ID"
+			sendMailToAll_ifyes $SEND 'Simulation finished'
 			exit 
 			;;	
 		-sfiupi|--stage_fault_injection_upi)
@@ -766,7 +779,7 @@ for p1 in $par; do
 				sim_total_time=$(($timetwo-$timeone))
 				echo "Total_sim_time:$sim_total_time" >> "$INFO_FILE"
 				echo "SImulation ID:$ID"
-				./comp_sim.sh -esfiupi "$ID"
+				#./comp_sim.sh -esfiupi "$ID"
 			fi
 			exit
 			;; 
@@ -995,4 +1008,4 @@ if [[ $BENCHMARK -eq 1 ]]; then
 fi
 
 
-sendMailToAll 'simulation finished'
+sendMailToAll_ifyes $SEND'simulation finished'

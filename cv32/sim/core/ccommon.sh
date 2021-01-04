@@ -586,5 +586,5 @@ sendMailToAll () {
 	stringa="Buon*\nOggi è il : $(date)\nQuesto è il log della simulazione:\n$1"
 	echo -e "$stringa"  | mail -s 'DalTuoCaroServer' lucafiore1996@gmail.com 
 	echo -e "$stringa"  | mail -s 'DalTuoCaroServer' ribaldoneelia@gmail.com
-	echo -e "$stringa"  | mail -s 'DalTuoCaroServer_affiliato_di_Ruo_Roch' marcellon96@hotmail.it
+	echo -e "$stringa"  | mail -s 'DalTuoCaroServerAffiliatoDiRuoRoch' marcellon96@hotmail.it
 }

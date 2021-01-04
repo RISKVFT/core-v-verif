@@ -57,6 +57,12 @@ set fp_info [ open "${info_filename}" "w" ]
 puts $fp_info "Number_of_signal:$len_sim_fi_sig"
 close $fp_info	
 
+# table of bits where we have applied fault injection because we don't want to do fault injection on the same signal at the same clock cysle two times
+set l_bit_ft {}
+
+for {set k 0} {$k<$len_sim_fi_sig} {incr k} {
+	lappend l_bit_ft {}
+}
 
 
 puts "INFO: before cycle CYCLE=$CYCLE"
@@ -100,61 +106,87 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 	########## fault iniettato e' stato corretto  detectato non sentito etc.
 	
 	# Set end of comparison and start to compare
-		
-	if { $FI == 1 } {
-		# Find instant time in which inject, this instant
-		# will be selected between 0 and ENDSIM/2
-		set fi_instant [expr {int(rand()*($ENDSIM-2*10))} ]	
-		run $fi_instant ns
-		
-		puts "INFO: cycle $i"
-		# index of signal in which inject signal
-		set sig_index [ expr {int(rand()*$len_sim_fi_sig)} ]
-		puts "INFO: Signal index = $sig_index"
-		# Find signal in which inject fault
-		set sig_fi [lindex $sim_fi_sig $sig_index]
-		puts "INFO: signal name = $sig_fi"
-		
-		# Print the examine and description command to see all value
-		set exam [examine sim:$sig_fi]
-		set descr [describe sim:$sig_fi]
-		puts "INFO: examine = $exam, descr = $descr"
-
-		# Now if the signal have multiple bit we should cycle
-		# otherwise we simple assign it
-		set bit_number [lindex [ split [ examine -binary -radixenumnumeric sim:$sig_fi] "'" ] 0 ]
-		puts "INFO: Bit number = $bit_number"
-		
-		set graffa [string index $bit_number 0]
-		puts "INFO: Graffa  = $graffa"
 	
-		if { "$graffa" == "\{" } {
-			# MATRICE
-			set descr [describe sim:$sig_fi]
-			set exam [examine sim:$sig_fi]
-			set array_depth [ expr [llength [split $descr "y"]] -1 ]
-			puts "INFO: In If signal  = $array_depth"
-			for { set j 0} {$j < $array_depth} {incr j} {
-				set array_dim  [ lindex [ split [ lindex $descr [expr {(int($j)*6)+4} ]] "\]" ] 0 ]
-				puts "INFO: array_dim = $array_dim"
-				set array_dim_rand [expr {int(rand())*$array_dim}]
-				append sig_fi "\[$array_dim_rand\]"
-				puts "INFO: appeded signal $sig_fi"
-			}
-			set bit_number [lindex [split [lindex [split $exam "'"] 0] "\{" ] end ]
-		} 
-		puts "INFO: Signal name  = $sig_fi"
-		set bit_choose [expr {int(rand()*$bit_number)} ] 
-		puts "INFO: Bit choose = $bit_choose"
-		# This is the real bit position since index are reversed for string and binary data
-		set bit_choose_real [expr $bit_number-$bit_choose-1 ]
-		# find bit to flip in binary string
-		set bit_value [string index [lindex [ split [examine -binary -radixenumnumeric sim:$sig_fi] "b" ] 1 ] $bit_choose_real ]
-		puts "INFO: row number = $bit_value"
+	
+	# check if the selected bit has been already used in previous fault injection
+	
+	if { $FI == 1 } {
+
+	    set find_n 1
+		while { $find_n == 1 } {
 		
-		set fp_sig [ open "${signals_filename}" "a" ]
-		puts $fp_sig "sig_fault: signal_name:$sig_fi\[$bit_choose\]  value:[expr ($bit_value+1)%2 ]  fi_instant:$fi_instant"
-		close $fp_sig
+		
+			# Find instant time in which inject, this instant
+			# will be selected between 0 and ENDSIM/2
+			set fi_instant [expr {int(rand()*($ENDSIM-2*10))} ]	
+			run $fi_instant ns
+			
+			puts "INFO: cycle $i"
+			# index of signal in which inject signal
+			set sig_index [ expr {int(rand()*$len_sim_fi_sig)} ]
+			puts "INFO: Signal index = $sig_index"
+			# Find signal in which inject fault
+			set sig_fi [lindex $sim_fi_sig $sig_index]
+			puts "INFO: signal name = $sig_fi"
+			
+			# Print the examine and description command to see all value
+			set exam [examine sim:$sig_fi]
+			set descr [describe sim:$sig_fi]
+			puts "INFO: examine = $exam, descr = $descr"
+
+			# Now if the signal have multiple bit we should cycle
+			# otherwise we simple assign it
+			set bit_number [lindex [ split [ examine -binary -radixenumnumeric sim:$sig_fi] "'" ] 0 ]
+			puts "INFO: Bit number = $bit_number"
+			
+			set graffa [string index $bit_number 0]
+			puts "INFO: Graffa  = $graffa"
+		
+			# set variable to manage multidim array for non replacement
+			set bit_choose_array ""
+			
+			if { "$graffa" == "\{" } {
+				# MATRICE
+				set descr [describe sim:$sig_fi]
+				set exam [examine sim:$sig_fi]
+				set array_depth [ expr [llength [split $descr "y"]] -1 ]
+				puts "INFO: In If signal  = $array_depth"
+				for { set j 0} {$j < $array_depth} {incr j} {
+					set array_dim  [ lindex [ split [ lindex $descr [expr {(int($j)*6)+4} ]] "\]" ] 0 ]
+					puts "INFO: array_dim = $array_dim"
+					set array_dim_rand [expr {int(rand())*$array_dim}]
+					append sig_fi "\[$array_dim_rand\]"
+					puts "INFO: appeded signal $sig_fi"
+					
+					# for non replacement
+					append bit_choose_array "\[$array_dim_rand\]"
+				}
+				set bit_number [lindex [split [lindex [split $exam "'"] 0] "\{" ] end ]
+			} 
+			puts "INFO: Signal name  = $sig_fi"
+			set bit_choose [expr {int(rand()*$bit_number)} ] 
+			puts "INFO: Bit choose = $bit_choose"
+			# This is the real bit position since index are reversed for string and binary data
+			set bit_choose_real [expr $bit_number-$bit_choose-1 ]
+			# find bit to flip in binary string
+			set bit_value [string index [lindex [ split [examine -binary -radixenumnumeric sim:$sig_fi] "b" ] 1 ] $bit_choose_real ]
+			puts "INFO: row number = $bit_value"
+	
+		    # for non replacement
+			set compare_sig [ concat $bit_choose_array "\[$bit_choose\]" "_" $fi_instant ]	
+			set find_n 0
+			#check find_n
+			foreach ll [ lindex $l_bit_ft $sig_index ] {
+				if  { $ll == $compare_sig } {
+					set find_n 1
+					break
+				}
+			}	
+		}
+				
+		# Append new bit to list of bits where we have applied fault injection
+		lset l_bit_ft $sig_index [ concat [ lindex $l_bit_ft $sig_index ] [ list $compare_sig ] ]
+
 		force -deposit "$sig_fi\[$bit_choose\]" [expr ($bit_value+1)%2 ]
 		
 	}
@@ -202,6 +234,13 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 			}
 		}
 	}
+	
+	# Print on file informations about faults and errors produced
+	set fp_sig [ open "${signals_filename}" "a" ]
+	puts $fp_sig "sig_fault: signal_name:$sig_fi\[$bit_choose\]  value:[expr ($bit_value+1)%2 ]  fi_instant:$fi_instant SIM_ERROR:$error_number"
+	close $fp_sig
+	
+	
 	
 	puts "INFO: current time = $now"
 

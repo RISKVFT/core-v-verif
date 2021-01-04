@@ -52,13 +52,13 @@ All_signals:/cv32e40p_id_stage/controller_i/debug_req_q
 All_signals:/cv32e40p_id_stage/int_controller_i/irq_q
 All_signals:/cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_end_q
 All_signals:/cv32e40p_id_stage/register_file_i/mem
-sig_fault: signal_name:/cv32e40p_id_stage/apu_read_dep_i[0]  value:1  fi_instant:807326
-sig_fault: signal_name:/cv32e40p_id_stage/data_err_i[0]  value:1  fi_instant:976145
-sig_fault: signal_name:/cv32e40p_id_stage/csr_hwlp_data_i[12]  value:0  fi_instant:440694
-sig_fault: signal_name:/cv32e40p_id_stage/trigger_match_i[0]  value:1  fi_instant:120444
-sig_fault: signal_name:/cv32e40p_id_stage/instr_valid_i[0]  value:1  fi_instant:184264
-sig_fault: signal_name:/cv32e40p_id_stage/mie_bypass_i[23]  value:1  fi_instant:792519
-sig_fault: signal_name:/cv32e40p_id_stage/regfile_wdata_wb_i[19]  value:1  fi_instant:905653
-sig_fault: signal_name:/cv32e40p_id_stage/ex_ready_i[0]  value:0  fi_instant:944555
-sig_fault: signal_name:/cv32e40p_id_stage/regfile_wdata_wb_i[10]  value:1  fi_instant:200867
-sig_fault: signal_name:/cv32e40p_id_stage/clk_ungated_i[0]  value:1  fi_instant:761472
+sig_fault: signal_name:/cv32e40p_id_stage/u_irq_enable_i[0]  value:1  fi_instant:717532 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/is_compressed_i[0]  value:0  fi_instant:121442 SIM_ERROR:primary
+sig_fault: signal_name:/cv32e40p_id_stage/regfile_alu_waddr_fw_i[2]  value:1  fi_instant:775602 SIM_ERROR:differences
+sig_fault: signal_name:/cv32e40p_id_stage/regfile_alu_wdata_fw_i[2]  value:1  fi_instant:720276 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/controller_i/ebrk_debug_entry_q[0]  value:1  fi_instant:774463 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/debug_ebreaku_i[0]  value:1  fi_instant:983714 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/regfile_alu_we_fw_i[0]  value:0  fi_instant:405260 SIM_ERROR:primary
+sig_fault: signal_name:/cv32e40p_id_stage/wb_ready_i[0]  value:0  fi_instant:5395 SIM_ERROR:primary
+sig_fault: signal_name:/cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_end_q[0][19]  value:1  fi_instant:387789 SIM_ERROR:primary
+sig_fault: signal_name:/cv32e40p_id_stage/ex_ready_i[0]  value:0  fi_instant:178467 SIM_ERROR:primary

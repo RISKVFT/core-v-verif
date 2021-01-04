@@ -1,7 +1,0 @@
-signal_name:/cv32e40p_id_stage/clk_ungated_i[0]  value:1  fi_instant:435861
-signal_name:/cv32e40p_id_stage/instr_rdata_i[26]  value:1  fi_instant:642006
-signal_name:/cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_end_q[0][2]  value:1  fi_instant:646766
-signal_name:/cv32e40p_id_stage/debug_single_step_i[0]  value:1  fi_instant:981621
-signal_name:/cv32e40p_id_stage/current_priv_lvl_i[0]  value:0  fi_instant:805094
-signal_name:/cv32e40p_id_stage/mcounteren_i[18]  value:1  fi_instant:675810
-signal_name:/cv32e40p_id_stage/int_controller_i/irq_sec_q[0]  value:1  fi_instant:201946
