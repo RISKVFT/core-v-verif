@@ -1,0 +1,154 @@
+All_signals:/cv32e40p_id_stage/mie_bypass_i
+All_signals:/cv32e40p_id_stage/debug_ebreakm_i
+All_signals:/cv32e40p_id_stage/frm_i
+All_signals:/cv32e40p_id_stage/wb_ready_i
+All_signals:/cv32e40p_id_stage/regfile_alu_we_fw_i
+All_signals:/cv32e40p_id_stage/m_irq_enable_i
+All_signals:/cv32e40p_id_stage/irq_sec_i
+All_signals:/cv32e40p_id_stage/data_misaligned_i
+All_signals:/cv32e40p_id_stage/instr_valid_i
+All_signals:/cv32e40p_id_stage/trigger_match_i
+All_signals:/cv32e40p_id_stage/scan_cg_en_i
+All_signals:/cv32e40p_id_stage/is_compressed_i
+All_signals:/cv32e40p_id_stage/clk_ungated_i
+All_signals:/cv32e40p_id_stage/ex_ready_i
+All_signals:/cv32e40p_id_stage/data_err_i
+All_signals:/cv32e40p_id_stage/regfile_alu_wdata_fw_i
+All_signals:/cv32e40p_id_stage/illegal_c_insn_i
+All_signals:/cv32e40p_id_stage/mult_multicycle_i
+All_signals:/cv32e40p_id_stage/regfile_alu_waddr_fw_i
+All_signals:/cv32e40p_id_stage/irq_i
+All_signals:/cv32e40p_id_stage/csr_hwlp_regid_i
+All_signals:/cv32e40p_id_stage/ex_valid_i
+All_signals:/cv32e40p_id_stage/debug_ebreaku_i
+All_signals:/cv32e40p_id_stage/csr_hwlp_we_i
+All_signals:/cv32e40p_id_stage/regfile_wdata_wb_i
+All_signals:/cv32e40p_id_stage/debug_req_i
+All_signals:/cv32e40p_id_stage/u_irq_enable_i
+All_signals:/cv32e40p_id_stage/regfile_waddr_wb_i
+All_signals:/cv32e40p_id_stage/pc_id_i
+All_signals:/cv32e40p_id_stage/mcounteren_i
+All_signals:/cv32e40p_id_stage/current_priv_lvl_i
+All_signals:/cv32e40p_id_stage/apu_busy_i
+All_signals:/cv32e40p_id_stage/apu_write_dep_i
+All_signals:/cv32e40p_id_stage/fetch_enable_i
+All_signals:/cv32e40p_id_stage/regfile_we_wb_i
+All_signals:/cv32e40p_id_stage/apu_read_dep_i
+All_signals:/cv32e40p_id_stage/is_fetch_failed_i
+All_signals:/cv32e40p_id_stage/debug_single_step_i
+All_signals:/cv32e40p_id_stage/csr_hwlp_data_i
+All_signals:/cv32e40p_id_stage/instr_rdata_i
+All_signals:/cv32e40p_id_stage/branch_decision_i
+All_signals:/cv32e40p_id_stage/controller_i/data_err_q
+All_signals:/cv32e40p_id_stage/controller_i/debug_mode_q
+All_signals:/cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_start_q
+All_signals:/cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_counter_q
+All_signals:/cv32e40p_id_stage/controller_i/hwlp_end_4_id_q
+All_signals:/cv32e40p_id_stage/int_controller_i/irq_sec_q
+All_signals:/cv32e40p_id_stage/controller_i/jump_done_q
+All_signals:/cv32e40p_id_stage/controller_i/illegal_insn_q
+All_signals:/cv32e40p_id_stage/controller_i/ebrk_debug_entry_q
+All_signals:/cv32e40p_id_stage/controller_i/debug_req_q
+All_signals:/cv32e40p_id_stage/int_controller_i/irq_q
+All_signals:/cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_end_q
+All_signals:/cv32e40p_id_stage/register_file_i/mem
+sig_fault: signal_name:/cv32e40p_id_stage/controller_i/illegal_insn_q[0]  value:1  fi_instant:430801 SIM_ERROR:28
+sig_fault: signal_name:/cv32e40p_id_stage/controller_i/debug_mode_q[0]  value:1  fi_instant:836636 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/is_fetch_failed_i[0]  value:1  fi_instant:594766 SIM_ERROR:64
+sig_fault: signal_name:/cv32e40p_id_stage/debug_ebreaku_i[0]  value:1  fi_instant:624346 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/int_controller_i/irq_q[18]  value:1  fi_instant:87319 SIM_ERROR:78
+sig_fault: signal_name:/cv32e40p_id_stage/clk_ungated_i[0]  value:0  fi_instant:278037 SIM_ERROR:64
+sig_fault: signal_name:/cv32e40p_id_stage/debug_ebreaku_i[0]  value:1  fi_instant:198051 SIM_ERROR:60
+sig_fault: signal_name:/cv32e40p_id_stage/controller_i/hwlp_end_4_id_q[0]  value:1  fi_instant:833123 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/current_priv_lvl_i[0]  value:0  fi_instant:76806 SIM_ERROR:48
+sig_fault: signal_name:/cv32e40p_id_stage/u_irq_enable_i[0]  value:1  fi_instant:191550 SIM_ERROR:35
+sig_fault: signal_name:/cv32e40p_id_stage/csr_hwlp_regid_i[0]  value:1  fi_instant:366715 SIM_ERROR:30
+sig_fault: signal_name:/cv32e40p_id_stage/debug_req_i[0]  value:1  fi_instant:964377 SIM_ERROR:43
+sig_fault: signal_name:/cv32e40p_id_stage/current_priv_lvl_i[0]  value:0  fi_instant:608122 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/illegal_c_insn_i[0]  value:1  fi_instant:379546 SIM_ERROR:25
+sig_fault: signal_name:/cv32e40p_id_stage/mie_bypass_i[0]  value:1  fi_instant:304630 SIM_ERROR:44
+sig_fault: signal_name:/cv32e40p_id_stage/trigger_match_i[0]  value:1  fi_instant:832088 SIM_ERROR:49
+sig_fault: signal_name:/cv32e40p_id_stage/frm_i[2]  value:1  fi_instant:77537 SIM_ERROR:23
+sig_fault: signal_name:/cv32e40p_id_stage/debug_ebreakm_i[0]  value:1  fi_instant:759291 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/is_compressed_i[0]  value:0  fi_instant:603881 SIM_ERROR:2
+sig_fault: signal_name:/cv32e40p_id_stage/controller_i/debug_mode_q[0]  value:1  fi_instant:112685 SIM_ERROR:76
+sig_fault: signal_name:/cv32e40p_id_stage/register_file_i/mem[0][14]  value:1  fi_instant:343132 SIM_ERROR:65
+sig_fault: signal_name:/cv32e40p_id_stage/mcounteren_i[26]  value:1  fi_instant:262935 SIM_ERROR:54
+sig_fault: signal_name:/cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_counter_q[0][4]  value:1  fi_instant:829605 SIM_ERROR:1
+sig_fault: signal_name:/cv32e40p_id_stage/irq_i[29]  value:1  fi_instant:199513 SIM_ERROR:57
+sig_fault: signal_name:/cv32e40p_id_stage/wb_ready_i[0]  value:0  fi_instant:899829 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_start_q[0][28]  value:1  fi_instant:476274 SIM_ERROR:67
+sig_fault: signal_name:/cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_end_q[0][20]  value:1  fi_instant:906270 SIM_ERROR:1
+sig_fault: signal_name:/cv32e40p_id_stage/int_controller_i/irq_sec_q[0]  value:1  fi_instant:824860 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/frm_i[1]  value:1  fi_instant:955269 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/pc_id_i[17]  value:1  fi_instant:602083 SIM_ERROR:1
+sig_fault: signal_name:/cv32e40p_id_stage/controller_i/hwlp_end_4_id_q[0]  value:1  fi_instant:174751 SIM_ERROR:90
+sig_fault: signal_name:/cv32e40p_id_stage/trigger_match_i[0]  value:1  fi_instant:148691 SIM_ERROR:23
+sig_fault: signal_name:/cv32e40p_id_stage/csr_hwlp_data_i[1]  value:1  fi_instant:677284 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/pc_id_i[2]  value:0  fi_instant:289131 SIM_ERROR:62
+sig_fault: signal_name:/cv32e40p_id_stage/regfile_waddr_wb_i[5]  value:1  fi_instant:1202 SIM_ERROR:82
+sig_fault: signal_name:/cv32e40p_id_stage/is_compressed_i[0]  value:0  fi_instant:329197 SIM_ERROR:49
+sig_fault: signal_name:/cv32e40p_id_stage/pc_id_i[14]  value:1  fi_instant:671412 SIM_ERROR:2
+sig_fault: signal_name:/cv32e40p_id_stage/controller_i/debug_req_q[0]  value:1  fi_instant:966456 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/regfile_waddr_wb_i[2]  value:0  fi_instant:29039 SIM_ERROR:75
+sig_fault: signal_name:/cv32e40p_id_stage/irq_i[15]  value:1  fi_instant:423620 SIM_ERROR:30
+sig_fault: signal_name:/cv32e40p_id_stage/m_irq_enable_i[0]  value:1  fi_instant:23447 SIM_ERROR:58
+sig_fault: signal_name:/cv32e40p_id_stage/csr_hwlp_we_i[0]  value:1  fi_instant:184280 SIM_ERROR:35
+sig_fault: signal_name:/cv32e40p_id_stage/controller_i/jump_done_q[0]  value:1  fi_instant:309077 SIM_ERROR:19
+sig_fault: signal_name:/cv32e40p_id_stage/instr_valid_i[0]  value:0  fi_instant:840935 SIM_ERROR:31
+sig_fault: signal_name:/cv32e40p_id_stage/regfile_alu_waddr_fw_i[4]  value:1  fi_instant:703986 SIM_ERROR:differences
+sig_fault: signal_name:/cv32e40p_id_stage/data_misaligned_i[0]  value:1  fi_instant:39214 SIM_ERROR:29
+sig_fault: signal_name:/cv32e40p_id_stage/ex_ready_i[0]  value:0  fi_instant:846568 SIM_ERROR:28
+sig_fault: signal_name:/cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_start_q[0][27]  value:1  fi_instant:721712 SIM_ERROR:1
+sig_fault: signal_name:/cv32e40p_id_stage/irq_sec_i[0]  value:1  fi_instant:81643 SIM_ERROR:43
+sig_fault: signal_name:/cv32e40p_id_stage/debug_ebreakm_i[0]  value:1  fi_instant:862085 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/ex_valid_i[0]  value:0  fi_instant:2249 SIM_ERROR:72
+sig_fault: signal_name:/cv32e40p_id_stage/regfile_alu_we_fw_i[0]  value:0  fi_instant:825928 SIM_ERROR:1
+sig_fault: signal_name:/cv32e40p_id_stage/is_fetch_failed_i[0]  value:1  fi_instant:795723 SIM_ERROR:15
+sig_fault: signal_name:/cv32e40p_id_stage/instr_rdata_i[18]  value:0  fi_instant:786935 SIM_ERROR:14
+sig_fault: signal_name:/cv32e40p_id_stage/data_misaligned_i[0]  value:1  fi_instant:400340 SIM_ERROR:40
+sig_fault: signal_name:/cv32e40p_id_stage/m_irq_enable_i[0]  value:1  fi_instant:3346 SIM_ERROR:86
+sig_fault: signal_name:/cv32e40p_id_stage/fetch_enable_i[0]  value:0  fi_instant:13456 SIM_ERROR:14
+sig_fault: signal_name:/cv32e40p_id_stage/ex_valid_i[0]  value:0  fi_instant:641223 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/regfile_wdata_wb_i[2]  value:1  fi_instant:187153 SIM_ERROR:66
+sig_fault: signal_name:/cv32e40p_id_stage/scan_cg_en_i[0]  value:1  fi_instant:521657 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/int_controller_i/irq_q[1]  value:1  fi_instant:485776 SIM_ERROR:90
+sig_fault: signal_name:/cv32e40p_id_stage/debug_req_i[0]  value:1  fi_instant:197585 SIM_ERROR:59
+sig_fault: signal_name:/cv32e40p_id_stage/csr_hwlp_we_i[1]  value:1  fi_instant:282620 SIM_ERROR:26
+sig_fault: signal_name:/cv32e40p_id_stage/debug_ebreakm_i[0]  value:1  fi_instant:399513 SIM_ERROR:49
+sig_fault: signal_name:/cv32e40p_id_stage/ex_valid_i[0]  value:0  fi_instant:417293 SIM_ERROR:22
+sig_fault: signal_name:/cv32e40p_id_stage/regfile_wdata_wb_i[3]  value:1  fi_instant:228411 SIM_ERROR:26
+sig_fault: signal_name:/cv32e40p_id_stage/scan_cg_en_i[0]  value:1  fi_instant:385048 SIM_ERROR:44
+sig_fault: signal_name:/cv32e40p_id_stage/controller_i/debug_req_q[0]  value:1  fi_instant:436019 SIM_ERROR:90
+sig_fault: signal_name:/cv32e40p_id_stage/controller_i/jump_done_q[0]  value:1  fi_instant:822869 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/branch_decision_i[0]  value:0  fi_instant:286506 SIM_ERROR:90
+sig_fault: signal_name:/cv32e40p_id_stage/trigger_match_i[0]  value:1  fi_instant:843750 SIM_ERROR:57
+sig_fault: signal_name:/cv32e40p_id_stage/controller_i/ebrk_debug_entry_q[0]  value:1  fi_instant:787004 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/csr_hwlp_data_i[1]  value:1  fi_instant:464429 SIM_ERROR:36
+sig_fault: signal_name:/cv32e40p_id_stage/controller_i/jump_done_q[0]  value:1  fi_instant:498020 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_end_q[0][20]  value:1  fi_instant:404843 SIM_ERROR:27
+sig_fault: signal_name:/cv32e40p_id_stage/pc_id_i[4]  value:1  fi_instant:513061 SIM_ERROR:1
+sig_fault: signal_name:/cv32e40p_id_stage/regfile_waddr_wb_i[3]  value:1  fi_instant:794717 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/m_irq_enable_i[0]  value:1  fi_instant:693599 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/irq_i[12]  value:1  fi_instant:802502 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/apu_read_dep_i[0]  value:1  fi_instant:206739 SIM_ERROR:19
+sig_fault: signal_name:/cv32e40p_id_stage/regfile_alu_wdata_fw_i[9]  value:0  fi_instant:181282 SIM_ERROR:12
+sig_fault: signal_name:/cv32e40p_id_stage/register_file_i/mem[0][23]  value:1  fi_instant:876382 SIM_ERROR:1
+sig_fault: signal_name:/cv32e40p_id_stage/pc_id_i[19]  value:1  fi_instant:468580 SIM_ERROR:77
+sig_fault: signal_name:/cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_end_q[0][12]  value:1  fi_instant:25433 SIM_ERROR:77
+sig_fault: signal_name:/cv32e40p_id_stage/regfile_alu_we_fw_i[0]  value:1  fi_instant:576739 SIM_ERROR:16
+sig_fault: signal_name:/cv32e40p_id_stage/clk_ungated_i[0]  value:1  fi_instant:303413 SIM_ERROR:39
+sig_fault: signal_name:/cv32e40p_id_stage/int_controller_i/irq_q[14]  value:1  fi_instant:741119 SIM_ERROR:1
+sig_fault: signal_name:/cv32e40p_id_stage/apu_busy_i[0]  value:1  fi_instant:928634 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/csr_hwlp_we_i[0]  value:1  fi_instant:467988 SIM_ERROR:66
+sig_fault: signal_name:/cv32e40p_id_stage/controller_i/ebrk_debug_entry_q[0]  value:1  fi_instant:491282 SIM_ERROR:75
+sig_fault: signal_name:/cv32e40p_id_stage/register_file_i/mem[0][17]  value:1  fi_instant:365930 SIM_ERROR:63
+sig_fault: signal_name:/cv32e40p_id_stage/controller_i/debug_mode_q[0]  value:1  fi_instant:730853 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/data_misaligned_i[0]  value:1  fi_instant:95300 SIM_ERROR:45
+sig_fault: signal_name:/cv32e40p_id_stage/mie_bypass_i[1]  value:1  fi_instant:64642 SIM_ERROR:29
+sig_fault: signal_name:/cv32e40p_id_stage/instr_valid_i[0]  value:0  fi_instant:532789 SIM_ERROR:16
+sig_fault: signal_name:/cv32e40p_id_stage/scan_cg_en_i[0]  value:1  fi_instant:502669 SIM_ERROR:0
+sig_fault: signal_name:/cv32e40p_id_stage/trigger_match_i[0]  value:1  fi_instant:531736 SIM_ERROR:13
+sig_fault: signal_name:/cv32e40p_id_stage/csr_hwlp_data_i[25]  value:1  fi_instant:103773 SIM_ERROR:45
+sig_fault: signal_name:/cv32e40p_id_stage/csr_hwlp_data_i[8]  value:1  fi_instant:274724 SIM_ERROR:37
+sig_fault: signal_name:/cv32e40p_id_stage/csr_hwlp_we_i[2]  value:1  fi_instant:303952 SIM_ERROR:89

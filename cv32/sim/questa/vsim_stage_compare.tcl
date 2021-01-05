@@ -113,9 +113,7 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 	if { $FI == 1 } {
 
 	    set find_n 1
-		while { $find_n == 1 } {
-		
-		
+		while { $find_n == 1 } {		
 			# Find instant time in which inject, this instant
 			# will be selected between 0 and ENDSIM/2
 			set fi_instant [expr {int(rand()*($ENDSIM-2*10))} ]	
@@ -186,8 +184,13 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 				
 		# Append new bit to list of bits where we have applied fault injection
 		lset l_bit_ft $sig_index [ concat [ lindex $l_bit_ft $sig_index ] [ list $compare_sig ] ]
+		if { $bit_value != 0  && $bit_value != 1 } {
+			set bit_force_value 0
+		} else {
+		 	set bit_force_value [expr ($bit_value+1)%2 ]
+		}
 
-		force -deposit "$sig_fi\[$bit_choose\]" [expr ($bit_value+1)%2 ]
+		force -deposit "$sig_fi\[$bit_choose\]" $bit_force_value
 		
 	}
 	
@@ -220,7 +223,11 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 	compare run $fi_instant $remaining 
 	
 	run 300
-	set error_number [ lindex [ compare info ] 12 ]
+	#set error_number [ lindex [ compare info ] 12 ]
+	set error_number [string map {" " ""} [lindex [ split [lindex [split [compare info] "\n"] 1 ] "=" ] 1]]
+
+	puts "INFO: compare_info: [compare info]"
+	puts "INFO: number of errors: $error_number"
 	if { $error_number == 0 } {
 		set clock_period 10
 		set num_run_cycles [expr $ENDSIM/($clock_period*10)]
@@ -233,31 +240,10 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 				break
 			}
 		}
-	}
-	
-	# Print on file informations about faults and errors produced
-	set fp_sig [ open "${signals_filename}" "a" ]
-	puts $fp_sig "sig_fault: signal_name:$sig_fi\[$bit_choose\]  value:[expr ($bit_value+1)%2 ]  fi_instant:$fi_instant SIM_ERROR:$error_number"
-	close $fp_sig
-	
-	
-	
-	puts "INFO: current time = $now"
-
-
-
-
-	##############################################################################
-	###### Save error if there are
-
-	puts "Compare error filename: ${compare_filename}"
-
-	# Find error number
-	set comp_info [ lindex [ compare info ] 12 ]
-
-	# If there is at least an error we open error file, read current number of error
-	# and increment it
-	if { "$comp_info" != "0" } {
+	} else {
+		# If there is at least an error we open error file, read current number of error
+		# and increment it
+		puts "Compare error filename: ${compare_filename}"
 		set fp_compare [ open "${compare_filename}" "r" ]
 		set num_error [ expr [ gets $fp_compare ] +1 ]
 		close $fp_compare
@@ -265,6 +251,11 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 		puts $fp_compare $num_error
 		close $fp_compare	
 	}
+	
+	puts "INFO: current time = $now"
+	
+	##############################################################################
+	###### Save error if there are
 
 	if {$FI > 0} {
 		compare end
@@ -274,6 +265,14 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 	# Save current cycle and cycle simulation time in cycle_file in order
 	# to cumpute remaining time and percentage of total simulations done
 	set end_time [clock milliseconds]
+	
+	if {$FI > 0} {
+		# Print on file informations about faults and errors produced
+		set fp_sig [ open "${signals_filename}" "a" ]
+		puts $fp_sig "sig_fault: signal_name:$sig_fi\[$bit_choose\]  value:[expr ($bit_value+1)%2 ]  fi_instant:$fi_instant SIM_ERROR:$error_number time_for_this_simulation:[expr $end_time-$start_time]" 
+		close $fp_sig
+	}
+	
 	set fp_cycle [ open "${cycle_filename}" "w" ]
 	puts $fp_cycle "$i"
 	puts $fp_cycle "[expr $end_time-$start_time]"

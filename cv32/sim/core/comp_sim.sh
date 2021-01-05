@@ -2,6 +2,42 @@
 
 source ccommon.sh
 
+# trap ctrl-c and call ctrl_c()
+trap ctrl_c INT
+
+#########################################################
+## Variable used to configure the closure of the program
+#########################################################
+# If setted, when the program is blocked using a ctrl-c the progression bar
+# is closed, 
+int_close_bar=0
+int_remove_work=1
+PPID_MAIL=0
+PPID_SFIUPI=0
+
+function ctrl_c() {
+        echo "** Trapped CTRL-C"
+	if [[ $int_close_bar -eq 1 ]]; then
+		destroy_scroll_area
+	fi
+#	if [[ $int_remove_work -eq 1 ]]; then
+#		ask_yesno "Probably your work directory is broken, remove it?(y/n)"
+#		if [[ $ANS -eq 1 ]]; then
+#			rm -r ./sim_FT/work
+#		fi
+#	fi
+	rm -f log.log
+	rm -f time_*
+	if [[ $PPID_MAIL -ne 0 ]]; then
+		kill $PPID_MAIL	
+	fi
+	if [[ $PPID_QSFIUPI -ne 0 ]]; then
+		kill $PPID_SFIUPI
+	fi
+
+}
+
+
 UsageExit () {
 	echo '
 Program Usage:
@@ -156,9 +192,12 @@ fileTimestamp () {
 executeInTerminal () {
 	mate-terminal --window --working-directory="$CUR_DIR" --command="$1; exec $SHELL"
 	ask_yesno "VCD creation is finished (close window before answer yes) (y/n)?"
-	while [[ $ANS -eq 1 ]] ; do
+	while [[ $ANS -eq 0 ]] ; do
 		ask_yesno "VCD creation is finished (close window before answer yes) (y/n)?"
 	done
+}
+executeInTerminalEasy () {
+	mate-terminal --window --working-directory="$CUR_DIR" --command="$1" &
 }
 findEndsim () {
 	sw=$1
@@ -233,10 +272,11 @@ SET_BLOCK=0
 SET_UPI=0
 #TEST_DIR="$CUR_DIR/../../tests/programs/MiBench/"
 #TEST_DIR="$CUR_DIR/../../tests/programs/riscv-toolchain-blogpost/out"
+CLEAROUT=0
 
 # Error variale
 ERROR_DIR="$CORE_V_VERIF/cv32/sim/core/sim_FT/sim_out"
-SIM_IDS="id_stage-fibonacci-10-1 id_stage-fibonacci-16600-1"
+SIM_IDS="if_stage-fibonacci-16-1 id_stage-fibonacci-100-1 id_stage-fibonacci-20-1 if_stage-fibonacci-20-1 if_stage-fibonacci-10-1 id_stage-fibonacci-30-1 id_stage-fibonacci-10-1 id_stage-fibonacci-16600-1"
 compare_error_file_prefix="cnt_error_"
 info_file_prefix="info_"
 cycle_file_prefix="cycle_"
@@ -556,18 +596,25 @@ for p1 in $par; do
 			file_timestamp1=$(fileTimestamp log.log)
 			sleep 0.5
 			comando="./comp_sim.sh -sfiupi $@"
+			db_becho "PROCESS: Opening a new terminal to run simulations ... "
 	                mate-terminal --window --working-directory="$CUR_DIR" --command="$comando" &	
+			PPID_SFIUPI=$PPID
 			#./comp_sim.sh  -sfiupi $@  &
 
 			# We wait until the file log.log is modified
 			file_timestamp2=$(fileTimestamp log.log)
 			while [[ $file_timestamp2 -eq $file_timestamp1 ]]; do
 				file_timestamp2=$(fileTimestamp log.log)
-				sleep 0.5
+				db_becho "INFO: Waiting a first write of log.log file ..."
+				sleep 2
 			done
-			sleep 1
+			while [[ $(cat log.log | wc -l) -lt 4 ]]; do
+				db_becho "INFO: Waiting that log.log file is completely written ..."
+				sleep 2
+			done
 			
 			# We save information from log.log in variables
+			db_becho "INFO: Reading log-log file ..."
 			CYCLE=$(cat log.log | grep "cycle:" | cut -d ":" -f 2)
 			CYCLE_FILE=$(cat log.log | grep "cycle_file" | cut -d ":" -f 2)
 			START_TIME=$(cat log.log | grep "start_time" | cut -d ":" -f 2)
@@ -583,13 +630,35 @@ for p1 in $par; do
 			echo "0" > "$CYCLE_FILE"
 			echo "2000" >> "$CYCLE_FILE"
 			# mean cycle time in ms
-			cycle_time_mean=2000
+			cycle_time_mean=4000
 			current_cycle=$(head -n 1 "$CYCLE_FILE")
 			cycle_time=$(tail -n 1 "$CYCLE_FILE")
 			cycle_time_sum=0
-			
+			 
+			# If the send variable is setted we sent a mail in periodical mode
+			# in order to report news from simulation
+			echo -e "Time-left:Unknown sec\nPercentage:0%\nMean cycle time sec:3 sec\ncycle:0" > "time_$ID.txt"
+			if [[ $SEND -eq 1 ]]; then
+				db_becho "PROCESS: Open a new terminal for mail sender ..."
+				touch time_$ID.txt
+				# time between two mail in order to have a coverage of 20%
+				# so about each 20% of simulation a mail is sent
+				if [[ $CYCLE -lt 20 ]]; then 
+					mail_cycle_time="0.5"
+					executeInTerminalEasy "./sendNewsOfSimulation.sh time_$ID.txt cycle: $CYCLE 0.5"
+				else
+					mail_cycle_time=$(echo "scale=3; $cycle_time_mean*$CYCLE/600000" | bc -l )
+					executeInTerminalEasy "./sendNewsOfSimulation.sh time_$ID.txt cycle: $CYCLE $mail_cycle_time"
+				fi
+				PPID_MAIL=$PPID
+				db_becho "INFO: The mail sender will send you a mail each $(show_time $(echo "$mail_cycle_time*60" | bc -l | cut -d "." -f 1))"
+
+			fi
+
+			db_becho "INFO: Monitoring the simulation"
 			enable_trapping
 			setup_scroll_area
+			int_close_bar=1
 			var=$(echo "scale=3; 2000/1000" | bc -l)
 			draw_progress_bar 0 $((2*$CYCLE)) "$var|$var"
 			while [[ $current_cycle -le $CYCLE ]]; do
@@ -623,6 +692,7 @@ for p1 in $par; do
 								| bc -l | cut -d "." -f 1)
 						cycle_time_mean_sec=$(echo "scale=2; $cycle_time_mean/1000" | bc -l)
 						cycle_time_sec="$cycle_time_mean_sec|$(echo "scale=2; $cycle_time/1000" | bc -l)"
+						echo -e "Time-left: $(show_time $time_left)\nPercentage: $percentage%\nMean cycle time sec: $cycle_time_mean_sec sec\ncycle:$current_cycle" > "time_$ID.txt" 
 						draw_progress_bar $percentage $time_left $cycle_time_sec
 					fi
 					
@@ -640,7 +710,9 @@ for p1 in $par; do
 			
 			sleep 0.5
 			./comp_sim.sh -esfiupi "$ID"
-			sendMailToAll_ifyes $SEND 'Simulation finished'
+			
+			kill $PPID_MAIL
+			kill $PPID_SFIUPI
 			exit 
 			;;	
 		-sfiupi|--stage_fault_injection_upi)
@@ -759,7 +831,6 @@ for p1 in $par; do
 					sim_total_time=$(($timetwo-$timeone))
 					echo "Total_sim_time:$sim_total_time" >> "$INFO_FILE"
 					echo "SImulation ID:$ID"
-					./comp_sim.sh -esfiupi "$ID"
 				done	
 			else
 				############ Save parameter in a log file for -qsfiupi ##########
@@ -808,18 +879,29 @@ for p1 in $par; do
 			time_for_cycle=$(echo "scale=3; $sim_total_time/$CYCLE" | bc -l)
 			sim_show_time=$(show_time $sim_total_time)
 
-			db_gecho "##############################################################################"
-			db_gecho "##############################################################################"
-			db_gecho "Total simulation time ${sim_show_time}"
-			db_gecho "Time for cycle ${time_for_cycle}s"
-			if [[ $FI > 0 ]]; then 
-				fault_tolerance=$(echo "100*(1-$error/$CYCLE)" | bc -l )
-				db_gecho "Total errors in $CYCLE simulations are $error"
-				db_gecho "Total number of signals that could be used for fault injection : $n_of_signal"
-				db_gecho "Fault tolerance ${fault_tolerance:0:6}%"
+			if [[ $CLEAROUT -eq 1 ]]; then
+				echo "Total simulation time ${sim_show_time}"
+				echo "Time for cycle ${time_for_cycle}s"
+				if [[ $FI > 0 ]]; then 
+					fault_tolerance=$(echo "100*(1-$error/$CYCLE)" | bc -l )
+					echo "Total errors in $CYCLE simulations are $error"
+					echo "Total number of signals that could be used for fault injection : $n_of_signal"
+					echo "Fault tolerance ${fault_tolerance:0:6}%"
+				fi
+			else
+				db_gecho "##############################################################################"
+				db_gecho "##############################################################################"
+				db_gecho "Total simulation time ${sim_show_time}"
+				db_gecho "Time for cycle ${time_for_cycle}s"
+				if [[ $FI > 0 ]]; then 
+					fault_tolerance=$(echo "100*(1-$error/$CYCLE)" | bc -l )
+					db_gecho "Total errors in $CYCLE simulations are $error"
+					db_gecho "Total number of signals that could be used for fault injection : $n_of_signal"
+					db_gecho "Fault tolerance ${fault_tolerance:0:6}%"
+				fi
+				db_gecho "##############################################################################"
+				db_gecho "##############################################################################"
 			fi
-			db_gecho "##############################################################################"
-			db_gecho "##############################################################################"
 			exit
 			;;
 		-bf|--bench-fi)
@@ -840,6 +922,14 @@ for p1 in $par; do
 		-clear-log-file)
 			SIM_IDS=""
 			rm  $ERROR_DIR/*
+			shift
+			;;
+		-co|--clear-output)
+			CLEAROUT=1
+			shift
+			;;
+		-send)
+			shift
 			;;
 		--)
 			break;;
@@ -1008,4 +1098,3 @@ if [[ $BENCHMARK -eq 1 ]]; then
 fi
 
 
-sendMailToAll_ifyes $SEND'simulation finished'
