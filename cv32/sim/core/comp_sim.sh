@@ -123,7 +123,27 @@ executeInTerminal () {
 	done
 }
 executeInTerminalEasy () {
-	mate-terminal --window --working-directory="$CUR_DIR" --command="$1" &
+	local cmd=$1
+	local tname=$2
+	mate-terminal --window --working-directory="$CUR_DIR" --command="$cmd"  --disable-factory &
+	TERMINAL_PID="$TERMINAL_PID $!_tname"
+}
+execute_in_terminal() {
+	local cmd=$1
+	local tname=$2
+	mate-terminal --window --working-directory="$CUR_DIR" --command="$cmd"  --disable-factory &
+	TERMINAL_PID="$TERMINAL_PID $!_$tname"
+}
+kill_terminal () {
+	local tname=$1
+	for pid_name in $TERMINAL_PID; do
+		echo "$pid_name"
+		if [[ $(echo $pid_name | cut -d "_" -f 2-) == $tname ]] ; then
+			echo "pid: $(echo $pid_name | cut -d "_" -f 1)"
+			kill -9 $(echo $pid_name | cut -d "_" -f 1)
+			return
+		fi
+	done
 }
 findEndsim () {
 	sw=$1
@@ -139,6 +159,19 @@ findEndsim () {
 
 	db_becho "endsim: $endsim"
 }
+
+verify_upi_vcdwlf () {
+	local sw=$1 # name of the software 
+	local stg=$2 # name of the stage without cv32e40p if core
+	local real_stg=$3 
+	swc=$(echo $sw | tr '-' '_')
+	if [[ ! -f ./sim_FT/dataset/gold_${real_stg}_${swc}_in.vcd ]]; then
+		execute_in_termina./comp_sim.sh -b sbv $sw $stg save_data_in "
+		executeInTerminal "./comp_sim.sh -b sbv $sw $stg save_data_out -g "
+	fi
+	
+}
+
 sendMailToAll_ifyes () {
 	if [[ $1 -eq 1 ]]; then
 		sendMailToAll $1
@@ -1041,6 +1074,7 @@ SET_UPI=0
 #TEST_DIR="$CUR_DIR/../../tests/programs/MiBench/"
 #TEST_DIR="$CUR_DIR/../../tests/programs/riscv-toolchain-blogpost/out"
 CLEAROUT=0
+TERMINAL_PID=""
 
 # Error variale
 ERROR_DIR="$CORE_V_VERIF/cv32/sim/core/sim_FT/sim_out"
