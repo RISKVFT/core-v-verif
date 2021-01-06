@@ -1,0 +1,91 @@
+Program Usage:
+	!!!!!!!!! ALL DIRECTORY will be appended to CORE_V_VERIF path !!!!!!!!
+	-h|--help)
+		UsageExit
+
+	-g|--gui)
+		GUI=-gui --> if -g then use Questasim GUI
+
+	-a|--arch)
+		ref https://github.com/path/to/repo.git branch_name
+			This option is used to set the repo and the branch of the reference arch
+			for current fault tolerant arch. This repo will be uploaded using "-a s ref"
+		ft https://github.com/path/to/repo.git branch_name
+			This option is used to set the repo and the branch of the fault tolerant arch
+			for current fault tolerant arch. This repo will be uploaded using "-a s ft"
+		s [ft|ref]   (ft as default)
+			This option is used to set the desired arch between ref (reference arch) and 
+			ft arch, this setting can only be done after providing the repositories and 
+			the branches for both architectures using "-a ref repo branch" and "-a ft repo branch"
+
+	-u|--unique-file)
+		d   directory setting
+			First of all set directory of *.c file to compile with:
+				-u d dir/to/c/file
+		l  dirrectory of log file
+				-u l path/to/log/file
+		cf|sf|csf compilation/simulation or both
+			Then it is possible to compile and simulate
+				-u cf c_file_name_without_extension   -> compile
+				-u sf c_file_name_without_extension   -> simulate (if already compiled)
+				-u csf c_file_name_without_extension   -> compile & simulate
+		v   set vsim file extension
+			You could also set the extension of vsim file to run with modelsim, this
+			file should be located in core-v-verif/cv32/sim/questa directory:
+				-u csfv c_file_name_without_extension vsim_extension -> 
+					compile & simulate with vsim_$(vsim_extension).tcl file
+			
+	-b|--benchmark)
+		d  directory setting
+			First of all set build file to run in order to compile all benchmark and
+			the directory in which all *.hex file will be located after compilation
+				-b d path/to/build_all.py path/to/hex/file
+		l  dirrectory of log file
+				-b l path/to/log/file
+		c|s|cs compilation/simulation
+			Then is possible to compilate and run all benchmark, a restricted number of
+			program in the benchmark or a specific program of benchmark:
+				-b cs a  -> compile and simulate all benchmark
+				-b cs 2  -> compile all b but simulate only the first two hex file
+				-b s hello-world -> go in path/to/hex/file and use hello-world to simulate
+		v   set vsim file extension
+			You could also set the extension of vsim file to run with modelsim, this
+			file should be located in core-v-verif/cv32/sim/questa directory:
+				-u csv all vsim_extension ->						
+					compile & simulate all b, with vsim_$(vsim_extension).tcl file
+	
+	-v|--verbose)
+		verbose prints				
+
+	Usage example:
+	1) set the reference and fault tolerant architectures:
+		./comp_sim.sh -a ref https://github.com/openhwgroup/cv32e40p.git master
+		./comp_sim.sh -a ft https://github.com/RISKVFT/cv32e40p.git FT_Elia
+	   now we could use ref or ft arch using "-a s [ft|ref]"
+	2) Compile and simulate an application program for our architecture:
+		1) set application *.c/*.S code directory:
+			./comp_sim.sh -u d cv32/tests/programs/custom_FT/hello-world
+		   The use of relative path is because we use the variable CORE_V_VERIF to
+		   have the core-v-verif path.
+		2) set log file directory
+			./comp_sim.sh -u l cv32/sim/core/log
+		   Will be created the log dir and used to save log file
+		3) Compile program
+			./comp_sim.sh -u c hello-world
+		4) Simulation using vsim_gold.tcl script in cv32/sim/questa directory
+		   and using gui (-g) and using ref architecture.
+			./comp_sim.sh -a ref -u sv hello-world gold -g 
+		   The same but with the ref arch
+			./comp_sim.sh -a ref -u sv hello-world gold -g 
+	3) Compile and simulate a testbench:
+		1) Set build program and directory of output *.hex file
+			./comp_sim.sh -b d cv32/tests/programs/mibench/build_all.py \
+						cv32/tests/programs/mibench/out
+		2) Set log dir
+			./comp_sim.sh -b l cv32/sim/core/bench_log
+		3) Compile all benchmark
+			./comp_sim.sh -b c a
+		4) Simulate only counters.hex program using reference arch and vsim_gold.tcl script:
+			./comp_sim.sh -a ref -b sv counters gold
+		5) Simulate my arch and compare using vsim_compare.tcl script:
+			./comp_sim.sh -a ft -b sv counters compare

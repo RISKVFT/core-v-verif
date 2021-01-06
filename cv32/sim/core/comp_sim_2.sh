@@ -46,111 +46,14 @@ function ctrl_c() {
 ######################################################################
 
 UsageExit () {
-	echo '
-Program Usage:
-	!!!!!!!!! ALL DIRECTORY will be appended to CORE_V_VERIF path !!!!!!!!
-	-h|--help)
-		UsageExit
-
-	-g|--gui)
-		GUI=-gui --> if -g then use Questasim GUI
-
-	-a|--arch)
-		ref https://github.com/path/to/repo.git branch_name
-			This option is used to set the repo and the branch of the reference arch
-			for current fault tolerant arch. This repo will be uploaded using "-a s ref"
-		ft https://github.com/path/to/repo.git branch_name
-			This option is used to set the repo and the branch of the fault tolerant arch
-			for current fault tolerant arch. This repo will be uploaded using "-a s ft"
-		s [ft|ref]   (ft as default)
-			This option is used to set the desired arch between ref (reference arch) and 
-			ft arch, this setting can only be done after providing the repositories and 
-			the branches for both architectures using "-a ref repo branch" and "-a ft repo branch"
-
-	-u|--unique-file)
-		d   directory setting
-			First of all set directory of *.c file to compile with:
-				-u d dir/to/c/file
-		l  dirrectory of log file
-				-u l path/to/log/file
-		cf|sf|csf compilation/simulation or both
-			Then it is possible to compile and simulate
-				-u cf c_file_name_without_extension   -> compile
-				-u sf c_file_name_without_extension   -> simulate (if already compiled)
-				-u csf c_file_name_without_extension   -> compile & simulate
-		v   set vsim file extension
-			You could also set the extension of vsim file to run with modelsim, this
-			file should be located in core-v-verif/cv32/sim/questa directory:
-				-u csfv c_file_name_without_extension vsim_extension -> 
-					compile & simulate with vsim_$(vsim_extension).tcl file
-			
-	-b|--benchmark)
-		d  directory setting
-			First of all set build file to run in order to compile all benchmark and
-			the directory in which all *.hex file will be located after compilation
-				-b d path/to/build_all.py path/to/hex/file
-		l  dirrectory of log file
-				-b l path/to/log/file
-		c|s|cs compilation/simulation
-			Then is possible to compilate and run all benchmark, a restricted number of
-			program in the benchmark or a specific program of benchmark:
-				-b cs a  -> compile and simulate all benchmark
-				-b cs 2  -> compile all b but simulate only the first two hex file
-				-b s hello-world -> go in path/to/hex/file and use hello-world to simulate
-		v   set vsim file extension
-			You could also set the extension of vsim file to run with modelsim, this
-			file should be located in core-v-verif/cv32/sim/questa directory:
-				-u csv all vsim_extension ->						
-					compile & simulate all b, with vsim_$(vsim_extension).tcl file
-	
-	-v|--verbose)
-		verbose prints				
-
-	Usage example:
-	1) set the reference and fault tolerant architectures:
-		./comp_sim.sh -a ref https://github.com/openhwgroup/cv32e40p.git master
-		./comp_sim.sh -a ft https://github.com/RISKVFT/cv32e40p.git FT_Elia
-	   now we could use ref or ft arch using "-a s [ft|ref]"
-	2) Compile and simulate an application program for our architecture:
-		1) set application *.c/*.S code directory:
-			./comp_sim.sh -u d cv32/tests/programs/custom_FT/hello-world
-		   The use of relative path is because we use the variable CORE_V_VERIF to
-		   have the core-v-verif path.
-		2) set log file directory
-			./comp_sim.sh -u l cv32/sim/core/log
-		   Will be created the log dir and used to save log file
-		3) Compile program
-			./comp_sim.sh -u c hello-world
-		4) Simulation using vsim_gold.tcl script in cv32/sim/questa directory
-		   and using gui (-g) and using ref architecture.
-			./comp_sim.sh -a ref -u sv hello-world gold -g 
-		   The same but with the ref arch
-			./comp_sim.sh -a ref -u sv hello-world gold -g 
-	3) Compile and simulate a testbench:
-		1) Set build program and directory of output *.hex file
-			./comp_sim.sh -b d cv32/tests/programs/mibench/build_all.py \
-						cv32/tests/programs/mibench/out
-		2) Set log dir
-			./comp_sim.sh -b l cv32/sim/core/bench_log
-		3) Compile all benchmark
-			./comp_sim.sh -b c a
-		4) Simulate only counters.hex program using reference arch and vsim_gold.tcl script:
-			./comp_sim.sh -a ref -b sv counters gold
-		5) Simulate my arch and compare using vsim_compare.tcl script:
-			./comp_sim.sh -a ft -b sv counters compare
-'
+	cat comp_sim_man
 	exit 1
 }
 
 
-CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
-COMMONMK="$CORE_V_VERIF/cv32/sim/core/sim_FT/Common.mk"
-
-isnumber='^[0-9]+$'
-
-#########################################################################################################################
-#  SUPPORT FUNCTION #####################################################################################################
-#########################################################################################################################
+###################################################################################################################
+#  SUPPORT FUNCTION ###############################################################################################
+###################################################################################################################
 
  
 vecho() { if [[ $VERBOSE ]]; then echo -e "${red}${1}${reset}";fi }
@@ -430,6 +333,35 @@ function sim_unique_program () {
 			-u csf file_to_compile&simulate\n\
 			-u csfv file_to_comp&sim vsim_script_extension\n"
 	fi
+	if [[ $UNIQUE_CHEX_DIR == " " ]]; then	
+		recho_exit "Error: you should set dir/build_all program \
+		used to compile all benchmark and the directory of *.hex files with:\n \
+		-b d dir/to/build_all.py dir/to/hexfile \n \ 
+		Both path will be appended to CORE_V_VERIF=$CORE_V_VERIF path \n \
+		to find real path\n"
+	fi
+	if [[ $U_LOG_DIR == " " ]]; then
+		recho_exit "Error: Set log directory with -u l /path/to/log/dir"
+	fi
+	if [[ $COMPILATION -eq 1 ]]; then
+		db_gecho "Executing Makefile_Compile.mk in $UNIQUE_CHEX_DIR"
+		#make -C $SIM_FT compile TEST_FILE="$FULL_FILE_CPATH"
+		mon_run "make -C $UNIQUE_CHEX_DIR -f $SIM_FT/Makefile_Compile.mk" \
+				$U_LOG_DIR/${CHEX_FILE}_comp.txt 1 $LINENO
+		db_gecho "File in unique directory:"
+		db_gecho "$(ls $UNIQUE_CHEX_DIR)"
+	fi
+	if [[ $SIMULATION -eq 1 ]]; then
+		#rm -rf $CORE_V_VERIF/cv32/sim/core/sim_FT/work	
+		source /software/europractice-release-2019/scripts/init_questa10.7c	
+		# full simulation path without extension 
+		mon_run "make -C $SIM_FT questa-sim$GUI TEST_FILE=$UNIQUE_CHEX_DIR/$CHEX_FILE \
+			FT=$VSIM_EXT" $U_LOG_DIR/${CHEX_FILE}_sim.txt 1 $LINENO
+
+		cat log/${CHEX_FILE}_sim.txt | grep '^#.*$' | grep -ve 'Warning\|Process\|Instance\|Loading\|(C)'
+		
+		#make -C $SIM_FT questa-sim$GUI TEST_FILE="$UNIQUE_CHEX_DIR/$CHEX_FILE" FT="$VSIM_EXT" 
+	fi
 
 }
 
@@ -546,6 +478,75 @@ function sim_benchmark_programs () {
 		findEndsim $SWC $STG $STAGE_NAME
 		export T_ENDSIM=$endsim
 		db_becho "ENDSIM = $T_ENDSIM"
+	fi
+	
+	# Controls
+	if [[ $B_LOG_DIR == " " ]]; then
+		recho_exit "Error: Set log directory with -b l /path/to/log/dir"
+	        exit 1
+	fi
+	if [[ $BENCH_BUILD_FILE == " " || $BENCH_HEX_DIR == " " ]]; then
+		recho_exit "Error: you should set dir/build_all program \n
+		used to compile all benchmark and the directory of *.hex files with:\n
+		-b d dir/to/build_all.py dir/to/hexfile\n
+		Both path will be appended to CORE_V_VERIF=$CORE_V_VERIF path\n
+		to find real path\n"
+	fi
+	# compilation of mibench files
+	if [[ $COMPILATION -eq 1 ]]; then
+		cd $BENCHMARK_DIR 
+		mkdir -p log 
+		mon_run $BENCH_BUILD_FILE "$B_LOG_DIR/bench_compilation.txt" 1 $LINENO
+	fi
+		
+	if [[ $SIMULATION -eq 1 ]]; then
+		# simulation of all file in out directory of mibench
+		source /software/europractice-release-2019/scripts/init_questa10.7c
+	
+		hexfiles=$(cd $BENCH_HEX_DIR; ls *.hex)
+		db_gecho "This are the *.hex file in $BENCH_HEX_DIR:"
+		db_lgecho "${hexfiles[@]}"
+		FDONE=0
+			
+		if [[ $B_TYPE == "name" ]]; then 
+			for hex in $hexfiles; do
+				if [[ $hex == $B_FILE.hex ]]; then 
+					FDONE=1
+					db_gecho "Simulation of $hex"
+					f_make $hex "$B_LOG_DIR/bench_sim_$(delExt $hex).txt" 1 $LINENO
+				fi
+			done
+			if [[ $FDONE -eq 0 ]]; then
+				recho_exit "Error: $B_FILE.hex file not found in $BENCH_HEX_DIR "		
+			fi
+		fi
+		if [[ $B_TYPE == "all" ]]; then
+			for hex in $hexfiles; do
+				FDONE=1
+				db_gecho "Simulation of $hex"
+				f_make $hex "$B_LOG_DIR/bench_sim_$(delExt $hex).txt" 1 $LINENO
+			done
+			if [[ $FDONE -eq 0 ]]; then
+				recho_exit "Error: *.hex file not found in $BENCH_HEX_DIR "		
+			fi
+		fi
+		if [[ $B_TYPE == "number" ]]; then
+		 	# saturation of file number
+			if [[ $B_NUM > ${#hexfiles[@]} ]]; then 
+				B_NUM=${#hexfiles[@]}; 
+			fi
+			# cycle on files
+			for ((i=0; i<$B_NUM; i++)); do
+				FDONE=1
+				hex=${hexfiles[i]}
+				db_gecho "Simulation of $hex"
+				f_make $hex "$B_LOG_DIR/bench_sim_$(delExt $hex).txt" 1 $LINENO
+			done
+			if [[ $FDONE -eq 0 ]]; then
+				recho_exit "Error: *.hex file not found in $BENCH_HEX_DIR "		
+			fi
+		fi
+
 	fi
 }
 
@@ -907,6 +908,11 @@ function elaborate_simulation_output () {
 ###########################################################################################
 
 ## General variable
+CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
+COMMONMK="$CORE_V_VERIF/cv32/sim/core/sim_FT/Common.mk"
+
+isnumber='^[0-9]+$'
+
 CUR_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 SIM_FT="$CUR_DIR/sim_FT"
 
@@ -1133,50 +1139,13 @@ for p1 in $par; do
 	esac
 done
 
-
-for par in $elabpar;do
-	case $par in 
-		-ci|--clear-id)
-			# AR_ci_id
-			clear_id_from_regular_expression $AR_ci_id
-			;;
-		-a|-arch)
-			# AR_a_args
-			set_sim_arch $AR_a_args
-			;;
-		-u|--unique-program)
-			# AR_u_args
-			sim_unique_program $AR_u_args
-			;;
-		-b|--benchmark)
-			# AR_b_args
-			sim_benchmark_programs $AR_b_args
-		-qsfiupi)
-			# AR_qsfiupi_args
-			manage_stage_fault_injection_upi $AR_qsfiupi_args
-			;;
-		-sfiupi|--stage_fault_injection_upi)
-			# AR_sfiupi_args
-			sim_stage_fault_injection_upi $AR_sfiupi_args
-			;;
-		-esfiupi)
-			# AR_esfiupi_args
-			elaborate_simulation_output $AR_esfiupi_args
-			;;
-		*)
-			db_recho "ERROR: something goes wrong in the script!! in the for of elaboration"
-			exit
-			;;
-	esac
-done
-
-
-
+#####################################################################################################
+# CONTROLS 
+####################################################################################################
 
 
 export CV32E40P_CUR_BRANCH=$(get_git_branch $CORE_V_VERIF/core-v-cores/cv32e40p)
 
-# CONTROLS !!
 if [[ $BENCHMARK -eq 0 && $UNIQUE -eq 0 ]]; then
 	if [[ $ARCH -eq 1 ]]; then
 		exit 1 # exit since arch is setted and all is already done
@@ -1227,108 +1196,48 @@ if [[ $VSIM_FILE == " " ]]; then
 		core-v-verif/cv32/sim/questa directory!! "
 	fi
 fi	 
-
-# EXECUTION
-if [[ $UNIQUE -eq 1 ]]; then
-	if [[ $UNIQUE_CHEX_DIR == " " ]]; then	
-		recho_exit "Error: you should set dir/build_all program \
-		used to compile all benchmark and the directory of *.hex files with:\n \
-		-b d dir/to/build_all.py dir/to/hexfile \n \ 
-		Both path will be appended to CORE_V_VERIF=$CORE_V_VERIF path \n \
-		to find real path\n"
-	fi
-	if [[ $U_LOG_DIR == " " ]]; then
-		recho_exit "Error: Set log directory with -u l /path/to/log/dir"
-	fi
-	if [[ $COMPILATION -eq 1 ]]; then
-		db_gecho "Executing Makefile_Compile.mk in $UNIQUE_CHEX_DIR"
-		#make -C $SIM_FT compile TEST_FILE="$FULL_FILE_CPATH"
-		mon_run "make -C $UNIQUE_CHEX_DIR -f $SIM_FT/Makefile_Compile.mk" \
-				$U_LOG_DIR/${CHEX_FILE}_comp.txt 1 $LINENO
-		db_gecho "File in unique directory:"
-		db_gecho "$(ls $UNIQUE_CHEX_DIR)"
-	fi
-	if [[ $SIMULATION -eq 1 ]]; then
-		#rm -rf $CORE_V_VERIF/cv32/sim/core/sim_FT/work	
-		source /software/europractice-release-2019/scripts/init_questa10.7c	
-		# full simulation path without extension 
-		mon_run "make -C $SIM_FT questa-sim$GUI TEST_FILE=$UNIQUE_CHEX_DIR/$CHEX_FILE FT=$VSIM_EXT" $U_LOG_DIR/${CHEX_FILE}_sim.txt 1 $LINENO
-		cat log/${CHEX_FILE}_sim.txt | grep '^#.*$' | grep -ve 'Warning\|Process\|Instance\|Loading\|(C)'
-		#make -C $SIM_FT questa-sim$GUI TEST_FILE="$UNIQUE_CHEX_DIR/$CHEX_FILE" FT="$VSIM_EXT" 
-	fi
-fi
+i
 
 
-#benchmarking 
-if [[ $BENCHMARK -eq 1 ]]; then
-	# Controls
-	if [[ $B_LOG_DIR == " " ]]; then
-		recho_exit "Error: Set log directory with -b l /path/to/log/dir"
-	        exit 1
-	fi
-	if [[ $BENCH_BUILD_FILE == " " || $BENCH_HEX_DIR == " " ]]; then
-		recho_exit "Error: you should set dir/build_all program \n
-		used to compile all benchmark and the directory of *.hex files with:\n
-		-b d dir/to/build_all.py dir/to/hexfile\n
-		Both path will be appended to CORE_V_VERIF=$CORE_V_VERIF path\n
-		to find real path\n"
-	fi
-	# compilation of mibench files
-	if [[ $COMPILATION -eq 1 ]]; then
-		cd $BENCHMARK_DIR 
-		mkdir -p log 
-		mon_run $BENCH_BUILD_FILE "$B_LOG_DIR/bench_compilation.txt" 1 $LINENO
-	fi
-		
-	if [[ $SIMULATION -eq 1 ]]; then
-		# simulation of all file in out directory of mibench
-		source /software/europractice-release-2019/scripts/init_questa10.7c
-	
-		hexfiles=$(cd $BENCH_HEX_DIR; ls *.hex)
-		db_gecho "This are the *.hex file in $BENCH_HEX_DIR:"
-		db_lgecho "${hexfiles[@]}"
-		FDONE=0
-			
-		if [[ $B_TYPE == "name" ]]; then 
-			for hex in $hexfiles; do
-				if [[ $hex == $B_FILE.hex ]]; then 
-					FDONE=1
-					db_gecho "Simulation of $hex"
-					f_make $hex "$B_LOG_DIR/bench_sim_$(delExt $hex).txt" 1 $LINENO
-				fi
-			done
-			if [[ $FDONE -eq 0 ]]; then
-				recho_exit "Error: $B_FILE.hex file not found in $BENCH_HEX_DIR "		
-			fi
-		fi
-		if [[ $B_TYPE == "all" ]]; then
-			for hex in $hexfiles; do
-				FDONE=1
-				db_gecho "Simulation of $hex"
-				f_make $hex "$B_LOG_DIR/bench_sim_$(delExt $hex).txt" 1 $LINENO
-			done
-			if [[ $FDONE -eq 0 ]]; then
-				recho_exit "Error: *.hex file not found in $BENCH_HEX_DIR "		
-			fi
-		fi
-		if [[ $B_TYPE == "number" ]]; then
-		 	# saturation of file number
-			if [[ $B_NUM > ${#hexfiles[@]} ]]; then 
-				B_NUM=${#hexfiles[@]}; 
-			fi
-			# cycle on files
-			for ((i=0; i<$B_NUM; i++)); do
-				FDONE=1
-				hex=${hexfiles[i]}
-				db_gecho "Simulation of $hex"
-				f_make $hex "$B_LOG_DIR/bench_sim_$(delExt $hex).txt" 1 $LINENO
-			done
-			if [[ $FDONE -eq 0 ]]; then
-				recho_exit "Error: *.hex file not found in $BENCH_HEX_DIR "		
-			fi
-		fi
+#####################################################################################################
+# EXECUTION of simulation 
+####################################################################################################
 
-	fi
-fi
+for par in $elabpar;do
+	case $par in 
+		-ci|--clear-id)
+			# AR_ci_id
+			clear_id_from_regular_expression $AR_ci_id
+			;;
+		-a|-arch)
+			# AR_a_args
+			set_sim_arch $AR_a_args
+			;;
+		-u|--unique-program)
+			# AR_u_args
+			sim_unique_program $AR_u_args
+			;;
+		-b|--benchmark)
+			# AR_b_args
+			sim_benchmark_programs $AR_b_args
+		-qsfiupi)
+			# AR_qsfiupi_args
+			manage_stage_fault_injection_upi $AR_qsfiupi_args
+			;;
+		-sfiupi|--stage_fault_injection_upi)
+			# AR_sfiupi_args
+			sim_stage_fault_injection_upi $AR_sfiupi_args
+			;;
+		-esfiupi)
+			# AR_esfiupi_args
+			elaborate_simulation_output $AR_esfiupi_args
+			;;
+		*)
+			db_recho "ERROR: something goes wrong in the script!! in the for of elaboration"
+			exit
+			;;
+	esac
+done
+
 
 
