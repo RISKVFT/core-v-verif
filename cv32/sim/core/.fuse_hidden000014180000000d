@@ -18,25 +18,20 @@ echo "Argument taken: $par"
 newpar=""
 while [[ $1 != '' ]]; do
 	echo "while1 $1"
-	echo "###### $@ #########à"
 	case $1 in
 		-c)
 			cc=2
 			shift
 			;;
-		-g|--gui-g)	
+		-g)	
 			gui=1
 			shift
 			;;
-		-b|--boc-cs)
+		-b)
 			shift
 			func $@
 			BPAR=$PAR
 			shift $ARG
-			;;
-		*)
-			echo "error"
-			exit
 			;;
 	esac
 done

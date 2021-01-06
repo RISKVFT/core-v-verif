@@ -1,0 +1,37 @@
+#!/bin/bash
+
+
+par=$(echo "$@" | awk 'BEGIN{RS=" "};{if ($0 ~ /^-[a-zA-Z\-]*$/) print $0; if ($0 ~ /^-[a-zA-Z\-]*\n/) print $0}')
+echo "Argument taken: $par"
+par="$par ---"
+
+newpar=""
+for p1 in $par; do
+	echo $1 -- $p1
+	case $p1 in
+		-c)
+			cc=2
+			shift
+			;;
+		-g)	
+			gui=1
+			shift
+			;;
+		-b)
+			shift
+			bpar=""
+			while [[ $1 != '---' ]] && ! [[ $1 =~ ^-[a-zA-Z\-]*$ ]] ; do
+				echo $1
+				bpar="$bpar $1"
+				shift	
+			done
+			;;
+		*)
+			newpar="$newpar $p1"
+			echo "nonce"
+			;;
+	esac
+done
+echo "newpar $newpar"
+echo "bpar $bpar"
+

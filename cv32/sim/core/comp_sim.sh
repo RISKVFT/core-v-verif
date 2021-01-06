@@ -242,14 +242,44 @@ sendMailToAll_ifyes () {
 	fi
 }
 
+function clear_id_from_regular_expression () { 
+	# clear id that match a specific regular expression
+	# $1 regular expression
+	local id=$1
+	local new_SIM_IDS=""	
+	# Backup simulations
+	mkdir -p $ERROR_DIR_BACKUP
+	cp $ERROR_DIR/* $ERROR_DIR_BACKUP
+
+	# Delete simulation selected
+	for id in $SIM_IDS; do
+		echo $id
+		if [[ $id =~ $id ]]; then
+			ask_yesno "QUESTION: Do you really want to delete $id simulation(y/n)?"
+			if [[ $ANS -eq 1 ]]; then
+				rm $ERROR_DIR/*$id*
+			else
+				echo "INFO: This simulation don't will be deleted."
+				new_SIM_IDS="$SIM_IDS $id"
+			fi
+		else
+			new_SIM_IDS="$SIM_IDS $id"
+		fi	
+	done
+	
+	SetVar "SIM_IDS" "$new_SIM_IDS"
+	exit
+}
+
+
 #########################################################################################################################
 #  ELABORATION FUNCTION #################################################################################################
 #########################################################################################################################
 
 function elaborate_simulation_output () {
 	# elaborate sfiupi output
-	# $1 is the id of simulation ex: id_stage-fibonacci-10-1  -> is_stage simulato col software fibonacci in 10 cicli
-	# 		con fault injection
+	# $1 is the id of simulation ex: id_stage-fibonacci-10-1  -> is_stage simulato 
+	# col software fibonacci in 10 cicli con fault injection
 	############ CONTROLS  #################################
 	local id=$1
 	if [[ $(idExists $id) == "0" ]]; then
@@ -377,6 +407,7 @@ if [[ $par =~ "-send" ]]; then
 	SEND=1
 fi
 
+elabpar=""
 for p1 in $par; do
 	case $p1 in
 		-h|--help)
@@ -399,34 +430,12 @@ for p1 in $par; do
 			fi
 			;;
 		-ci|--clear-id)
+			elabpar="$elabpar $1"
 			shift
 			# Clear data associated  to a simulation
 			# you could use regular expression
-			rexpr="$1"
+			AR_id="$1"
 			shift
-			new_SIM_IDS=""	
-			# Backup simulations
-			mkdir -p $ERROR_DIR_BACKUP
-			cp $ERROR_DIR/* $ERROR_DIR_BACKUP
-
-			# Delete simulation selected
-			for id in $SIM_IDS; do
-				echo $id
-				if [[ $id =~ $rexpr ]]; then
-					ask_yesno "QUESTION: Do you really want to delete $id simulation(y/n)?"
-					if [[ $ANS -eq 1 ]]; then
-						rm $ERROR_DIR/*$id*
-					else
-						echo "INFO: This simulation don't will be deleted."
-						new_SIM_IDS="$SIM_IDS $id"
-					fi
-				else
-					new_SIM_IDS="$SIM_IDS $id"
-				fi	
-			done
-			
-			SetVar "SIM_IDS" "$new_SIM_IDS"
-			exit
 			;;
 		-rsb|--restore-simulation-backup)
 			shift
@@ -1031,6 +1040,19 @@ for p1 in $par; do
 			;;
 	esac
 done
+
+
+for par in $elabpar;do
+	case $par in 
+		-ci|--clear-id)
+			# AR_id
+			clear_id_from_regular_expression $AR_id
+			;;
+done
+
+
+
+
 
 export CV32E40P_CUR_BRANCH=$(get_git_branch $CORE_V_VERIF/core-v-cores/cv32e40p)
 
