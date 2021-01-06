@@ -276,7 +276,8 @@ CLEAROUT=0
 
 # Error variale
 ERROR_DIR="$CORE_V_VERIF/cv32/sim/core/sim_FT/sim_out"
-SIM_IDS="if_stage-fibonacci-16-1 id_stage-fibonacci-100-1 id_stage-fibonacci-20-1 if_stage-fibonacci-20-1 if_stage-fibonacci-10-1 id_stage-fibonacci-30-1 id_stage-fibonacci-10-1 id_stage-fibonacci-16600-1"
+ERROR_DIR_BACKUP="$CORE_V_VERIF/cv32/sim/core/sim_FT/.sim_out_backup"
+SIM_IDS="id_stage-fibonacci-16600-1"
 compare_error_file_prefix="cnt_error_"
 info_file_prefix="info_"
 cycle_file_prefix="cycle_"
@@ -306,6 +307,41 @@ for p1 in $par; do
 		-q|--quiet)
 			VERBOSE=0
 			shift
+			;;
+		-ci|--clear-id)
+			shift
+			# Clear data associated  to a simulation
+			# you could use regular expression
+			rexpr="$1"
+			shift
+			new_SIM_IDS=""	
+			# Backup simulations
+			mkdir -p $ERROR_DIR_BACKUP
+			cp $ERROR_DIR/* $ERROR_DIR_BACKUP
+
+			# Delete simulation selected
+			for id in $SIM_IDS; do
+				echo $id
+				if [[ $id =~ $rexpr ]]; then
+					ask_yesno "QUESTION: Do you really want to delete $id simulation(y/n)?"
+					if [[ $ANS -eq 1 ]]; then
+						rm $ERROR_DIR/*$id*
+					else
+						echo "INFO: This simulation don't will be deleted."
+						new_SIM_IDS="$SIM_IDS $id"
+					fi
+				else
+					new_SIM_IDS="$SIM_IDS $id"
+				fi	
+			done
+			
+			SetVar "SIM_IDS" "$new_SIM_IDS"
+			exit
+			;;
+		-rsb|--restore-simulation-backup)
+			shift
+			# Restore previous backup of simulations 
+			cp $ERROR_DIR_BACKUP/* $ERROR_DIR
 			;;
 		-a|-arch)
 			ARCH=1
@@ -742,16 +778,34 @@ for p1 in $par; do
 						if [[ $CYCLE == "cov" ]]; then
 							CALC_CYCLE_ON=1
 						fi
+						if ! [[ $CYCLE =~ $isnumber ]]; then
+							db_recho "ERROR: -sfiupi c number_of_cycle : \n		number of cycle should be an integer number. \n		value $CYCLE is wrong!"
+							exit
+						fi
 						db_becho "CYCLE = $1"
 						shift
 					;;
 					f) #fi
 						export FI=$1
+						if [[ $FI -ne 0 && $FI -ne 1 ]]; then
+							db_recho "ERROR: -sfiupi f fault_injection_yes_no : \n		fault_injection_yes_no should bo 0 or 1.\n		value $FI is wrong!"
+						fi
 						db_becho "FI = $1"
 						shift
 					;; 
 					s)
 						SW=$1
+						hexfiles=$(cd $BENCH_HEX_DIR; ls *.hex)
+						flag=0
+						for file in $hexfile; do
+							if [[ "$SW.hex" == $file ]]; then
+								flag=1
+								break
+							fi
+						done
+						if [[ $flag -eq 0 ]]; then
+							db_recho "ERROR: -sfiupi s software:\n		software should be an hex file located in: $BENCH_HEX_DIR directory\n		This directory can be setted with \'-b d ~/dir/to/buld/all/file/build_all.py ~/dir/to/hex/file\' command.\n		$SW hex file there isn't in $BENCH_HEX_DIR!!"
+						fi
 						SWC="$(echo $1 | tr '-' '_')"
 						shift	
 					;;
@@ -904,9 +958,6 @@ for p1 in $par; do
 			fi
 			exit
 			;;
-		-bf|--bench-fi)
-			
-			;;
 		-asi|--available-sim-info)
 			db_gecho "These are the simulation ids currently available:"
 			for i in $SIM_IDS; do
@@ -918,11 +969,6 @@ for p1 in $par; do
 			shift
 			export SILENT_COMP="&>/dev/null"
 			export SILENT_SIM="&>/dev/null"
-			;;
-		-clear-log-file)
-			SIM_IDS=""
-			rm  $ERROR_DIR/*
-			shift
 			;;
 		-co|--clear-output)
 			CLEAROUT=1
