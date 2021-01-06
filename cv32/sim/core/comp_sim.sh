@@ -4,10 +4,11 @@ source ccommon.sh
 
 # trap ctrl-c and call ctrl_c()
 trap ctrl_c INT
+trap exit_f EXIT
 
-#########################################################
-## Variable used to configure the closure of the program
-#########################################################
+#######################################################################
+## Variable used to configure the closure of the program with ctrl-c
+######################################################################
 # If setted, when the program is blocked using a ctrl-c the progression bar
 # is closed, 
 int_close_bar=0
@@ -20,12 +21,6 @@ function ctrl_c() {
 	if [[ $int_close_bar -eq 1 ]]; then
 		destroy_scroll_area
 	fi
-#	if [[ $int_remove_work -eq 1 ]]; then
-#		ask_yesno "Probably your work directory is broken, remove it?(y/n)"
-#		if [[ $ANS -eq 1 ]]; then
-#			rm -r ./sim_FT/work
-#		fi
-#	fi
 	rm -f log.log
 	rm -f time_*
 	if [[ $PPID_MAIL -ne 0 ]]; then
@@ -37,6 +32,18 @@ function ctrl_c() {
 
 }
 
+
+#######################################################################
+## configure the closure of the program each time that finished
+######################################################################
+
+#function exit_f () {
+#	
+#}	
+
+#######################################################################
+## HELP
+######################################################################
 
 UsageExit () {
 	echo '
@@ -135,18 +142,23 @@ Program Usage:
 	exit 1
 }
 
+
 CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
 COMMONMK="$CORE_V_VERIF/cv32/sim/core/sim_FT/Common.mk"
 
 isnumber='^[0-9]+$'
 
+#########################################################################################################################
+#  SUPPORT FUNCTION #####################################################################################################
+#########################################################################################################################
+
+ 
 vecho() { if [[ $VERBOSE ]]; then echo -e "${red}${1}${reset}";fi }
 db_recho() { if [[ $VERBOSE ]]; then echo -e "${red}${bold}${1}${reset}"; fi }
 db_becho() { if [[ $VERBOSE ]]; then echo -e "${blue}${bold}${1}${reset}"; fi }
 db_gecho() { if [[ $VERBOSE ]]; then echo -e "${green}${bold}${1}${reset}"; fi }
 db_lgecho() { if [[ $VERBOSE ]]; then lgecho "$1"; fi }
 
-# FUNCTIONS #########################
 refGitIsSet () { if [[ $A_REF_REPO == " " && $A_REF_BRANCH == " " ]]; then echo 0; else echo 1; fi ; }
 ftGitIsSet () { if [[ $A_FT_REPO == " " && $A_FT_BRANCH == " " ]]; then echo 0; else echo 1; fi ;}
 setRepoBranch () {
@@ -170,7 +182,9 @@ setRepoBranch () {
 		repMakeFile "CV32E40P_BRANCH" $COMMONMK "$A_FT_BRANCH"
 	fi
 }
+
 idExists () {
+	# Loop in SIM_IDS and check if there is the corresponding id of simulation
 	ID=$1
 	thereisid=0
 	for iid in $SIM_IDS; do
@@ -185,12 +199,21 @@ idExists () {
 	echo "1"
 
 }
+
+# This function give the timestamp of a file in microseconds
 fileTimestamp () {
-	echo $(($(($(stat -c %y $1 | cut -d ":" -f 2 | bc -l )*60))+$(stat -c %y $1 | \
-	                                cut -d ":" -f 3 | cut -d " " -f 1 | cut -d "." -f 1 | bc -l)))
+	min_inmsec=$(echo "$(stat -c %y $1 | cut -d ":" -f 2 | bc -l )*60*1000" | bc -l)
+	sec_inmsec=$(echo "$(stat -c %y $1 | cut -d ":" -f 3 | cut -d " " -f 1 | cut -d "." -f 1 | bc -l)*1000" \
+				| bc -l)
+	msec_inusec=$(echo "scale=0; $(stat -c %y $1 | cut -d ":" -f 3 | cut -d " " -f 1 | cut -d "." -f 2 | bc -l)/1000" \
+				| bc -l)
+	timestamp_inmsec=$(echo "$min_inmsec*1000+$sec_inmsec*1000+$msec_inusec" | bc -l)
+	echo $timestamp_inmsec
 }
+
+
 executeInTerminal () {
-	mate-terminal --window --working-directory="$CUR_DIR" --command="$1; exec $SHELL"
+	mate-terminal --window --working-directory="$CUR_DIR" --command="$1; exec $SHELL" --disable-factory &
 	ask_yesno "VCD creation is finished (close window before answer yes) (y/n)?"
 	while [[ $ANS -eq 0 ]] ; do
 		ask_yesno "VCD creation is finished (close window before answer yes) (y/n)?"
@@ -219,8 +242,68 @@ sendMailToAll_ifyes () {
 	fi
 }
 
-#####################################
+#########################################################################################################################
+#  ELABORATION FUNCTION #################################################################################################
+#########################################################################################################################
 
+function elaborate_simulation_output () {
+	# elaborate sfiupi output
+	# $1 is the id of simulation ex: id_stage-fibonacci-10-1  -> is_stage simulato col software fibonacci in 10 cicli
+	# 		con fault injection
+	############ CONTROLS  #################################
+	local id=$1
+	if [[ $(idExists $id) == "0" ]]; then
+		db_recho "Error: ID not found, these are the available IDS: $SIM_IDS"
+		exit
+	fi
+
+	############ TAKE DATA #################################
+	local stg=$(echo $id | cut -d "-" -f 1)
+	local swc=$(echo $id | cut -d "-" -f 2)
+	local tot_cycle=$(echo $id | cut -d "-" -f 3)
+	local fi=$(echo $id | cut -d "-" -f 4)
+	local err_file="$ERROR_DIR/$compare_error_file_prefix$id.txt"
+	local info_file="$ERROR_DIR/$info_file_prefix$id.txt"
+	### Take data from files 
+	local error=$(cat "$err_file")
+	local sim_total_time=$(cat "$info_file" | grep Total_sim_time | cut -d ":" -f 2)
+	local n_of_signal=$(cat "$info_file" | grep Number_of_signal | cut -d ":" -f 2)
+
+
+	############ ELABORATE DATA ##############################
+	
+	local time_for_cycle=$(echo "scale=3; $sim_total_time/$tot_cycle" | bc -l)
+	local sim_show_time=$(show_time $sim_total_time)
+
+	# CLEAROUT variable said when to print an putput clean from color, used for send mail
+	if [[ $CLEAROUT -eq 1 ]]; then
+		echo "Total simulation time ${sim_show_time}"
+		echo "Time for cycle ${time_for_cycle}s"
+		if [[ $fi> 0 ]]; then 
+			local fault_tolerance=$(echo "100*(1-$error/$tot_cycle)" | bc -l )
+			echo "Total errors in $tot_cycle simulations are $error"
+			echo "Total number of signals that could be used for fault injection : $n_of_signal"
+			echo "Fault tolerance ${fault_tolerance:0:6}%"
+		fi
+	else
+		db_gecho "##############################################################################"
+		db_gecho "##############################################################################"
+		db_gecho "Total simulation time ${sim_show_time}"
+		db_gecho "Time for cycle ${time_for_cycle}s"
+		if [[ $fi> 0 ]]; then 
+			local fault_tolerance=$(echo "100*(1-$error/$tot_cycle)" | bc -l )
+			db_gecho "Total errors in $tot_cycle simulations are $error"
+			db_gecho "Total number of signals that could be used for fault injection : $n_of_signal"
+			db_gecho "Fault tolerance ${fault_tolerance:0:6}%"
+		fi
+		db_gecho "##############################################################################"
+		db_gecho "##############################################################################"
+	fi
+}
+
+#########################################################################################################################
+#  ARGUMENT HANDLER AND ELABORATION #####################################################################################
+#########################################################################################################################
 
 ## General variable
 CUR_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
@@ -285,6 +368,7 @@ signals_fi_file_prefix="signals_fault_injection_"
 export SIM_CYCLE_NUMBER_FILE="$ERROR_DIR/cycles_number_coverage.txt"
 
 SEND=0
+PIPENAME=""
 
 # vector of parameter -[a-zA-Z]
 par=$(echo "$@" | awk 'BEGIN{RS=" "};{if ($0 ~ /^-[a-zA-Z\-]*$/) print $0; if ($0 ~ /^-[a-zA-Z\-]*\n/) print $0}')
@@ -307,6 +391,12 @@ for p1 in $par; do
 		-q|--quiet)
 			VERBOSE=0
 			shift
+			;;
+		-p|--pipe)
+			PIPENAME=$1
+			if [[ ! -p $PIPENAME ]]; then
+				recho_exit "ERROR: Pipe name given is wrong!! pipname=$1"
+			fi
 			;;
 		-ci|--clear-id)
 			shift
@@ -910,52 +1000,8 @@ for p1 in $par; do
 			;; 
 		-esfiupi)
 			shift
-			# elaborate sfiupi output
-			if [[ $(idExists $1) == "0" ]]; then
-				db_recho "Error: ID not found, these are the available IDS: $SIM_IDS"
-				exit
-			fi
-			ID=$1
-			STG=$(echo $ID | cut -d "-" -f 1)
-			SWC=$(echo $ID | cut -d "-" -f 2)
-			CYCLE=$(echo $ID | cut -d "-" -f 3)
-			FI=$(echo $ID | cut -d "-" -f 4)
-			ERR_FILE="$ERROR_DIR/$compare_error_file_prefix$ID.txt"
-			INFO_FILE="$ERROR_DIR/$info_file_prefix$ID.txt"
-			### Take data from files 
-			error=$(cat "$ERR_FILE")
-			sim_total_time=$(cat "$INFO_FILE" | grep Total_sim_time | cut -d ":" -f 2)
-			n_of_signal=$(cat "$INFO_FILE" | grep Number_of_signal | cut -d ":" -f 2)
-
-
-			############ ELABORATE DATA ##############################
-			
-			time_for_cycle=$(echo "scale=3; $sim_total_time/$CYCLE" | bc -l)
-			sim_show_time=$(show_time $sim_total_time)
-
-			if [[ $CLEAROUT -eq 1 ]]; then
-				echo "Total simulation time ${sim_show_time}"
-				echo "Time for cycle ${time_for_cycle}s"
-				if [[ $FI > 0 ]]; then 
-					fault_tolerance=$(echo "100*(1-$error/$CYCLE)" | bc -l )
-					echo "Total errors in $CYCLE simulations are $error"
-					echo "Total number of signals that could be used for fault injection : $n_of_signal"
-					echo "Fault tolerance ${fault_tolerance:0:6}%"
-				fi
-			else
-				db_gecho "##############################################################################"
-				db_gecho "##############################################################################"
-				db_gecho "Total simulation time ${sim_show_time}"
-				db_gecho "Time for cycle ${time_for_cycle}s"
-				if [[ $FI > 0 ]]; then 
-					fault_tolerance=$(echo "100*(1-$error/$CYCLE)" | bc -l )
-					db_gecho "Total errors in $CYCLE simulations are $error"
-					db_gecho "Total number of signals that could be used for fault injection : $n_of_signal"
-					db_gecho "Fault tolerance ${fault_tolerance:0:6}%"
-				fi
-				db_gecho "##############################################################################"
-				db_gecho "##############################################################################"
-			fi
+			elaborate_simulation_output $1
+			shift
 			exit
 			;;
 		-asi|--available-sim-info)
