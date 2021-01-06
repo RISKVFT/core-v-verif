@@ -37,9 +37,14 @@ function ctrl_c() {
 ## configure the closure of the program each time that finished
 ######################################################################
 
-#function exit_f () {
-#	
-#}	
+function exit_f () {
+	# communicate using pipe that the program is terminated
+	if [[ $PIPENAME != "" ]]; then
+		echo "exit" > $PIPENAME
+	fi	
+	rm -f log.log
+	rm -f time_*
+}	
 
 #######################################################################
 ## HELP
@@ -106,10 +111,10 @@ idExists () {
 # This function give the timestamp of a file in microseconds
 fileTimestamp () {
 	min_inmsec=$(echo "$(stat -c %y $1 | cut -d ":" -f 2 | bc -l )*60*1000" | bc -l)
-	sec_inmsec=$(echo "$(stat -c %y $1 | cut -d ":" -f 3 | cut -d " " -f 1 | cut -d "." -f 1 | bc -l)*1000" \
-				| bc -l)
-	msec_inusec=$(echo "scale=0; $(stat -c %y $1 | cut -d ":" -f 3 | cut -d " " -f 1 | cut -d "." -f 2 | bc -l)/1000" \
-				| bc -l)
+	sec_inmsec=$(echo "$(stat -c %y $1 | cut -d ":" -f 3 | cut -d " " -f 1 | \
+		cut -d "." -f 1 | bc -l)*1000" | bc -l)
+	msec_inusec=$(echo "scale=0; $(stat -c %y $1 | cut -d ":" -f 3 | cut -d " " -f 1 | \
+		cut -d "." -f 2 | bc -l)/1000" | bc -l)
 	timestamp_inmsec=$(echo "$min_inmsec*1000+$sec_inmsec*1000+$msec_inusec" | bc -l)
 	echo $timestamp_inmsec
 }
@@ -145,31 +150,103 @@ kill_terminal () {
 		fi
 	done
 }
-findEndsim () {
-	sw=$1
-	stg=$2
-	real_stg=$3
-	swc=$(echo $sw | tr '-' '_')
-	if [[ ! -f ./sim_FT/dataset/gold_${real_stg}_${swc}_in.vcd ]]; then
-		executeInTerminal "./comp_sim.sh -b sbv $sw $stg save_data_in "
-		executeInTerminal "./comp_sim.sh -b sbv $sw $stg save_data_out -g "
-	fi
-	db_becho "./sim_FT/dataset/gold_${real_stg}_${swc}_in.vcd"
-	endsim="$(( $(tail -n 2 ./sim_FT/dataset/gold_${real_stg}_${swc}_in.vcd | head -n 1 | tr -d "#") - 1 ))"
-
-	db_becho "endsim: $endsim"
+function delete_pipe ()  {
+	local pipename=$1
+	rm -f $pipename
 }
+function check_pipe () {
+	local pipename=$1
+	if [[ -p $pipename ]]; then
+		db_recho "ERROR: The pipe $pipename don't exist!!"
+		exit	
+	fi
+}
+
+function read_pipe () {
+	local pipename=$1
+	check_pipe $pipename
+	while true; do
+		if read line < $pipename; then
+			break
+		fi
+	done
+	echo $line
+}
+
+function write_PIPENAME () {
+	local pipename=$PIPENAME
+	local towrite=$1
+	if [[ $pipename != "" ]]; then
+		echo $towrite > $PIPENAME
+	fi
+}
+
+function pulling_pipe () {
+	local pipename=$1
+	local nametopull=$2
+	sleep 1
+	check_pipe $pipename
+	while true ; do
+		if read line < $pipename ; then
+			if [[ $line == $nametopull ]]; then
+				break
+			fi
+		fi	
+	done
+}
+
+function kill_terminal_when_it_finished () {
+	local pipename=$1
+	local wname=$2
+	pulling_pipe $pipename "exit"
+	kill_terminal $wname
+}
+
 
 verify_upi_vcdwlf () {
 	local sw=$1 # name of the software 
 	local stg=$2 # name of the stage without cv32e40p if core
 	local real_stg=$3 
+
 	swc=$(echo $sw | tr '-' '_')
 	if [[ ! -f ./sim_FT/dataset/gold_${real_stg}_${swc}_in.vcd ]]; then
-		execute_in_termina./comp_sim.sh -b sbv $sw $stg save_data_in "
-		executeInTerminal "./comp_sim.sh -b sbv $sw $stg save_data_out -g "
+		execute_in_terminal "./comp_sim.sh -b sbv $sw $stg save_data_in -p /tmp/save_in" "save_in"
+		kill_terminal_when_it_finished "/tmp/save_in" "save_in"
+		delete_pipe "/tmp/save_in"
+		execute_in_terminal "./comp_sim.sh -b sbv $sw $stg save_data_out -g -p /tmp/save_out" "save_out"
+		kill_terminal_when_it_finished "/tmp/save_out" "save_out"
+		delete_pipe "/tmp/save_out"
 	fi
 	
+}
+
+findEndsim () {
+	local sw=$1
+	local stg=$2
+	local real_stg=$3
+	
+	verify_upi_vcdwlf $sw $stg $stg_real
+	
+	db_becho "INFO: vcd input file = ./sim_FT/dataset/gold_${real_stg}_${swc}_in.vcd"
+
+	endsim="$(( $(tail -n 2 ./sim_FT/dataset/gold_${real_stg}_${swc}_in.vcd | head -n 1 | tr -d "#") - 1 ))"
+
+	db_becho "INFO: endsim = $endsim"
+}
+
+db_gecho_c () {
+	if [[ $CLEAROUT == 1 ]]; then
+		echo -e "$1"
+	else
+		db_becho $1	
+	fi	
+}	
+
+function check_id () {
+	if [[ $(idExists $1) == "0" ]]; then
+		db_recho "Error: ID not found, these are the available IDS: $SIM_IDS"
+		exit
+	fi
 }
 
 sendMailToAll_ifyes () {
@@ -670,38 +747,33 @@ function sim_benchmark_programs () {
 
 function manage_stage_fault_injection_upi () {
 	# Called by qsfiupi
-
-	# Save current last modify of log.log 
-	file_timestamp1=$(fileTimestamp log.log)
-	sleep 0.5
-	comando="./comp_sim.sh -sfiupi $@"
-	db_becho "PROCESS: Opening a new terminal to run simulations ... "
-	mate-terminal --window --working-directory="$CUR_DIR" --command="$comando" &	
-	PPID_SFIUPI=$PPID
-	#./comp_sim.sh  -sfiupi $@  &
-
-	# We wait until the file log.log is modified
-	file_timestamp2=$(fileTimestamp log.log)
-	while [[ $file_timestamp2 -eq $file_timestamp1 ]]; do
-		file_timestamp2=$(fileTimestamp log.log)
-		db_becho "INFO: Waiting a first write of log.log file ..."
-		sleep 2
-	done
-	while [[ $(cat log.log | wc -l) -lt 4 ]]; do
-		db_becho "INFO: Waiting that log.log file is completely written ..."
-		sleep 2
-	done
 	
-	# We save information from log.log in variables
-	db_becho "INFO: Reading log-log file ..."
-	CYCLE=$(cat log.log | grep "cycle:" | cut -d ":" -f 2)
-	CYCLE_FILE=$(cat log.log | grep "cycle_file" | cut -d ":" -f 2)
-	START_TIME=$(cat log.log | grep "start_time" | cut -d ":" -f 2)
-	ID=$(cat log.log | grep "ID" | cut -d ":" -f 2)
+	local pipe_info=/tmp/pipe_info
+	local comando="./comp_sim.sh -sfiupi $@ -p $pipe_info"
+	local tname="sfiupi"
+	local file_info_mail="/tmp/time_$ID.txt"
 
-	db_becho "INFO: CYCLE_FILE = $CYCLE_FILE"
-	db_becho "INFO: CYCLE = $CYCLE"
+	db_becho "PROCESS: Opening a new terminal to run simulations ... "
+	# Run 
+	execute_in_terminal $comando $tname
+
+	
+	# We save information from pipe in variables
+	db_becho "INFO: Reading pipe..."
+	
+	ID=$(read_pipe $pipe_info| cut -d ":" -f 2)
 	db_becho "INFO: ID = $ID"
+	
+	CYCLE=$(read_pipe $pipe_info|cut -d ":" -f 2)
+	db_becho "INFO: CYCLE = $CYCLE"
+	
+	CYCLE_FILE=$(read_pipe $pipe_info| cut -d ":" -f 2)
+	db_becho "INFO: CYCLE_FILE = $CYCLE_FILE"
+	
+	START_TIME=$(read_pipe $pipe_info| cut -d ":" -f 2)
+
+	delete_pipe $pipe_info
+
 	
 	# We reset the cycle file, this file is written by tcl script
 	# and contain a number correcponding to the  number of
@@ -719,28 +791,32 @@ function manage_stage_fault_injection_upi () {
 	echo -e "Time-left:Unknown sec\nPercentage:0%\nMean cycle time sec:3 sec\ncycle:0" > "time_$ID.txt"
 	if [[ $SEND -eq 1 ]]; then
 		db_becho "PROCESS: Open a new terminal for mail sender ..."
-		touch time_$ID.txt
+		touch $file_info_mail
 		# time between two mail in order to have a coverage of 20%
 		# so about each 20% of simulation a mail is sent
 		if [[ $CYCLE -lt 20 ]]; then 
 			mail_cycle_time="0.5"
-			executeInTerminalEasy "./sendNewsOfSimulation.sh time_$ID.txt cycle: $CYCLE 0.5"
 		else
 			mail_cycle_time=$(echo "scale=3; $cycle_time_mean*$CYCLE/600000" | bc -l )
-			executeInTerminalEasy "./sendNewsOfSimulation.sh time_$ID.txt cycle: $CYCLE $mail_cycle_time"
 		fi
-		PPID_MAIL=$PPID
-		db_becho "INFO: The mail sender will send you a mail each $(show_time $(echo "$mail_cycle_time*60" | bc -l | cut -d "." -f 1))"
+		execute_in_terminal "./sendNewsOfSimulation.sh $file_info_mail cycle: $CYCLE $mail_cycle_time" "mail"
+		
+		db_becho "INFO: The mail sender will send you a mail each "
+		db_becho "		$(show_time $(echo "$mail_cycle_time*60" | bc -l | cut -d "." -f 1))"
 
 	fi
 
 	db_becho "INFO: Monitoring the simulation"
 	enable_trapping
 	setup_scroll_area
+
 	int_close_bar=1
 	var=$(echo "scale=3; 2000/1000" | bc -l)
+	
 	draw_progress_bar 0 $((2*$CYCLE)) "$var|$var"
+	
 	while [[ $current_cycle -le $CYCLE ]]; do
+	
 		current_cycle=$(head -n 1 "$CYCLE_FILE")
 		cycle_time=$(tail -n 1 "$CYCLE_FILE")
 
@@ -771,27 +847,39 @@ function manage_stage_fault_injection_upi () {
 						| bc -l | cut -d "." -f 1)
 				cycle_time_mean_sec=$(echo "scale=2; $cycle_time_mean/1000" | bc -l)
 				cycle_time_sec="$cycle_time_mean_sec|$(echo "scale=2; $cycle_time/1000" | bc -l)"
-				echo -e "Time-left: $(show_time $time_left)\nPercentage: $percentage%\nMean cycle time sec: $cycle_time_mean_sec sec\ncycle:$current_cycle" > "time_$ID.txt" 
+
+				# send info to mail process
+				echo -e "Time-left: $(show_time $time_left)" > "$file_info_mail"
+				echo -e "Percentage: $percentage%" >> "$file_info_mail"
+				echo -e "Mean cycle time sec: $cycle_time_mean_sec sec" >> "$file_info_mail"
+				echo -e "cycle:$current_cycle" >> "$file_info_mail" 
+				
+				#draw progress bar
 				draw_progress_bar $percentage $time_left $cycle_time_sec
 			fi
 			
 		fi
 			
+		# Termination condition
 		if [[ $current_cycle -eq $CYCLE ]]; then
 			break
 		fi
+
 		current_cycle_old=$current_cycle
 		cycle_time_old=$cycle_time
+		
 		sleep 1
 	done
+
+	# Clear cycle file
 	echo "0" > "$CYCLE_FILE"
+	
 	destroy_scroll_area
 	
 	sleep 0.5
-	./comp_sim.sh -esfiupi "$ID"
-	
-	kill $PPID_MAIL
-	kill $PPID_SFIUPI
+	elaborate_simulation_output "$ID"
+
+	kill_terminal "mail"
 	exit 
 }
 
@@ -904,7 +992,9 @@ function sim_stage_fault_injection_upi () {
 	# the number in this file in increased by one.
 	mkdir -p $ERROR_DIR
 	ID="$STG-$SW-$CYCLE-$FI"
-	echo "ID:$ID" > log.log 
+
+	write_PIPENAME "ID:$ID"
+
 	if [[ $(idExists $ID) == "0" ]]; then
 		SetVar "SIM_IDS" "$STG-$SWC-$CYCLE-$FI $SIM_IDS"
 	fi
@@ -920,10 +1010,12 @@ function sim_stage_fault_injection_upi () {
 		hexfile=$(ls $BENCH_HEX_DIR/*.hex)
 		for i in $hexfile;do
 			############ Save parameter in a log file for -qsfiupi ##########
-			echo "cycle:$CYCLE" >> log.log
-			echo "cycle_file:$CYCLE_FILE" >> log.log
+			write_PIPENAME "cycle:$CYCLE"
+			write_PIPENAME "cycle_file:$CYCLE_FILE"
+
 			timeone=$(date +%s)
-			echo "start_time:$timeone" >> log.log
+			write_PIPENAME "start_time:$timeone"
+
 			SW=$(echo $i | rev | cut -d "/" -f 1 | rev | cut -d "." -f 1)
 			SWC="$(echo $SW | tr '-' '_')"
 
@@ -940,10 +1032,11 @@ function sim_stage_fault_injection_upi () {
 		done	
 	else
 		############ Save parameter in a log file for -qsfiupi ##########
-		echo "cycle:$CYCLE" >> log.log
-		echo "cycle_file:$CYCLE_FILE" >> log.log
+		write_PIPENAME "cycle:$CYCLE"
+		write_PIPENAME "cycle_file:$CYCLE_FILE"
+
 		timeone=$(date +%s)
-		echo "start_time:$timeone" >> log.log
+		write_PIPENAME "start_time:$timeone"
 		
 		findEndsim $SW $STG $REAL_STG
 		export T_ENDSIM=$endsim
@@ -961,9 +1054,28 @@ function sim_stage_fault_injection_upi () {
 	exit
 }
 
-#############################################################################################
-#  ELABORATION FUNCTION #####################################################################
-#############################################################################################
+#######################################################################################
+#  ELABORATION FUNCTION #########################################################
+######################################################################################
+
+function signals_elaboration () {
+	local id=$1
+	local file_sig="$ERROR_DIR/signals_fault_injection_$id.txt"
+	local signals=$(grep All_signals $file_sig | cut -d ":" -f 2)
+	
+	MEAN_ERROR=""
+	for sig in $signals; do
+		local l_errors=$(grep $sig $file_sig | grep sig_fault | tr -s " " |\
+		       	cut -d " " -f 5 | cut -d ":" -f 2)
+		local err_n=$(echo $l_errors | wc -w )
+		local tot_errors=0
+		for err in $l_errors; do
+			let tot_errors=tot_errors+$err
+		done
+		local mean_error=$( echo "scale=2; $tot_errors/$err_n" | bc -l)
+		MEAN_ERROR="$MEAN_ERROR mean:$mean_error#$sig"
+	done
+}
 
 function elaborate_simulation_output () {
 	# elaborate sfiupi output
@@ -971,10 +1083,10 @@ function elaborate_simulation_output () {
 	# col software fibonacci in 10 cicli con fault injection
 	############ CONTROLS  #################################
 	local id=$1
-	if [[ $(idExists $id) == "0" ]]; then
-		db_recho "Error: ID not found, these are the available IDS: $SIM_IDS"
-		exit
-	fi
+	check_id $id
+
+	#cat signals_fault_injection_id_stage-fibonacci-16600-1.txt | grep sig_fault | \
+	#o	sort -k 5.12,5.16 -n | tr -s " " | cut -d " " -f 5 | cut -d ":" -f 2
 
 	############ TAKE DATA #################################
 	local stg=$(echo $id | cut -d "-" -f 1)
@@ -989,35 +1101,34 @@ function elaborate_simulation_output () {
 	local n_of_signal=$(cat "$info_file" | grep Number_of_signal | cut -d ":" -f 2)
 
 
-	############ ELABORATE DATA ##############################
+	############ ELABORATE DATA in info and error files ##############################
 	
 	local time_for_cycle=$(echo "scale=3; $sim_total_time/$tot_cycle" | bc -l)
 	local sim_show_time=$(show_time $sim_total_time)
 
-	# CLEAROUT variable said when to print an putput clean from color, used for send mail
-	if [[ $CLEAROUT -eq 1 ]]; then
-		echo "Total simulation time ${sim_show_time}"
-		echo "Time for cycle ${time_for_cycle}s"
-		if [[ $fi> 0 ]]; then 
-			local fault_tolerance=$(echo "100*(1-$error/$tot_cycle)" | bc -l )
-			echo "Total errors in $tot_cycle simulations are $error"
-			echo "Total number of signals that could be used for fault injection : $n_of_signal"
-			echo "Fault tolerance ${fault_tolerance:0:6}%"
-		fi
-	else
-		db_gecho "##############################################################################"
-		db_gecho "##############################################################################"
-		db_gecho "Total simulation time ${sim_show_time}"
-		db_gecho "Time for cycle ${time_for_cycle}s"
-		if [[ $fi> 0 ]]; then 
-			local fault_tolerance=$(echo "100*(1-$error/$tot_cycle)" | bc -l )
-			db_gecho "Total errors in $tot_cycle simulations are $error"
-			db_gecho "Total number of signals that could be used for fault injection : $n_of_signal"
-			db_gecho "Fault tolerance ${fault_tolerance:0:6}%"
-		fi
-		db_gecho "##############################################################################"
-		db_gecho "##############################################################################"
+	if [[ $fi > 0 ]]; then 
+		local fault_tolerance=$(echo "100*(1-$error/$tot_cycle)" | bc -l )
+		signals_elaboration $id
+		local signals_mean=$(echo $MEAN_ERROR | tr " " "\n" | \
+			sort -k 1.6,1.20 -n -r)
 	fi
+
+	# CLEAROUT variable said when to print an putput clean from color, used for send mail
+	db_gecho_c "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	db_gecho_c "Total simulation time ${sim_show_time}"
+	db_gecho_c "Software : $swc"
+	db_gecho_c "Stage : $stg"
+	db_gecho_c "Time for cycle ${time_for_cycle}s"
+	if [[ $fi> 0 ]]; then 
+		db_gecho_c "Total errors in $tot_cycle simulations are $error"
+		db_gecho_c "Total number of signals that could be used" 
+		db_gecho_c "	for fault injection : $n_of_signal"
+		db_gecho_c "Fault tolerance ${fault_tolerance:0:6}%"
+		for sig_mean in $signals_mean; do
+			db_gecho_c "$(echo $sig_mean | sed 's/#/ sig:/g')"
+		done
+	fi	
+	db_gecho_c "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 }
 
 ###########################################################################################
