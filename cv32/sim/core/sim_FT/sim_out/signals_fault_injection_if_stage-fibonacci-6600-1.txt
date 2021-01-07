@@ -46,7 +46,3 @@ All_signals:/cv32e40p_if_stage/aligner_i/hwlp_update_pc_q
 All_signals:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/read_pointer_q
 All_signals:/cv32e40p_if_stage/aligner_i/branch_addr_q
 All_signals:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/cnt_q
-sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q[0]  value:1  fi_instant:782124 SIM_ERROR:0 time_for_this_simulation:61569
-sig_fault: signal_name:/cv32e40p_if_stage/hwlp_target_i[16]  value:1  fi_instant:627517 SIM_ERROR:0 time_for_this_simulation:6876
-sig_fault: signal_name:/cv32e40p_if_stage/dm_halt_addr_i[31]  value:1  fi_instant:171610 SIM_ERROR:860357 time_for_this_simulation:27775
-sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/hwlp_flush_cnt_delayed_q[1]  value:1  fi_instant:60644 SIM_ERROR:1146442 time_for_this_simulation:36385
