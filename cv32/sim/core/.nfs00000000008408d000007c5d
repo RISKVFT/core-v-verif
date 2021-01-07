@@ -1212,7 +1212,7 @@ TERMINAL_PID=""
 # Error variale
 ERROR_DIR="$CORE_V_VERIF/cv32/sim/core/sim_FT/sim_out"
 ERROR_DIR_BACKUP="$CORE_V_VERIF/cv32/sim/core/sim_FT/.sim_out_backup"
-SIM_IDS="if_stage-fibonacci-6600-1 if_stage-hello_world-3-1 if_stage-hello_world-10-1 if_stage-hello_world-10-1 id_stage-fibonacci-10-1 --1-0 id_stage-fibonacci-16600-1"
+SIM_IDS="if_stage-hello_world-3-1 if_stage-hello_world-10-1 if_stage-hello_world-10-1 id_stage-fibonacci-10-1 --1-0 id_stage-fibonacci-16600-1"
 compare_error_file_prefix="cnt_error_"
 info_file_prefix="info_"
 cycle_file_prefix="cycle_"

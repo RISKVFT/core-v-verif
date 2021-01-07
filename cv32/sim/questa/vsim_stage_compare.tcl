@@ -269,7 +269,8 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 	if {$FI > 0} {
 		# Print on file informations about faults and errors produced
 		set fp_sig [ open "${signals_filename}" "a" ]
-		puts $fp_sig "sig_fault: signal_name:$sig_fi\[$bit_choose\]  value:[expr ($bit_value+1)%2 ]  fi_instant:$fi_instant SIM_ERROR:$error_number time_for_this_simulation:[expr $end_time-$start_time]" 
+		if [[ $bit_value != 
+		puts $fp_sig "sig_fault: signal_name:$sig_fi\[$bit_choose\]  value:$bit_force_value  fi_instant:$fi_instant SIM_ERROR:$error_number time_for_this_simulation:[expr $end_time-$start_time]" 
 		close $fp_sig
 	}
 	
