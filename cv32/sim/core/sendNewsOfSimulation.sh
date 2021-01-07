@@ -40,11 +40,11 @@ while [[ $flag -eq 1 ]]; do
 	current_cycle=$(cat $info_file | grep $string_to_search | cut -d ":" -f 2)
 	text=$(cat $info_file)
 	if [[ $previous_cycle == $current_cycle ]]; then
-		message="Buon* (probabilmente non lo è perchè forse c'è un errore)\nLog della simulazione\n\n----------------------------------------------\nNome: ${info_file:5:-4}i\n----------------------------------------------\n\n$text\n\n----------------------------------------------"
+		message="Buon* (probabilmente non lo e' perche' forse c'e' un errore)\nLog della simulazione\n\n----------------------------------------------\nNome: ${info_file:5:-4}i\n----------------------------------------------\n\n$text\n\n----------------------------------------------"
 		flag=0
 		echo "------Errors -------"
 	else
-		message="Buon*\nOggi è il : $(date)\nQuesto è il log della simulazione\n\n----------------------------------------------\nNome: ${info_file:5:-4}\n----------------------------------------------\n\n$text\n\n----------------------------------------------"
+		message="Buon*\nOggi e' il : $(date)\nQuesto e' il log della simulazione\n\n----------------------------------------------\nNome: ${info_file:5:-4}\n----------------------------------------------\n\n$text\n\n----------------------------------------------"
 	fi
 	#echo "messaggio:$message"
 	
@@ -55,7 +55,7 @@ while [[ $flag -eq 1 ]]; do
 		flag=0
 		logesfiupi="$(./comp_sim.sh -co -esfiupi ${info_file:5:-4} | grep -v "esfiupi\|Argument")"
 		#logesfiupi="$(./comp_sim.sh -co -esfiupi ${info_file:5:-4} | grep -v "esfiupi\|Argument" | cat -E | sed 's/\$/\\n/g')"
-		message="Buon*\nOggi è il : $(date)\nQuesto è il log della simulazione\n\n----------------------------------------------\nNome: ${info_file:5:-4}\n----------------------------------------------\n\n$logesfiupi\n\n----------------------------------------------"
+		message="Buon*\nOggi e' il : $(date)\nQuesto e' il log della simulazione\n\n----------------------------------------------\nNome: ${info_file:5:-4}\n----------------------------------------------\n\n$logesfiupi\n\n----------------------------------------------"
 		echo -e "last_message: $message"
 		echo "-------Cycle finished -------"
 	fi

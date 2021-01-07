@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source ccommon.sh
+echo "argomenti: $@"
 
 # trap ctrl-c and call ctrl_c()
 trap ctrl_c INT
@@ -41,6 +42,9 @@ function exit_f () {
 	# communicate using pipe that the program is terminated
 	if [[ $PIPENAME != "" ]]; then
 		echo "exit" > $PIPENAME
+		if [[ $PIPENAME =~ "info" ]]; then
+			delete_pipe $PIPENAME
+		fi
 	fi	
 	rm -f log.log
 	rm -f time_*
@@ -134,8 +138,8 @@ executeInTerminalEasy () {
 	TERMINAL_PID="$TERMINAL_PID $!_tname"
 }
 execute_in_terminal() {
-	local cmd=$1
-	local tname=$2
+	local cmd="$1"
+	local tname="$2"
 	mate-terminal --window --working-directory="$CUR_DIR" --command="$cmd"  --disable-factory &
 	TERMINAL_PID="$TERMINAL_PID $!_$tname"
 }
@@ -152,11 +156,12 @@ kill_terminal () {
 }
 function delete_pipe ()  {
 	local pipename=$1
-	rm -f $pipename
+	rm $pipename
+	#find /tmp -maxdepth 1 -name pipe_* -delete 
 }
 function check_pipe () {
 	local pipename=$1
-	if [[ -p $pipename ]]; then
+	if [[ ! -p $pipename ]]; then
 		db_recho "ERROR: The pipe $pipename don't exist!!"
 		exit	
 	fi
@@ -165,11 +170,7 @@ function check_pipe () {
 function read_pipe () {
 	local pipename=$1
 	check_pipe $pipename
-	while true; do
-		if read line < $pipename; then
-			break
-		fi
-	done
+	read line < $pipename
 	echo $line
 }
 
@@ -184,7 +185,6 @@ function write_PIPENAME () {
 function pulling_pipe () {
 	local pipename=$1
 	local nametopull=$2
-	sleep 1
 	check_pipe $pipename
 	while true ; do
 		if read line < $pipename ; then
@@ -204,18 +204,26 @@ function kill_terminal_when_it_finished () {
 
 
 verify_upi_vcdwlf () {
+	# Verify that vcd (for input signals) and wlf (for output) exist, otherwise create it
 	local sw=$1 # name of the software 
 	local stg=$2 # name of the stage without cv32e40p if core
-	local real_stg=$3 
+	local real_stg=$3
 
 	swc=$(echo $sw | tr '-' '_')
+	db_becho "INFO: ./sim_FT/dataset/gold_${real_stg}_${swc}_in.vcd exists?"
 	if [[ ! -f ./sim_FT/dataset/gold_${real_stg}_${swc}_in.vcd ]]; then
-		execute_in_terminal "./comp_sim.sh -b sbv $sw $stg save_data_in -p /tmp/save_in" "save_in"
-		kill_terminal_when_it_finished "/tmp/save_in" "save_in"
-		delete_pipe "/tmp/save_in"
-		execute_in_terminal "./comp_sim.sh -b sbv $sw $stg save_data_out -g -p /tmp/save_out" "save_out"
-		kill_terminal_when_it_finished "/tmp/save_out" "save_out"
-		delete_pipe "/tmp/save_out"
+		local pipe_in=/tmp/save_in
+		local pipe_out=/tmp/save_out
+		mkfifo $pipe_in
+		mkfifo $pipe_out
+		# Creation of vcd that contain input of stage
+		db_becho "PROCESS: Creation of vcd that contains inputs of the stage $stg with program $sw ..."
+		execute_in_terminal "./comp_sim.sh -b sbv $sw $stg save_data_in -p $pipe_in" "save_in"
+		kill_terminal_when_it_finished "$pipe_in" "save_in"
+		delete_pipe "$pipe_in"
+		execute_in_terminal "./comp_sim.sh -b sbv $sw $stg save_data_out -g -p $pipe_out" "save_out"
+		kill_terminal_when_it_finished "$pipe_out" "save_out"
+		delete_pipe "$pipe_out"
 	fi
 	
 }
@@ -225,7 +233,7 @@ findEndsim () {
 	local stg=$2
 	local real_stg=$3
 	
-	verify_upi_vcdwlf $sw $stg $stg_real
+	verify_upi_vcdwlf $sw $stg $real_stg
 	
 	db_becho "INFO: vcd input file = ./sim_FT/dataset/gold_${real_stg}_${swc}_in.vcd"
 
@@ -238,7 +246,7 @@ db_gecho_c () {
 	if [[ $CLEAROUT == 1 ]]; then
 		echo -e "$1"
 	else
-		db_becho $1	
+		db_becho "$1"	
 	fi	
 }	
 
@@ -749,13 +757,15 @@ function manage_stage_fault_injection_upi () {
 	# Called by qsfiupi
 	
 	local pipe_info=/tmp/pipe_info
+	mkfifo $pipe_info
 	local comando="./comp_sim.sh -sfiupi $@ -p $pipe_info"
 	local tname="sfiupi"
 	local file_info_mail="/tmp/time_$ID.txt"
 
 	db_becho "PROCESS: Opening a new terminal to run simulations ... "
 	# Run 
-	execute_in_terminal $comando $tname
+	echo "INFO: command = $comando"
+	execute_in_terminal "$comando" "$tname"
 
 	
 	# We save information from pipe in variables
@@ -771,6 +781,9 @@ function manage_stage_fault_injection_upi () {
 	db_becho "INFO: CYCLE_FILE = $CYCLE_FILE"
 	
 	START_TIME=$(read_pipe $pipe_info| cut -d ":" -f 2)
+	db_becho "INFO: CYCLE_FILE = $CYCLE_FILE"
+	
+	sleep 1
 
 	delete_pipe $pipe_info
 
@@ -991,9 +1004,10 @@ function sim_stage_fault_injection_upi () {
 	# each simulation, if at least an error is found in the output signals
 	# the number in this file in increased by one.
 	mkdir -p $ERROR_DIR
-	ID="$STG-$SW-$CYCLE-$FI"
+	ID="$STG-$SWC-$CYCLE-$FI"
 
 	write_PIPENAME "ID:$ID"
+	db_becho "INFO: send ID through pipe"
 
 	if [[ $(idExists $ID) == "0" ]]; then
 		SetVar "SIM_IDS" "$STG-$SWC-$CYCLE-$FI $SIM_IDS"
@@ -1033,10 +1047,12 @@ function sim_stage_fault_injection_upi () {
 	else
 		############ Save parameter in a log file for -qsfiupi ##########
 		write_PIPENAME "cycle:$CYCLE"
+		db_becho "INFO: send CYCLE through pipe"
 		write_PIPENAME "cycle_file:$CYCLE_FILE"
-
+		db_becho "INFO: send CYCLE_FILE through pipe"
 		timeone=$(date +%s)
 		write_PIPENAME "start_time:$timeone"
+
 		
 		findEndsim $SW $STG $REAL_STG
 		export T_ENDSIM=$endsim
@@ -1062,18 +1078,21 @@ function signals_elaboration () {
 	local id=$1
 	local file_sig="$ERROR_DIR/signals_fault_injection_$id.txt"
 	local signals=$(grep All_signals $file_sig | cut -d ":" -f 2)
-	
+
+	# TODO: add percentage of fault tolerance for each signal
 	MEAN_ERROR=""
 	for sig in $signals; do
 		local l_errors=$(grep $sig $file_sig | grep sig_fault | tr -s " " |\
 		       	cut -d " " -f 5 | cut -d ":" -f 2)
 		local err_n=$(echo $l_errors | wc -w )
-		local tot_errors=0
-		for err in $l_errors; do
-			let tot_errors=tot_errors+$err
-		done
-		local mean_error=$( echo "scale=2; $tot_errors/$err_n" | bc -l)
-		MEAN_ERROR="$MEAN_ERROR mean:$mean_error#$sig"
+		if [[ $err_n -gt 0 ]]; then
+			local tot_errors=0
+			for err in $l_errors; do
+				let tot_errors=tot_errors+$err
+			done
+			local mean_error=$( echo "scale=2; $tot_errors/$err_n" | bc -l)
+			MEAN_ERROR="$MEAN_ERROR mean:$mean_error#$sig"
+		fi
 	done
 }
 
@@ -1125,7 +1144,7 @@ function elaborate_simulation_output () {
 		db_gecho_c "	for fault injection : $n_of_signal"
 		db_gecho_c "Fault tolerance ${fault_tolerance:0:6}%"
 		for sig_mean in $signals_mean; do
-			db_gecho_c "$(echo $sig_mean | sed 's/#/ sig:/g')"
+			db_gecho_c "$(echo $sig_mean )"  #| sed -e 's/\#/ sig\:/g')"
 		done
 	fi	
 	db_gecho_c "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -1148,22 +1167,25 @@ SIM_FT="$CUR_DIR/sim_FT"
 # Folder that contain *.c file (and after compilation the *.hex file) of
 # unique program to use as architecture firmware
 UNIQUE_CHEX_DIR="$CORE_V_VERIF/cv32/tests/programs/custom_FT/general_tests/hello-world"
-U_LOG_DIR=" "
+U_LOG_DIR="$CORE_V_VERIF/cv32/sim/core/u_log"
+mkdir -p $U_LOG_DIR
 
 # Folder that contain the build_all.py program runned to compile all benchmark
 BENCH_BUILD_FILE="$CORE_V_VERIF/cv32/tests/programs/custom_FT/build_all.py"
+#BENCH_BUILD_FILE="$CORE_V_VERIF/cv32/tests/programs/custom_FT/coremark/build-coremark.sh"
 # Folder that contain *.hex file of benchmar
 BENCH_HEX_DIR="$CORE_V_VERIF/cv32/tests/programs/custom_FT/out"
 B_TYPE=""
 B_FILE=""
 B_NUM=0
 B_LOG_DIR="$CORE_V_VERIF/cv32/sim/core/bench_log"
+mkdir -p $B_LOG_DIR
 # common parameter
 CHEX_FILE=" "
 VSIM_EXT=""
 export GUI=""
 export SIM_BASE="tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
-export STAGE_NAME="id_stage"
+export STAGE_NAME="if_stage"
 
 VERBOSE=1
 
@@ -1190,7 +1212,7 @@ TERMINAL_PID=""
 # Error variale
 ERROR_DIR="$CORE_V_VERIF/cv32/sim/core/sim_FT/sim_out"
 ERROR_DIR_BACKUP="$CORE_V_VERIF/cv32/sim/core/sim_FT/.sim_out_backup"
-SIM_IDS="id_stage-fibonacci-10-1 --1-0 id_stage-fibonacci-16600-1"
+SIM_IDS="if_stage-hello_world-3-1 if_stage-hello_world-10-1 if_stage-hello_world-10-1 id_stage-fibonacci-10-1 --1-0 id_stage-fibonacci-16600-1"
 compare_error_file_prefix="cnt_error_"
 info_file_prefix="info_"
 cycle_file_prefix="cycle_"
@@ -1235,7 +1257,7 @@ while [[ $1 != "" ]]; do
 	echo "p1 : $1"
 	case $1 in	
 		########################################################################
-		# INFO option
+		# SETTING options
 		########################################################################
 		-g|--gui)
 			db_becho "INFO: -g -> setted GUI for sim"
@@ -1258,10 +1280,9 @@ while [[ $1 != "" ]]; do
 			shift
 			;;
 		-p|--pipe)
+			shift
 			PIPENAME=$1
-			if [[ ! -p $PIPENAME ]]; then
-				recho_exit "ERROR: Pipe name given is wrong!! pipname=$1"
-			fi
+			shift 
 			;;
 		-upi|--use-previous-input)
 			# This option enable the use of .vcd file as input of simulation
@@ -1339,8 +1360,12 @@ while [[ $1 != "" ]]; do
 		-ssa|--save_stage_all) # create the input .vcd and ouput .wlf for upi simulation
 			shift
 			# Save in and out of a stage 
-			./comp_sim.sh -b svb $1 save_data_in $2 
-			./comp_sim.sh -b svb $1 save_data_out $2 -g   
+			if [[ $2 =~ "core" ]]; then
+				local real_stg="cv32e40p_$2"
+			else
+				local real_stg=$2
+			fi
+			verify_upi_vcdwlf $1 $2 $real_stg
 			exit 1
 			;;
 		-qsfiupi) # manage sfiupi simulation using a new terminal and a progression bar, send mail also

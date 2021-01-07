@@ -1,5 +1,5 @@
-# vsim -nowlfcollapse -quiet -c -vcdstim ./dataset/gold_id_stage_fibonacci_in.vcd -debugDB "+dumpports+nocollapse" cv32e40p_id_stage_vopt -do "../../questa/vsim_stage_compare.tcl" 
-# Start time: 21:16:49 on Jan 06,2021
+# vsim -nowlfcollapse -quiet -c -vcdstim ./dataset/gold_if_stage_hello_world_in.vcd -debugDB "+dumpports+nocollapse" cv32e40p_if_stage_vopt -do "../../questa/vsim_stage_compare.tcl" 
+# Start time: 00:03:29 on Jan 08,2021
 # //  Questa Sim-64
 # //  Version 10.7c linux_x86_64 Aug 17 2018
 # //
@@ -18,34 +18,20 @@
 # do ../../questa/vsim_stage_compare.tcl
 # /home/thesis/elia.ribaldone/Desktop/core-v-verif/
 # tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i
-# gold_id_stage_fibonacci
-# id_stage
-# 984999
+# gold_if_stage_hello_world
+# if_stage
+# 156029
 # 10
 # 1
-# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/cnt_error_id_stage-fibonacci-10-1.txt
-# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/info_id_stage-fibonacci-10-1.txt
-# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/cycle_id_stage-fibonacci-10-1.txt
-# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/signals_fault_injection_id_stage-fibonacci-10-1.txt
-# cv32e40p_id_stage
-# /cv32e40p_id_stage/mie_bypass_i /cv32e40p_id_stage/debug_ebreakm_i /cv32e40p_id_stage/frm_i /cv32e40p_id_stage/wb_ready_i /cv32e40p_id_stage/regfile_alu_we_fw_i /cv32e40p_id_stage/m_irq_enable_i /cv32e40p_id_stage/irq_sec_i /cv32e40p_id_stage/data_misaligned_i /cv32e40p_id_stage/instr_valid_i /cv32e40p_id_stage/trigger_match_i /cv32e40p_id_stage/scan_cg_en_i /cv32e40p_id_stage/is_compressed_i /cv32e40p_id_stage/clk_ungated_i /cv32e40p_id_stage/ex_ready_i /cv32e40p_id_stage/data_err_i /cv32e40p_id_stage/regfile_alu_wdata_fw_i /cv32e40p_id_stage/illegal_c_insn_i /cv32e40p_id_stage/mult_multicycle_i /cv32e40p_id_stage/regfile_alu_waddr_fw_i /cv32e40p_id_stage/irq_i /cv32e40p_id_stage/csr_hwlp_regid_i /cv32e40p_id_stage/ex_valid_i /cv32e40p_id_stage/debug_ebreaku_i /cv32e40p_id_stage/csr_hwlp_we_i /cv32e40p_id_stage/regfile_wdata_wb_i /cv32e40p_id_stage/debug_req_i /cv32e40p_id_stage/u_irq_enable_i /cv32e40p_id_stage/regfile_waddr_wb_i /cv32e40p_id_stage/pc_id_i /cv32e40p_id_stage/mcounteren_i /cv32e40p_id_stage/current_priv_lvl_i /cv32e40p_id_stage/apu_busy_i /cv32e40p_id_stage/apu_write_dep_i /cv32e40p_id_stage/fetch_enable_i /cv32e40p_id_stage/regfile_we_wb_i /cv32e40p_id_stage/apu_read_dep_i /cv32e40p_id_stage/is_fetch_failed_i /cv32e40p_id_stage/debug_single_step_i /cv32e40p_id_stage/csr_hwlp_data_i /cv32e40p_id_stage/instr_rdata_i /cv32e40p_id_stage/branch_decision_i /cv32e40p_id_stage/controller_i/data_err_q /cv32e40p_id_stage/controller_i/debug_mode_q /cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_start_q /cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_counter_q /cv32e40p_id_stage/controller_i/hwlp_end_4_id_q /cv32e40p_id_stage/int_controller_i/irq_sec_q /cv32e40p_id_stage/controller_i/jump_done_q /cv32e40p_id_stage/controller_i/illegal_insn_q /cv32e40p_id_stage/controller_i/ebrk_debug_entry_q /cv32e40p_id_stage/controller_i/debug_req_q /cv32e40p_id_stage/int_controller_i/irq_q /cv32e40p_id_stage/HWLOOP_REGS/hwloop_regs_i/hwlp_end_q /cv32e40p_id_stage/register_file_i/mem
+# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/cnt_error_if_stage-hello_world-10-1.txt
+# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/info_if_stage-hello_world-10-1.txt
+# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/cycle_if_stage-hello_world-10-1.txt
+# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/signals_fault_injection_if_stage-hello_world-10-1.txt
+# cv32e40p_if_stage
+# /cv32e40p_if_stage/trap_addr_mux_i /cv32e40p_if_stage/instr_rdata_i /cv32e40p_if_stage/m_exc_vec_pc_mux_i /cv32e40p_if_stage/uepc_i /cv32e40p_if_stage/hwlp_jump_i /cv32e40p_if_stage/jump_target_ex_i /cv32e40p_if_stage/jump_target_id_i /cv32e40p_if_stage/halt_if_i /cv32e40p_if_stage/m_trap_base_addr_i /cv32e40p_if_stage/id_ready_i /cv32e40p_if_stage/exc_pc_mux_i /cv32e40p_if_stage/dm_halt_addr_i /cv32e40p_if_stage/u_exc_vec_pc_mux_i /cv32e40p_if_stage/pc_mux_i /cv32e40p_if_stage/depc_i /cv32e40p_if_stage/instr_err_pmp_i /cv32e40p_if_stage/mepc_i /cv32e40p_if_stage/clear_instr_valid_i /cv32e40p_if_stage/pc_set_i /cv32e40p_if_stage/boot_addr_i /cv32e40p_if_stage/u_trap_base_addr_i /cv32e40p_if_stage/req_i /cv32e40p_if_stage/instr_gnt_i /cv32e40p_if_stage/instr_err_i /cv32e40p_if_stage/hwlp_target_i /cv32e40p_if_stage/dm_exception_addr_i /cv32e40p_if_stage/instr_rvalid_i /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/flush_cnt_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_addr_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_atop_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q /cv32e40p_if_stage/aligner_i/hwlp_addr_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_be_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_q /cv32e40p_if_stage/aligner_i/aligner_ready_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/write_pointer_q /cv32e40p_if_stage/aligner_i/instr_valid_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_wdata_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/hwlp_flush_cnt_delayed_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/mem_q /cv32e40p_if_stage/aligner_i/pc_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/status_cnt_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/state_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/state_q /cv32e40p_if_stage/aligner_i/hwlp_update_pc_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/read_pointer_q /cv32e40p_if_stage/aligner_i/branch_addr_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/cnt_q
 # file17
-# 54
+# 48
 # file17
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#768 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 769
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#758 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 759
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#752 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 753
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#743 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 744
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#737 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 738
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#601(immediate_a_mux) File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 602
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#516 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 517
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
@@ -58,109 +44,11 @@
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Computing waveform differences from time 383412 ns to 601532 ns
+# Computing waveform differences from time 28092 ns to 127882 ns
 # 
 # Max total difference limit of 1 reached.
-# Comparison reached total difference limit at time 383490 ns
-# Found 41 differences.
+# Found 144711 differences.
 # ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#768 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 769
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#758 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 759
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#752 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 753
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#743 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 744
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#737 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 738
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#601(immediate_a_mux) File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 602
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#516 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 517
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
@@ -173,457 +61,15 @@
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Computing waveform differences from time 342830 ns to 642114 ns
-# 
-# Max total difference limit of 1 reached.
-# Comparison reached total difference limit at time 342920 ns
-# Found 26 differences.
-# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#768 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 769
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#758 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 759
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#752 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 753
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#743 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 744
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#737 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 738
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#601(immediate_a_mux) File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 602
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#516 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 517
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Computing waveform differences from time 459452 ns to 525492 ns
-# 
-# Max total difference limit of 1 reached.
-# Comparison reached total difference limit at time 459520 ns
-# Found 9 differences.
-# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#768 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 769
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#758 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 759
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#752 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 753
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#743 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 744
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#737 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 738
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#601(immediate_a_mux) File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 602
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#516 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 517
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Computing waveform differences from time 15342 ns to 969602 ns
-# 
-# Max total difference limit of 1 reached.
-# Comparison reached total difference limit at time 15620 ns
-# Found 24 differences.
-# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#768 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 769
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#758 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 759
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#752 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 753
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#743 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 744
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#737 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 738
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#601(immediate_a_mux) File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 602
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#516 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 517
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Computing waveform differences from time 685186 ns to 685541 ns
+# Computing waveform differences from time 107876 ns to 108231 ns
 # No differences found.
-# Updating waveform differences from time 685541 ns to 784031 ns
+# Updating waveform differences from time 108231 ns to 123831 ns
 # No new differences found.
-# Updating waveform differences from time 784031 ns to 882521 ns
+# Updating waveform differences from time 123831 ns to 139431 ns
 # No new differences found.
-# Updating waveform differences from time 882521 ns to 981011 ns
+# Updating waveform differences from time 139431 ns to 155031 ns
 # No new differences found.
 # ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#768 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 769
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#758 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 759
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#752 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 753
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#743 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 744
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#737 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 738
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#601(immediate_a_mux) File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 602
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#516 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 517
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
@@ -636,109 +82,11 @@
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Computing waveform differences from time 39257 ns to 945687 ns
+# Computing waveform differences from time 68827 ns to 87147 ns
 # 
 # Max total difference limit of 1 reached.
-# Comparison reached total difference limit at time 39330 ns
-# Found 39 differences.
+# Found 25178 differences.
 # ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#768 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 769
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#758 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 759
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#752 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 753
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#743 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 744
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#737 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 738
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#601(immediate_a_mux) File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 602
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#516 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 517
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
@@ -751,6 +99,15 @@
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
+# Computing waveform differences from time 97288 ns to 97643 ns
+# No differences found.
+# Updating waveform differences from time 97643 ns to 113243 ns
+# No new differences found.
+# Updating waveform differences from time 113243 ns to 128843 ns
+# No new differences found.
+# Updating waveform differences from time 128843 ns to 144443 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
@@ -763,97 +120,12 @@
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Computing waveform differences from time 218402 ns to 766542 ns
+# Computing waveform differences from time 141279 ns to 141634 ns
 # 
 # Max total difference limit of 1 reached.
-# Comparison reached total difference limit at time 218470 ns
+# Comparison reached total difference limit at time 141350 ns
 # Found 30 differences.
 # ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#768 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 769
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#758 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 759
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#752 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 753
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#743 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 744
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#737 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 738
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#601(immediate_a_mux) File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 602
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#516 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 517
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
@@ -866,109 +138,11 @@
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Computing waveform differences from time 895109 ns to 895464 ns
+# Computing waveform differences from time 71889 ns to 84085 ns
 # 
 # Max total difference limit of 1 reached.
-# Comparison reached total difference limit at time 895170 ns
-# Found 2 differences.
+# Found 16978 differences.
 # ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#768 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 769
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#758 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 759
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#752 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 753
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#743 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 744
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#737 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 738
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#601(immediate_a_mux) File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 602
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#516 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 517
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
@@ -981,6 +155,12 @@
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
+# Computing waveform differences from time 123979 ns to 124334 ns
+# 
+# Max total difference limit of 1 reached.
+# Comparison reached total difference limit at time 124050 ns
+# Found 6 differences.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
@@ -993,6 +173,11 @@
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
+# Computing waveform differences from time 51005 ns to 104969 ns
+# 
+# Max total difference limit of 1 reached.
+# Found 79652 differences.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
@@ -1005,88 +190,13 @@
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Computing waveform differences from time 599172 ns to 599527 ns
+# Computing waveform differences from time 111259 ns to 111614 ns
 # No differences found.
-# Updating waveform differences from time 599527 ns to 698017 ns
+# Updating waveform differences from time 111614 ns to 127214 ns
 # No new differences found.
-# Updating waveform differences from time 698017 ns to 796507 ns
-# No new differences found.
-# Updating waveform differences from time 796507 ns to 894997 ns
+# Updating waveform differences from time 127214 ns to 142814 ns
 # No new differences found.
 # ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#768 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 769
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#758 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 759
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#752 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 753
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#743 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 744
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#737 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 738
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#601(immediate_a_mux) File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 602
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_id_stage/#ALWAYS#516 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p/rtl/cv32e40p_id_stage.sv Line: 517
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
@@ -1099,98 +209,11 @@
 # Created 1 comparison.
 # Created 1 comparison.
 # Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Created 1 comparison.
-# Computing waveform differences from time 682517 ns to 682872 ns
-# No differences found.
-# Updating waveform differences from time 682872 ns to 781362 ns
-# No new differences found.
-# Updating waveform differences from time 781362 ns to 879852 ns
-# No new differences found.
-# Updating waveform differences from time 879852 ns to 978342 ns
-# No new differences found.
+# Computing waveform differences from time 10164 ns to 145810 ns
+# 
+# Max total difference limit of 1 reached.
+# Found 189035 differences.
 # ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
 # file18
-# End time: 21:17:21 on Jan 06,2021, Elapsed time: 0:00:32
+# End time: 00:04:10 on Jan 08,2021, Elapsed time: 0:00:41
 # Errors: 0, Warnings: 0
