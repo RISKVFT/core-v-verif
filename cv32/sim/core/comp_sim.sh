@@ -210,8 +210,8 @@ verify_upi_vcdwlf () {
 	local real_stg=$3
 
 	swc=$(echo $sw | tr '-' '_')
-	db_becho "INFO: ./sim_FT/dataset/gold_${real_stg}_${swc}_in.vcd exists?"
-	if [[ ! -f ./sim_FT/dataset/gold_${real_stg}_${swc}_in.vcd ]]; then
+	db_becho "INFO: ./sim_FT/dataset/gold_${ARCH_TO_COMPARE}_${real_stg}_${swc}_in.vcd exists?"
+	if [[ ! -f ./sim_FT/dataset/gold_${ARCH_TO_COMPARE}_${real_stg}_${swc}_in.vcd ]]; then
 		local pipe_in=/tmp/save_in
 		local pipe_out=/tmp/save_out
 		mkfifo $pipe_in
@@ -235,9 +235,9 @@ findEndsim () {
 	
 	verify_upi_vcdwlf $sw $stg $real_stg
 	
-	db_becho "INFO: vcd input file = ./sim_FT/dataset/gold_${real_stg}_${swc}_in.vcd"
+	db_becho "INFO: vcd input file = ./sim_FT/dataset/gold_${ARCH_TO_COMPARE}_${real_stg}_${swc}_in.vcd"
 
-	endsim="$(( $(tail -n 2 ./sim_FT/dataset/gold_${real_stg}_${swc}_in.vcd | head -n 1 | tr -d "#") - 1 ))"
+	endsim="$(( $(tail -n 2 ./sim_FT/dataset/gold_${ARCH_TO_COMPARE}_${real_stg}_${swc}_in.vcd | head -n 1 | tr -d "#") - 1 ))"
 
 	db_becho "INFO: endsim = $endsim"
 }
@@ -406,6 +406,11 @@ function sim_unique_program () {
 	# cycle on args string
 	for (( i=0; i< ${#arg}; i++ )) ; do
 		case ${arg:i:1} in
+			a) # select the architecture to test
+				ARCH_TO_USE="$1"
+				SetVar "ARCH_TO_USE" "$ARCH_TO_USE"
+				export $ARCH_TO_USE
+				shift;;
 			c) # case like "-u cf filename" only compilation or both
 				db_becho "To do: compilation"
 				COMPILATION=1;;
@@ -516,7 +521,7 @@ function sim_unique_program () {
 		source /software/europractice-release-2019/scripts/init_questa10.7c	
 		# full simulation path without extension 
 		mon_run "make -C $SIM_FT questa-sim$GUI TEST_FILE=$UNIQUE_CHEX_DIR/$CHEX_FILE \
-			FT=$VSIM_EXT" $U_LOG_DIR/${CHEX_FILE}_sim.txt 1 $LINENO
+			FT=$VSIM_EXT ARCH=_$ARCH_TO_USE" $U_LOG_DIR/${CHEX_FILE}_sim.txt 1 $LINENO
 
 		cat log/${CHEX_FILE}_sim.txt | grep '^#.*$' | grep -ve 'Warning\|Process\|Instance\|Loading\|(C)'
 		
@@ -562,6 +567,26 @@ function sim_benchmark_programs () {
 	# cycle on args string
 	for (( i=0; i< ${#arg}; i++ )) ; do
 		case ${arg:i:1} in
+			a) #architecture to test
+				ARCH_TO_USE="$1"
+				SetVar "ARCH_TO_USE" "$ARCH_TO_USE"
+				export $ARCH_TO_USE
+				shift;;
+			t) #architecture to compare 
+				ARCH_TO_COMPARE="$1";
+				SetVar "ARCH_TO_COMPARE" "$ARCH_TO_COMPARE"
+				export $ARCH_TO_COMPARE
+				shift;;
+			f) #fi
+				export FI=$1
+				if [[ $FI -ne 0 && $FI -ne 1 ]]; then
+					db_recho "ERROR: -sfiupi f fault_injection_yes_no :"
+				        db_recho "	fault_injection_yes_no should bo 0 or 1."
+					db_recho "	value $FI is wrong!"
+					exit
+				fi
+				db_becho "FI = $1"
+				shift;; 
 			c|s)# compile or simulate
 				if [[ ${arg:i:1} == "c" ]]; then
 				# case like "-u cf filename" only compilation or both
@@ -594,7 +619,7 @@ function sim_benchmark_programs () {
 				if [[ $1 == "cov" ]]; then
 					VSIM_EXT="_cycle_to_certain_coverage"
 				fi
-				db_becho "Set vsim file extension, vsim$1.tcl will be run"
+				db_becho "Set vsim file extension, vsim_$1.tcl will be run"
 				shift;;
 			d) # set build file, dir of out *.hex file and exit
 				SET_DIR=1
@@ -633,14 +658,31 @@ function sim_benchmark_programs () {
 			;;
 		esac
 	done
+	db_becho "Architecture selected: $ARCH_TO_USE"
 	if  [[ $VSIM_EXT == "_cycle_to_certain_coverage" ]]; then
 		export SWC="$(echo $B_FILE | tr '-' '_')"
 		findEndsim $SWC $STG $STAGE_NAME
 		export T_ENDSIM=$endsim
 		db_becho "ENDSIM = $T_ENDSIM"
 	fi
+	if  [[ $VSIM_EXT == "_stage_compare" ]]; then
+		SET_UPI=1
+		export CYCLE=1 
+		export SWC="$(echo $B_FILE | tr '-' '_')"
+		findEndsim $SWC $STG $STAGE_NAME
+		export T_ENDSIM=$endsim
+		db_becho "ENDSIM = $T_ENDSIM"
+		## aggiunti per il momento
+		mkdir -p $ERROR_DIR
+		ID="$STG-$SWC-$CYCLE-$FI"
 
-
+		export COMPARE_ERROR_FILE="$ERROR_DIR/$compare_error_file_prefix$ID.txt"
+		export INFO_FILE="$ERROR_DIR/$info_file_prefix$ID.txt"
+		export CYCLE_FILE="$ERROR_DIR/$cycle_file_prefix$ID.txt"
+		export SIGNALS_FI_FILE="$ERROR_DIR/$signals_fi_file_prefix$ID.txt"
+		##
+	fi
+	
 	if [[ $SET_DIR -eq 1 || $SET_LOG -eq 1 ]]; then
 		exit 1 # exit since dir or log dir is setted and no other should be done
 	else
@@ -1033,7 +1075,7 @@ function sim_stage_fault_injection_upi () {
 			SW=$(echo $i | rev | cut -d "/" -f 1 | rev | cut -d "." -f 1)
 			SWC="$(echo $SW | tr '-' '_')"
 
-			findEndsim $SW $STG $REAL_STG
+			findEndsim $SWC $STG $REAL_STG
 			export T_ENDSIM=$endsim
 
 
@@ -1054,7 +1096,7 @@ function sim_stage_fault_injection_upi () {
 		write_PIPENAME "start_time:$timeone"
 
 		
-		findEndsim $SW $STG $REAL_STG
+		findEndsim $SWC $STG $REAL_STG
 		export T_ENDSIM=$endsim
 		
 		db_becho "Simulation end time $T_ENDSIM"
@@ -1155,7 +1197,7 @@ function elaborate_simulation_output () {
 ###########################################################################################
 
 ## General variable
-CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
+CORE_V_VERIF="/home/thesis/marcello.neri/Desktop/core-v-verif"
 COMMONMK="$CORE_V_VERIF/cv32/sim/core/sim_FT/Common.mk"
 
 isnumber='^[0-9]+$'
@@ -1163,6 +1205,10 @@ isnumber='^[0-9]+$'
 CUR_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 SIM_FT="$CUR_DIR/sim_FT"
 
+ARCH_TO_USE="ft"
+ARCH_TO_COMPARE="ref"
+export $ARCH_TO_USE
+export $ARCH_TO_COMPARE
 
 # Folder that contain *.c file (and after compilation the *.hex file) of
 # unique program to use as architecture firmware
@@ -1185,7 +1231,7 @@ CHEX_FILE=" "
 VSIM_EXT=""
 export GUI=""
 export SIM_BASE="tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
-export STAGE_NAME="if_stage"
+export STAGE_NAME="cv32e40p_core"
 
 VERBOSE=1
 

@@ -21,7 +21,7 @@ module cv32e40p_tb_wrapper
                 DM_HALTADDRESS    = 32'h1A11_0800,
                 HART_ID           = 32'h0000_0000,
                 // Parameters used by DUT
-                PULP_XPULP        = 1,
+                PULP_XPULP        = 0,
                 PULP_CLUSTER      = 0,
                 FPU               = 0,
                 PULP_ZFINX        = 0,
@@ -61,10 +61,44 @@ module cv32e40p_tb_wrapper
     logic                         irq_ack;
     logic [0:5]                   irq_id_out;
     logic                         irq_sec;
+	
+	// set this parameter to choose the FT level for the core
+	parameter 					FT = 0;
 
 
     // interrupts (only timer for now)
     assign irq_sec     = '0;
+
+initial begin: print_ft_level
+		$display("\n\n\
+#############################################################\n\
+#############################################################\n\
+##### CORE FAULT TOLERANT LEVEL ---> %d #####\n\
+#############################################################\n\
+##  CODE		   CONTROLLER				DECODER			PIPELINE(IF/ID) 		REGFILE\n\
+##	0			X			X			X			X\n\
+##	1			YES			X			X			X\n\
+##	2			X			YES			X			X\n\
+##	3			YES			YES			X			X\n\
+##	4			X			X			YES			X\n\
+##	5			YES			X			YES			X\n\
+##	6			X			YES			YES			X\n\
+##	7			YES			YES			YES			X\n\
+##	8			X			X			X			YES\n\
+##	9			YES			X			X			YES\n\
+##	10			X			YES			X			YES\n\
+##	11			YES			YES			X			YES\n\
+##	12			X			X			YES			YES\n\
+##	13			YES			X			YES			YES\n\
+##	14			X			YES			YES			YES\n\
+##	15			YES			YES			YES			YES\n\
+##	16			X			X			X			HARD\n\
+##  ALL INTERMEDIATE COMBINATIONS WITH HARD REGILE\n\
+##	31			YES			YES			YES			HARD\n\
+##   OTHERS CODES LIKE 0\n\
+#############################################################\n\
+#############################################################\n\n\n", FT);
+end
 
     // instantiate the core
     cv32e40p_core #(
@@ -72,7 +106,8 @@ module cv32e40p_tb_wrapper
                  .PULP_CLUSTER     (PULP_CLUSTER),
                  .FPU              (FPU),
                  .PULP_ZFINX       (PULP_ZFINX),
-                 .NUM_MHPMCOUNTERS (NUM_MHPMCOUNTERS)
+                 .NUM_MHPMCOUNTERS (NUM_MHPMCOUNTERS),
+				 .ID_FAULT_TOLERANCE(FT)
                 )
     cv32e40p_core_i
         (

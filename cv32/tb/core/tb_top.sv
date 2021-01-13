@@ -49,6 +49,16 @@ module tb_top
     // signals for ri5cy
     logic                   fetch_enable;
 
+	// signals to test the content of the regfile
+	logic [31:0][32+7-1:0]	regfile_content_main, regfile_content_second;
+	int 	 						fd_m, fd_s; // Variable for file descriptor handle
+
+	/*initial
+	begin
+		$init_signal_spy("/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/genblk3/register_file_i/register_file_i_main/mem","/tb_top/regfile_content_main", 1);
+		$init_signal_spy("/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/genblk3/register_file_i/register_file_i_second/mem","/tb_top/regfile_content_second", 1);
+	end*/
+
     // make the core start fetching instruction immediately
     assign fetch_enable = '1;
 
@@ -129,10 +139,26 @@ module tb_top
     always_ff @(posedge core_clk, negedge core_rst_n) begin
         if (tests_passed) begin
             $display("ALL TESTS PASSED");
+			/*fd_m = $fopen ("./tb_out/regfile_main_hw.txt", "w");
+			fd_s = $fopen ("./tb_out/regfile_second_hw.txt", "w");
+			for (int i = 0; i <= 31; i=i+1) begin
+				$fdisplay (fd_m, "%b", regfile_content_main[i]);
+				$fdisplay (fd_s, "%b", regfile_content_second[i]);
+			end
+			$fclose(fd_m);
+			$fclose(fd_s);*/
             $finish;
         end
         if (tests_failed) begin
             $display("TEST(S) FAILED!");
+			/*fd_m = $fopen ("./tb_out/regfile_main_hw.txt", "w");
+			fd_s = $fopen ("./tb_out/regfile_second_hw.txt", "w");
+			for (int i = 0; i <= 31; i=i+1) begin
+				$fdisplay (fd_m, "%b", regfile_content_main[i]);
+				$fdisplay (fd_s, "%b", regfile_content_second[i]);
+			end
+			$fclose(fd_m);
+			$fclose(fd_s);*/
             $finish;
         end
         if (exit_valid) begin
@@ -140,6 +166,14 @@ module tb_top
                 $display("EXIT SUCCESS");
             else
                 $display("EXIT FAILURE: %d", exit_value);
+			/*fd_m = $fopen ("./tb_out/regfile_main_hw.txt", "w");
+			fd_s = $fopen ("./tb_out/regfile_second_hw.txt", "w");
+			for (int i = 0; i <= 31; i=i+1) begin
+				$fdisplay (fd_m, "%b", regfile_content_main[i]);
+				$fdisplay (fd_s, "%b", regfile_content_second[i]);
+			end
+			$fclose(fd_m);
+			$fclose(fd_s);*/
             $finish;
         end
     end

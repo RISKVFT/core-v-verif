@@ -166,7 +166,6 @@ monitor_file () {
 SetVar () {
 	var=$1
 	var_value=$2
-	echo "ciccio1"
 	repfile "$var" "$CUR_DIR/$(basename $0)" "$var_value"
 }
 
@@ -258,7 +257,7 @@ mon_run (){
 f_make () {
         firmware=$1
 	firmware_converted="$(echo $firmware | tr '-' '_')"
-	export GOLD_NAME="gold_${STAGE_NAME}_${firmware_converted:0:-4}"
+	export GOLD_NAME="gold_${ARCH_TO_COMPARE}_${STAGE_NAME}_${firmware_converted:0:-4}"
 	logfile=$2
 	override=$3
 	lineno=$4
@@ -268,12 +267,12 @@ f_make () {
 	echo "---------------$GUI"
 	if [[ $SET_UPI -eq 0 ]]; then
     		make -C $SIM_FT questa-sim$GUI TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}" FT="$VSIM_EXT" \
-		SILENT_COMP=$SILENT_COMP SILENT_SIM=$SILENT_SIM
+		ARCH="_$ARCH_TO_USE" SILENT_COMP=$SILENT_COMP SILENT_SIM=$SILENT_SIM
 	else 
 		echo "-------B_STAGE:  $B_STAGE"
 		make -C $SIM_FT questa-sim-stage$GUI STAGE=$B_STAGE \
 			TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}" FT="$VSIM_EXT" \
-			SILENT_COMP=$SILENT_COMP SILENT_SIM=$SILENT_SIM
+			ARCH="_$ARCH_TO_USE" SILENT_COMP=$SILENT_COMP SILENT_SIM=$SILENT_SIM
 	fi
 	#for file in $(ls ./sim_FT/dataset | grep .*_out.vcd); do
 	#	if ! test -f ./sim_FT/dataset/${file:0:-4}.wlf; then

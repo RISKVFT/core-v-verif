@@ -1,0 +1,137 @@
+make: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/sim/core/sim_FT'
+vlog -O0 \
+	-work work \
+	-pedanticerrors -suppress 2577 -suppress 2583 \
+	-f /home/thesis/marcello.neri/Desktop/core-v-verif/core-v-cores/cv32e40p/cv32e40p_manifest.flist \
+	/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tb/core/tb_riscv/include/perturbation_defines.sv /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tb/core/tb_top.sv /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tb/core/mm_ram.sv /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tb/core/dp_ram.sv /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_stall.sv /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tb/core/tb_riscv/riscv_rvalid_stall.sv /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tb/core/tb_riscv/riscv_gnt_stall.sv /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_interrupt_generator.sv 
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+Start time: 13:29:20 on Jan 07,2021
+vlog -O0 -work work -pedanticerrors -suppress 2577 -suppress 2583 -f /home/thesis/marcello.neri/Desktop/core-v-verif/core-v-cores/cv32e40p/cv32e40p_manifest.flist /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tb/core/tb_riscv/include/perturbation_defines.sv /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tb/core/tb_top.sv /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tb/core/mm_ram.sv /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tb/core/dp_ram.sv /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_stall.sv /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tb/core/tb_riscv/riscv_rvalid_stall.sv /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tb/core/tb_riscv/riscv_gnt_stall.sv /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_interrupt_generator.sv 
+-- Compiling package cv32e40p_apu_core_pkg
+-- Compiling package fpnew_pkg
+-- Compiling package cv32e40p_pkg
+-- Importing package fpnew_pkg
+-- Compiling package cv32e40p_tracer_pkg
+-- Importing package cv32e40p_pkg
+-- Compiling module cv32e40p_cs_registers
+-- Compiling module cv32e40p_register_file
+-- Compiling module cv32e40p_load_store_unit
+-- Compiling module cv32e40p_aligner
+-- Compiling module cv32e40p_decoder
+-- Importing package cv32e40p_apu_core_pkg
+-- Compiling module cv32e40p_compressed_decoder
+-- Compiling module cv32e40p_fifo
+-- Compiling module cv32e40p_prefetch_buffer
+-- Compiling module cv32e40p_hwloop_regs
+-- Compiling module cv32e40p_mult
+-- Compiling module cv32e40p_int_controller
+-- Compiling module cv32e40p_ex_stage
+-- Compiling module cv32e40p_alu_div
+-- Compiling module cv32e40p_alu
+-- Compiling module cv32e40p_ff_one
+-- Compiling module cv32e40p_popcnt
+-- Compiling module cv32e40p_apu_disp
+-- Compiling module cv32e40p_controller
+-- Compiling module cv32e40p_obi_interface
+-- Compiling module cv32e40p_prefetch_controller
+-- Compiling module cv32e40p_sleep_unit
+-- Compiling module cv32e40p_clock_gate
+-- Compiling module cv32e40p_core_log
+-- Compiling module cv32e40p_wrapper
+-- Compiling module cv32e40p_3voter
+-- Compiling module cv32e40p_hsiao_secded_encoder
+-- Compiling module cv32e40p_hsiao_secded_decoder
+-- Compiling module cv32e40p_register_file_ft_hard
+-- Compiling module cv32e40p_register_file_ft
+-- Compiling module cv32e40p_decoder_ft
+-- Compiling module cv32e40p_controller_feedback
+-- Compiling module cv32e40p_controller_ft
+-- Compiling module cv32e40p_id_stage_ft
+-- Compiling module cv32e40p_if_stage_ft
+-- Compiling module cv32e40p_core_ft
+-- Compiling package perturbation_defines
+-- Compiling module tb_top
+-- Compiling module cv32e40p_tb_wrapper
+-- Compiling module mm_ram
+-- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
+-- Compiling module dp_ram
+-- Compiling package riscv_random_stall_sv_unit
+-- Importing package perturbation_defines
+-- Compiling module riscv_random_stall
+-- Compiling module riscv_rvalid_stall
+-- Compiling module riscv_gnt_stall
+-- Compiling package riscv_random_interrupt_generator_sv_unit
+-- Importing package perturbation_defines
+-- Compiling module riscv_random_interrupt_generator
+
+Top level modules:
+	cv32e40p_wrapper
+	tb_top
+	riscv_random_stall
+End time: 13:29:24 on Jan 07,2021, Elapsed time: 0:00:04
+Errors: 0, Warnings: 0, Suppressed Warnings: 483
+vopt -work work -debugdb -fsmdebug -pedanticerrors +acc  tb_top -o tb_top_vopt
+QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+Start time: 13:29:24 on Jan 07,2021
+vopt -work work -debugdb -fsmdebug -pedanticerrors "+acc" tb_top -o tb_top_vopt 
+
+Top level modules:
+	tb_top
+
+Analyzing design...
+** Warning: (vopt-2009) At least one design unit was compiled with optimization level -O0 or -O1.
+Use vdir -l command to find such design units.
+-- Loading module tb_top
+-- Loading module cv32e40p_tb_wrapper
+-- Loading module cv32e40p_core_ft
+-- Importing package cv32e40p_apu_core_pkg
+-- Importing package cv32e40p_pkg
+-- Importing package fpnew_pkg
+-- Loading module cv32e40p_sleep_unit
+-- Loading module cv32e40p_clock_gate
+-- Loading module cv32e40p_if_stage_ft
+-- Loading module cv32e40p_prefetch_buffer
+-- Loading module cv32e40p_prefetch_controller
+-- Loading module cv32e40p_fifo
+-- Loading module cv32e40p_obi_interface
+-- Loading module cv32e40p_aligner
+-- Loading module cv32e40p_compressed_decoder
+-- Loading module cv32e40p_id_stage_ft
+-- Loading module cv32e40p_int_controller
+-- Loading module cv32e40p_ex_stage
+-- Loading module cv32e40p_alu
+-- Loading module cv32e40p_popcnt
+-- Loading module cv32e40p_ff_one
+-- Loading module cv32e40p_alu_div
+-- Loading module cv32e40p_mult
+-- Loading module cv32e40p_load_store_unit
+-- Loading module cv32e40p_cs_registers
+-- Loading module mm_ram
+-- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
+-- Loading module dp_ram
+-- Loading module riscv_rvalid_stall
+-- Importing package perturbation_defines
+-- Loading module riscv_gnt_stall
+-- Loading module riscv_random_interrupt_generator
+-- Loading package mtiUvm.questa_uvm_pkg
+-- Loading module cv32e40p_3voter
+-- Loading module cv32e40p_register_file_ft_hard
+-- Loading module cv32e40p_hsiao_secded_encoder
+-- Loading module cv32e40p_hsiao_secded_decoder
+-- Loading module cv32e40p_register_file
+-- Loading module cv32e40p_decoder_ft
+-- Loading module cv32e40p_controller_ft
+-- Loading module cv32e40p_hwloop_regs
+-- Loading module cv32e40p_decoder
+-- Loading module cv32e40p_controller_feedback
+Incremental compilation check found 53 design-units (out of 54) may be reused.
+Optimizing 1 design-unit (inlining 0/170 module instances):
+-- Optimizing module cv32e40p_id_stage_ft(fast)
+-- Processing module cv32e40p_id_stage_ft(fast) for debug
+Optimized design name is tb_top_vopt
+End time: 13:29:30 on Jan 07,2021, Elapsed time: 0:00:06
+Errors: 0, Warnings: 1
+touch .opt-rtl
+vsim -work work +dumpports+nocollapse -nowlfcollapse -quiet  +firmware=/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/dhrystone/dhrystone.hex +dumpports+nocollapse -gui -debugdb  \
+tb_top_vopt -do ../../questa/vsim.tcl 
+make: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/sim/core/sim_FT'

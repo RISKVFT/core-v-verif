@@ -103,7 +103,7 @@ SIM_LIBS    := \$(PROJ_ROOT_DIR)/lib/sim_libs
 
 # RTL source files for the CV32E core
 # DESIGN_RTL_DIR is used by CV32E40P_MANIFEST file
-CV32E40P_PKG         := $(PROJ_ROOT_DIR)/core-v-cores/cv32e40p
+CV32E40P_PKG         := $(PROJ_ROOT_DIR)/core-v-cores/cv32e40p$(ARCH)
 CV32E40P_RTLSRC_INCDIR  := $(CV32E40P_PKG)/rtl/include
 CV32E40P_RTLSRC_PKG  := $(CV32E40P_PKG)/rtl/fpnew/src/fpnew_pkg.sv \
 				$(addprefix $(CV32E40P_RTLSRC_INCDIR)/,\
@@ -122,7 +122,7 @@ export DESIGN_RTL_DIR = $(CV32E40P_PKG)/rtl
 
 ### Creation of variables for benchmark tasks
 STAGE ?= cv32e40p_id_stage
-SV_STAGE := $(PROJ_ROOT_DIR)/core-v-cores/cv32e40p/rtl/$(STAGE).sv
+SV_STAGE := $(PROJ_ROOT_DIR)/core-v-cores/cv32e40p$(ARCH)/rtl/$(STAGE).sv
 VLOG_SV_STAGE := $(basename $(notdir $(SV_STAGE)))
 VOPT_SV_STAGE := $(addsuffix _vopt, $(VLOG_SV_STAGE))
 DPILIB_VSIM_OPT := +dumpports+nocollapse
