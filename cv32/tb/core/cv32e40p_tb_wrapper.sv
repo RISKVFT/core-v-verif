@@ -106,8 +106,7 @@ end
                  .PULP_CLUSTER     (PULP_CLUSTER),
                  .FPU              (FPU),
                  .PULP_ZFINX       (PULP_ZFINX),
-                 .NUM_MHPMCOUNTERS (NUM_MHPMCOUNTERS),
-				 .ID_FAULT_TOLERANCE(FT)
+                 .NUM_MHPMCOUNTERS (NUM_MHPMCOUNTERS)
                 )
     cv32e40p_core_i
         (

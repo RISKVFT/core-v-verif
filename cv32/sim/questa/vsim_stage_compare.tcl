@@ -1,4 +1,4 @@
-set CORE_V_VERIF "/home/thesis/marcello.neri/Desktop/core-v-verif"
+set CORE_V_VERIF "/home/thesis/elia.ribaldone/Desktop/core-v-verif"
 set SIM_BASE "$env(SIM_BASE)"
 set GOLD_NAME "$env(GOLD_NAME)"
 set STAGE_NAME "$env(STAGE_NAME)"
@@ -40,33 +40,87 @@ if { ${STAGE_NAME} == "cv32e40p_core" } {
 	set REAL_STAGE_NAME "cv32e40p_${STAGE_NAME}"
 }
 
+set flag 0
+set n_fault 0
 # Find all signals that we use in fault injection
 # we use _i to filter out clock and reset 
 set sim_fi_sig [ concat [ concat  [ find nets  "sim:/${REAL_STAGE_NAME}/*_i" ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] 
+if [ file exists "${signals_filename}" ] {
+	# If the file exist this function enable the script to continue
+	# from where it is stopped !!
+	set fp [open "${signals_filename}" "r"]
+	set filedata [read $fp]
+	close $fp
+	set file_lines [llength [ split $filedata "\n" ]]
+	set len_sim_fi_sig [llength $sim_fi_sig]
 
-# open file of signal in order to delete previous data
-set fp_sig [ open "${signals_filename}" "w" ]
-foreach sig $sim_fi_sig {
-	puts $fp_sig "All_signals:$sig"
+	if { $file_lines > $len_sim_fi_sig } {
+		set sim_fi_sig []
+		set n_fault 0
+
+		foreach line [ split $filedata "\n" ] {
+			if [ string match "All_signals:*" $line ] {
+				# Save signals
+				lappend sim_fi_sig [lindex [split $line ":"] 1]
+				lappend l_bit_ft {}
+			} else {
+				if [ string match "sig_fault:*" $line ]  {
+				        set sig_name [lindex [ split [ lindex [ split $line ":" ]  2 ] "\[" ] 0 ]               
+				        set sig_id [lindex [split [lindex [split $line ":" ] 3] " "] 0]
+				        set sig_index [lsearch $sim_fi_sig $sig_name ]
+				        lset l_bit_ft $sig_index [ concat [ lindex $l_bit_ft $sig_index ] [ list $sig_id ] ]
+					incr n_fault
+				}
+			}
+
+		}
+
+		if { $n_fault >= $CYCLE } {
+			puts "################################################################"
+			puts "You are tring to simulate a simulation that is already done, if you want to resimulate delete file:"
+			puts "${signals_filename}"
+			puts "################################################################"
+			exit 
+		}
+		set fp_cycle [ open "${cycle_filename}" "w" ]
+		puts $fp_cycle "$n_fault"
+		puts $fp_cycle "2000"
+		close $fp_cycle	
+	
+	} else {
+		set flag 1
+	}	
+
+} else {
+	set flag 1
 }
-close $fp_sig
 
-set len_sim_fi_sig [llength $sim_fi_sig]
+if { $flag == 1 } {
+	set len_sim_fi_sig [llength $sim_fi_sig]
+	# open file of signal in order to delete previous data
+	set fp_sig [ open "${signals_filename}" "w" ]
+	foreach sig $sim_fi_sig {
+		puts $fp_sig "All_signals:$sig"
+	}
+	close $fp_sig
+	# table of bits where we have applied fault injection because we don't want to do fault injection on the same signal at the same clock cysle two times
+	set l_bit_ft {}
+
+	for {set k 0} {$k<$len_sim_fi_sig} {incr k} {
+		lappend l_bit_ft {}
+	}
+
+}
+
 
 set fp_info [ open "${info_filename}" "w" ]
 puts $fp_info "Number_of_signal:$len_sim_fi_sig"
 close $fp_info	
 
-# table of bits where we have applied fault injection because we don't want to do fault injection on the same signal at the same clock cysle two times
-set l_bit_ft {}
-
-for {set k 0} {$k<$len_sim_fi_sig} {incr k} {
-	lappend l_bit_ft {}
-}
 
 
 puts "INFO: before cycle CYCLE=$CYCLE"
-for {set i 0} {$i<$CYCLE} {incr i} {
+for {set i $n_fault} {$i<$CYCLE} {incr i} {
 		
 	# set start time of simulation 
 	set start_time [clock milliseconds]
@@ -77,7 +131,7 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 
 	##################################################################
 	####### Open gold simulation 
-	if { $i == 0 } {	
+	if { $i == $n_fault } {	
 		dataset open ./dataset/${GOLD_NAME}_out.wlf
 
 		set GOutSignals [ find nets "${GOLD_NAME}_out:/$SIM_BASE/${STAGE_NAME}_i/*_o" ]
@@ -117,8 +171,7 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 		while { $find_n == 1 } {		
 			# Find instant time in which inject, this instant
 			# will be selected between 0 and ENDSIM/2
-			#set fi_instant [expr {int(rand()*($ENDSIM-2*10))} ] ###moved to line 112	
-			run $fi_instant ns
+			set fi_instant [expr {int(rand()*($ENDSIM-2*10))} ] 	
 			
 			puts "INFO: cycle $i"
 			# index of signal in which inject signal
@@ -172,7 +225,7 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 			puts "INFO: row number = $bit_value"
 	
 		    # for non replacement
-			set compare_sig [ concat $bit_choose_array "\[$bit_choose\]" "_" $fi_instant ]	
+			set compare_sig "${bit_choose_array}\[${bit_choose}\]${fi_instant}"
 			set find_n 0
 			#check find_n
 			foreach ll [ lindex $l_bit_ft $sig_index ] {
@@ -193,13 +246,16 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 
 		force -deposit "$sig_fi\[$bit_choose\]" $bit_force_value
 		
+		run $fi_instant ns
+		
 	}
+
 	
 	#################################################################
 	###### Begin comparation between gold and current simulation
 
 	compare start ${GOLD_NAME}_out sim
-	compare options -maxtotal 1000
+	compare options -maxtotal 1
 	compare options -track
 	
 	# These two line find gold and current simulation ouput signal and order it using ord_list function 
@@ -261,17 +317,18 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 		#set error_number [ lindex [ compare info ] 12 ]
 		set error_number [string map {" " ""} [lindex [ split [lindex [split [compare info] "\n"] 1 ] "=" ] 1]]
 
-		puts "INFO: compare_info: [compare info]"
+			#puts "INFO: compare_info: [compare info]"
 		puts "INFO: number of errors: $error_number"
 		if { $error_number == 0 } {
+ 			set remaining [expr $ENDSIM-$now]
 			set clock_period 10
-			set num_run_cycles [expr $ENDSIM/($clock_period*10)]
-			set num_compare [ expr $remaining/($clock_period*$num_run_cycles) ]
-			set run_time [expr $num_run_cycles*$clock_period ]
-			for {set c 0} {$c < $num_compare} { incr c } {
+			set num_run_cycles 10 
+			set num_clock_for_cycle [expr $remaining/($clock_period*$num_run_cycles)]
+			set run_time [expr $num_clock_for_cycle*$clock_period ]
+			for {set c 0} {$c < $num_run_cycles} { incr c } {
 				run ${run_time}
-				set error_number [ lindex [ compare info ] 12 ]
-				if { $error_number > 0 } {
+				set error_number [string map {" " ""} [lindex [ split [lindex [split [compare info] "\n"] 1 ] "=" ] 1]]
+				if { $error_number != 0 } {
 					break
 				}
 			}
@@ -309,7 +366,7 @@ for {set i 0} {$i<$CYCLE} {incr i} {
 	if {$FI > 0} {
 		# Print on file informations about faults and errors produced
 		set fp_sig [ open "${signals_filename}" "a" ]
-		puts $fp_sig "sig_fault: signal_name:$sig_fi\[$bit_choose\]  value:$bit_force_value  fi_instant:$fi_instant SIM_ERROR:$error_number time_for_this_simulation:[expr $end_time-$start_time]" 
+		puts $fp_sig "sig_fault: signal_name:$sig_fi\[$bit_choose\] sim_id:$compare_sig  value:$bit_force_value  fi_instant:$fi_instant SIM_ERROR:$error_number time_for_this_simulation:[expr $end_time-$start_time]" 
 		close $fp_sig
 		
 		set fp_cycle [ open "${cycle_filename}" "w" ]

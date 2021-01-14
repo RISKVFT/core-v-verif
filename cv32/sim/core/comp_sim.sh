@@ -213,18 +213,23 @@ verify_upi_vcdwlf () {
 	db_becho "INFO: ./sim_FT/dataset/gold_${ARCH_TO_COMPARE}_${real_stg}_${swc}_in.vcd exists?"
 	if [[ ! -f ./sim_FT/dataset/gold_${ARCH_TO_COMPARE}_${real_stg}_${swc}_in.vcd ]]; then
 		local pipe_in=/tmp/save_in
-		local pipe_out=/tmp/save_out
 		mkfifo $pipe_in
-		mkfifo $pipe_out
 		# Creation of vcd that contain input of stage
 		db_becho "PROCESS: Creation of vcd that contains inputs of the stage $stg with program $sw ..."
 		execute_in_terminal "./comp_sim.sh -b sbv $sw $stg save_data_in -p $pipe_in" "save_in"
 		kill_terminal_when_it_finished "$pipe_in" "save_in"
 		delete_pipe "$pipe_in"
+	fi
+	if [[ ! -f ./sim_FT/dataset/gold_${ARCH_TO_COMPARE}_${real_stg}_${swc}_out.wlf ]]; then
+		local pipe_out=/tmp/save_out
+		mkfifo $pipe_out
+		# Creation of vcd that contain input of stage
+		db_becho "PROCESS: Creation of wlf that contains output of the stage $stg with program $sw ..."
 		execute_in_terminal "./comp_sim.sh -b sbv $sw $stg save_data_out -g -p $pipe_out" "save_out"
 		kill_terminal_when_it_finished "$pipe_out" "save_out"
 		delete_pipe "$pipe_out"
 	fi
+
 	
 }
 
@@ -271,7 +276,7 @@ function clear_id_from_regular_expression () {
 	# Called by -c option
 	# clear id that match a specific regular expression
 	# $1 regular expression
-	local id=$1
+	local id_to_delete=$1
 	local new_SIM_IDS=""	
 	# Backup simulations
 	mkdir -p $ERROR_DIR_BACKUP
@@ -280,16 +285,19 @@ function clear_id_from_regular_expression () {
 	# Delete simulation selected
 	for id in $SIM_IDS; do
 		echo $id
-		if [[ $id =~ $id ]]; then
+		if [[ $id =~ $id_to_delete ]]; then
 			ask_yesno "QUESTION: Do you really want to delete $id simulation(y/n)?"
 			if [[ $ANS -eq 1 ]]; then
-				rm $ERROR_DIR/*$id*
+				files=$(ls $ERROR_DIR | grep "$id")
+				for ff in $files; do
+					rm $ERROR_DIR/$ff
+				done
 			else
-				echo "INFO: This simulation don't will be deleted."
-				new_SIM_IDS="$SIM_IDS $id"
+				echo "INFO: This simulation won't be deleted."
+				new_SIM_IDS="$new_SIM_IDS $id"
 			fi
 		else
-			new_SIM_IDS="$SIM_IDS $id"
+			new_SIM_IDS="$new_SIM_IDS $id"
 		fi	
 	done
 	
@@ -478,11 +486,6 @@ function sim_unique_program () {
 		fi	
 	fi
 
-	if ! [[ -z ${CV32E40P_CUR_BRANCH+x} ]]; then
-		export CV32E40P_CUR_BRANCH=$(get_git_branch $CORE_V_VERIF/core-v-cores/cv32e40p)
-		echo $CV32E40P_CUR_BRANCH
-	fi
-
 	if [[ $VSIM_FILE == " " ]]; then
 		if ! test -f $CORE_V_VERIF/cv32/sim/questa/$VSIM_FILE; then
 			recho_exit "Error: when you give 'v' parameter you should give\
@@ -667,7 +670,6 @@ function sim_benchmark_programs () {
 	fi
 	if  [[ $VSIM_EXT == "_stage_compare" ]]; then
 		SET_UPI=1
-		export CYCLE=1 
 		export SWC="$(echo $B_FILE | tr '-' '_')"
 		findEndsim $SWC $STG $STAGE_NAME
 		export T_ENDSIM=$endsim
@@ -675,6 +677,7 @@ function sim_benchmark_programs () {
 		## aggiunti per il momento
 		mkdir -p $ERROR_DIR
 		ID="$STG-$SWC-$CYCLE-$FI"
+		bd_becho "-----------ID:$ID"
 
 		export COMPARE_ERROR_FILE="$ERROR_DIR/$compare_error_file_prefix$ID.txt"
 		export INFO_FILE="$ERROR_DIR/$info_file_prefix$ID.txt"
@@ -711,10 +714,6 @@ function sim_benchmark_programs () {
 				fi
 			fi
 		fi	
-	fi
-	if ! [[ -z ${CV32E40P_CUR_BRANCH+x} ]]; then
-		export CV32E40P_CUR_BRANCH=$(get_git_branch $CORE_V_VERIF/core-v-cores/cv32e40p)
-		echo $CV32E40P_CUR_BRANCH
 	fi
 
 	if [[ $VSIM_FILE == " " ]]; then
@@ -897,11 +896,11 @@ function manage_stage_fault_injection_upi () {
 			else
 				cycle_time_sum=$( echo "$cycle_time_sum+$cycle_time" | bc -l)
 				cycle_time_mean=$( echo "$cycle_time_sum/$current_cycle" | bc -l)
-				percentage=$(($current_cycle*100/$CYCLE))
+				percentage=$( echo "scale=2; $current_cycle*100/$CYCLE" | bc -l)
 				time_left=$( echo "(($CYCLE-$current_cycle)*$cycle_time_mean)/1000" \
 						| bc -l | cut -d "." -f 1)
 				cycle_time_mean_sec=$(echo "scale=2; $cycle_time_mean/1000" | bc -l)
-				cycle_time_sec="$cycle_time_mean_sec|$(echo "scale=2; $cycle_time/1000" | bc -l)"
+				cycle_time_sec="m:$cycle_time_mean_sec|tcy:$(echo "scale=2; $cycle_time/1000" | bc -l)|cy:$current_cycle"
 
 				# send info to mail process
 				echo -e "Time-left: $(show_time $time_left)" > "$file_info_mail"
@@ -931,7 +930,7 @@ function manage_stage_fault_injection_upi () {
 	
 	destroy_scroll_area
 	
-	sleep 0.5
+	sleep 2
 	elaborate_simulation_output "$ID"
 
 	kill_terminal "mail"
@@ -957,6 +956,16 @@ function sim_stage_fault_injection_upi () {
 	# cycle on args string
 	for (( i=0; i< ${#arg}; i++ )) ; do
 		case ${arg:i:1} in
+			a) #architecture to test
+				ARCH_TO_USE="$1"
+				SetVar "ARCH_TO_USE" "$ARCH_TO_USE"
+				export $ARCH_TO_USE
+				shift;;
+			t) #architecture to compare 
+				ARCH_TO_COMPARE="$1";
+				SetVar "ARCH_TO_COMPARE" "$ARCH_TO_COMPARE"
+				export $ARCH_TO_COMPARE
+				shift;;
 			c)# cycle
 				# metti solo gli export e' via			
 				export CYCLE=$1
@@ -1052,7 +1061,9 @@ function sim_stage_fault_injection_upi () {
 	db_becho "INFO: send ID through pipe"
 
 	if [[ $(idExists $ID) == "0" ]]; then
+		db_becho "INFO: Saving IDs for next simulation"
 		SetVar "SIM_IDS" "$STG-$SWC-$CYCLE-$FI $SIM_IDS"
+		SIM_IDS="$STG-$SWC-$CYCLE-$FI $SIM_IDS"
 	fi
 	export COMPARE_ERROR_FILE="$ERROR_DIR/$compare_error_file_prefix$ID.txt"
 	export INFO_FILE="$ERROR_DIR/$info_file_prefix$ID.txt"
@@ -1080,7 +1091,7 @@ function sim_stage_fault_injection_upi () {
 
 
 			db_becho "Simulation end time $T_ENDSIM"
-			./comp_sim.sh -b svb $SW stage_compare $STG -upi
+			sim_benchmark_programs svb $SW stage_compare $STG -upi
 			timetwo=$(date +%s)
 			sim_total_time=$(($timetwo-$timeone))
 			echo "Total_sim_time:$sim_total_time" >> "$INFO_FILE"
@@ -1101,7 +1112,7 @@ function sim_stage_fault_injection_upi () {
 		
 		db_becho "Simulation end time $T_ENDSIM"
 
-		./comp_sim.sh -b svb $SW stage_compare $STG -upi
+		sim_benchmark_programs atsvb $ARCH_TO_USE $ARCH_TO_COMPARE $SW stage_compare $STG -upi
 		
 		timetwo=$(date +%s)
 		sim_total_time=$(($timetwo-$timeone))
@@ -1197,7 +1208,7 @@ function elaborate_simulation_output () {
 ###########################################################################################
 
 ## General variable
-CORE_V_VERIF="/home/thesis/marcello.neri/Desktop/core-v-verif"
+CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
 COMMONMK="$CORE_V_VERIF/cv32/sim/core/sim_FT/Common.mk"
 
 isnumber='^[0-9]+$'
@@ -1231,15 +1242,17 @@ CHEX_FILE=" "
 VSIM_EXT=""
 export GUI=""
 export SIM_BASE="tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
-export STAGE_NAME="cv32e40p_core"
+export STAGE_NAME="if_stage"
 
 VERBOSE=1
 
 # ARCH
-A_REF_REPO="https://github.com/openhwgroup/cv32e40p.git"
+A_REF_REPO="https://github.com/RISKVFT/cv32e40p.git"
 A_REF_BRANCH="master"
+A_REF_REPO_NAME="cv32e40p_ref"
 A_FT_REPO="https://github.com/RISKVFT/cv32e40p.git"
 A_FT_BRANCH="master"
+A_FT_REPO_NAME="cv32e40p_ft"
 
 # Set variable are used to correctly end program if only
 # this action are done, for example if only git repo 
@@ -1254,11 +1267,12 @@ SET_UPI=0
 #TEST_DIR="$CUR_DIR/../../tests/programs/riscv-toolchain-blogpost/out"
 CLEAROUT=0
 TERMINAL_PID=""
+export CYCLE=1
 
 # Error variale
 ERROR_DIR="$CORE_V_VERIF/cv32/sim/core/sim_FT/sim_out"
 ERROR_DIR_BACKUP="$CORE_V_VERIF/cv32/sim/core/sim_FT/.sim_out_backup"
-SIM_IDS="if_stage-fibonacci-6600-1 if_stage-hello_world-3-1 if_stage-hello_world-10-1 if_stage-hello_world-10-1 id_stage-fibonacci-10-1 --1-0 id_stage-fibonacci-16600-1"
+SIM_IDS=""
 compare_error_file_prefix="cnt_error_"
 info_file_prefix="info_"
 cycle_file_prefix="cycle_"
@@ -1267,6 +1281,68 @@ export SIM_CYCLE_NUMBER_FILE="$ERROR_DIR/cycles_number_coverage.txt"
 
 SEND=0
 PIPENAME=""
+
+###########################################################################################
+#  CLONE of cv32e40p  repository    #######################################################
+###########################################################################################
+
+# Verify that the ref and ft architecture exist otherwise clone it
+function verify_branch(){
+	local ft_repo=$CORE_V_VERIF/core-v-cores/$A_FT_REPO_NAME
+	local ref_repo=$CORE_V_VERIF/core-v-cores/$A_REF_REPO_NAME
+	local gitref="git --git-dir $ref_repo/.git"
+	local gitft="git --git-dir $ft_repo/.git"
+	
+	cd $CORE_V_VERIF/core-v-cores/
+	if test -d  $ref_repo ; then
+		local current_branch=$($gitref branch | grep \* | cut -d " " -f 2)
+
+		# Verify if the current branch is equal to the setted branch
+		if [[ $current_branch != $A_REF_BRANCH ]]; then
+			# Verify if user want to change branch
+			ask_yesno "Are you sure to change REF branch from\
+					$current_branch to $A_REF_BRANCH?? (y/n)"
+			if [[ $ANS -eq 1 ]];then
+				# Checkout of setted branch if current branch is different
+				$gitref checkout $A_REF_BRANCH 
+				make -C $ref_repo deps
+			fi
+		else
+			# If the current branch is correct we pull from git 
+			$gitref pull $A_REF_REPO
+		fi
+	else
+		# Clone repository if it doesn't exists
+		git clone -b $A_REF_BRANCH $A_REF_REPO $A_REF_REPO_NAME 
+		make -C $ref_repo deps
+	fi
+
+	if test -d  $ft_repo; then
+		local current_branch=$($gitft branch | grep \* | cut -d " " -f 2)
+
+		# Verify if the current branch is equal to the setted branch
+		if [[ $current_branch != $A_FT_BRANCH ]]; then
+			# Verify if user want to change branch
+			ask_yesno "Are you sure to change FT branch from\
+					$current_branch to $A_FT_BRANCH?? (y/n)"
+			if [[ $ANS -eq 1 ]];then
+				# Checkout of setted branch if current branch is different
+				$gitft checkout $A_FT_BRANCH 
+				make -C $ft_repo deps
+			fi
+		else
+			# If the current branch is correct we pull from git 
+			$gitft pull $A_FT_REPO
+		fi
+	else
+		git clone -b $A_FT_BRANCH $A_FT_REPO $A_FT_REPO_NAME
+		make -C $ft_repo deps
+	fi
+
+	# return to previous dir
+	cd -
+}
+
 
 ###########################################################################################
 #  ARGUMENT HANDLER AND ELABORATION #######################################################
@@ -1411,6 +1487,7 @@ while [[ $1 != "" ]]; do
 			else
 				local real_stg=$2
 			fi
+			verify_branch
 			verify_upi_vcdwlf $1 $2 $real_stg
 			exit 1
 			;;
@@ -1452,8 +1529,8 @@ echo "elabpar : $ELABPAR"
 # CONTROLS 
 ####################################################################################################
 
+verify_branch
 
-export CV32E40P_CUR_BRANCH=$(get_git_branch $CORE_V_VERIF/core-v-cores/cv32e40p)
 
 
 #####################################################################################################

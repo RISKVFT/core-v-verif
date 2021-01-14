@@ -1081,17 +1081,22 @@ function signals_elaboration () {
 
 	# TODO: add percentage of fault tolerance for each signal
 	MEAN_ERROR=""
+	N_ERR=""
 	for sig in $signals; do
 		local l_errors=$(grep $sig $file_sig | grep sig_fault | tr -s " " |\
 		       	cut -d " " -f 5 | cut -d ":" -f 2)
 		local err_n=$(echo $l_errors | wc -w )
 		if [[ $err_n -gt 0 ]]; then
 			local tot_errors=0
+			local n_err=0
 			for err in $l_errors; do
 				let tot_errors=tot_errors+$err
+				if [[ $err -gt 0 ]]; then
+					let n_err=$n_err+1
+				fi
 			done
 			local mean_error=$( echo "scale=2; $tot_errors/$err_n" | bc -l)
-			MEAN_ERROR="$MEAN_ERROR mean:$mean_error#$sig"
+			MEAN_ERROR="$MEAN_ERROR nerr:$(echo "scale=4;$n_err/$err_n" | bc -l)#mean:$mean_error#nerr:$n_err#$err_n#$sig"
 		fi
 	done
 }
@@ -1103,6 +1108,7 @@ function elaborate_simulation_output () {
 	############ CONTROLS  #################################
 	local id=$1
 	check_id $id
+	local file_sig="$ERROR_DIR/signals_fault_injection_$id.txt"
 
 	#cat signals_fault_injection_id_stage-fibonacci-16600-1.txt | grep sig_fault | \
 	#o	sort -k 5.12,5.16 -n | tr -s " " | cut -d " " -f 5 | cut -d ":" -f 2
@@ -1110,12 +1116,12 @@ function elaborate_simulation_output () {
 	############ TAKE DATA #################################
 	local stg=$(echo $id | cut -d "-" -f 1)
 	local swc=$(echo $id | cut -d "-" -f 2)
-	local tot_cycle=$(echo $id | cut -d "-" -f 3)
+	local tot_cycle=$(cat "$file_sig" | grep "fault:" | wc -l)
 	local fi=$(echo $id | cut -d "-" -f 4)
 	local err_file="$ERROR_DIR/$compare_error_file_prefix$id.txt"
 	local info_file="$ERROR_DIR/$info_file_prefix$id.txt"
 	### Take data from files 
-	local error=$(cat "$err_file")
+	local error=$(cat "$file_sig" | grep "fault:" | cut -d " " -f 7 | grep -v ":0" | wc -l )
 	local sim_total_time=$(cat "$info_file" | grep Total_sim_time | cut -d ":" -f 2)
 	local n_of_signal=$(cat "$info_file" | grep Number_of_signal | cut -d ":" -f 2)
 
@@ -1212,7 +1218,7 @@ TERMINAL_PID=""
 # Error variale
 ERROR_DIR="$CORE_V_VERIF/cv32/sim/core/sim_FT/sim_out"
 ERROR_DIR_BACKUP="$CORE_V_VERIF/cv32/sim/core/sim_FT/.sim_out_backup"
-SIM_IDS="if_stage-fibonacci-6600-1 if_stage-hello_world-3-1 if_stage-hello_world-10-1 if_stage-hello_world-10-1 id_stage-fibonacci-10-1 --1-0 id_stage-fibonacci-16600-1"
+SIM_IDS="if_stage-fibonacci-16600-1 if_stage-fibonacci-6600-1 if_stage-hello_world-3-1 if_stage-hello_world-10-1 if_stage-hello_world-10-1 id_stage-fibonacci-10-1 --1-0 id_stage-fibonacci-16600-1"
 compare_error_file_prefix="cnt_error_"
 info_file_prefix="info_"
 cycle_file_prefix="cycle_"

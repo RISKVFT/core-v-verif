@@ -174,7 +174,7 @@ unit-test-gui: $(SIMULATOR)-unit-test-gui
 # Common Makefile:
 #    - Core Firmware and the RISCV GCC Toolchain (SDK)
 #    - Variables for RTL dependencies
-include $(PROJ_ROOT_DIR)/cv32/sim/core/sim_FT/Common.mk
+##include $(PROJ_ROOT_DIR)/cv32/sim/core/sim_FT/Common.mk
 
 
 # assume verilator if no target chosen
@@ -336,18 +336,6 @@ questa-clean:
 
 ###############################################################################
 
-clone_cv32e40p_rtl:
-	$(CLONE_CV32E40P_CMD)
-
-clone_fpnew_rtl: clone_cv32e40p_rtl
-	$(CLONE_FPNEW_CMD)
-
-$(CV32E40P_PKG):
-	$(CLONE_CV32E40P_CMD)
-	$(CLONE_FPNEW_CMD)
-
-
-###############################################################################
 # general targets
 .PHONY: tc-clean
 	

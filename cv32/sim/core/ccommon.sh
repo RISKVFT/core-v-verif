@@ -60,6 +60,7 @@ gitRepoBranchExist() {
 }
 
 repMakeFile () {
+	# Replace a variable in a makefile
         key=$1 # keyword
         file=$2 # file with absolute path
         to_rep=$3 # word to replace
@@ -261,7 +262,7 @@ f_make () {
 	logfile=$2
 	override=$3
 	lineno=$4
-	db_gecho "sielnt comp:$SILENT_COMP"
+	db_gecho "silent comp:$SILENT_COMP"
         #mon_run "make -C $SIM_FT questa-sim$GUI \
         #TEST_FILE=\"$BENCH_HEX_DIR/${firmware:0:-4}\" FT=\"$VSIM_EXT\"" "$logfile" "$override" "$lineno"
 	echo "---------------$GUI"
@@ -493,13 +494,14 @@ print_bar_text() {
     color="${LG}"
 
     # Prepare progress bar
-    let complete_size=($bar_size*$percentage)/100
+    local percentage_int=$(echo "scale=0; $percentage/1" | bc -l)
+    let complete_size=($bar_size*$percentage_int)/100
     let remainder_size=$bar_size-$complete_size
     progress_bar=$(echo -ne "|"; echo -en "${color}"; printf_new "█" $complete_size; echo -en "${RESTORE_FG}${RESTORE_BG}"; printf_new " " $remainder_size; echo -ne "|");
 
     # Print progress bar
     t=$(show_time $time_left)
-    echo -ne "${LR}T left: ${LW}${t} ${RESTORE_FG}${RESTORE_BG}|$cycle_t| ${LC}${percentage}% ${RESTORE_FG}${RESTORE_BG} ${progress_bar}"
+    echo -ne "${LR}Tleft:${LW}${t}${RESTORE_FG}${RESTORE_BG}|$cycle_t|${LC}${percentage}%${RESTORE_FG}${RESTORE_BG} ${progress_bar}"
 }
 
 enable_trapping() {

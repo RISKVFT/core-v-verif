@@ -70,11 +70,10 @@ else
 endif
 
 # Generate command to clone the FPNEW RTL
-ifeq ($(FPNEW_BRANCH), master)
+git clone -b $(CV32E40P_BRANCH) --single-branch $(CV32E40P_REPO) --recurse $(CV32E40P_PKG)ifeq ($(FPNEW_BRANCH), master)
   TMP2 = git clone $(FPNEW_REPO) --recurse $(FPNEW_PKG)
 else
   TMP2 = git clone -b $(FPNEW_BRANCH) --single-branch $(FPNEW_REPO) --recurse $(FPNEW_PKG)
-endif
 
 ifeq ($(FPNEW_HASH), head)
   CLONE_FPNEW_CMD = $(TMP2)
