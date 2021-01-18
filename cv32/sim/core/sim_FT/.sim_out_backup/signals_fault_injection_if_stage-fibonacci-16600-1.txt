@@ -3976,3 +3976,4 @@ sig_fault: signal_name:/cv32e40p_if_stage/depc_i[9]  value:1  fi_instant:799511 
 sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/state_q[0]  value:1  fi_instant:384621 SIM_ERROR:251749 time_for_this_simulation:8099
 sig_fault: signal_name:/cv32e40p_if_stage/m_trap_base_addr_i[5]  value:1  fi_instant:70454 SIM_ERROR:1075403 time_for_this_simulation:30166
 sig_fault: signal_name:/cv32e40p_if_stage/m_exc_vec_pc_mux_i[0]  value:1  fi_instant:198734 SIM_ERROR:895614 time_for_this_simulation:25245
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/cnt_q[0] sim_id:[0]367512  value:1  fi_instant:367512 SIM_ERROR:262884 time_for_this_simulation:8889
