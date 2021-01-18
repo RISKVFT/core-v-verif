@@ -191,7 +191,7 @@ dfSetVar (){
 		fi
 	else
 		if test -$df $dirorfile ; then
-			recho_echo "AHhhhh you give me an absolute\
+			db_recho "AHhhhh you give me an absolute\
 			path buth I need path from \
 			CORE_V_VERIF=$CORE_V_VERIF dir"
 		fi

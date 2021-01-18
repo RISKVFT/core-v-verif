@@ -8,7 +8,7 @@ if not os.path.exists('out'):
     os.mkdir("out")
 
 TOPDIR = os.path.abspath(os.path.dirname(__file__))
-CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
+CORE_V_VERIF="/home/thesis/luca.fiore/Repos/core-v-verif"
 
 # If any folders need prepending to the path for a given configuration, then
 # edit the appropriate value in here. If no additional paths need prepending

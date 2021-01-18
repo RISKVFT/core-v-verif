@@ -313,8 +313,8 @@ function set_sim_arch () {
 	# BASE   "-a ref|ft REPO BRANCH"
 	#   ref     save the ref git REPO and BRANCH 
 	#		"-a ref https://github.com/openhwgroup/cv32e40p.git master"
-	#   ft     save the dut git REPO and BRANCH
-	#		"-a dut https://github.com/RISKVFT/cv32e40p.git FT_Marcello"
+	#   ft     save the ft git REPO and BRANCH
+	#		"-a ft https://github.com/RISKVFT/cv32e40p.git FT_Marcello"
 	#   s [ft|ref]     set current arch , default is ft
 	#		"-a s ref -b s a" -> simula tutto il benchmark utilizzando l'arch ft
 	if [[ $1 == "ref" || $1 == "ft" ]];then
@@ -425,7 +425,8 @@ function sim_unique_program () {
 			s)# case like "-u sf filename" only simulation or both
 				db_becho "To do: simulation"
 				SIMULATION=1;;
-			f)# parameter to give filename of .c file to compile or to 
+			f)# TODO --> 
+                          # parameter to give filename of .c file to compile or to 
 			  # simulate their name should be the same apart the extention
 			  # cmd like"-u csf filename" o "-u csfv filename vsimname"
 				db_becho "Set filename of *.c file to $1.c"
@@ -437,18 +438,16 @@ function sim_unique_program () {
 				VSIM_EXT="_$1"; shift;;
 			d)# 
 				SET_DIR=1
-				UNIQUE_CHEX_DIR=$1
+				UNIQUE_CHEX_DIR=${CORE_V_VERIF}/$1
 				dfSetVar d $1 "UNIQUE_CHEX_DIR" "Set hex/c file directory" \
 					"give a correct directory for executable and hex!!"
-				shift
-				exit 1;;
+				shift;;
 			l)
 				SET_LOG=1
 				U_LOG_DIR=$1
 				dfSetVar d $1 "U_LOG_DIR" "Set log file directory" \
 					"give a correct directory for log file!!" CREATE
-				shift
-				exit 1;;
+				shift;;
 				
 			*)
 				
@@ -1208,7 +1207,7 @@ function elaborate_simulation_output () {
 ###########################################################################################
 
 ## General variable
-CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
+CORE_V_VERIF="/home/thesis/luca.fiore/Repos/core-v-verif"
 COMMONMK="$CORE_V_VERIF/cv32/sim/core/sim_FT/Common.mk"
 
 isnumber='^[0-9]+$'
@@ -1223,7 +1222,7 @@ export $ARCH_TO_COMPARE
 
 # Folder that contain *.c file (and after compilation the *.hex file) of
 # unique program to use as architecture firmware
-UNIQUE_CHEX_DIR="$CORE_V_VERIF/cv32/tests/programs/custom_FT/general_tests/hello-world"
+UNIQUE_CHEX_DIR="$CORE_V_VERIF//cv32/tests/programs/custom_FT/general_test/fibonacci/"
 U_LOG_DIR="$CORE_V_VERIF/cv32/sim/core/u_log"
 mkdir -p $U_LOG_DIR
 
@@ -1247,11 +1246,11 @@ export STAGE_NAME="if_stage"
 VERBOSE=1
 
 # ARCH
-A_REF_REPO="https://github.com/RISKVFT/cv32e40p.git"
+A_REF_REPO="https://github.com/openhwgroup/cv32e40p.git"
 A_REF_BRANCH="master"
 A_REF_REPO_NAME="cv32e40p_ref"
-A_FT_REPO="https://github.com/RISKVFT/cv32e40p.git"
-A_FT_BRANCH="master"
+A_FT_REPO="https://github.com/RISKVFT/cv32e40p"
+A_FT_BRANCH="FT_Luca"
 A_FT_REPO_NAME="cv32e40p_ft"
 
 # Set variable are used to correctly end program if only
@@ -1291,18 +1290,20 @@ function verify_branch(){
 	local ft_repo=$CORE_V_VERIF/core-v-cores/$A_FT_REPO_NAME
 	local ref_repo=$CORE_V_VERIF/core-v-cores/$A_REF_REPO_NAME
 	local gitref="git --git-dir $ref_repo/.git"
-	local gitft="git --git-dir $ft_repo/.git"
-	
+	local current_branch=""
+
 	cd $CORE_V_VERIF/core-v-cores/
 	if test -d  $ref_repo ; then
-		local current_branch=$($gitref branch | grep \* | cut -d " " -f 2)
+		current_branch=$($gitref branch | grep \* | cut -d " " -f 2)
+	fi
 
+	if [[ $current_branch != "" ]]; then
 		# Verify if the current branch is equal to the setted branch
 		if [[ $current_branch != $A_REF_BRANCH ]]; then
 			# Verify if user want to change branch
 			ask_yesno "Are you sure to change REF branch from\
 					$current_branch to $A_REF_BRANCH?? (y/n)"
-			if [[ $ANS -eq 1 ]];then
+			if [[ $ANS -eq 1 ]]; then
 				# Checkout of setted branch if current branch is different
 				$gitref checkout $A_REF_BRANCH 
 				make -C $ref_repo deps
@@ -1317,15 +1318,19 @@ function verify_branch(){
 		make -C $ref_repo deps
 	fi
 
-	if test -d  $ft_repo; then
-		local current_branch=$($gitft branch | grep \* | cut -d " " -f 2)
+	current_branch=""
 
+	if test -d  $ft_repo ; then
+		current_branch=$($gitft branch | grep \* | cut -d " " -f 2)
+	fi
+
+	if [[ $current_branch != "" ]]; then
 		# Verify if the current branch is equal to the setted branch
 		if [[ $current_branch != $A_FT_BRANCH ]]; then
 			# Verify if user want to change branch
 			ask_yesno "Are you sure to change FT branch from\
 					$current_branch to $A_FT_BRANCH?? (y/n)"
-			if [[ $ANS -eq 1 ]];then
+			if [[ $ANS -eq 1 ]]; then
 				# Checkout of setted branch if current branch is different
 				$gitft checkout $A_FT_BRANCH 
 				make -C $ft_repo deps
