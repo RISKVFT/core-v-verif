@@ -309,7 +309,7 @@ function set_sim_arch () {
 	# Called by -a option
 	# This option set the ref git REPO and the derivated ft git REPO and their 
 	# relative branch, the ref git REPO can be used in the script to create
-	# a fisrt comparison in order to verify correct working of FT arch.
+	# a first comparison in order to verify correct working of FT arch.
 	# BASE   "-a ref|ft REPO BRANCH"
 	#   ref     save the ref git REPO and BRANCH 
 	#		"-a ref https://github.com/openhwgroup/cv32e40p.git master"
@@ -422,23 +422,23 @@ function sim_unique_program () {
 			c) # case like "-u cf filename" only compilation or both
 				db_becho "To do: compilation"
 				COMPILATION=1;;
-			s)# case like "-u sf filename" only simulation or both
+			s) # case like "-u sf filename" only simulation or both
 				db_becho "To do: simulation"
 				SIMULATION=1;;
-			f)# TODO --> 
-                          # parameter to give filename of .c file to compile or to 
-			  # simulate their name should be the same apart the extention
-			  # cmd like"-u csf filename" o "-u csfv filename vsimname"
+			f) # TO_DO --> 
+                           # parameter to give filename of .c file to compile or to 
+			   # simulate their name should be the same apart the extention
+			   # cmd like"-u csf filename" o "-u csfv filename vsimname"
 				db_becho "Set filename of *.c file to $1.c"
 				CHEX_FILE=$1; shift;;
-			v)# parameter to give extension to append to the vsim file 
-			  # used to execute simulation in vsim and stored in
-			  # core-v-verif/cv32/sim/questa
+			v) # parameter to give extension to append to the vsim file 
+			   # used to execute simulation in vsim and stored in
+			   # core-v-verif/cv32/sim/questa
 				db_becho "Set vsim extension to _$1"
 				VSIM_EXT="_$1"; shift;;
-			d)# 
+			d) # 
 				SET_DIR=1
-				UNIQUE_CHEX_DIR=${CORE_V_VERIF}/$1
+				UNIQUE_CHEX_DIR=${CORE_V_VERIF}$1
 				dfSetVar d $1 "UNIQUE_CHEX_DIR" "Set hex/c file directory" \
 					"give a correct directory for executable and hex!!"
 				shift;;
@@ -511,6 +511,12 @@ function sim_unique_program () {
 		recho_exit "Error: Set log directory with -u l /path/to/log/dir"
 	fi
 	if [[ $COMPILATION -eq 1 ]]; then
+
+		program=$(echo $UNIQUE_CHEX_DIR | rev | cut -d '/' -f 1 | rev)
+		if [[ $program != $CHEX_FILE ]]; then #check if the directory setted with d option is the same of the file we want to compile
+			recho_exit "Error: the file you are trying to compile is not in the directory setted by d option. Set the new directory or the correct file."
+		fi
+
 		db_gecho "Executing Makefile_Compile.mk in $UNIQUE_CHEX_DIR"
 		#make -C $SIM_FT compile TEST_FILE="$FULL_FILE_CPATH"
 		mon_run "make -C $UNIQUE_CHEX_DIR -f $SIM_FT/Makefile_Compile.mk" \
@@ -519,6 +525,12 @@ function sim_unique_program () {
 		db_gecho "$(ls $UNIQUE_CHEX_DIR)"
 	fi
 	if [[ $SIMULATION -eq 1 ]]; then
+
+		program=$(echo $UNIQUE_CHEX_DIR | rev | cut -d '/' -f 1 | rev)
+		if [[ $program != $CHEX_FILE ]]; then #check if the directory setted with d option is the same of the file we want to simulate
+			recho_exit "Error: the file you are trying to simulate is not in the directory setted by d option. Set the new directory or the correct file."
+		fi
+
 		#rm -rf $CORE_V_VERIF/cv32/sim/core/sim_FT/work	
 		source /software/europractice-release-2019/scripts/init_questa10.7c	
 		# full simulation path without extension 
@@ -1222,7 +1234,7 @@ export $ARCH_TO_COMPARE
 
 # Folder that contain *.c file (and after compilation the *.hex file) of
 # unique program to use as architecture firmware
-UNIQUE_CHEX_DIR="$CORE_V_VERIF//cv32/tests/programs/custom_FT/general_test/fibonacci/"
+UNIQUE_CHEX_DIR="${CORE_V_VERIF}/cv32/tests/programs/custom_FT/general_test/fibonacci"
 U_LOG_DIR="$CORE_V_VERIF/cv32/sim/core/u_log"
 mkdir -p $U_LOG_DIR
 
@@ -1290,6 +1302,7 @@ function verify_branch(){
 	local ft_repo=$CORE_V_VERIF/core-v-cores/$A_FT_REPO_NAME
 	local ref_repo=$CORE_V_VERIF/core-v-cores/$A_REF_REPO_NAME
 	local gitref="git --git-dir $ref_repo/.git"
+        local gitft="git --git-dir $ft_repo/.git"
 	local current_branch=""
 
 	cd $CORE_V_VERIF/core-v-cores/
@@ -1323,6 +1336,8 @@ function verify_branch(){
 	if test -d  $ft_repo ; then
 		current_branch=$($gitft branch | grep \* | cut -d " " -f 2)
 	fi
+
+        echo "Current branch: $current_branch"
 
 	if [[ $current_branch != "" ]]; then
 		# Verify if the current branch is equal to the setted branch

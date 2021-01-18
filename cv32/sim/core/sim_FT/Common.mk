@@ -19,9 +19,9 @@
 #      *_TAG:    Not yet supported (TODO).
 #                
 
-CV32E40P_REPO ?= https://github.com/RISKVFT/cv32e40p.git
+CV32E40P_REPO ?= https://github.com/RISKVFT/cv32e40p
 #CV32E40P_REPO   ?= https://github.com/RISKVFT/cv32e40p.git
-CV32E40P_BRANCH ?= master
+CV32E40P_BRANCH ?= FT_Luca
 #CV32E40P_BRANCH ?= FT_Marcello
 #2020-10-08
 CV32E40P_HASH   ?= head

@@ -1,7 +1,7 @@
-hello-world
+fibonacci
 "/home/thesis/luca.fiore/Repos/core-v-verif/cv32/sim/core/asm"
-make: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tests/programs/custom_FT/general_test/hello-world'
-[0;91mTARGET: hello-world_C[0m
+make: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tests/programs/custom_FT/general_test/fibonacci'
+[0;91mTARGET: fibonacci_C[0m
 [0;91mS files: [0m
 [0;91m   [0m
 rm -rf *.elf *.o
@@ -10,11 +10,11 @@ make[1]: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp
 make[1]: Nothing to be done for `all'.
 make[1]: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
 test_asm_src=
-/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic hello-world.c -o hello-world.elf -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp/link.ld
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy -O verilog hello-world.elf hello-world.hex \
+/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic fibonacci.c -o fibonacci.elf -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp/link.ld
+/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy -O verilog fibonacci.elf fibonacci.hex \
         	--change-section-address  .debugger=0x3FC000 \
         	--change-section-address  .debugger_exception=0x3FC800
 # Save elf properties
-/software/pulp/riscv/bin/riscv32-unknown-elf-readelf -a hello-world.elf > hello-world.readelf
-/software/pulp/riscv/bin/riscv32-unknown-elf-objdump -D -S hello-world.elf > hello-world.objdump
-make: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tests/programs/custom_FT/general_test/hello-world'
+/software/pulp/riscv/bin/riscv32-unknown-elf-readelf -a fibonacci.elf > fibonacci.readelf
+/software/pulp/riscv/bin/riscv32-unknown-elf-objdump -D -S fibonacci.elf > fibonacci.objdump
+make: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tests/programs/custom_FT/general_test/fibonacci'

@@ -182,12 +182,12 @@ dfSetVar (){
 	errtext=$5
 	create=$6	
 	if test -$df "$CORE_V_VERIF/$dirorfile" || [[ $create == "CREATE" ]]; then
-		db_becho "$settext: $CORE_V_VERIF/$dirorfile"
+		db_becho "$settext: ${CORE_V_VERIF}$dirorfile"
 		repfile "$var" \
 			"$CUR_DIR/$(basename $0)" \
-			"\$CORE_V_VERIF/$dirorfile"
+			"\${CORE_V_VERIF}$dirorfile"
 		if [[ $df == "d" ]]; then
-			mkdir -p $CORE_V_VERIF/$dirorfile
+			mkdir -p ${CORE_V_VERIF}$dirorfile
 		fi
 	else
 		if test -$df $dirorfile ; then
