@@ -162,7 +162,7 @@ function delete_pipe ()  {
 function check_pipe () {
 	local pipename=$1
 	if [[ ! -p $pipename ]]; then
-		db_recho "ERROR: The pipe $pipename don't exist!!"
+		db_recho "ERROR: The pipe $pipename doesn't exist!!"
 		exit	
 	fi
 }
@@ -312,17 +312,17 @@ function set_sim_arch () {
 	# a first comparison in order to verify correct working of FT arch.
 	# BASE   "-a ref|ft REPO BRANCH"
 	#   ref     save the ref git REPO and BRANCH 
-	#		"-a ref https://github.com/openhwgroup/cv32e40p.git master"
+	#		"-a ref https://github.com/RISKVFT/cv32e40p.git master"
 	#   ft     save the ft git REPO and BRANCH
 	#		"-a ft https://github.com/RISKVFT/cv32e40p.git FT_Marcello"
 	#   s [ft|ref]     set current arch , default is ft
 	#		"-a s ref -b s a" -> simula tutto il benchmark utilizzando l'arch ft
 	if [[ $1 == "ref" || $1 == "ft" ]];then
 		if ! gitRepoExist "$2"; then
-			recho_exit "Error: git repo don't exist!!!"
+			recho_exit "Error: git repo doesn't exist!!!"
 		fi
 		if ! gitRepoBranchExist $2 $3; then
-			recho_exit "Error: branch of $2 don't exist!!"
+			recho_exit "Error: branch of $2 doesn't exist!!"
 		fi
 	fi
 
@@ -438,8 +438,15 @@ function sim_unique_program () {
 				VSIM_EXT="_$1"; shift;;
 			d) # 
 				SET_DIR=1
-				UNIQUE_CHEX_DIR=${CORE_V_VERIF}$1
-				dfSetVar d $1 "UNIQUE_CHEX_DIR" "Set hex/c file directory" \
+  				if [[ $1 =~ ^/.* ]]; then #check if the directory path starts with '/' or not
+					UNIQUE_CHEX_DIR=${CORE_V_VERIF}$1
+					dirorfile=$1
+					dirorfile=${dirorfile:1}
+				else 
+					UNIQUE_CHEX_DIR=${CORE_V_VERIF}/$1
+					dirorfile=$1
+				fi
+				dfSetVar d $dirorfile "UNIQUE_CHEX_DIR" "Set hex/c file directory" \
 					"give a correct directory for executable and hex!!"
 				shift;;
 			l)
@@ -548,11 +555,11 @@ function sim_benchmark_programs () {
 	# Called by -b option
 	# BASE:
 	#  c a         compilation of all benchmark "-b c a " (all)
-	#  c $num                  of first program  "-b c 1" (not implemented)
-	#  c $filename	           of hello-world "-b c hello-world" (not implemented)
-	#  s a 	       simulazione di tutto il b "-b s a" (uguale a sopra per il resto)
-	#  s $num		                 "-b s 3"
-	#  s $filename                           "-b s hello-world"
+	#  c $num           //     of first program "-b c 1" (not implemented)
+	#  c $filename	    //     of hello-world   "-b c hello-world" (not implemented)
+	#  s a 	       simulation of all benchmark  "-b s a" (same as above)
+	#  s $num	    //	                    "-b s 3"
+	#  s $filename      //                      "-b s hello-world"
 	# MIXING OPTION  
 	#  cs 	compilation and simulation of all file "-b cs a"
 	#	compilation of all and simulation of 1° and 2° file  "-b cs 2"
@@ -601,7 +608,7 @@ function sim_benchmark_programs () {
 				fi
 				db_becho "FI = $1"
 				shift;; 
-			c|s)# compile or simulate
+			c|s) # compile or simulate
 				if [[ ${arg:i:1} == "c" ]]; then
 				# case like "-u cf filename" only compilation or both
 					db_becho "To do: compilation"
@@ -627,8 +634,8 @@ function sim_benchmark_programs () {
 				fi
 				;;
 			v) # parameter to give extension to append to the vsim file 
-			  # used to execute simulation in vsim and stored in
-			  # core-v-verif/cv32/sim/questa
+			   # used to execute simulation in vsim and stored in
+			   # core-v-verif/cv32/sim/questa
 				VSIM_EXT="_$1"; 
 				if [[ $1 == "cov" ]]; then
 					VSIM_EXT="_cycle_to_certain_coverage"
@@ -701,8 +708,8 @@ function sim_benchmark_programs () {
 		exit 1 # exit since dir or log dir is setted and no other should be done
 	else
 		if [[ $COMPILATION -eq 0 && $SIMULATION -eq 0 ]]; then
-			recho_exit "Error: select simulation (s) or/and compilation (c) at least\n\
-			\tFirst of all set unique directory or benchmark build-file & hex-dir\n\
+			recho_exit "Error: select simulation (s) and/or compilation (c) at least\n\
+			\tFirst of all set unique directory of benchmark build-file & hex-dir\n\
 			\tAll path wil be appended to CORE_V_VERIF=$CORE_V_VERIF path:\n\
 			\t\t-b d path/to/build_all.py path/to/hex/file \n\
 			\t\t-u d path/to/c/dir\n\
@@ -1234,15 +1241,15 @@ export $ARCH_TO_COMPARE
 
 # Folder that contain *.c file (and after compilation the *.hex file) of
 # unique program to use as architecture firmware
-UNIQUE_CHEX_DIR="${CORE_V_VERIF}/cv32/tests/programs/custom_FT/general_test/fibonacci"
+UNIQUE_CHEX_DIR="$CORE_V_VERIF/cv32/tests/programs/custom_FT/general_test/fibonacci"
 U_LOG_DIR="$CORE_V_VERIF/cv32/sim/core/u_log"
 mkdir -p $U_LOG_DIR
 
 # Folder that contain the build_all.py program runned to compile all benchmark
-BENCH_BUILD_FILE="$CORE_V_VERIF/cv32/tests/programs/custom_FT/build_all.py"
+BENCH_BUILD_FILE="$CORE_V_VERIF//cv32/tests/programs/custom_FT/build_all.py"
 #BENCH_BUILD_FILE="$CORE_V_VERIF/cv32/tests/programs/custom_FT/coremark/build-coremark.sh"
 # Folder that contain *.hex file of benchmar
-BENCH_HEX_DIR="$CORE_V_VERIF/cv32/tests/programs/custom_FT/out"
+BENCH_HEX_DIR="$CORE_V_VERIF//cv32/tests/programs/custom_FT/out"
 B_TYPE=""
 B_FILE=""
 B_NUM=0
@@ -1253,15 +1260,15 @@ CHEX_FILE=" "
 VSIM_EXT=""
 export GUI=""
 export SIM_BASE="tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
-export STAGE_NAME="if_stage"
+export STAGE_NAME="ex_stage"
 
 VERBOSE=1
 
 # ARCH
-A_REF_REPO="https://github.com/openhwgroup/cv32e40p.git"
+A_REF_REPO="https://github.com/RISKVFT/cv32e40p.git"
 A_REF_BRANCH="master"
 A_REF_REPO_NAME="cv32e40p_ref"
-A_FT_REPO="https://github.com/RISKVFT/cv32e40p"
+A_FT_REPO="https://github.com/RISKVFT/cv32e40p.git"
 A_FT_BRANCH="FT_Luca"
 A_FT_REPO_NAME="cv32e40p_ft"
 
@@ -1491,7 +1498,7 @@ while [[ $1 != "" ]]; do
 			AR_b_args=$ARGS
 			shift $N_ARGS
 			;;
-		-sfiupi|--stage_fault_injection_upi) # simulate benchmarch programs with fault injection
+		-sfiupi|--stage_fault_injection_upi) # simulate benchmark programs with fault injection
 			SFIUPI=1
 			elab_par $1
 			shift			

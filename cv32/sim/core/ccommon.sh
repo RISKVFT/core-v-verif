@@ -182,12 +182,12 @@ dfSetVar (){
 	errtext=$5
 	create=$6	
 	if test -$df "$CORE_V_VERIF/$dirorfile" || [[ $create == "CREATE" ]]; then
-		db_becho "$settext: ${CORE_V_VERIF}$dirorfile"
+		db_becho "$settext: $CORE_V_VERIF/$dirorfile"
 		repfile "$var" \
 			"$CUR_DIR/$(basename $0)" \
-			"\${CORE_V_VERIF}$dirorfile"
+			"\$CORE_V_VERIF/$dirorfile"
 		if [[ $df == "d" ]]; then
-			mkdir -p ${CORE_V_VERIF}$dirorfile
+			mkdir -p $CORE_V_VERIF/$dirorfile
 		fi
 	else
 		if test -$df $dirorfile ; then
@@ -258,7 +258,7 @@ mon_run (){
 f_make () {
         firmware=$1
 	firmware_converted="$(echo $firmware | tr '-' '_')"
-	export GOLD_NAME="gold_${ARCH_TO_COMPARE}_${STAGE_NAME}_${firmware_converted:0:-4}"
+	export GOLD_NAME="gold_${ARCH_TO_USE}_${STAGE_NAME}_${firmware_converted:0:-4}"
 	logfile=$2
 	override=$3
 	lineno=$4

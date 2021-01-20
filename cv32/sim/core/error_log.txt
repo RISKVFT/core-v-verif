@@ -1,7 +1,0 @@
-4:	-pedanticerrors -suppress 2577 -suppress 2583 \
-9:vlog -O0 -work work -pedanticerrors -suppress 2577 -suppress 2583 -f /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/cv32e40p_manifest.flist /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/include/perturbation_defines.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_top.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/mm_ram.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/dp_ram.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_stall.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_rvalid_stall.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_gnt_stall.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_interrupt_generator.sv 
-73:Errors: 0, Warnings: 2, Suppressed Warnings: 788
-74:vopt -work work -debugdb -fsmdebug -pedanticerrors +acc  tb_top -o tb_top_vopt
-77:vopt -work work -debugdb -fsmdebug -pedanticerrors "+acc" tb_top -o tb_top_vopt 
-230:Errors: 0, Warnings: 4
-368:# Errors: 0, Warnings: 14
