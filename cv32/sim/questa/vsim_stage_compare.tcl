@@ -11,8 +11,9 @@ set cycle_filename "$env(CYCLE_FILE)"
 set signals_filename "$env(SIGNALS_FI_FILE)"
 
 proc ord_list {listain} {
+	set listain_new [ deleteGenblk $listain]
 	set lista_sig []
- 	set stagename [ lindex $listain 0]
+ 	set stagename [ lindex $listain_new 0]
 	set lista [ lrange $listain 1 end ]
 	foreach l1 $lista {
 		lappend lista_sig [ splitPath $l1 $stagename ]
@@ -25,11 +26,25 @@ proc ord_list {listain} {
     }
     return $lista_out
 }
+
 proc splitPath {stringa stagename} {
         set l2 [ split $stringa / ]
 	set val_stage [ expr [ lsearch $l2 $stagename ] + 1 ]
         return  [join [lrange $l2 $val_stage end] /]
 }
+
+
+proc deleteGenblk {stringa} {
+        set l2 [ split $stringa / ]
+		set stringa_new []
+		foreach substring $l2 {
+			if { [ string match "genblk*" $substring ] == 0 } {
+				lappend stringa_new $substring
+			}
+		}
+        return  [join $stringa_new /]
+}
+
 
 # find real name of stage, if we simulate core we should give to comp_sim.sh
 # script the name with cv32e40p (cv32e40p_core) instaead in other cases we

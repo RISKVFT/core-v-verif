@@ -258,7 +258,7 @@ mon_run (){
 f_make () {
         firmware=$1
 	firmware_converted="$(echo $firmware | tr '-' '_')"
-	export GOLD_NAME="gold_${ARCH_TO_USE}_${STAGE_NAME}_${firmware_converted:0:-4}"
+	export GOLD_NAME="gold_${ARCH_TO_COMPARE}_${STAGE_NAME}_${firmware_converted:0:-4}"
 	logfile=$2
 	override=$3
 	lineno=$4
@@ -586,6 +586,6 @@ ask_yesno () {
 sendMailToAll () {
 	stringa="Buon*\nOggi è il : $(date)\nQuesto è il log della simulazione:\n$1"
 	echo -e "$stringa"  | mail -s 'DalTuoCaroServer' lucafiore1996@gmail.com 
-	echo -e "$stringa"  | mail -s 'DalTuoCaroServer' ribaldoneelia@gmail.com
-	echo -e "$stringa"  | mail -s 'DalTuoCaroServerAffiliatoDiRuoRoch' marcellon96@hotmail.it
+	#echo -e "$stringa"  | mail -s 'DalTuoCaroServer' ribaldoneelia@gmail.com
+	#echo -e "$stringa"  | mail -s 'DalTuoCaroServerAffiliatoDiRuoRoch' marcellon96@hotmail.it
 }

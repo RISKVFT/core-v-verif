@@ -1,5 +1,4 @@
-# vsim "+dumpports+nocollapse" -nowlfcollapse -quiet "+firmware=/home/thesis/luca.fiore/Repos/core-v-verif//cv32/tests/programs/custom_FT/out/hello-world.hex" "+dumpports+nocollapse" -c tb_top_vopt -do "../../questa/vsim_save_data_in.tcl" 
-# Start time: 19:43:22 on Jan 20,2021
+# Reading pref.tcl
 # //  Questa Sim-64
 # //  Version 10.7c linux_x86_64 Aug 17 2018
 # //
@@ -14,84 +13,123 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-# ** Warning: (vsim-3015) [PCDPC] - Port size (32) does not match connection size (64) for port 'irq_i'. The port definition is at: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_core.sv(92).
-#    Time: 0 ns  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i File: /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 77
-# ** Warning: (vsim-3015) [PCDPC] - Port size (5) does not match connection size (6) for port 'irq_id_o'. The port definition is at: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_core.sv(94).
-#    Time: 0 ns  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i File: /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 77
-# ** Warning: (vsim-3015) [PCDPC] - Port size (32) does not match connection size (34) for port 'instr_addr_i'. The port definition is at: /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/mm_ram.sv(36).
-#    Time: 0 ns  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/ram_i File: /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 136
-# ** Warning: (vsim-3015) [PCDPC] - Port size (32) does not match connection size (1) for port 'irq_o'. The port definition is at: /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/mm_ram.sv(52).
-#    Time: 0 ns  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/ram_i File: /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 136
-# do ../../questa/vsim_save_data_in.tcl
+# vsim -nowlfcollapse -quiet -gui -debugdb -vcdstim ./dataset/gold_ref_cv32e40p_core_hello_world_in.vcd -debugDB "+dumpports+nocollapse" cv32e40p_core_vopt -do "../../questa/vsim_stage_compare.tcl" 
+# Start time: 00:35:50 on Jan 30,2021
+# ** Note: (vsim-8900) Creating design debug database vsim.dbg.
+# do ../../questa/vsim_stage_compare.tcl
 # /home/thesis/luca.fiore/Repos/core-v-verif
-# tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i
-# gold_ft_ex_stage_hello_world
-# ex_stage
-# /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/sel_bypass_mult_ex_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/regfile_alu_we_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/mhpm_wdata_ft_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/apu_waddr_ex_voted_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/lsu_err_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/alu_operand_c_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/mult_imm_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/apu_op_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/sel_mux_only_two_mult_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/sel_mux_ex_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/mult_operand_a_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/apu_flags_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/alu_vec_mode_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/lsu_ready_ex_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/mult_en_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/bmask_a_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/rst_n /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/regfile_alu_we_ex_voted_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/apu_waddr_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/is_decoding_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/apu_operands_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/apu_read_regs_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/apu_master_gnt_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/clk /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/alu_is_subrot_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/regfile_waddr_ex_voted_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/regfile_alu_waddr_ex_voted_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/alu_operator_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/apu_operands_ex_voted_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/mult_dot_op_a_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/branch_in_ex_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/regfile_alu_waddr_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/mult_dot_signed_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/apu_lat_ex_voted_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/csr_rdata_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/mult_operand_b_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/mult_is_clpx_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/wb_ready_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/regfile_waddr_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/bmask_b_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/apu_master_result_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/apu_op_ex_voted_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/regfile_we_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/clock_enable_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/alu_operand_a_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/alu_en_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/apu_en_ex_voted_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/mult_clpx_shift_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/mhpm_we_ft_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/regfile_we_ex_voted_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/lsu_en_voted_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/mult_dot_op_b_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/apu_en_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/apu_master_valid_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/only_two_mult_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/mult_operand_c_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/fpu_prec_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/mhpm_addr_ft_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/apu_lat_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/lsu_en_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/apu_write_regs_valid_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/sel_mux_only_two_alu_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/mhpm_re_ft_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/branch_in_ex_voted_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/csr_access_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/mult_sel_subword_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/alu_is_clpx_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/alu_operand_b_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/only_two_alu_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/csr_access_ex_voted_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/mult_signed_mode_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/lsu_rdata_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/imm_vec_ext_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/mult_dot_op_c_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/apu_read_regs_valid_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/apu_write_regs_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/sel_bypass_alu_ex_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/mult_clpx_img_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/alu_clpx_shift_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/mult_operator_i /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/alu_en_ex_voted_i
-# ----------------------------------------------------------------
-# UVM-1.1d
-# (C) 2007-2013 Mentor Graphics Corporation
-# (C) 2007-2013 Cadence Design Systems, Inc.
-# (C) 2006-2013 Synopsys, Inc.
-# (C) 2011-2013 Cypress Semiconductor Corp.
-# ----------------------------------------------------------------
+# tb_top/cv32e40p_tb_wrapper_i
+# gold_ref_cv32e40p_core_hello_world
+# cv32e40p_core
+# 134319
+# 1
+# 1
+# /home/thesis/luca.fiore/Repos/core-v-verif/cv32/sim/core/sim_FT/sim_out/cnt_error_core-hello_world-1-1.txt
+# /home/thesis/luca.fiore/Repos/core-v-verif/cv32/sim/core/sim_FT/sim_out/info_core-hello_world-1-1.txt
+# /home/thesis/luca.fiore/Repos/core-v-verif/cv32/sim/core/sim_FT/sim_out/cycle_core-hello_world-1-1.txt
+# /home/thesis/luca.fiore/Repos/core-v-verif/cv32/sim/core/sim_FT/sim_out/signals_fault_injection_core-hello_world-1-1.txt
+# cv32e40p_core
+# 0
+# 0
+# /cv32e40p_core/data_rvalid_i /cv32e40p_core/hart_id_i /cv32e40p_core/irq_i /cv32e40p_core/apu_master_flags_i /cv32e40p_core/debug_req_i /cv32e40p_core/boot_addr_i /cv32e40p_core/scan_cg_en_i /cv32e40p_core/instr_gnt_i /cv32e40p_core/apu_master_gnt_i /cv32e40p_core/dm_exception_addr_i /cv32e40p_core/data_gnt_i /cv32e40p_core/dm_halt_addr_i /cv32e40p_core/instr_rdata_i /cv32e40p_core/data_rdata_i /cv32e40p_core/irq_sec_i /cv32e40p_core/pulp_clock_en_i /cv32e40p_core/apu_master_result_i /cv32e40p_core/fetch_enable_i /cv32e40p_core/apu_master_valid_i /cv32e40p_core/mtvec_addr_i /cv32e40p_core/instr_rvalid_i /cv32e40p_core/clk_i /cv32e40p_core/if_stage_i/prefetch_buffer_i/prefetch_controller_i/flush_cnt_q /cv32e40p_core/cs_registers_i/mcounteren_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/instruction_obi_i/genblk1/obi_be_q /cv32e40p_core/if_stage_i/aligner_i/hwlp_addr_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/instruction_obi_i/genblk1/obi_wdata_q /cv32e40p_core/cs_registers_i/uepc_q /cv32e40p_core/id_stage_i/controller_i/hwlp_end_4_id_q /cv32e40p_core/id_stage_i/controller_i/illegal_insn_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/prefetch_controller_i/hwlp_flush_cnt_delayed_q /cv32e40p_core/load_store_unit_i/data_load_event_q /cv32e40p_core/load_store_unit_i/data_type_q /cv32e40p_core/cs_registers_i/mtvec_mode_q /cv32e40p_core/load_store_unit_i/data_we_q /cv32e40p_core/cs_registers_i/fflags_q /cv32e40p_core/cs_registers_i/id_valid_q /cv32e40p_core/cs_registers_i/depc_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/fifo_i/read_pointer_q /cv32e40p_core/cs_registers_i/priv_lvl_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/instruction_obi_i/genblk1/obi_addr_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/instruction_obi_i/genblk1/obi_atop_q /cv32e40p_core/load_store_unit_i/data_sign_ext_q /cv32e40p_core/id_stage_i/controller_i/debug_mode_q /cv32e40p_core/cs_registers_i/utvec_mode_q /cv32e40p_core/load_store_unit_i/cnt_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/fifo_i/write_pointer_q /cv32e40p_core/cs_registers_i/dcsr_q /cv32e40p_core/cs_registers_i/mcountinhibit_q /cv32e40p_core/cs_registers_i/mscratch_q /cv32e40p_core/if_stage_i/aligner_i/instr_valid_q /cv32e40p_core/cs_registers_i/mcause_q /cv32e40p_core/id_stage_i/controller_i/jump_done_q /cv32e40p_core/if_stage_i/aligner_i/pc_q /cv32e40p_core/cs_registers_i/pmp_reg_q /cv32e40p_core/cs_registers_i/dscratch0_q /cv32e40p_core/id_stage_i/int_controller_i/irq_q /cv32e40p_core/cs_registers_i/ucause_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/prefetch_controller_i/cnt_q /cv32e40p_core/if_stage_i/aligner_i/branch_addr_q /cv32e40p_core/cs_registers_i/mtvec_q /cv32e40p_core/id_stage_i/controller_i/data_err_q /cv32e40p_core/cs_registers_i/fprec_q /cv32e40p_core/cs_registers_i/mstatus_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/prefetch_controller_i/trans_addr_q /cv32e40p_core/sleep_unit_i/p_elw_busy_q /cv32e40p_core/cs_registers_i/utvec_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/fifo_i/mem_q /cv32e40p_core/load_store_unit_i/rdata_offset_q /cv32e40p_core/id_stage_i/controller_i/ebrk_debug_entry_q /cv32e40p_core/load_store_unit_i/data_obi_i/state_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/prefetch_controller_i/state_q /cv32e40p_core/load_store_unit_i/rdata_q /cv32e40p_core/cs_registers_i/dscratch1_q /cv32e40p_core/cs_registers_i/gen_trigger_regs/tmatch_value_q /cv32e40p_core/cs_registers_i/mhpmcounter_q /cv32e40p_core/sleep_unit_i/fetch_enable_q /cv32e40p_core/cs_registers_i/mhpmevent_q /cv32e40p_core/if_stage_i/aligner_i/aligner_ready_q /cv32e40p_core/sleep_unit_i/core_busy_q /cv32e40p_core/id_stage_i/int_controller_i/irq_sec_q /cv32e40p_core/cs_registers_i/gen_trigger_regs/tmatch_control_exec_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/fifo_i/status_cnt_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/instruction_obi_i/state_q /cv32e40p_core/ex_stage_i/mult_i/mulh_carry_q /cv32e40p_core/cs_registers_i/mie_q /cv32e40p_core/id_stage_i/controller_i/debug_req_q /cv32e40p_core/if_stage_i/aligner_i/hwlp_update_pc_q /cv32e40p_core/cs_registers_i/frm_q /cv32e40p_core/cs_registers_i/mepc_q /cv32e40p_core/id_stage_i/register_file_i/mem
+# 1
+# file18
+# INFO: before cycle CYCLE=1
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_core/load_store_unit_i/#ALWAYS#471 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_load_store_unit.sv Line: 472
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_core/id_stage_i/#ALWAYS#768 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 769
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_core/id_stage_i/#ALWAYS#758 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 759
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_core/id_stage_i/#ALWAYS#752 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 753
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_core/id_stage_i/#ALWAYS#743 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 744
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_core/id_stage_i/#ALWAYS#737 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 738
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_core/id_stage_i/#ALWAYS#601(immediate_a_mux) File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 602
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_core/id_stage_i/#ALWAYS#516 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 517
+# INFO: cycle 0
+# INFO: Signal index = 41
+# INFO: signal name = /cv32e40p_core/if_stage_i/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q
+# INFO: examine = 1'h0, descr = Register
 # 
-#   ***********       IMPORTANT RELEASE NOTES         ************
-# 
-#   You are using a version of the UVM library that has been compiled
-#   with `UVM_NO_DEPRECATED undefined.
-#   See http://www.eda.org/svdb/view.php?id=3313 for more details.
-# 
-#   You are using a version of the UVM library that has been compiled
-#   with `UVM_OBJECT_MUST_HAVE_CONSTRUCTOR undefined.
-#   See http://www.eda.org/svdb/view.php?id=3770 for more details.
-# 
-#       (Specify +UVM_NO_RELNOTES to turn off this notice)
-# 
-# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(215) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
-# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(216) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/load_store_unit_i/#ALWAYS#471 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_load_store_unit.sv Line: 472
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#993 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_id_stage.sv Line: 994
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#983 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_id_stage.sv Line: 984
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#977 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_id_stage.sv Line: 978
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#968 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_id_stage.sv Line: 969
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#962 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_id_stage.sv Line: 963
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#826(immediate_a_mux) File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_id_stage.sv Line: 827
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#741 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_id_stage.sv Line: 742
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 2  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/load_store_unit_i/#ALWAYS#471 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_load_store_unit.sv Line: 472
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 4  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/load_store_unit_i/#ALWAYS#471 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_load_store_unit.sv Line: 472
-# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall enable: 0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall mode:   0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall gnt:    0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall valid:  0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall max:    0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall enable:  0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall mode:    0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall gnt:     0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall valid:   0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall max:     0
-# Unimplemented system call called!
-# 
-# HELLO WORLD!!!
-# This is the OpenHW Group CV32E40P CORE-V processor core.
-# CV32E40P is a RISC-V ISA compliant core with the following attributes:
-# 	misa      = 0x40801104
-# 	XLEN is 32-bits
-# 	Supported Instructions: XMIC
-# 	This machine supports non-standard instructions.
-# 
-# EXIT SUCCESS
-# ** Note: $finish    : /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_top.sv(177)
-#    Time: 156030 ns  Iteration: 1  Instance: /tb_top
-# End time: 19:43:25 on Jan 20,2021, Elapsed time: 0:00:03
-# Errors: 0, Warnings: 14
+# INFO: Bit number = 1
+# INFO: Graffa  = 1
+# INFO: Signal name  = /cv32e40p_core/if_stage_i/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q
+# INFO: Bit choose = 0
+# INFO: row number = 0
+# SIGNAL TO COMPARE: sim:/cv32e40p_core/apu_master_flags_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/apu_master_flags_o
+# Created 1 comparison.
+# SIGNAL TO COMPARE: sim:/cv32e40p_core/apu_master_op_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/apu_master_op_o
+# Created 1 comparison.
+# SIGNAL TO COMPARE: sim:/cv32e40p_core/apu_master_operands_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/apu_master_operands_o
+# Created 1 comparison.
+# SIGNAL TO COMPARE: sim:/cv32e40p_core/apu_master_ready_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/apu_master_ready_o
+# Created 1 comparison.
+# SIGNAL TO COMPARE: sim:/cv32e40p_core/apu_master_req_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/apu_master_req_o
+# Created 1 comparison.
+# SIGNAL TO COMPARE: sim:/cv32e40p_core/apu_master_type_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/apu_master_type_o
+# Created 1 comparison.
+# SIGNAL TO COMPARE: sim:/cv32e40p_core/core_sleep_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/core_sleep_o
+# Created 1 comparison.
+# SIGNAL TO COMPARE: sim:/cv32e40p_core/data_addr_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/data_addr_o
+# Created 1 comparison.
+# SIGNAL TO COMPARE: sim:/cv32e40p_core/data_atop_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/data_atop_o
+# Created 1 comparison.
+# SIGNAL TO COMPARE: sim:/cv32e40p_core/data_be_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/data_be_o
+# Created 1 comparison.
+# SIGNAL TO COMPARE: sim:/cv32e40p_core/data_req_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/data_req_o
+# Created 1 comparison.
+# SIGNAL TO COMPARE: sim:/cv32e40p_core/data_wdata_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/data_wdata_o
+# Created 1 comparison.
+# SIGNAL TO COMPARE: sim:/cv32e40p_core/data_we_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/data_we_o
+# Created 1 comparison.
+# SIGNAL TO COMPARE: sim:/cv32e40p_core/instr_addr_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/instr_addr_o
+# Created 1 comparison.
+# SIGNAL TO COMPARE: sim:/cv32e40p_core/instr_req_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/instr_req_o
+# Created 1 comparison.
+# SIGNAL TO COMPARE: sim:/cv32e40p_core/irq_ack_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/irq_ack_o
+# Created 1 comparison.
+# SIGNAL TO COMPARE: sim:/cv32e40p_core/irq_id_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/irq_id_o
+# Created 1 comparison.
+# SIGNAL TO COMPARE: sim:/cv32e40p_core/regfile_waddr_fw_wb_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/regfile_waddr_fw_wb_o
+# Created 1 comparison.
+# SIGNAL TO COMPARE: sim:/cv32e40p_core/sec_lvl_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/sec_lvl_o
+# Created 1 comparison.
+# ENDSIM 134319
+# INFO: Instant = 119807
+# INFO: remaining = 14457
+# Computing waveform differences from time 119807 ns to 120162 ns
+# No differences found.
+# INFO: number of errors: 0
+# Updating waveform differences from time 120162 ns to 121572 ns
+# No new differences found.
+# Updating waveform differences from time 121572 ns to 122982 ns
+# No new differences found.
+# Updating waveform differences from time 122982 ns to 124392 ns
+# No new differences found.
+# Updating waveform differences from time 124392 ns to 125802 ns
+# No new differences found.
+# Updating waveform differences from time 125802 ns to 127212 ns
+# No new differences found.
+# Updating waveform differences from time 127212 ns to 128622 ns
+# No new differences found.
+# Updating waveform differences from time 128622 ns to 130032 ns
+# No new differences found.
+# Updating waveform differences from time 130032 ns to 131442 ns
+# No new differences found.
+# Updating waveform differences from time 131442 ns to 132852 ns
+# No new differences found.
+# Updating waveform differences from time 132852 ns to 134262 ns
+# No new differences found.
+# INFO: current time = 134262
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# --------------------------------------------------------
+# Open file: file17 serial0 serial1 serial2 file4 sock4ee5ee0 sock4f1f500 sock4f1d160 file8 stdin file11 stdout file12 stderr
+# .------------------------------
+# file19
+# End time: 00:37:03 on Jan 30,2021, Elapsed time: 0:01:13
+# Errors: 0, Warnings: 0

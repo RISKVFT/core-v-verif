@@ -644,12 +644,26 @@ function sim_benchmark_programs () {
 				shift;;
 			d) # set build file, dir of out *.hex file and exit
 				SET_DIR=1
-				BENCH_BUILD_FILE=$1
-				dfSetVar f "$1" "BENCH_BUILD_FILE" "Set benchmark build file" \
+				if [[ $1 =~ ^/.* ]]; then #check if the directory path starts with '/' or not
+					BENCH_BUILD_FILE=$1
+					dirorfile=$1
+					dirorfile=${dirorfile:1}
+				else 
+					BENCH_BUILD_FILE="/$1"
+					dirorfile=$1
+				fi
+				dfSetVar f "$dirorfile" "BENCH_BUILD_FILE" "Set benchmark build file" \
 					"give a correct path/name for build file!!"
 				shift
-				BENCH_HEX_DIR=$1
-				dfSetVar d "$1" "BENCH_HEX_DIR" "Set benchmark hex file dir"\
+				if [[ $1 =~ ^/.* ]]; then #check if the directory path starts with '/' or not
+					BENCH_HEX_DIR=$1
+					dirorfile=$1
+					dirorfile=${dirorfile:1}
+				else 
+					BENCH_HEX_DIR="/$1"
+					dirorfile=$1
+				fi
+				dfSetVar d "$dirorfile" "BENCH_HEX_DIR" "Set benchmark hex file dir"\
 					"give a correct directory of hex directory !!" 
 				shift
 				# if user set d variables can't do nothing else
@@ -686,6 +700,11 @@ function sim_benchmark_programs () {
 		export T_ENDSIM=$endsim
 		db_becho "ENDSIM = $T_ENDSIM"
 	fi
+
+        if  [[ $VSIM_EXT == "_save_data_*" ]]; then
+		ARCH_TO_COMPARE=$ARCH_TO_USE
+	fi
+
 	if  [[ $VSIM_EXT == "_stage_compare" ]]; then
 		SET_UPI=1
 		export SWC="$(echo $B_FILE | tr '-' '_')"
@@ -695,7 +714,7 @@ function sim_benchmark_programs () {
 		## aggiunti per il momento
 		mkdir -p $ERROR_DIR
 		ID="$STG-$SWC-$CYCLE-$FI"
-		bd_becho "-----------ID:$ID"
+		db_becho "-----------ID:$ID"
 
 		export COMPARE_ERROR_FILE="$ERROR_DIR/$compare_error_file_prefix$ID.txt"
 		export INFO_FILE="$ERROR_DIR/$info_file_prefix$ID.txt"
@@ -984,7 +1003,7 @@ function sim_stage_fault_injection_upi () {
 				SetVar "ARCH_TO_COMPARE" "$ARCH_TO_COMPARE"
 				export $ARCH_TO_COMPARE
 				shift;;
-			c)# cycle
+			c) # cycle
 				# metti solo gli export e' via			
 				export CYCLE=$1
 				if [[ $CYCLE == "cov" ]]; then
@@ -1234,7 +1253,7 @@ isnumber='^[0-9]+$'
 CUR_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 SIM_FT="$CUR_DIR/sim_FT"
 
-ARCH_TO_USE="ft"
+ARCH_TO_USE="ref"
 ARCH_TO_COMPARE="ref"
 export $ARCH_TO_USE
 export $ARCH_TO_COMPARE
@@ -1246,10 +1265,10 @@ U_LOG_DIR="$CORE_V_VERIF/cv32/sim/core/u_log"
 mkdir -p $U_LOG_DIR
 
 # Folder that contain the build_all.py program runned to compile all benchmark
-BENCH_BUILD_FILE="$CORE_V_VERIF//cv32/tests/programs/custom_FT/build_all.py"
+BENCH_BUILD_FILE="$CORE_V_VERIF/cv32/tests/programs/custom_FT/build_all.py"
 #BENCH_BUILD_FILE="$CORE_V_VERIF/cv32/tests/programs/custom_FT/coremark/build-coremark.sh"
 # Folder that contain *.hex file of benchmar
-BENCH_HEX_DIR="$CORE_V_VERIF//cv32/tests/programs/custom_FT/out"
+BENCH_HEX_DIR="$CORE_V_VERIF/cv32/tests/programs/custom_FT/out"
 B_TYPE=""
 B_FILE=""
 B_NUM=0
@@ -1260,7 +1279,7 @@ CHEX_FILE=" "
 VSIM_EXT=""
 export GUI=""
 export SIM_BASE="tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
-export STAGE_NAME="ex_stage"
+export STAGE_NAME="cv32e40p_core"
 
 VERBOSE=1
 
@@ -1290,7 +1309,7 @@ export CYCLE=1
 # Error variale
 ERROR_DIR="$CORE_V_VERIF/cv32/sim/core/sim_FT/sim_out"
 ERROR_DIR_BACKUP="$CORE_V_VERIF/cv32/sim/core/sim_FT/.sim_out_backup"
-SIM_IDS="if_stage-fibonacci-16600-1 "
+SIM_IDS="ex_stage-hello_world-3-1 core-hello_world-3-1 core-fibonacci-3-1 ex_stage-fibonacci-3-1 ex_stage-fibonacci-1-0 ex_stage-fibonacci-10-1 ex_stage-fibonacci-100-1 if_stage-fibonacci-16600-1 "
 compare_error_file_prefix="cnt_error_"
 info_file_prefix="info_"
 cycle_file_prefix="cycle_"
@@ -1600,6 +1619,7 @@ for par in $ELABPAR;do
 			;;
 	esac
 done
+
 
 
 

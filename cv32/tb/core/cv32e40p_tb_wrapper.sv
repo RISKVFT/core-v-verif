@@ -21,7 +21,7 @@ module cv32e40p_tb_wrapper
                 DM_HALTADDRESS    = 32'h1A11_0800,
                 HART_ID           = 32'h0000_0000,
                 // Parameters used by DUT
-                PULP_XPULP        = 1,
+                PULP_XPULP        = 0,
                 PULP_CLUSTER      = 0,
                 FPU               = 0,
                 PULP_ZFINX        = 0,
