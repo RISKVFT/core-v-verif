@@ -30,6 +30,7 @@ function ctrl_c() {
 	if [[ $PPID_QSFIUPI -ne 0 ]]; then
 		kill $PPID_SFIUPI
 	fi
+	exit_f
 
 }
 
@@ -40,6 +41,7 @@ function ctrl_c() {
 
 function exit_f () {
 	# communicate using pipe that the program is terminated
+	# and delete pipe
 	if [[ $PIPENAME != "" ]]; then
 		echo "exit" > $PIPENAME
 		if [[ $PIPENAME =~ "info" ]]; then
@@ -73,30 +75,10 @@ db_lgecho() { if [[ $VERBOSE ]]; then lgecho "$1"; fi }
 
 refGitIsSet () { if [[ $A_REF_REPO == " " && $A_REF_BRANCH == " " ]]; then echo 0; else echo 1; fi ; }
 ftGitIsSet () { if [[ $A_FT_REPO == " " && $A_FT_BRANCH == " " ]]; then echo 0; else echo 1; fi ;}
-setRepoBranch () {
-	ref_or_ft=$1
-	if [[ $ref_or_ft != "ref" && $ref_or_ft != "ft" ]];then
-		recho_exit "Error, arch can be only ref or ft"
-	fi	
-	if [[ $ref_or_ft == "ref" ]]; then
-		if [[ $(refGitIsSet) -eq 0 ]]; then
-			recho_exit "Error, repo and branch of ref arch isn't setted"
-		fi
-		db_gecho "Setted ref arch repo=$A_REF_REPO branch=$A_REF_BRANCH"
-		repMakeFile "CV32E40P_REPO" $COMMONMK "$A_REF_REPO"
-		repMakeFile "CV32E40P_BRANCH" $COMMONMK "$A_REF_BRANCH"
-	else
-		if [[ $(ftGitIsSet) -eq 0 ]]; then
-			recho_exit "Error, repo and branch of ft arch isn't setted"
-		fi
-		db_gecho "Setted ft arch repo=$A_FT_REPO branch=$A_FT_BRANCH"
-		repMakeFile "CV32E40P_REPO" $COMMONMK "$A_FT_REPO"
-		repMakeFile "CV32E40P_BRANCH" $COMMONMK "$A_FT_BRANCH"
-	fi
-}
 
+
+# Loop in SIM_IDS and check if there is the corresponding id of simulation
 idExists () {
-	# Loop in SIM_IDS and check if there is the corresponding id of simulation
 	ID=$1
 	thereisid=0
 	for iid in $SIM_IDS; do
@@ -112,37 +94,29 @@ idExists () {
 
 }
 
-# This function give the timestamp of a file in microseconds
-fileTimestamp () {
-	min_inmsec=$(echo "$(stat -c %y $1 | cut -d ":" -f 2 | bc -l )*60*1000" | bc -l)
-	sec_inmsec=$(echo "$(stat -c %y $1 | cut -d ":" -f 3 | cut -d " " -f 1 | \
-		cut -d "." -f 1 | bc -l)*1000" | bc -l)
-	msec_inusec=$(echo "scale=0; $(stat -c %y $1 | cut -d ":" -f 3 | cut -d " " -f 1 | \
-		cut -d "." -f 2 | bc -l)/1000" | bc -l)
-	timestamp_inmsec=$(echo "$min_inmsec*1000+$sec_inmsec*1000+$msec_inusec" | bc -l)
-	echo $timestamp_inmsec
-}
-
-
-executeInTerminal () {
-	mate-terminal --window --working-directory="$CUR_DIR" --command="$1; exec $SHELL" --disable-factory &
-	ask_yesno "VCD creation is finished (close window before answer yes) (y/n)?"
-	while [[ $ANS -eq 0 ]] ; do
-		ask_yesno "VCD creation is finished (close window before answer yes) (y/n)?"
-	done
-}
-executeInTerminalEasy () {
-	local cmd=$1
-	local tname=$2
-	mate-terminal --window --working-directory="$CUR_DIR" --command="$cmd"  --disable-factory &
-	TERMINAL_PID="$TERMINAL_PID $!_tname"
-}
+#############################################################################
+# Execute a command in another terminal saving the new terminal pid
+# in TERMINAL_PID variable, in this way we can terminate it with kill_terminal
+# Arguments:
+#	$1 -> command to execute
+#	$2 -> name of the new terminal, used for track the terminal
+# Variables:
+#	CUR_DIR -> The new terminal will execute the command in this directory
+#	TERMINAL_PID -> In this variable are stored pid_terminalname
+#
 execute_in_terminal() {
 	local cmd="$1"
 	local tname="$2"
 	mate-terminal --window --working-directory="$CUR_DIR" --command="$cmd"  --disable-factory &
 	TERMINAL_PID="$TERMINAL_PID $!_$tname"
 }
+
+#############################################################################
+# This function kill a specific terminal opened by execute_in_terminal function
+# using TERMINAL_PID information and the name of the terminal given as argument
+# Arguments: 
+#	$1 -> Name of terminal to kill
+#
 kill_terminal () {
 	local tname=$1
 	for pid_name in $TERMINAL_PID; do
@@ -154,11 +128,23 @@ kill_terminal () {
 		fi
 	done
 }
+
+##############################################################################
+# This function delete a pipe given as argument
+# Argument:
+#	$1 -> pipename
+#
 function delete_pipe ()  {
 	local pipename=$1
 	rm $pipename
 	#find /tmp -maxdepth 1 -name pipe_* -delete 
 }
+
+##############################################################################
+# Check if a pipe exists or not
+# Arguments: 
+#	$1 -> pipename
+#
 function check_pipe () {
 	local pipename=$1
 	if [[ ! -p $pipename ]]; then
@@ -167,6 +153,14 @@ function check_pipe () {
 	fi
 }
 
+##############################################################################
+# Read a pipe, this function block program execution until something is written
+# in the pipe
+# Arguments:
+#	$1 -> Pipename
+# Return:
+#	It prints data readed from the pipe
+#
 function read_pipe () {
 	local pipename=$1
 	check_pipe $pipename
@@ -174,6 +168,12 @@ function read_pipe () {
 	echo $line
 }
 
+##############################################################################
+# This function write in the PIPENAME pipe that is the pipe setted using -p option
+# in the script.
+# Arguments
+#	$1 -> data to print in the PIPENAME pipe
+#
 function write_PIPENAME () {
 	local pipename=$PIPENAME
 	local towrite=$1
@@ -182,6 +182,13 @@ function write_PIPENAME () {
 	fi
 }
 
+##############################################################################
+# Read the pipe $1 until the data readed is $2.
+# Arguments:
+#	$1 -> pipename
+#	$2 -> name checked every time that the pipe is written, when
+#		in the pipe is found $2 the function exit
+#
 function pulling_pipe () {
 	local pipename=$1
 	local nametopull=$2
@@ -195,6 +202,13 @@ function pulling_pipe () {
 	done
 }
 
+#########################################################################à###
+# This function wait until a pipe return "exit" and then kill the a terminal
+# Arguments:
+#	$1 -> pipename to wait
+#	$2 -> name of the terminal to kill (we used TERMINAL_PID to find
+#		pid of the terminal and then kill it).
+#
 function kill_terminal_when_it_finished () {
 	local pipename=$1
 	local wname=$2
@@ -202,7 +216,19 @@ function kill_terminal_when_it_finished () {
 	kill_terminal $wname
 }
 
-
+#############################################################################
+# This function verify that  the ARCH_TO_COMPARE architecture has been already 
+# simulated with a specific software and stage so that the corrisponding 
+# vcd file (for input ) and wlf file (for output) has been created.
+# If this file there isn't we run the two simulations to create them.
+# Arguments:
+#	$1 -> name of the software with "-" but without the extension
+#	$2 -> name of the stage during simulation (instance name)
+#	$3 -> name of the stage definition
+# Variables:
+#	ARCH_TO_COMPARE -> This is the architecture used, the vcd and wlf should be related 
+#			to this architecture
+#
 verify_upi_vcdwlf () {
 	# Verify that vcd (for input signals) and wlf (for output) exist, otherwise create it
 	local sw=$1 # name of the software 
@@ -233,6 +259,19 @@ verify_upi_vcdwlf () {
 	
 }
 
+#####################################################################################################
+# This function find how long the simulation should it last using *in.vcd file of ARCH_TO_COMPARE 
+# architecture.
+# Arguments:
+#	$1 -> name of the software with "-" but without the extension
+#       $2 -> name of the stage during simulation (instance name)
+#       $3 -> name of the stage definition
+# Variables:
+#	ARCH_TO_COMPARE -> This is the architecture used, the vcd and wlf should be related 
+#			to this architecture
+# Returns: 
+#	endsim -> in this variable is stored the ns of simulation
+#
 findEndsim () {
 	local sw=$1
 	local stg=$2
@@ -262,6 +301,11 @@ function check_id () {
 	fi
 }
 
+################################################################################à
+# This function send a mail to elia, marcello or luca looking at root name
+# Arguments:
+#	$1 -> mail text
+#
 sendMailToAll_ifyes () {
 	if [[ $1 -eq 1 ]]; then
 		sendMailToAll $1
@@ -269,12 +313,65 @@ sendMailToAll_ifyes () {
 }
 
 ############################################################################################
+# This function execute the makefile with correct configuration
+# the arguments used are:
+#	$1 -> firmware   Is the name of the firmware (with .hex estension) to simulate in 
+#			the architecture, it should be in BENCH_HEX_DIR dir.
+# These instead are the variable used for makefile and vsim setting
+#	SET_UPI -> (1/0) If it is 1 we use questa-sim-stage rule and so we set -vcdstim while 
+# 			we run vsim, in this way the file ${GOLD_NAME}_in.vcd will be used 
+# 			as input stimulus for the simulation
+#	ARCH_TO_COMPARE -> Is the name of the gold architecture, or if we use FI will be the 
+#				same architecture, this variable is used to find the correct 
+#				vcd input file to use as stimulus
+#	STAGE_NAME -> Is the name of the block as it is defined in simulation, to see this name
+#			you should go in the core definition and see as each stage is defined, in cv32e40p the core
+#			for example is defined as "cv32e40p_core" in the wrapper and the file .sv is "cv32e40p_core.sv" so 
+#			STAGE_NAME will be "cv32e40p_core" and B_STAGE will be the same. But the if stage 
+#			for example is intanced as "if_stage" in the core while the file is "cv32e40p_if_stage.sv" so
+#			STAGE_NAME will be "if_stage" while B_STAGE will be "cv32e40p_if_stage"
+#	B_STAGE -> see STAGE_NAME
+#	VSIM_EXT -> This is the extension of the tcl file used for the simulation, the complete tcl file name
+#		will be "vsim$(VSIM_FT).tcl" and it should be located in core-v-verif/cv32/sim/questa
+#	ARCH_TO_USE ->  (ft, ref) This is the architecture to use for simulation, this arch will be used to
+#			identify the correct directory of the architecture 
+#			( core-v-verif/core-v-cores/cv32e40p$(ARCH_TO_USE) )
+#	BENCH_HEX_DIR -> This is the directory in which there is the firmware given with $1 argument
+#	GUI -> (-gui/) If this variable is equal to gui the -gui the gui will be opened for vsim simulation
+
+f_make () {
+        firmware=$1
+	firmware_converted="$(echo $firmware | tr '-' '_')"
+
+	export GOLD_NAME="gold_${ARCH_TO_COMPARE}_${STAGE_NAME}_${firmware_converted:0:-4}"
+	export FT="$VSIM_EXT"
+	export ARCH="_$ARCH_TO_USE"
+	export TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}"
+	
+	if [[ $SET_UPI -eq 0 ]]; then
+    		make -C $SIM_FT questa-sim$GUI 
+	else 
+		db_gecho "[INFO]: STAGE:  $B_STAGE"
+		make -C $SIM_FT questa-sim-stage$GUI STAGE=$B_STAGE 
+	fi
+}
+
+
+############################################################################################
 #  SETTING and MANAGING FUNCTIONS
 ############################################################################################
 
+############################################################################################à
+# This function create a backup of simulation file in ERROR_DIR and then delete files selected 
+# Arguments:
+#	 $1 -> regular expression used to find file to delete
+# Variabili:
+#	ERROR_DIR_BACKUP -> complete path of the backup directory to  use 
+#	ERROR_DIR -> Directory in which are located simulation files
+#	SIM_IDS -> List of IDS of all simulation done up to now
+#
 function clear_id_from_regular_expression () { 
 	# Called by -c option
-	# clear id that match a specific regular expression
 	# $1 regular expression
 	local id_to_delete=$1
 	local new_SIM_IDS=""	
@@ -305,66 +402,63 @@ function clear_id_from_regular_expression () {
 	exit
 }
 
+##############################################################################################
+# Called by -a option
+# With this function you can set ref and ft repo and branch. 
+# Arguments:
+#	$1 -> (refr, refb, ftr, ftb, i, simbase) this argument define what architecture you are setting
+#		or give you info about current setting:
+#		refr -> set the REPO of the reference architecture e.g. https://github.com/RISKVFT/cv32e40p.git
+#		refb -> set the BRANCH of the reference architecture  e.g. master
+#		ftr -> set the REPO of the fault tolerant arch
+#		ftb -> set the BRANCH of the fault tolerant arch
+# 		i -> give info about current arch setting
+#		simbase -> you can set the base of the simulation 
+#	$2 -> the argument processed according to $1
+# Variables setted by the function:
+#	A_REF_REPO -> the name of the repo of the reference arch
+#	A_REF_BRANCH -> the name of the branch of the reference arch
+#	A_FT_REPO -> The name of the fault tolerant repo
+#	A_FT_BRANCH -> the name of the ft branch
+#	SIM_BASE -> this variable
+# Variables used:
+#	CUR_DIR -> directory of this script
+#
 function set_sim_arch () {
-	# Called by -a option
-	# This option set the ref git REPO and the derivated ft git REPO and their 
-	# relative branch, the ref git REPO can be used in the script to create
-	# a first comparison in order to verify correct working of FT arch.
-	# BASE   "-a ref|ft REPO BRANCH"
-	#   ref     save the ref git REPO and BRANCH 
-	#		"-a ref https://github.com/RISKVFT/cv32e40p.git master"
-	#   ft     save the ft git REPO and BRANCH
-	#		"-a ft https://github.com/RISKVFT/cv32e40p.git FT_Marcello"
-	#   s [ft|ref]     set current arch , default is ft
-	#		"-a s ref -b s a" -> simula tutto il benchmark utilizzando l'arch ft
-	if [[ $1 == "ref" || $1 == "ft" ]];then
-		if ! gitRepoExist "$2"; then
-			recho_exit "Error: git repo doesn't exist!!!"
-		fi
-		if ! gitRepoBranchExist $2 $3; then
-			recho_exit "Error: branch of $2 doesn't exist!!"
-		fi
-	fi
-
+	
 	case $1 in
-		ref)
-			db_becho "Setted \n	REF_REPO=$2 and \n	REF_BRANCH=$3"
-			A_REF_REPO=$2
-			repfile "A_REF_REPO" "$CUR_DIR/$(basename $0)" $2
-			A_REF_BRANCH=$3
-			repfile "A_REF_BRANCH" "$CUR_DIR/$(basename $0)" $3 
-			shift 2;;
 		refb)
+			if ! gitRepoBranchExist $2 $3; then
+				recho_exit "Error: branch of $2 doesn't exist!!"
+			fi
 			db_becho "Setted \n	REF_BRANCH=$2"
 			A_REF_BRANCH=$2
 			repfile "A_REF_BRANCH" "$CUR_DIR/$(basename $0)" $2
 			shift 2;;	
 		refr)
+			if ! gitRepoExist "$2"; then
+				recho_exit "Error: git repo doesn't exist!!!"
+			fi
 			db_becho "Setted \n	REF_REPO=$2"
 			A_REF_REPO=$2
 			repfile "A_REF_REPO" "$CUR_DIR/$(basename $0)" $2
 			shift 2;;	
-		ft)
-			db_becho "Setted \n	FT_REPO=$2 and \n	FT_BRANCH=$3"
-			A_FT_REPO=$2
-			repfile "A_FT_REPO" "$CUR_DIR/$(basename $0)" $2
-			A_FT_BRANCH=$3
-			repfile "A_FT_BRANCH" "$CUR_DIR/$(basename $0)" $3
-			shift 3;;
 		ftr)
+			if ! gitRepoExist "$2"; then
+				recho_exit "Error: git repo doesn't exist!!!"
+			fi
 			db_becho "Setted \n	FT_REPO=$2"
 			A_FT_REPO=$2
 			repfile "A_FT_REPO" "$CUR_DIR/$(basename $0)" $2
 			shift 2;;
 		ftb)
+			if ! gitRepoBranchExist $2 $3; then
+				recho_exit "Error: branch of $2 doesn't exist!!"
+			fi
 			db_becho "Setted \n	FT_BRANCH=$2"
 			A_FT_BRANCH=$2
 			repfile "A_FT_BRANCH" "$CUR_DIR/$(basename $0)" $2
 			shift 3;;
-		s)
-			SET_ARCH=1
-			setRepoBranch $2
-			shift 2;;
 		i) # info
 			db_becho "Info about archs\nFT branch = $A_FT_BRANCH\nTF repo = $A_FT_REPO\nREF branch = $A_REF_BRANCH\nREF repo = $A_REF_REPO\nSIM BASE = $SIM_BASE\n"	
 			exit 1 ;;
@@ -480,14 +574,6 @@ function sim_unique_program () {
 			if [[ $A_FT_REPO == " " || $A_REF_REPO == " " ]]; then
 				recho_exit "Error: you should setat least FT repo and branch aof arch using \n\
 					 	\t\t-a ft https://github.com/ft_repo ft_branch_name\n"
-			else
-				if [[ $A_FT_REPO != " " ]]; then
-					db_gecho "Setted ft arch (default) repo=$A_FT_REPO branch=$A_FT_BRANCH"
-					setRepoBranch ft
-				else
-					db_gecho "Setted ref arch repo=$A_REF_REPO branch=$A_REF_BRANCH"
-					setRepoBranch ref
-				fi
 			fi
 		fi	
 	fi
@@ -741,14 +827,6 @@ function sim_benchmark_programs () {
 			if [[ $A_FT_REPO == " " || $A_REF_REPO == " " ]]; then
 				recho_exit "Error: you should setat least FT repo and branch aof arch using \n\
 					 	\t\t-a ft https://github.com/ft_repo ft_branch_name\n"
-			else
-				if [[ $A_FT_REPO != " " ]]; then
-					db_gecho "Setted ft arch (default) repo=$A_FT_REPO branch=$A_FT_BRANCH"
-					setRepoBranch ft
-				else
-					db_gecho "Setted ref arch repo=$A_REF_REPO branch=$A_REF_BRANCH"
-					setRepoBranch ref
-				fi
 			fi
 		fi	
 	fi
@@ -794,7 +872,7 @@ function sim_benchmark_programs () {
 				if [[ $hex == $B_FILE.hex ]]; then 
 					FDONE=1
 					db_gecho "Simulation of $hex"
-					f_make $hex "$B_LOG_DIR/bench_sim_$(delExt $hex).txt" 1 $LINENO
+					f_make $hex
 				fi
 			done
 			if [[ $FDONE -eq 0 ]]; then
@@ -805,7 +883,7 @@ function sim_benchmark_programs () {
 			for hex in $hexfiles; do
 				FDONE=1
 				db_gecho "Simulation of $hex"
-				f_make $hex "$B_LOG_DIR/bench_sim_$(delExt $hex).txt" 1 $LINENO
+				f_make $hex 
 			done
 			if [[ $FDONE -eq 0 ]]; then
 				recho_exit "Error: *.hex file not found in $BENCH_HEX_DIR "		
@@ -821,7 +899,7 @@ function sim_benchmark_programs () {
 				FDONE=1
 				hex=${hexfiles[i]}
 				db_gecho "Simulation of $hex"
-				f_make $hex "$B_LOG_DIR/bench_sim_$(delExt $hex).txt" 1 $LINENO
+				f_make $hex 
 			done
 			if [[ $FDONE -eq 0 ]]; then
 				recho_exit "Error: *.hex file not found in $BENCH_HEX_DIR "		
@@ -1309,15 +1387,21 @@ export CYCLE=1
 # Error variale
 ERROR_DIR="$CORE_V_VERIF/cv32/sim/core/sim_FT/sim_out"
 ERROR_DIR_BACKUP="$CORE_V_VERIF/cv32/sim/core/sim_FT/.sim_out_backup"
-SIM_IDS="ex_stage-hello_world-3-1 core-hello_world-3-1 core-fibonacci-3-1 ex_stage-fibonacci-3-1 ex_stage-fibonacci-1-0 ex_stage-fibonacci-10-1 ex_stage-fibonacci-100-1 if_stage-fibonacci-16600-1 "
-compare_error_file_prefix="cnt_error_"
-info_file_prefix="info_"
-cycle_file_prefix="cycle_"
-signals_fi_file_prefix="signals_fault_injection_"
+compare_error_file_prefix="cnt_error-"
+info_file_prefix="info-"
+cycle_file_prefix="cycle-"
+signals_fi_file_prefix="signals_fault_injection-"
 export SIM_CYCLE_NUMBER_FILE="$ERROR_DIR/cycles_number_coverage.txt"
 
 SEND=0
 PIPENAME=""
+
+
+###########################################################################################
+#  Find all IDS                     #######################################################
+###########################################################################################
+
+SIM_IDS="ls $ERROR_DIR  | cut -d "-" -f 2,3,4,5 | sed 's/\.txt//g' | sort -u"
 
 ###########################################################################################
 #  CLONE of cv32e40p  repository    #######################################################
@@ -1331,6 +1415,9 @@ function verify_branch(){
         local gitft="git --git-dir $ft_repo/.git"
 	local current_branch=""
 
+	#######################################################
+	# Verify REF branch
+	#######################################################
 	cd $CORE_V_VERIF/core-v-cores/
 	if test -d  $ref_repo ; then
 		current_branch=$($gitref branch | grep \* | cut -d " " -f 2)
@@ -1358,6 +1445,11 @@ function verify_branch(){
 	fi
 
 	current_branch=""
+	
+	#######################################################
+	# Verify FT branch
+	#######################################################
+	cd $CORE_V_VERIF/core-v-cores/
 
 	if test -d  $ft_repo ; then
 		current_branch=$($gitft branch | grep \* | cut -d " " -f 2)
@@ -1575,7 +1667,6 @@ echo "elabpar : $ELABPAR"
 # CONTROLS 
 ####################################################################################################
 
-verify_branch
 
 
 
@@ -1595,18 +1686,22 @@ for par in $ELABPAR;do
 			;;
 		-u|--unique-program)
 			# AR_u_args
+			verify_branch
 			sim_unique_program $AR_u_args
 			;;
 		-b|--benchmark)
 			# AR_b_args
+			verify_branch
 			sim_benchmark_programs $AR_b_args
 			;;
 		-qsfiupi)
 			# AR_qsfiupi_args
+			verify_branch
 			manage_stage_fault_injection_upi $AR_qsfiupi_args
 			;;
 		-sfiupi|--stage_fault_injection_upi)
 			# AR_sfiupi_args
+			verify_branch
 			sim_stage_fault_injection_upi $AR_sfiupi_args
 			;;
 		-esfiupi)

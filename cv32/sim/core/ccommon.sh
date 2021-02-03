@@ -255,32 +255,6 @@ mon_run (){
 	   monitor_file "$2" "line $4: [$1" $!
 	   monitor_file_error $2 "Line $4: $1"
 }
-f_make () {
-        firmware=$1
-	firmware_converted="$(echo $firmware | tr '-' '_')"
-	export GOLD_NAME="gold_${ARCH_TO_COMPARE}_${STAGE_NAME}_${firmware_converted:0:-4}"
-	logfile=$2
-	override=$3
-	lineno=$4
-	db_gecho "silent comp:$SILENT_COMP"
-        #mon_run "make -C $SIM_FT questa-sim$GUI \
-        #TEST_FILE=\"$BENCH_HEX_DIR/${firmware:0:-4}\" FT=\"$VSIM_EXT\"" "$logfile" "$override" "$lineno"
-	echo "---------------$GUI"
-	if [[ $SET_UPI -eq 0 ]]; then
-    		make -C $SIM_FT questa-sim$GUI TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}" FT="$VSIM_EXT" \
-		ARCH="_$ARCH_TO_USE" SILENT_COMP=$SILENT_COMP SILENT_SIM=$SILENT_SIM
-	else 
-		echo "-------B_STAGE:  $B_STAGE"
-		make -C $SIM_FT questa-sim-stage$GUI STAGE=$B_STAGE \
-			TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}" FT="$VSIM_EXT" \
-			ARCH="_$ARCH_TO_USE" SILENT_COMP=$SILENT_COMP SILENT_SIM=$SILENT_SIM
-	fi
-	#for file in $(ls ./sim_FT/dataset | grep .*_out.vcd); do
-	#	if ! test -f ./sim_FT/dataset/${file:0:-4}.wlf; then
-	#			vsim -c -do "vcd2wlf ./sim_FT/dataset/$file ./sim_FT/dataset/${file:0:-4}.wlf ; quit -f"
-	#	fi
-	#done
-}
 
 get_git_branch (){
 	gitd=$1
@@ -585,7 +559,31 @@ ask_yesno () {
 
 sendMailToAll () {
 	stringa="Buon*\nOggi è il : $(date)\nQuesto è il log della simulazione:\n$1"
-	echo -e "$stringa"  | mail -s 'DalTuoCaroServer' lucafiore1996@gmail.com 
-	#echo -e "$stringa"  | mail -s 'DalTuoCaroServer' ribaldoneelia@gmail.com
-	#echo -e "$stringa"  | mail -s 'DalTuoCaroServerAffiliatoDiRuoRoch' marcellon96@hotmail.it
+	if [[ $CORE_V_VERIF =~ "luca" ]]; then
+		echo -e "$stringa"  | mail -s 'DalTuoCaroServer' lucafiore1996@gmail.com 
+	fi
+	if [[ $CORE_V_VERIF =~ "elia" ]]; then
+		echo -e "$stringa"  | mail -s 'DalTuoCaroServer' ribaldoneelia@gmail.com
+	fi
+	if [[ $CORE_V_VERIF =~ "marcello" ]]; then
+		echo -e "$stringa"  | mail -s 'DalTuoCaroServerAffiliatoDiRuoRoch' marcellon96@hotmail.it
+	fi
 }
+
+# This function give the timestamp of a file in microseconds
+fileTimestamp () {
+	# $1 is the file
+	if test -f $1 ; then
+		min_inmsec=$(echo "$(stat -c %y $1 | cut -d ":" -f 2 | bc -l )*60*1000" | bc -l)
+		sec_inmsec=$(echo "$(stat -c %y $1 | cut -d ":" -f 3 | cut -d " " -f 1 | \
+			cut -d "." -f 1 | bc -l)*1000" | bc -l)
+		msec_inusec=$(echo "scale=0; $(stat -c %y $1 | cut -d ":" -f 3 | cut -d " " -f 1 | \
+			cut -d "." -f 2 | bc -l)/1000" | bc -l)
+		timestamp_inmsec=$(echo "$min_inmsec*1000+$sec_inmsec*1000+$msec_inusec" | bc -l)
+		echo $timestamp_inmsec
+	else
+		recho_exit "Error in fileTimestamp, file $1 doesn't exist"
+	fi
+}
+
+
