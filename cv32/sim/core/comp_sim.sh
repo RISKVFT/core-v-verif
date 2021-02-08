@@ -61,23 +61,46 @@ UsageExit () {
 	exit 1
 }
 
+#############################################################################################################
+#############################################################################################################
+#  SUPPORT FUNCTION #########################################################################################
+#############################################################################################################
 
-###################################################################################################################
-#  SUPPORT FUNCTION ###############################################################################################
-###################################################################################################################
-
- 
-vecho() { if [[ $VERBOSE ]]; then echo -e "${red}${1}${reset}";fi }
-db_recho() { if [[ $VERBOSE ]]; then echo -e "${red}${bold}${1}${reset}"; fi }
-db_becho() { if [[ $VERBOSE ]]; then echo -e "${blue}${bold}${1}${reset}"; fi }
-db_gecho() { if [[ $VERBOSE ]]; then echo -e "${green}${bold}${1}${reset}"; fi }
+############################################################################
+# Color printer function
+# Parmeters:
+#	VERBOSE -> (1/0) if it is 1 the function print $1
+#	CLEAROUT -> (1/0) if it is 0 the output is colored, otherwise is without color
+#
+vecho() { if [[ $VERBOSE ]]; then if [[ $CLEAROUT == 1 ]]; then echo -e "$1"; else echo -e "${red}${1}${reset}"; fi; fi }
+db_recho() { if [[ $VERBOSE ]]; then if [[ $CLEAROUT == 1 ]]; then echo -e "$1"; else echo -e "${red}${bold}${1}${reset}"; fi, fi }
+db_becho() { if [[ $VERBOSE ]]; then if [[ $CLEAROUT == 1 ]]; then echo -e "$1"; else echo -e "${blue}${bold}${1}${reset}"; fi ;fi}
+db_gecho() { if [[ $VERBOSE ]]; then if [[ $CLEAROUT == 1 ]]; then echo -e "$1"; else echo -e "${green}${bold}${1}${reset}"; fi ; fi}
 db_lgecho() { if [[ $VERBOSE ]]; then lgecho "$1"; fi }
 
 refGitIsSet () { if [[ $A_REF_REPO == " " && $A_REF_BRANCH == " " ]]; then echo 0; else echo 1; fi ; }
 ftGitIsSet () { if [[ $A_FT_REPO == " " && $A_FT_BRANCH == " " ]]; then echo 0; else echo 1; fi ;}
 
+############################################################################
+# Check if the architecture is ref or ft, otherwise print an error and exit
+# Arguments:
+#	$1 -> arch
+#
+function checkArch() {
+	if [[ $1 == 'ref' || $1 == 'ft' ]]; then
+		return
+	else
+		recho_exit "[ERR] Error, the architecture can't be $1, should be \"ref\" or \"ft\""
+	fi
+}
 
+##############################################################################
 # Loop in SIM_IDS and check if there is the corresponding id of simulation
+# Arguments: 
+#	$1 -> Id of the simulation
+# Parameters:
+#	SIM_IDS -> list of current simulation ids
+#
 idExists () {
 	ID=$1
 	thereisid=0
@@ -274,11 +297,9 @@ verify_upi_vcdwlf () {
 #
 findEndsim () {
 	local sw=$1
-	local stg=$2
 	local real_stg=$3
 	
-	verify_upi_vcdwlf $sw $stg $real_stg
-	
+	swc=$(echo $sw | tr '-' '_')
 	db_becho "INFO: vcd input file = ./sim_FT/dataset/gold_${ARCH_TO_COMPARE}_${real_stg}_${swc}_in.vcd"
 
 	endsim="$(( $(tail -n 2 ./sim_FT/dataset/gold_${ARCH_TO_COMPARE}_${real_stg}_${swc}_in.vcd | head -n 1 | tr -d "#") - 1 ))"
@@ -286,14 +307,11 @@ findEndsim () {
 	db_becho "INFO: endsim = $endsim"
 }
 
-db_gecho_c () {
-	if [[ $CLEAROUT == 1 ]]; then
-		echo -e "$1"
-	else
-		db_becho "$1"	
-	fi	
-}	
-
+###########################################################################################
+# This function check if an id exist in SIM_IDS and simply exit if the id doesn't exists
+# Arguments:
+#	$1 -> Id value
+#	
 function check_id () {
 	if [[ $(idExists $1) == "0" ]]; then
 		db_recho "Error: ID not found, these are the available IDS: $SIM_IDS"
@@ -325,11 +343,13 @@ sendMailToAll_ifyes () {
 #				same architecture, this variable is used to find the correct 
 #				vcd input file to use as stimulus
 #	STAGE_NAME -> Is the name of the block as it is defined in simulation, to see this name
-#			you should go in the core definition and see as each stage is defined, in cv32e40p the core
-#			for example is defined as "cv32e40p_core" in the wrapper and the file .sv is "cv32e40p_core.sv" so 
+#			you should go in the core definition and see as each stage is defined,
+#			in cv32e40p the core for example is defined as "cv32e40p_core" in the 
+#			wrapper and the file .sv is "cv32e40p_core.sv" so 
 #			STAGE_NAME will be "cv32e40p_core" and B_STAGE will be the same. But the if stage 
-#			for example is intanced as "if_stage" in the core while the file is "cv32e40p_if_stage.sv" so
-#			STAGE_NAME will be "if_stage" while B_STAGE will be "cv32e40p_if_stage"
+#			for example is intanced as "if_stage" in the core while the 
+#			file is "cv32e40p_if_stage.sv" so STAGE_NAME will be "if_stage" while B_STAGE 
+#			will be "cv32e40p_if_stage"
 #	B_STAGE -> see STAGE_NAME
 #	VSIM_EXT -> This is the extension of the tcl file used for the simulation, the complete tcl file name
 #		will be "vsim$(VSIM_FT).tcl" and it should be located in core-v-verif/cv32/sim/questa
@@ -338,19 +358,28 @@ sendMailToAll_ifyes () {
 #			( core-v-verif/core-v-cores/cv32e40p$(ARCH_TO_USE) )
 #	BENCH_HEX_DIR -> This is the directory in which there is the firmware given with $1 argument
 #	GUI -> (-gui/) If this variable is equal to gui the -gui the gui will be opened for vsim simulation
-
+#	GOLD_NAME -> is the base name of the golden files (wlf and vcd) used as stimulus, this paramter
+#		is used in vsim_save_data_*.tcl script to know how to call the output wlf and vcd files, 
+#		it is also used in vsim_stage_compare in order to open the correct ouput file and in 
+#		the makefile to give the correct input vcd ( when SET_UPI=1)
+#	
 f_make () {
         firmware=$1
 	firmware_converted="$(echo $firmware | tr '-' '_')"
 
-	export GOLD_NAME="gold_${ARCH_TO_COMPARE}_${STAGE_NAME}_${firmware_converted:0:-4}"
 	export FT="$VSIM_EXT"
 	export ARCH="_$ARCH_TO_USE"
 	export TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}"
 	
 	if [[ $SET_UPI -eq 0 ]]; then
+		# If we don't use the previous input GOLD_NAME is only used by save_data_in and 
+		# save_data_out and so the name of the vcd and wlf are related to used architecture
+		export GOLD_NAME="gold_${ARCH_TO_USE}_${STAGE_NAME}_${firmware_converted:0:-4}"
     		make -C $SIM_FT questa-sim$GUI 
 	else 
+		# If we are using previous input we compare the used architecture with the 
+		# ARCH_TO_COMPARE architecture, so we use the vcd of this arch
+		export GOLD_NAME="gold_${ARCH_TO_COMPARE}_${STAGE_NAME}_${firmware_converted:0:-4}"
 		db_gecho "[INFO]: STAGE:  $B_STAGE"
 		make -C $SIM_FT questa-sim-stage$GUI STAGE=$B_STAGE 
 	fi
@@ -362,17 +391,26 @@ f_make () {
 ############################################################################################
 
 ############################################################################################à
+clear_id_from_regular_expression_help () {
+echo -e "
 # This function create a backup of simulation file in ERROR_DIR and then delete files selected 
 # Arguments:
-#	 $1 -> regular expression used to find file to delete
+#	 \$1 -> regular expression used to find file to delete
 # Variabili:
 #	ERROR_DIR_BACKUP -> complete path of the backup directory to  use 
 #	ERROR_DIR -> Directory in which are located simulation files
 #	SIM_IDS -> List of IDS of all simulation done up to now
-#
+#"
+}
 function clear_id_from_regular_expression () { 
 	# Called by -c option
 	# $1 regular expression
+	
+	if [[ $(check_fio $arg -h -H h -help --help) == 1 ]]; then
+		clear_id_from_regular_expression_help
+		exit 1;
+	fi
+	
 	local id_to_delete=$1
 	local new_SIM_IDS=""	
 	# Backup simulations
@@ -403,10 +441,12 @@ function clear_id_from_regular_expression () {
 }
 
 ##############################################################################################
+set_sim_arch_help () {
+echo -e "
 # Called by -a option
 # With this function you can set ref and ft repo and branch. 
 # Arguments:
-#	$1 -> (refr, refb, ftr, ftb, i, simbase) this argument define what architecture you are setting
+#	\$1 -> (refr, refb, ftr, ftb, i, simbase) this argument define what architecture you are setting
 #		or give you info about current setting:
 #		refr -> set the REPO of the reference architecture e.g. https://github.com/RISKVFT/cv32e40p.git
 #		refb -> set the BRANCH of the reference architecture  e.g. master
@@ -414,7 +454,7 @@ function clear_id_from_regular_expression () {
 #		ftb -> set the BRANCH of the fault tolerant arch
 # 		i -> give info about current arch setting
 #		simbase -> you can set the base of the simulation 
-#	$2 -> the argument processed according to $1
+#	\$2 -> the argument processed according to \$1
 # Variables setted by the function:
 #	A_REF_REPO -> the name of the repo of the reference arch
 #	A_REF_BRANCH -> the name of the branch of the reference arch
@@ -423,8 +463,14 @@ function clear_id_from_regular_expression () {
 #	SIM_BASE -> this variable
 # Variables used:
 #	CUR_DIR -> directory of this script
-#
+# "
+}
 function set_sim_arch () {
+	
+	if [[ $(check_fio $1 -h -H h -help --help) == 1 ]]; then
+		set_sim_arch_help
+		exit 1;
+	fi
 	
 	case $1 in
 		refb)
@@ -477,38 +523,50 @@ function set_sim_arch () {
 #  SIMULATION FUNCTIONS             #######################################################
 ###########################################################################################
 
-function sim_unique_program () {
-	# Called by -u option
-	# BASE:
-	#   cf    only compilation "-u cf filename"
-	#   sf	  only compilation "-u sf filename"
-	#   csf   both "-u csf filename"
-	# 
-	# OPTIONAL OPTIONS:
-	#   fv   only comp, with file vsim setted"-u cfv filename vsimfile" o
-	#   vf	             	  		   "-u cvf vsimfile filename"
-	#      	 only sim, with file vsim settato "-u sfv filename vsimfile" o
-	#				 	 "-u svf vsimfile filename"
-	# 	 both with file vsim setted "-u csvf vsimfile filename" o
-	#				  	"-u csfv filename vsimfile"
-	# OPTIONS MANDATORY FOR THE FIRST RUN
-	#   d    directory of c and hex file "-u cvfd vsimfile filename dirname"
-	#   l    directory in which save log file of unique elaboration
-	#	
-	# SCRIPT PARAMETER
-	#	COMPILATION
-	#	SIMULATION
-	# 	CHEX_FILE
-	#	VSIM_EXT
-	#	UNIQUE_CHEX_DIR
 
+#########################################################################################
+sim_unique_program_help () {
+echo -e "
+# Called with -u option
+# This function can:
+# 	- compile a \$(name).c file in a directory called \$(name)  (d option)
+#	- simulate the \$(name).c file in \$(name) directory (d option) with a specified architecture (a option) 
+# The option work in this way:
+#       comp_sim -u [c][s][a][v][d][l] [a_arg][v_arg][d_arg][l_arg]
+# The order of the 
+# Option:
+#	c -> set compilation
+#	s -> set simulation
+#	a [ref|ft] -> (ref, ft) set ARCH_TO_USE with the corrisponding argument 
+#       v tcl_extension -> set VSIM_EXT that is appended to "vsim_" in order to find tcl script
+#			located in core-v-verif/cv32/sim/questa
+#	d hex_dir -> set UNIQUE_CHEX_DIR variable that is the path (from CORE_V_VERIF) of the
+#		directory where there is the file to compile or simulate. The name of this
+#		file should be the same of the directory
+#	l log_dir -> Set the log dir
+# Parmeterus:
+#	ARCH_TO_USE
+# 	CHEX_FILE
+#	VSIM_EXT
+#	UNIQUE_CHEX_DIR
+# 	CORE_V_VERIF
+# 	U_LOG_DIR
+#  	"
+}
+function sim_unique_program () {
 	arg=$1
 	shift # delete args string
+	
+	if [[ $(check_fio $arg -h -H h -help --help) == 1 ]]; then
+		sim_unique_program_help
+		exit 1;
+	fi
 
 	# cycle on args string
 	for (( i=0; i< ${#arg}; i++ )) ; do
 		case ${arg:i:1} in
 			a) # select the architecture to test
+				checkArch "$1"
 				ARCH_TO_USE="$1"
 				SetVar "ARCH_TO_USE" "$ARCH_TO_USE"
 				export $ARCH_TO_USE
@@ -523,6 +581,7 @@ function sim_unique_program () {
                            # parameter to give filename of .c file to compile or to 
 			   # simulate their name should be the same apart the extention
 			   # cmd like"-u csf filename" o "-u csfv filename vsimname"
+			   	recho_exit "[ERR] f option isn't implemented"
 				db_becho "Set filename of *.c file to $1.c"
 				CHEX_FILE=$1; shift;;
 			v) # parameter to give extension to append to the vsim file 
@@ -532,20 +591,16 @@ function sim_unique_program () {
 				VSIM_EXT="_$1"; shift;;
 			d) # 
 				SET_DIR=1
-  				if [[ $1 =~ ^/.* ]]; then #check if the directory path starts with '/' or not
-					UNIQUE_CHEX_DIR=${CORE_V_VERIF}$1
-					dirorfile=$1
-					dirorfile=${dirorfile:1}
-				else 
-					UNIQUE_CHEX_DIR=${CORE_V_VERIF}/$1
-					dirorfile=$1
-				fi
+				UNIQUE_CHEX_DIR=${CORE_V_VERIF}/$1
+				dirorfile=$1
+				db_gecho "[INFO] Set directory of execution at UNIQUE_CHEX_DIR=$UNIQUE_CHEX_DIR"
 				dfSetVar d $dirorfile "UNIQUE_CHEX_DIR" "Set hex/c file directory" \
 					"give a correct directory for executable and hex!!"
 				shift;;
 			l)
 				SET_LOG=1
 				U_LOG_DIR=$1
+				db_gecho "[INFO] Set log dir at U_LOG_DIR=$U_LOG_DIR"
 				dfSetVar d $1 "U_LOG_DIR" "Set log file directory" \
 					"give a correct directory for log file!!" CREATE
 				shift;;
@@ -555,45 +610,16 @@ function sim_unique_program () {
 			
 		esac
 	done
-
-	if [[ $SET_DIR -eq 1 || $SET_LOG -eq 1 ]]; then
-		exit 1 # exit since dir or log dir is setted and no other should be done
-	else
-		if [[ $COMPILATION -eq 0 && $SIMULATION -eq 0 ]]; then
-			recho_exit "Error: select simulation (s) or/and compilation (c) at least\n\
-			\tFirst of all set unique directory or benchmark build-file & hex-dir\n\
-			\tAll path wil be appended to CORE_V_VERIF=$CORE_V_VERIF path:\n\
-			\t\t-b d path/to/build_all.py path/to/hex/file \n\
-			\t\t-u d path/to/c/dir\n\
-			\tThen you could compile and simulate\n\
-			\t\t-b c a -> compile all benchmark file using build script passed with 'd' option\n\
-			\t\t-b s a -> simulate all benchmark *.hex file\n\
-			\t\t-u cf filename -> compile filename file in directory passed wirh 'd' option\n"
-		fi
-		if [[ $SET_ARCH -eq 0 ]];then
-			if [[ $A_FT_REPO == " " || $A_REF_REPO == " " ]]; then
-				recho_exit "Error: you should setat least FT repo and branch aof arch using \n\
-					 	\t\t-a ft https://github.com/ft_repo ft_branch_name\n"
-			fi
-		fi	
-	fi
-
-	if [[ $VSIM_FILE == " " ]]; then
-		if ! test -f $CORE_V_VERIF/cv32/sim/questa/$VSIM_FILE; then
+	# Check tcl file extension
+	if [[ $VSIM_EXT == " " ]]; then
+		if ! test -f $CORE_V_VERIF/cv32/sim/questa/$VSIM_EXT; then
 			recho_exit "Error: when you give 'v' parameter you should give\
 			the correct\n extension of a vsim_EXTENSION.tcl file in \
 			core-v-verif/cv32/sim/questa directory!! "
 		fi
 	fi	 
-	# error handler
-	if [[ $CHEX_FILE == " " ]]; then
-		recho_exit "Error: program file to compile or simulate should be\n \
-			alway specified, for example:\n \
-			-u cf file_to_compile\n -u sf file_to_simulate\n\
-			-u csf file_to_compile&simulate\n\
-			-u csfv file_to_comp&sim vsim_script_extension\n"
-	fi
-	if [[ $UNIQUE_CHEX_DIR == " " ]]; then	
+	# Check dircetory of execution, the .c file should have the same name 
+	if [[ $UNIQUE_CHEX_DIR == " "  ]]; then	
 		recho_exit "Error: you should set dir/build_all program \
 		used to compile all benchmark and the directory of *.hex files with:\n \
 		-b d dir/to/build_all.py dir/to/hexfile \n \ 
@@ -603,13 +629,9 @@ function sim_unique_program () {
 	if [[ $U_LOG_DIR == " " ]]; then
 		recho_exit "Error: Set log directory with -u l /path/to/log/dir"
 	fi
-	if [[ $COMPILATION -eq 1 ]]; then
 
-		program=$(echo $UNIQUE_CHEX_DIR | rev | cut -d '/' -f 1 | rev)
-		if [[ $program != $CHEX_FILE ]]; then #check if the directory setted with d option is the same of the file we want to compile
-			recho_exit "Error: the file you are trying to compile is not in the directory setted by d option. Set the new directory or the correct file."
-		fi
 
+	if [[ $COMPILATION -eq 1 ]]; then	
 		db_gecho "Executing Makefile_Compile.mk in $UNIQUE_CHEX_DIR"
 		#make -C $SIM_FT compile TEST_FILE="$FULL_FILE_CPATH"
 		mon_run "make -C $UNIQUE_CHEX_DIR -f $SIM_FT/Makefile_Compile.mk" \
@@ -618,12 +640,6 @@ function sim_unique_program () {
 		db_gecho "$(ls $UNIQUE_CHEX_DIR)"
 	fi
 	if [[ $SIMULATION -eq 1 ]]; then
-
-		program=$(echo $UNIQUE_CHEX_DIR | rev | cut -d '/' -f 1 | rev)
-		if [[ $program != $CHEX_FILE ]]; then #check if the directory setted with d option is the same of the file we want to simulate
-			recho_exit "Error: the file you are trying to simulate is not in the directory setted by d option. Set the new directory or the correct file."
-		fi
-
 		#rm -rf $CORE_V_VERIF/cv32/sim/core/sim_FT/work	
 		source /software/europractice-release-2019/scripts/init_questa10.7c	
 		# full simulation path without extension 
@@ -637,63 +653,77 @@ function sim_unique_program () {
 
 }
 
+###########################################################################################
+sim_benchmark_programs_help () {
+ echo -e "
+# Called by -b option
+# This function compile and simulate program that are in a benchmark, for compilation 
+# require an executable script (d option) and the directory of the *.hex that the script
+# will create.
+# Synopsis:
+#	comp_sim.sh -b [c][s][a][t][v][d][l][b] [s_arg][a_arg][t_arg][v_args][d_args][l_args][b_arg]
+# Options:
+#	a [ref|ft] -> set ARCH_TO_USE with the corrisponding argument
+#	t [ref|ft] -> set ARCH_TO_COMPARE with the corrisponding argument
+#	c -> Compile your benchmark programs using the executable script given using 'd' option,
+#		the script should compile all programs you need and place the *.hex files in the directory 
+#		setted uding 'd' option. 
+#	s [a|number|name] -> Can simulate in different way;
+#		s a -> Simulate all executable file in the BENCH_HEX_DIR dir (setted with 'd' option)
+#		s 3 -> simulate the first 3 *.hex in the BENCH_HEX_DIR dir
+#		s hello_world -> Simulate hello_world.hex if it is present in the BENCH_HEX_DIR dir.
+#	v [tcl_extention_name|cov] -> This option set the tcl to use for simulation , final tcl file will be 
+#		vsim_\"tcl_extension_name\".tcl and should be located in /cv32/core/questa directory.
+#		If we run \"v cov\" the function set VSIM_EXT as _cycle_to_certain_coverage, this means that
+#		will be calculated the number of cycle for a certain coverage. See vsim_cycle_to_certain_coverage.tcl
+#		for further info.
+#	d [build_file] [hex_out_dir] -> This option set th build executable file used to compile all 
+#	 	benchmark, and  the directory where all *.hex file will be (final directory will be
+#		\$CORE_V_VERIF/hex_out_dir)
+#	l [dir] -> Set log dir (final directory will be \$CORE_V_VERIF/dir)
+#	b [block_name] -> set the stage name to simulate (final name will be cv32e40p_"block_name")
+# Variable:
+#	ARCH_TO_USE -> Architecture to simulate, setted with \"a\" option
+#	ARCH_TO_COMPARE -> Architecture to compare, setted with \"t\" option
+#	COMPILATION -> If 1 compile
+#	SIMULATION -> if 1 simulate
+#	B_TYPE -> Type of benchmark, all -> simulate all etc, setted with c and s option
+#	VSIM_EXT -> Extension of tcl file
+#	BENCH_BUILD_FILE -> File used from compile option to compilate all.
+#	BENCH_HEX_DIR -> Directory of all hex file
+# 	B_STAGE -> is the name of the stage plus cv32e40p, cv32e40p_\$stage_name
+#	STAGE_NAME -> Is the name of the stage used in simulation, so for the core
+#		is not appended the cv32e40p prefix.
+#	COMPARE_ERROR_FILE -> Used by tcl script to know where to save log
+#	INFO_FILE -> info file for tcl script
+#	CYCLE_FILE -> file used to communicate current cycle
+#
+"
+}
 function sim_benchmark_programs () {
-	# Called by -b option
-	# BASE:
-	#  c a         compilation of all benchmark "-b c a " (all)
-	#  c $num           //     of first program "-b c 1" (not implemented)
-	#  c $filename	    //     of hello-world   "-b c hello-world" (not implemented)
-	#  s a 	       simulation of all benchmark  "-b s a" (same as above)
-	#  s $num	    //	                    "-b s 3"
-	#  s $filename      //                      "-b s hello-world"
-	# MIXING OPTION  
-	#  cs 	compilation and simulation of all file "-b cs a"
-	#	compilation of all and simulation of 1° and 2° file  "-b cs 2"
-	#	compilation of all and simulation of hello-world file "-b cs hello-world"
-	# OPTIONAL PARAMETERS:
-	#  v	simulation with a specific vsim file extension "-b sv a FT"
-	# 				                       "-b csv 2 FT"
-	# MANDATORY FILE FOR THE FIRST RUN
-	#  d    give as first parameter the absolute filename of build_all file and 
-	#	then the dir of *.hex file
-	#	"-b d ~/dir/to/buld/all/file/build_all.py ~/dir/to/hex/file"
-	#	This option has to be given alone
-	# SCRIPT PARAMETER
-	#	BENCHMARK def 0
-	#	COMPILATION def 0
-	# 	SIMULATION def 0
-	#       B_TYPE def " "
-	#       B_NUM def 0
-	#       B_FILE def " "
-	#	VSIM_EXT def " "
-	#	BENCH_BUILD_FILE def " "
-	#   	BENCH_HEX_DIR def " "
 	arg=$1
 	shift # delete args string
+
+	if [[ $(check_fio $arg -h -H h -help --help) == 1 ]]; then
+		sim_benchmark_programs_help
+		exit 1;
+	fi
 	
 	# cycle on args string
 	for (( i=0; i< ${#arg}; i++ )) ; do
 		case ${arg:i:1} in
 			a) #architecture to test
+				checkArch "$1"
 				ARCH_TO_USE="$1"
 				SetVar "ARCH_TO_USE" "$ARCH_TO_USE"
 				export $ARCH_TO_USE
 				shift;;
 			t) #architecture to compare 
+				checkArch "$1"
 				ARCH_TO_COMPARE="$1";
 				SetVar "ARCH_TO_COMPARE" "$ARCH_TO_COMPARE"
 				export $ARCH_TO_COMPARE
 				shift;;
-			f) #fi
-				export FI=$1
-				if [[ $FI -ne 0 && $FI -ne 1 ]]; then
-					db_recho "ERROR: -sfiupi f fault_injection_yes_no :"
-				        db_recho "	fault_injection_yes_no should bo 0 or 1."
-					db_recho "	value $FI is wrong!"
-					exit
-				fi
-				db_becho "FI = $1"
-				shift;; 
 			c|s) # compile or simulate
 				if [[ ${arg:i:1} == "c" ]]; then
 				# case like "-u cf filename" only compilation or both
@@ -728,27 +758,15 @@ function sim_benchmark_programs () {
 				fi
 				db_becho "Set vsim file extension, vsim_$1.tcl will be run"
 				shift;;
-			d) # set build file, dir of out *.hex file and exit
+			d) # set build file, dir oBENCH_HEX_DIR/SET_BLOCKf out *.hex file and exit
 				SET_DIR=1
-				if [[ $1 =~ ^/.* ]]; then #check if the directory path starts with '/' or not
-					BENCH_BUILD_FILE=$1
-					dirorfile=$1
-					dirorfile=${dirorfile:1}
-				else 
-					BENCH_BUILD_FILE="/$1"
-					dirorfile=$1
-				fi
+				BENCH_BUILD_FILE="$CORE_V_VERIF/$1"
+				dirorfile=$1
 				dfSetVar f "$dirorfile" "BENCH_BUILD_FILE" "Set benchmark build file" \
 					"give a correct path/name for build file!!"
 				shift
-				if [[ $1 =~ ^/.* ]]; then #check if the directory path starts with '/' or not
-					BENCH_HEX_DIR=$1
-					dirorfile=$1
-					dirorfile=${dirorfile:1}
-				else 
-					BENCH_HEX_DIR="/$1"
-					dirorfile=$1
-				fi
+				BENCH_HEX_DIR="$CORE_V_VERIF/$1"
+				dirorfile=$1
 				dfSetVar d "$dirorfile" "BENCH_HEX_DIR" "Set benchmark hex file dir"\
 					"give a correct directory of hex directory !!" 
 				shift
@@ -756,7 +774,7 @@ function sim_benchmark_programs () {
 				exit 1;;
 			l)
 				SET_LOG=1
-				B_LOG_DIR=$1
+				B_LOG_DIR="$CORE_V_VERIF/$1"
 				dfSetVar d $1 "B_LOG_DIR" "Set log bench file directory" \
 					"give a correct directory for log file of benchmark!!"\
 					CREATE
@@ -780,65 +798,28 @@ function sim_benchmark_programs () {
 		esac
 	done
 	db_becho "Architecture selected: $ARCH_TO_USE"
-	if  [[ $VSIM_EXT == "_cycle_to_certain_coverage" ]]; then
-		export SWC="$(echo $B_FILE | tr '-' '_')"
-		findEndsim $SWC $STG $STAGE_NAME
-		export T_ENDSIM=$endsim
-		db_becho "ENDSIM = $T_ENDSIM"
-	fi
 
-        if  [[ $VSIM_EXT == "_save_data_*" ]]; then
-		ARCH_TO_COMPARE=$ARCH_TO_USE
-	fi
-
-	if  [[ $VSIM_EXT == "_stage_compare" ]]; then
-		SET_UPI=1
-		export SWC="$(echo $B_FILE | tr '-' '_')"
-		findEndsim $SWC $STG $STAGE_NAME
-		export T_ENDSIM=$endsim
-		db_becho "ENDSIM = $T_ENDSIM"
-		## aggiunti per il momento
-		mkdir -p $ERROR_DIR
-		ID="$STG-$SWC-$CYCLE-$FI"
-		db_becho "-----------ID:$ID"
-
-		export COMPARE_ERROR_FILE="$ERROR_DIR/$compare_error_file_prefix$ID.txt"
-		export INFO_FILE="$ERROR_DIR/$info_file_prefix$ID.txt"
-		export CYCLE_FILE="$ERROR_DIR/$cycle_file_prefix$ID.txt"
-		export SIGNALS_FI_FILE="$ERROR_DIR/$signals_fi_file_prefix$ID.txt"
-		##
-	fi
-	
-	if [[ $SET_DIR -eq 1 || $SET_LOG -eq 1 ]]; then
-		exit 1 # exit since dir or log dir is setted and no other should be done
-	else
-		if [[ $COMPILATION -eq 0 && $SIMULATION -eq 0 ]]; then
-			recho_exit "Error: select simulation (s) and/or compilation (c) at least\n\
-			\tFirst of all set unique directory of benchmark build-file & hex-dir\n\
-			\tAll path wil be appended to CORE_V_VERIF=$CORE_V_VERIF path:\n\
-			\t\t-b d path/to/build_all.py path/to/hex/file \n\
-			\t\t-u d path/to/c/dir\n\
-			\tThen you could compile and simulate\n\
-			\t\t-b c a -> compile all benchmark file using build script passed with 'd' option\n\
-			\t\t-b s a -> simulate all benchmark *.hex file\n\
-			\t\t-u cf filename -> compile filename file in directory passed wirh 'd' option\n"
-		fi
-		if [[ $SET_ARCH -eq 0 ]];then
-			if [[ $A_FT_REPO == " " || $A_REF_REPO == " " ]]; then
-				recho_exit "Error: you should setat least FT repo and branch aof arch using \n\
-					 	\t\t-a ft https://github.com/ft_repo ft_branch_name\n"
-			fi
-		fi	
-	fi
-
-	if [[ $VSIM_FILE == " " ]]; then
-		if ! test -f $CORE_V_VERIF/cv32/sim/questa/$VSIM_FILE; then
+	if [[ $VSIM_EXT == " " ]]; then
+		if ! test -f $CORE_V_VERIF/cv32/sim/questa/$VSIM_EXT; then
 			recho_exit "Error: when you give 'v' parameter you should give\
 			the correct\n extension of a vsim_EXTENSION.tcl file in \
 			core-v-verif/cv32/sim/questa directory!! "
 		fi
 	fi	 
 	
+	if  [[ $VSIM_EXT == "_cycle_to_certain_coverage" ]]; then
+		export SWC="$(echo $B_FILE | tr '-' '_')"
+		findEndsim $SWC $STAGE_NAME
+		export T_ENDSIM=$endsim
+		db_becho "ENDSIM = $T_ENDSIM"
+	fi
+	
+	# To use stage compare we should use sfiupi since many variable should set and monitored
+	if  [[ $VSIM_EXT == "_stage_compare" && $SSFIUPI == 0 ]]; then
+		recho_exit "[ERR] Use sfiupi or qsfiupi to simulate with vsim_stage_compare.tcl script!!"
+	fi
+
+
 	# Controls
 	if [[ $B_LOG_DIR == " " ]]; then
 		recho_exit "Error: Set log directory with -b l /path/to/log/dir"
@@ -909,8 +890,23 @@ function sim_benchmark_programs () {
 	fi
 }
 
+########################################################################################################
+manage_stage_fault_injection_upi_help () {
+echo "
+# Called by -qsfiupi
+# This function call -sfiupi option and monitor simulation status using progress bar.
+# See -sfiupi for options.
+"
+}
 function manage_stage_fault_injection_upi () {
 	# Called by qsfiupi
+	
+	if [[ $(check_fio $1 -h -H h -help --help) == 1 ]]; then
+		manage_stage_fault_injection_upi_help
+		db_becho "\n\nSFIUPI help :"
+		sim_stage_fault_injection_upi_help
+		exit 1;
+	fi
 	
 	local pipe_info=/tmp/pipe_info
 	mkfifo $pipe_info
@@ -942,6 +938,20 @@ function manage_stage_fault_injection_upi () {
 	sleep 1
 
 	delete_pipe $pipe_info
+
+	# If user want to run multiple programs the progress bar will be in
+	# the second terminal and in this terminal will be only displayed the
+	# name of the program already simulated
+	if [[ $CYCLE == "all" ]]; then
+		while true; do
+			software=$(read_pipe $ALL_SW_PIPE)		
+			if [[ $software == "END" ]]; then
+				db_gecho "[Info] All software simulated!!!"
+				exit 1;
+			fi
+			db_gecho "[INFO] $software software is in simulation ..."
+		done
+	fi
 
 	
 	# We reset the cycle file, this file is written by tcl script
@@ -1052,22 +1062,71 @@ function manage_stage_fault_injection_upi () {
 	exit 
 }
 
+#############################################################################################################à
+sim_stage_fault_injection_upi_help () {
+echo -e "
+# This function  use the vsim_stage_compare.tcl script (in cv32/sim/questa) to simulate an architecture
+# (setted with \"a\" option) and compare the output with the golden architecture (Setted with \"t\" option), this
+# simulation is done for a specific software (setted with \"s\" option), this software should be the name of an 
+# *.hex file in the directory of the benchmark output.
+# This comparison can be used with fault injection, in this case usually the golden architecture is setted
+# equal to the architecture to test, the simulation flow is:
+#	- Creation of vcd in and wlf out using \"-b sbv software stage save_data_in\" 
+#		and \"-b sbv software stage save_data_out\"
+#	- fault injection repeated for a certain number of cycle (10 cycle in this case):	
+#		\"-sfiupi atcfsb ref ref 10 1 software stage\"
+# 
+# If we want to test fault injection with a certain coverage we can set cycle to \"cov\" like this:
+#	        \"-sfiupi atcfsb ref ref cov 1 software stage\"
+# In this case the function run  the script vsim_cycle_to_certain_coverage.tcl, this script calculate the
+# number of cycle of fault injection starting from total number of bits where we can inject the fault.
+# Then the script simulate using this number of cycle.
+#
+# Another feature is the possibility to run all software that are in the hex dir, this directory can be set
+# using -b option and it is the directory where are stored all *hex of benchmark software. Therfore we can run
+# all software setting \"s\" option equal to \"all\" in this way:
+#	\"-sfiupi atcfsb ref ref 10 1 all stage\"  -> simulation with fault injection of all software
+#
+# General form:
+#	comp_sim -sfiupi [a][t][c][f][s][b] args
+# Options:
+#	a [ref|ft]-> Set ARCH_TO_USE with the corrisponding argument, this is the architecture used 
+#			in current simulation.
+#	t [ref|ft] -> Set ARCH_TO_COMPARE with the corrisponding argument, the vcd (for input) and wlf
+#		(for ouput) of this architecture are used respectively as vcdstim input and output 
+#		comparison for ARCH_TO_USE architecture. 
+#	c [number|cov] -> set number of fault injection cycle to do, for each cycle a fault is injected in
+#		a different signal and the output are compared. If we use \"cov\" the program find the number
+#		of cycle that corresponds to a certain coverage using vsim_cycle_to_certain_coverage.tcl script.
+#	f [0|1] -> This option is effective if we use vsim_stage_compare.tcl script, this option set 
+#		the FI variable that is used by vsim_stage_compare.tcl, if FI is 1 the script make
+#		fault injection for CYCLE cycle ()
+#	s [software|all] -> Set the name of the software to use for simulation, this software should be in 
+#	 	the BENCH_HEX_DIR directory, this dir can be set using \"-b d\" option and is the output dir
+#		of the benchmark builder. If we set s option to \"all\" the program will simulate one by one all
+#		software that are in BENCH_HEX_DIR directory.
+#	b [stage_name] -> this is the stage name that we want to test, set it to core to simulate entire core.
+# Variables:
+#	All variable setted also by -b option, since -sfiupi use -b to simulate
+#	CYCLE -> number of cycle
+#	T_ENDSIM -> ns of simulation
+#"
+}
 function sim_stage_fault_injection_upi () {
 	
-	if [[ $1 == "-h" ]]; then
-		echo "c (0-1000000)[cycle number], f (0/1)[injection], s [software_name], b [stage_name]"
-		exit
-	fi
-	# c [0-100000000] cycle number
-	# f [0/1] fault  injection
-	# s software
-	# b stage
 	arg=$1
 	shift # delete args string
+	
+	if [[ $(check_fio $arg -h -H h -help --help) == 1 ]]; then
+		sim_stage_fault_injection_upi_help
+		exit 1;
+	fi
 	
 	export CYCLE=1
 	export FI=0
 	CALC_CYCLE_ON=0
+	SET_UPI=1
+	SSFIUPI=1
 	# cycle on args string
 	for (( i=0; i< ${#arg}; i++ )) ; do
 		case ${arg:i:1} in
@@ -1086,8 +1145,7 @@ function sim_stage_fault_injection_upi () {
 				export CYCLE=$1
 				if [[ $CYCLE == "cov" ]]; then
 					CALC_CYCLE_ON=1
-				fi
-				if ! [[ $CYCLE =~ $isnumber ]]; then
+				elif ! [[ $CYCLE =~ $isnumber ]]; then
 					db_recho "ERROR: -sfiupi c number_of_cycle :"
 					db_recho "	number of cycle should be an integer number."
 				        db_recho "      value $CYCLE is wrong!"
@@ -1140,30 +1198,36 @@ function sim_stage_fault_injection_upi () {
 			;;
 		esac
 	done
+
+	# If we don't use fault injection is useless do cycle.
 	if [[ $FI -eq 0 ]]; then
 		export CYCLE=1
-		echo "Fault injection is equal to 0 so you can't cycle, CYCLE=0"
-	else
-		if  [[ $CALC_CYCLE_ON -eq 1 ]]; then
-			CYCLE="cov"	
-			if [[ -f "$SIM_CYCLE_NUMBER_FILE" ]]; then
-				line=$(cat "$SIM_CYCLE_NUMBER_FILE" | grep "$SWC$REAL_STG:")
-				if [[ $line != "" ]]; then
-					CYCLE=$(echo $line | rev | cut -d ":" -f 1 | rev)
-				fi
+		echo "Fault injection is equal to 0 so you can't cycle, CYCLE=1"
+	fi
+
+	# If CYCLE is setted to "cov" we should calculate the number of cycle 
+        # needed for a certain coverage and set it before the simulation	
+	if  [[ $CALC_CYCLE_ON -eq 1 ]]; then
+		CYCLE="cov"	
+		if [[ -f "$SIM_CYCLE_NUMBER_FILE" ]]; then
+			line=$(cat "$SIM_CYCLE_NUMBER_FILE" | grep "$SWC$REAL_STG:")
+			if [[ $line != "" ]]; then
+				CYCLE=$(echo $line | rev | cut -d ":" -f 1 | rev)
 			fi
-			if [[ $CYCLE == "cov" ]]; then
-				# execute the tcl script in order to find correct number of cycle
-				./comp_sim.sh -b sbv $SW $STG "cov" -upi
-				line=$(cat "$SIM_CYCLE_NUMBER_FILE" | grep "$SWC$REAL_STG:")
-				if [[ $line != "" ]]; then
-					CYCLE=$(echo $line | rev | cut -d ":" -f 1 | rev)
-				fi
-				db_becho "CYCLE = $CYCLE"
-				exit
-			fi
-			
 		fi
+		# If CYCLE don't change means that the cycle for this stage
+		# are not already calculated and stored in SIM_CYCLE_NUMBER_FILE file.
+		# In this case we should calculate it
+		if [[ $CYCLE == "cov" ]]; then
+			# execute the tcl script in order to find correct number of cycle
+			./comp_sim.sh -b sbv $SW $STG "cov" -upi
+			line=$(cat "$SIM_CYCLE_NUMBER_FILE" | grep "$SWC$REAL_STG:")
+			if [[ $line != "" ]]; then
+				CYCLE=$(echo $line | rev | cut -d ":" -f 1 | rev)
+			fi
+			db_becho "CYCLE = $CYCLE"
+		fi
+		
 	fi
 
 	# Set error file used to save number of error of the simulation
@@ -1180,6 +1244,7 @@ function sim_stage_fault_injection_upi () {
 		SetVar "SIM_IDS" "$STG-$SWC-$CYCLE-$FI $SIM_IDS"
 		SIM_IDS="$STG-$SWC-$CYCLE-$FI $SIM_IDS"
 	fi
+
 	export COMPARE_ERROR_FILE="$ERROR_DIR/$compare_error_file_prefix$ID.txt"
 	export INFO_FILE="$ERROR_DIR/$info_file_prefix$ID.txt"
 	export CYCLE_FILE="$ERROR_DIR/$cycle_file_prefix$ID.txt"
@@ -1187,31 +1252,31 @@ function sim_stage_fault_injection_upi () {
 	echo 0 > "$COMPARE_ERROR_FILE"
 	echo "" > "$INFO_FILE"
 
+	# Verifica dei file vcd di input e wlf di output
+	verify_upi_vcdwlf $SWC $STG $REAL_STG
+	
 	############# RUN SIMULATION #############################
 	if [[ $SWC == "all" ]]; then
 		hexfile=$(ls $BENCH_HEX_DIR/*.hex)
-		for i in $hexfile;do
-			############ Save parameter in a log file for -qsfiupi ##########
-			write_PIPENAME "cycle:$CYCLE"
-			write_PIPENAME "cycle_file:$CYCLE_FILE"
 
-			timeone=$(date +%s)
-			write_PIPENAME "start_time:$timeone"
+		write_PIPENAME "cycle:all"
+		db_becho "INFO: send CYCLE through pipe"
+		write_PIPENAME "cycle_file:$CYCLE_FILE"
+		db_becho "INFO: send CYCLE_FILE through pipe"
+		timeone=$(date +%s)
+		write_PIPENAME "start_time:$timeone"
+		
+		sleep 2
 
-			SW=$(echo $i | rev | cut -d "/" -f 1 | rev | cut -d "." -f 1)
-			SWC="$(echo $SW | tr '-' '_')"
-
-			findEndsim $SWC $STG $REAL_STG
-			export T_ENDSIM=$endsim
-
-
-			db_becho "Simulation end time $T_ENDSIM"
-			sim_benchmark_programs svb $SW stage_compare $STG -upi
-			timetwo=$(date +%s)
-			sim_total_time=$(($timetwo-$timeone))
-			echo "Total_sim_time:$sim_total_time" >> "$INFO_FILE"
-			echo "SImulation ID:$ID"
+		delete_pipe $PIPENAME
+		PIPENAME=$ALL_SW_PIPE
+		for i in $hexfile;do	
+			software=$(echo $i | cut -d "." -f 1) 
+			./comp_sim.sh -sfiupi atsbfc $ARCH_TO_USE $ARCH_TO_COMPARE $software $STG $FI $CYCLE
+			write_PIPENAME "$software"
 		done	
+		sleep 1
+		write_PIPENAME "END"
 	else
 		############ Save parameter in a log file for -qsfiupi ##########
 		write_PIPENAME "cycle:$CYCLE"
@@ -1222,7 +1287,7 @@ function sim_stage_fault_injection_upi () {
 		write_PIPENAME "start_time:$timeone"
 
 		
-		findEndsim $SWC $STG $REAL_STG
+		findEndsim $SWC $REAL_STG
 		export T_ENDSIM=$endsim
 		
 		db_becho "Simulation end time $T_ENDSIM"
@@ -1242,6 +1307,17 @@ function sim_stage_fault_injection_upi () {
 #  ELABORATION FUNCTION #########################################################
 ######################################################################################
 
+
+#######################################################################################
+# This function elaborate the ERROR_DIR/signals_fault_injection_$id.txt files created 
+# during a fault injection by vsim_stage_compare.tcl script.
+# Elaboration are stored in variables:
+# 	MEAN_ERROR -> if a fault injection create errors, there will be a certain amounnt of 
+#	errors in other signals, in signals_fault_injection_$id file is stored the amount
+#	of these errors for each fault injection. MEAN_ERROR is a sequence of string like
+#	mean:$(mean_number_of_error)#$(signal_where_fault_is_injected)
+#	where the mean_number_of_error is calculated over all fault injection.
+#
 function signals_elaboration () {
 	local id=$1
 	local file_sig="$ERROR_DIR/signals_fault_injection_$id.txt"
@@ -1260,14 +1336,36 @@ function signals_elaboration () {
 			done
 			local mean_error=$( echo "scale=2; $tot_errors/$err_n" | bc -l)
 			MEAN_ERROR="$MEAN_ERROR mean:$mean_error#$sig"
+		else
+			MEAN_ERROR="$MEAN_ERROR mean:0#$dig"
 		fi
 	done
 }
 
+
+#################################################################################################
+elaborate_simulation_output_help () {
+echo -e "
+# Called by -esfiupi
+# This function elaborate the ouput file of a sfiupi simulation. The file in ERROR_DIR directory
+# are used to find and print:
+# 	- Simulation identity : software, stage
+# 	- Total simulation time in dd:hh:mm 
+#	- Time spent for a single simulation cycle
+# If we simulate with fault injection are also printed:
+#	- The absolute number of fault injected that create an error
+#	- Number of singnal that has been used for fault injecton
+#	- Percentage of fault tolerance
+#
+"
+}
 function elaborate_simulation_output () {
-	# elaborate sfiupi output
-	# $1 is the id of simulation ex: id_stage-fibonacci-10-1  -> is_stage simulato 
-	# col software fibonacci in 10 cicli con fault injection
+	
+	if [[ $(check_fio $1 -h -H h -help --help) == 1 ]]; then
+		sim_stage_fault_injection_upi_help
+		exit 1;
+	fi
+	
 	############ CONTROLS  #################################
 	local id=$1
 	check_id $id
@@ -1301,28 +1399,31 @@ function elaborate_simulation_output () {
 	fi
 
 	# CLEAROUT variable said when to print an putput clean from color, used for send mail
-	db_gecho_c "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	db_gecho_c "Total simulation time ${sim_show_time}"
-	db_gecho_c "Software : $swc"
-	db_gecho_c "Stage : $stg"
-	db_gecho_c "Time for cycle ${time_for_cycle}s"
+	db_gecho "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	db_gecho "Total simulation time ${sim_show_time}"
+	db_gecho "Software : $swc"
+	db_gecho "Stage : $stg"
+	db_gecho "Time for cycle ${time_for_cycle}s"
 	if [[ $fi> 0 ]]; then 
-		db_gecho_c "Total errors in $tot_cycle simulations are $error"
-		db_gecho_c "Total number of signals that could be used" 
-		db_gecho_c "	for fault injection : $n_of_signal"
-		db_gecho_c "Fault tolerance ${fault_tolerance:0:6}%"
+		db_gecho "Total errors in $tot_cycle simulations are $error"
+		db_gecho "Total number of signals that could be used" 
+		db_gecho "	for fault injection : $n_of_signal"
+		db_gecho "Fault tolerance ${fault_tolerance:0:6}%"
 		for sig_mean in $signals_mean; do
-			db_gecho_c "$(echo $sig_mean )"  #| sed -e 's/\#/ sig\:/g')"
+			db_gecho "$(echo $sig_mean )"  #| sed -e 's/\#/ sig\:/g')"
 		done
 	fi	
-	db_gecho_c "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	db_gecho "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 }
 
 ###########################################################################################
-#  SETTING VARIABLES                #######################################################
+#  SETTING VARIABLES      #################################################################
 ###########################################################################################
 
-## General variable
+########################################################################
+# FIXED variable       #################################################
+########################################################################
+
 CORE_V_VERIF="/home/thesis/luca.fiore/Repos/core-v-verif"
 COMMONMK="$CORE_V_VERIF/cv32/sim/core/sim_FT/Common.mk"
 
@@ -1331,44 +1432,17 @@ isnumber='^[0-9]+$'
 CUR_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 SIM_FT="$CUR_DIR/sim_FT"
 
-ARCH_TO_USE="ref"
-ARCH_TO_COMPARE="ref"
-export $ARCH_TO_USE
-export $ARCH_TO_COMPARE
+ERROR_DIR="$CORE_V_VERIF/cv32/sim/core/sim_FT/sim_out"
+ERROR_DIR_BACKUP="$CORE_V_VERIF/cv32/sim/core/sim_FT/.sim_out_backup"
+compare_error_file_prefix="cnt_error-"
+info_file_prefix="info-"
+cycle_file_prefix="cycle-"
+signals_fi_file_prefix="signals_fault_injection-"
+export SIM_CYCLE_NUMBER_FILE="$ERROR_DIR/cycles_number_coverage.txt"
 
-# Folder that contain *.c file (and after compilation the *.hex file) of
-# unique program to use as architecture firmware
-UNIQUE_CHEX_DIR="$CORE_V_VERIF/cv32/tests/programs/custom_FT/general_test/fibonacci"
-U_LOG_DIR="$CORE_V_VERIF/cv32/sim/core/u_log"
-mkdir -p $U_LOG_DIR
-
-# Folder that contain the build_all.py program runned to compile all benchmark
-BENCH_BUILD_FILE="$CORE_V_VERIF/cv32/tests/programs/custom_FT/build_all.py"
-#BENCH_BUILD_FILE="$CORE_V_VERIF/cv32/tests/programs/custom_FT/coremark/build-coremark.sh"
-# Folder that contain *.hex file of benchmar
-BENCH_HEX_DIR="$CORE_V_VERIF/cv32/tests/programs/custom_FT/out"
-B_TYPE=""
-B_FILE=""
-B_NUM=0
-B_LOG_DIR="$CORE_V_VERIF/cv32/sim/core/bench_log"
-mkdir -p $B_LOG_DIR
-# common parameter
-CHEX_FILE=" "
-VSIM_EXT=""
-export GUI=""
-export SIM_BASE="tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
-export STAGE_NAME="cv32e40p_core"
-
-VERBOSE=1
-
-# ARCH
-A_REF_REPO="https://github.com/RISKVFT/cv32e40p.git"
-A_REF_BRANCH="master"
-A_REF_REPO_NAME="cv32e40p_ref"
-A_FT_REPO="https://github.com/RISKVFT/cv32e40p.git"
-A_FT_BRANCH="FT_Luca"
-A_FT_REPO_NAME="cv32e40p_ft"
-
+##########################
+# Used by function
+#
 # Set variable are used to correctly end program if only
 # this action are done, for example if only git repo 
 # is setted the program should ended since all is done
@@ -1380,21 +1454,74 @@ SET_BLOCK=0
 SET_UPI=0
 #TEST_DIR="$CUR_DIR/../../tests/programs/MiBench/"
 #TEST_DIR="$CUR_DIR/../../tests/programs/riscv-toolchain-blogpost/out"
-CLEAROUT=0
 TERMINAL_PID=""
-export CYCLE=1
 
 # Error variale
-ERROR_DIR="$CORE_V_VERIF/cv32/sim/core/sim_FT/sim_out"
-ERROR_DIR_BACKUP="$CORE_V_VERIF/cv32/sim/core/sim_FT/.sim_out_backup"
-compare_error_file_prefix="cnt_error-"
-info_file_prefix="info-"
-cycle_file_prefix="cycle-"
-signals_fi_file_prefix="signals_fault_injection-"
-export SIM_CYCLE_NUMBER_FILE="$ERROR_DIR/cycles_number_coverage.txt"
 
 SEND=0
 PIPENAME=""
+SSFIUPI=0
+ALL_SW_PIPE="/tmp/pipe_info_all"
+
+
+########################################################################
+# USER DEFINED variable      ###########################################
+########################################################################
+##########################
+# Setted by -u option
+#
+# Folder that contain *.c file (and after compilation the *.hex file) of
+# unique program to use as architecture firmware
+UNIQUE_CHEX_DIR="$CORE_V_VERIF/cv32/tests/programs/custom_FT/general_test/fibonacci"
+U_LOG_DIR="$CORE_V_VERIF/cv32/sim/core/u_log"
+mkdir -p $U_LOG_DIR
+VSIM_EXT=""
+
+##########################
+# Setted by -b option
+#
+# Folder that contain the build_all.py program runned to compile all benchmark
+BENCH_BUILD_FILE="$CORE_V_VERIF/cv32/tests/programs/custom_FT/build_all.py"
+#BENCH_BUILD_FILE="$CORE_V_VERIF/cv32/tests/programs/custom_FT/coremark/build-coremark.sh"
+# Folder that contain *.hex file of benchmar
+BENCH_HEX_DIR="$CORE_V_VERIF/cv32/tests/programs/custom_FT/out"
+B_TYPE=""
+B_FILE=""
+B_NUM=0
+B_LOG_DIR="$CORE_V_VERIF/cv32/sim/core/bench_log"
+mkdir -p $B_LOG_DIR
+
+export CYCLE=1
+
+##########################
+# Setted by -b and -u option
+#
+CHEX_FILE=" "
+export GUI=""
+export SIM_BASE="tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
+export STAGE_NAME="cv32e40p_core"
+
+ARCH_TO_USE="ref"
+ARCH_TO_COMPARE="ref"
+export $ARCH_TO_USE
+export $ARCH_TO_COMPARE
+
+
+##########################
+# Directly setted by cmd line
+VERBOSE=1
+CLEAROUT=0
+
+##########################
+# Setted by -a option
+# 
+A_REF_REPO="https://github.com/RISKVFT/cv32e40p.git"
+A_REF_BRANCH="master"
+A_REF_REPO_NAME="cv32e40p_ref"
+A_FT_REPO="https://github.com/RISKVFT/cv32e40p.git"
+A_FT_BRANCH="FT_Luca"
+A_FT_REPO_NAME="cv32e40p_ft"
+
 
 
 ###########################################################################################
@@ -1407,13 +1534,35 @@ SIM_IDS="ls $ERROR_DIR  | cut -d "-" -f 2,3,4,5 | sed 's/\.txt//g' | sort -u"
 #  CLONE of cv32e40p  repository    #######################################################
 ###########################################################################################
 
-# Verify that the ref and ft architecture exist otherwise clone it
+# Verify that the ref and ft architecture exist otherwise clone it and set correct branch
 function verify_branch(){
 	local ft_repo=$CORE_V_VERIF/core-v-cores/$A_FT_REPO_NAME
 	local ref_repo=$CORE_V_VERIF/core-v-cores/$A_REF_REPO_NAME
 	local gitref="git --git-dir $ref_repo/.git"
         local gitft="git --git-dir $ft_repo/.git"
 	local current_branch=""
+	
+	#######################################################
+	# Verify that repo and branch are setted
+	#######################################################
+	stringa=""
+	if [[ $A_REF_REPO == "" ]]; then
+		stringa="$stringa ref repo "
+	fi
+	if [[ $A_REF_BRANCH == "" ]]; then
+		stringa="$stringa, ref branch "
+	fi
+	if [[ $A_FT_REPO == "" ]]; then
+		stringa="$stringa, ft repo "
+	fi
+	if [[ $A_FT_BRANCH == "" ]]; then
+		stringa="$stringa, ft branch "
+	fi		
+	db_gecho "[INFO] $stringa aren't setted!!."
+	ask_yesno "[QUESTION] Do you want to terminate in order to set them (with -a option) (y/n)?"
+	if [[ $ANS -eq 1  ]]; then
+		exit 1
+	fi
 
 	#######################################################
 	# Verify REF branch
@@ -1662,12 +1811,6 @@ while [[ $1 != "" ]]; do
 	esac
 done
 echo "elabpar : $ELABPAR"
-
-#####################################################################################################
-# CONTROLS 
-####################################################################################################
-
-
 
 
 #####################################################################################################

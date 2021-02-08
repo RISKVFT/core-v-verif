@@ -1,91 +1,231 @@
-Program Usage:
-	!!!!!!!!! ALL DIRECTORY will be appended to CORE_V_VERIF path !!!!!!!!
-	-h|--help)
-		UsageExit
+.TH comp_sim(1)	
+.SH NAME
+comp_sim \- simulate and compile programs for cv32e40p riscv architecture
+.SH SYNOPSIS
+You can call comp_sim with many different options, these are all options with their syntax.
 
-	-g|--gui)
-		GUI=-gui --> if -g then use Questasim GUI
+.B \./comp_sim 
+[\fb -a\fR \fb[refr|refb|ftr|ftb|i|simbase]\fR \fIarg\fR]
 
-	-a|--arch)
-		ref https://github.com/path/to/repo.git branch_name
-			This option is used to set the repo and the branch of the reference arch
-			for current fault tolerant arch. This repo will be uploaded using "-a s ref"
-		ft https://github.com/path/to/repo.git branch_name
-			This option is used to set the repo and the branch of the fault tolerant arch
-			for current fault tolerant arch. This repo will be uploaded using "-a s ft"
-		s [ft|ref]   (ft as default)
-			This option is used to set the desired arch between ref (reference arch) and 
-			ft arch, this setting can only be done after providing the repositories and 
-			the branches for both architectures using "-a ref repo branch" and "-a ft repo branch"
+.B \./comp_sim 
+[\fb -u\fR \fb[c][s][a][v][d][l]\fR \fI[a-arg] [v-arg] [d-arg] [l-arg]\fR]
 
-	-u|--unique-file)
-		d   directory setting
-			First of all set directory of *.c file to compile with:
-				-u d dir/to/c/file
-		l  dirrectory of log file
-				-u l path/to/log/file
-		cf|sf|csf compilation/simulation or both
-			Then it is possible to compile and simulate
-				-u cf c_file_name_without_extension   -> compile
-				-u sf c_file_name_without_extension   -> simulate (if already compiled)
-				-u csf c_file_name_without_extension   -> compile & simulate
-		v   set vsim file extension
-			You could also set the extension of vsim file to run with modelsim, this
-			file should be located in core-v-verif/cv32/sim/questa directory:
-				-u csfv c_file_name_without_extension vsim_extension -> 
-					compile & simulate with vsim_$(vsim_extension).tcl file
-			
-	-b|--benchmark)
-		d  directory setting
-			First of all set build file to run in order to compile all benchmark and
-			the directory in which all *.hex file will be located after compilation
-				-b d path/to/build_all.py path/to/hex/file
-		l  dirrectory of log file
-				-b l path/to/log/file
-		c|s|cs compilation/simulation
-			Then is possible to compilate and run all benchmark, a restricted number of
-			program in the benchmark or a specific program of benchmark:
-				-b cs a  -> compile and simulate all benchmark
-				-b cs 2  -> compile all b but simulate only the first two hex file
-				-b s hello-world -> go in path/to/hex/file and use hello-world to simulate
-		v   set vsim file extension
-			You could also set the extension of vsim file to run with modelsim, this
-			file should be located in core-v-verif/cv32/sim/questa directory:
-				-u csv all vsim_extension ->						
-					compile & simulate all b, with vsim_$(vsim_extension).tcl file
-	
-	-v|--verbose)
-		verbose prints				
+.SH OPTIONS
 
-	Usage example:
-	1) set the reference and fault tolerant architectures:
-		./comp_sim.sh -a ref https://github.com/openhwgroup/cv32e40p.git master
-		./comp_sim.sh -a ft https://github.com/RISKVFT/cv32e40p.git FT_Elia
-	   now we could use ref or ft arch using "-a s [ft|ref]"
-	2) Compile and simulate an application program for our architecture:
-		1) set application *.c/*.S code directory:
-			./comp_sim.sh -u d cv32/tests/programs/custom_FT/hello-world
-		   The use of relative path is because we use the variable CORE_V_VERIF to
-		   have the core-v-verif path.
-		2) set log file directory
-			./comp_sim.sh -u l cv32/sim/core/log
-		   Will be created the log dir and used to save log file
-		3) Compile program
-			./comp_sim.sh -u c hello-world
-		4) Simulation using vsim_gold.tcl script in cv32/sim/questa directory
-		   and using gui (-g) and using ref architecture.
-			./comp_sim.sh -a ref -u sv hello-world gold -g 
-		   The same but with the ref arch
-			./comp_sim.sh -a ref -u sv hello-world gold -g 
-	3) Compile and simulate a testbench:
-		1) Set build program and directory of output *.hex file
-			./comp_sim.sh -b d cv32/tests/programs/mibench/build_all.py \
-						cv32/tests/programs/mibench/out
-		2) Set log dir
-			./comp_sim.sh -b l cv32/sim/core/bench_log
-		3) Compile all benchmark
-			./comp_sim.sh -b c a
-		4) Simulate only counters.hex program using reference arch and vsim_gold.tcl script:
-			./comp_sim.sh -a ref -b sv counters gold
-		5) Simulate my arch and compare using vsim_compare.tcl script:
-			./comp_sim.sh -a ft -b sv counters compare
+
+.TP
+.BR \-a "  "[refr|refb|ftr|ftb|i|simbase] "  " arg
+This is the architecture option, all setting will be stored in the script for next run.
+.RS
+.TP 
+.BR i
+Print information about branch and repo setted for ref and ft arch.
+.TP 
+.BR refr "    "\fIhttps://github.com/path/to/repo.git\fR
+Url of the github repo for the reference architecture
+.TP 
+.BR refb "    "\fIbranch-name\fB
+Name of the branch used for reference arch
+.TP 
+.BR ftr "    "\fIhttps://github.com/path/to/repo.git\fR
+Url of the github repo for the ft architecture
+.TP 
+.BR ftb "    "\fIbranch-name\fB
+Name of the branch used for ft arch
+.TP 
+.BR simbase 
+Set SIM_BASE
+.RE
+
+
+.TP
+.BR -u "  " [c][s][a][v][d][l] "  " args
+Uniques option, with this option you could compile a file \'NAME\'.c located in a directory /path/to/folder/\'NAME\', the compilation create \'NAME\'.hex file that can be used for the simulation with ref or ft arch. 
+.RS
+.TP
+.BR c
+Compile \'name\'.c file in UNIQUE_CHEX_DIR dir, \'name\' should be the same of the directory name. UNIQUE_CHEX_DIR should be set with \fB d\fR option.
+.TP
+.BR s 
+Simulate the \'name\'.hex file in UNIQUE_CHEX_DIR dir using architecture setted with \fBa\fR,  \'name\' should be the same of the directory name. 
+.TP
+.BR d "   " \fIdir\fR
+Set the directory where there is .c file, it is mandatory for the first run. \'dir\' is affixed after core_v_verif variable so the directory used by the program will be \fb CORE_V_VERIF/\'dir\' \fr.
+.TP 
+.BR l "   " \fIdir\fR
+Set the directory where to store log of simulation or compilation, it is mandatory for the first run. \'dir\' is affixed after core_v_verif variable so the directory used by the program will be \fb CORE_V_VERIF/\'dir\' \fr.
+.TP
+.BR a "  "\fI[ref|ft]\fB
+Set the name of the architecture to use for simulation located at CORE_V_VERIF/core-v-cores/, to set the architecture use \fB-a\fR option.
+.TP
+.BR v "  "\fItcl-file-suffix\fR
+Set the suffix of tcl file located in core-v-verif/cv32/sim/questa and used for simulation. The final file name used by program is \fBvsim_\'tcl-file-suffix\'.tcl\fR.
+.TP
+.RE
+
+
+.TP
+.BR -b  "   " [c][s][a][t][f][v][d][l][b] "   " [args]
+Benchmark option can compilate an entire benchmark (running a user defined builder executable script) and simulate one or many hex file for a specific architecture.
+.RS
+.TP
+.BR c
+Compile your benchmark programs using the executable script given using 'd' option, the script should compile all programs you need and place the *.hex files in the directory setted uding 'd' option. 
+.TP
+.BR s "  " \fI[a|number|name]\fR
+Can simulate in different way:
+.RS
+.TP
+.B s"  " a
+Simulate all executable file in the BENCH_HEX_DIR dir (setted with 'd' option)
+.TP
+.B s "  " 3
+Simulate the first 3 *.hex in the BENCH_HEX_DIR dir
+.TP
+.B s "  " hello_world 
+Simulate hello_world.hex if it is present in the BENCH_HEX_DIR dir.
+.RE
+.TP
+.BR a "  " [ref|ft]
+Set ARCH_TO_USE with the corrisponding argument, this is the architecture used in current simulation.
+.TP
+.BR t "  " [ref|ft]
+Set ARCH_TO_COMPARE with the corrisponding argument, the vcd (for input) and wlf (for ouput) of this architecture are used respectively as vcdstim input and output comparison for ARCH_TO_USE architecture. 
+.TP
+.BR v "  " \fI[tcl_extention_name]\fR
+This option set the tcl to use for simulation , final tcl file will be vsim_"tcl_extension_name".tcl and should be located in /cv32/core/questa directory.
+.TP
+.BR d "  " \fI[build_file] "  " [hex_out_dir]\fR
+This option set th build executable file used to compile all benchmark, and  the directory where all *.hex file will be (final directory will be $CORE_V_VERIF/hex_out_dir)
+.TP l "  " \fI[dir]\fR
+ Set log dir (final directory will be $CORE_V_VERIF/dir)
+.TP 
+.BR b "  " \fI[block_name]\fR
+Set the stage name to simulate (final name will be cv32e40p_"block_name")
+.RE
+
+.TP
+.BR -sfiupi "   "[a][t][c][f][s][b] "   " [args]
+This function  use the vsim_stage_compare.tcl script (in cv32/sim/questa) to simulate an architecture (setted with 'a' option) and compare the output with the golden architecture (Setted with 't' option), this simulation is done for a specific software (setted with 's' option), this software should be the name of an *.hex file in the directory of the benchmark output. 
+
+This comparison can be used with fault injection, in this case usually the golden architecture is setted equal to the architecture to test, the simulation flow is:
+
+.BR 1)
+Creation of vcd in and wlf out using '-b sbv software stage save_data_in' and '\-b sbv software stage save_data_out'
+
+.BR 2)
+fault injection repeated for a certain number of cycle (10 cycle in this case):
+.RS
+         \-sfiupi atcfsb ref ref 10 1 software stage
+
+
+If we want to test fault injection with a certain coverage we can set cycle to 'cov' like this:
+.RS
+.B -sfiupi atcfsb ref ref cov 1 software stage
+.RE
+In this case the function run  the script vsim_cycle_to_certain_coverage.tcl, this script calculate the number of cycle of fault injection starting from total number of bits where we can inject the fault. Then the script simulate using this number of cycle.
+
+Another feature is the possibility to run all software that are in the hex dir, this directory can be set using \-b option and it is the directory where are stored all *hex of benchmark software. Therfore we can run all software setting 's' option equal to \fBall\fR in this way: \fB\-sfiupi atcfsb ref ref 10 1 all stage\fR (simulation with fault injection of all software).
+.RS
+.TP
+.BR a "  " \fI[ref|ft]\fR
+Set ARCH_TO_USE with the corrisponding argument, this is the architecture used in current simulation.
+.TP
+.BR t "  " \fI[ref|ft]\fR
+Set ARCH_TO_COMPARE with the corrisponding argument, the vcd (for input) and wlf (for ouput) of this architecture are used respectively as vcdstim input and output comparison for ARCH_TO_USE architecture. 
+.TP
+.BR  c "   " \fI[number|cov]\fR
+set number of fault injection cycle to do, for each cycle a fault is injected in a different signal and the output are compared. If we use 'cov' the program find the number of cycle that corresponds to a certain coverage using vsim_cycle_to_certain_coverage.tcl script.
+.TP
+.BR f "  " \fI[0|1]\fR
+This option is effective if we use vsim_stage_compare.tcl script, this option set the FI variable that is used by vsim_stage_compare.tcl, if FI is 1 the script make fault injection for CYCLE cycle.
+.TP
+.BR s "  " \fI[software|all]\fR
+Set the name of the software to use for simulation, this software should be in the BENCH_HEX_DIR directory, this dir can be set using '\-b d' option and is the output dir of the benchmark builder. If we set s option to 'all' the program will simulate one by one all software that are in BENCH_HEX_DIR directory. 
+.TP
+.BR b "  " \fI[stage_name]\fR
+This is the stage name that we want to test, set it to core to simulate entire core.
+.RE
+.RE
+
+
+.TP
+.BR -qsfiupi "   "[a][t][c][f][s][b] "   " [args]
+This function call -sfiupi option and monitor simulation status using a progress bar.
+See -sfiupi for options.
+
+.TP
+.BR -esfiupi "   "id
+This function elaborate the ouput file of a sfiupi simulation. The file in ERROR_DIR directory are used to find and print:
+.RS
+.TP 
+	\- Simulation identity : software, stage
+.TP
+	\- Total simulation time in dd:hh:mm
+.TP
+	\- Time spent for a single simulation cycle
+If we simulate with fault injection are also printed:
+.TP
+	\- The absolute number of fault injected that create an error
+.TP 
+ 	\- Number of singnal that has been used for fault injecton
+.TP
+	\- Percentage of fault tolerance
+.RE
+
+
+.SH EXAMPLE
+Usage example:
+.TP
+1) set the reference and fault tolerant architectures:
+.RS
+.TP
+./comp_sim.sh -a refr https://github.com/openhwgroup/cv32e40p.git 
+.TP
+./comp_sim.sh -a refb master        
+.TP
+./comp_sim.sh -a ftr https://github.com/RISKVFT/cv32e40p.git 
+.TP
+./comp_sim.sh -a ftb FT_Elia
+.RE
+now we could use ref or ft arch using "-a s [ft|ref]"
+
+.TP
+2) Compile and simulate an application program for our architecture:
+.RS
+.TP
+1) ./comp_sim.sh -u d cv32/tests/programs/custom_FT/hello-world
+Set application *.c/*.S code directory , the use of relative path is because we use the variable CORE_V_VERIF to have the core-v-verif path.
+.TP
+2) ./comp_sim.sh -u l cv32/sim/core/log
+Set log file directory, will be created the log dir and used to save log file.
+.TP
+3) ./comp_sim.sh -u c ref hello-world
+Compile the program
+.TP
+4) ./comp_sim.sh -u sv hello-world gold -g 
+Simulation of ref architecture using vsim_gold.tcl script in cv32/sim/questa directory and gui (-g).
+.TP
+4.1) ./comp_sim.sh -u asv ft hello-world -g 
+The same as before but using ft reachitecture
+.RE
+
+.TP
+3) Compile and simulate a testbench:
+.RS
+.TP
+1) ./comp_sim.sh \-b d cv32/tests/programs/mibench/build_all.py cv32/tests/programs/mibench/out
+Set build program and directory of output *.hex file
+.TP 
+2)  ./comp_sim.sh \-b l cv32/sim/core/bench_log
+Set log dir
+.TP
+3) ./comp_sim.sh \-b c a
+Compile all benchmark
+.TP
+4) ./comp_sim.sh \-sfiupi atsf ft ref counters 0
+Simulate only counters.hex program using the fault tolerant arch and compare this with the ref arch, no fault injection.
+.TP
+4.1) ./comp_sim.sh \-qfiupi atsf ft ref counters 0
+Same as poin 4 but in this case \-qsiupi monitor the sfiupi work showing a progress bar.
+.RE
