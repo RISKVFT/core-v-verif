@@ -4,11 +4,18 @@ comp_sim \- simulate and compile programs for cv32e40p riscv architecture
 .SH SYNOPSIS
 You can call comp_sim with many different options, these are all options with their syntax.
 
-.B \./comp_sim 
-[\fb -a\fR \fb[refr|refb|ftr|ftb|i|simbase]\fR \fIarg\fR]
+\fB\./comp_sim\fR  \fB\-a\fR \fB[refr|refb|ftr|ftb|i|simbase]\fR \fIarg\fR
 
-.B \./comp_sim 
-[\fb -u\fR \fb[c][s][a][v][d][l]\fR \fI[a-arg] [v-arg] [d-arg] [l-arg]\fR]
+\fB\./comp_sim\fR \fB\-u\fR \fB[c|s|a|v|d|l]\fR \fI[args]\fR
+
+\fB\./comp_sim\fR \fB\-b\fR  \fB[c|s|a|t|f|v|d|l|b]\fR  \fI[args]\fR
+
+\fB\./comp_sim\fR \fB\-sfiupi\fR \fB[a|t|c|f|s|b]\fR \fI[args]\fR
+
+\fB\./comp_sim\fR \fB\-qsfiupi\fR \fB[a|t|c|f|s|b]\fR \fI[args]\fR
+
+\fB\./comp_sim\fR \fB\-esfiupi\fR \fIid\fR
+
 
 .SH OPTIONS
 

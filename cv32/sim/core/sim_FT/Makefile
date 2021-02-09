@@ -36,7 +36,7 @@
 ###############################################################################
 
 # "Constants"
-TEST_FILE=hello-world
+#TEST_FILE?=hello-world
 MAKE           = make
 MAKE_DIR      = $(PWD)
 MAKE_PATH     := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
@@ -129,8 +129,6 @@ DPILIB_VSIM_OPT := +dumpports+nocollapse
 
 # Default "custom test-program"
 CUSTOM_PROG  ?= requested_csr_por
-SILENT_COMP ?= ""
-SILENT_SIM ?= ""
 
 # Shorthand rules for convience
 cv32e40p_pkg: $(CV32E40P_PKG)
@@ -262,7 +260,7 @@ questa-sim-gui: vsim-run-gui &
 
 .PHONY: questa-sim-stage-gui
 questa-sim-stage-gui: ALL_VSIM_FLAGS += $(VSIM_GUI_FLAGS)
-questa-sim-stage-gui: ALL_VSIM_FLAGS += -vcdstim ./dataset/$(GOLD_NAME)_in.vcd -debugDB
+questa-sim-stage-gui: ALL_VSIM_FLAGS += -vcdstim ./dataset/$(GOLD_NAME)-in.vcd -debugDB
 questa-sim-stage-gui: ALL_VSIM_FLAGS += +dumpports+nocollapse
 questa-sim-stage-gui:
 				$(VLIB) $(VWORK)
@@ -274,15 +272,15 @@ questa-sim-stage-gui:
 
 .PHONY: questa-sim-stage
 questa-sim-stage: ALL_VSIM_FLAGS += -c
-questa-sim-stage: ALL_VSIM_FLAGS += -vcdstim ./dataset/$(GOLD_NAME)_in.vcd -debugDB
+questa-sim-stage: ALL_VSIM_FLAGS += -vcdstim ./dataset/$(GOLD_NAME)-in.vcd -debugDB
 questa-sim-stage: ALL_VSIM_FLAGS += +dumpports+nocollapse
 questa-sim-stage:
-				$(VLIB) $(VWORK) $(SILENT_COMP)
+				$(VLIB) $(VWORK)
 				touch .lib-rtl
-				$(VLOG) -O0 -work $(VWORK)  $(VLOG_FLAGS) -f $(CV32E40P_MANIFEST) $(SILENT_COMP)
-				$(VOPT) -work $(VWORK) $(VOPT_FLAGS) $(VLOG_SV_STAGE) -o $(VOPT_SV_STAGE) $(SILENT_COMP)
+				$(VLOG) -O0 -work $(VWORK)  $(VLOG_FLAGS) -f $(CV32E40P_MANIFEST) 
+				$(VOPT) -work $(VWORK) $(VOPT_FLAGS) $(VLOG_SV_STAGE) -o $(VOPT_SV_STAGE)
 				touch .opt-rtl
-				$(VSIM) -work $(VWORK) $(ALL_VSIM_FLAGS) $(VOPT_SV_STAGE) -do $(VSIM_SCRIPT) $(SILENT_SIM)
+				$(VSIM) -work $(VWORK) $(ALL_VSIM_FLAGS) $(VOPT_SV_STAGE) -do $(VSIM_SCRIPT)
 
 	
 ###############################################

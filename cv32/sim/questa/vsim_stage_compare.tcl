@@ -1,6 +1,7 @@
 set CORE_V_VERIF "/home/thesis/luca.fiore/Repos/core-v-verif"
 set SIM_BASE "$env(SIM_BASE)"
-set GOLD_NAME "$env(GOLD_NAME)"
+set GOLD_NAME "$env(GOLD_NAME_SIM)"
+set GOLD_NAME_FILE "$env(GOLD_NAME)"
 set STAGE_NAME "$env(STAGE_NAME)"
 set ENDSIM "$env(T_ENDSIM)"
 set CYCLE "$env(CYCLE)"
@@ -147,7 +148,7 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 	##################################################################
 	####### Open gold simulation 
 	if { $i == $n_fault } {	
-		dataset open ./dataset/${GOLD_NAME}_out.wlf
+		dataset open ./dataset/${GOLD_NAME_FILE}-out.wlf
 
 		set GOutSignals [ find nets "${GOLD_NAME}_out:/$SIM_BASE/${STAGE_NAME}_i/*_o" ]
 		set GInSignals [ find nets "${GOLD_NAME}_out:/$SIM_BASE/${STAGE_NAME}_i/*_i" ]
@@ -401,5 +402,6 @@ if { "$env(GUI)" != "-gui"}  {
 	compare end
 	quit -f
 }
+
 
 

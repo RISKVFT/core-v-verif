@@ -1,4 +1,5 @@
-# Reading pref.tcl
+# vsim -nowlfcollapse -quiet -c -vcdstim ./dataset/gold-ref-if_stage-interrupt_bootstrap-in.vcd -debugDB "+dumpports+nocollapse" cv32e40p_if_stage_vopt -do "../../questa/vsim_stage_compare.tcl" 
+# Start time: 22:11:44 on Feb 09,2021
 # //  Questa Sim-64
 # //  Version 10.7c linux_x86_64 Aug 17 2018
 # //
@@ -13,123 +14,130 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-# vsim -nowlfcollapse -quiet -gui -debugdb -vcdstim ./dataset/gold_ref_cv32e40p_core_hello_world_in.vcd -debugDB "+dumpports+nocollapse" cv32e40p_core_vopt -do "../../questa/vsim_stage_compare.tcl" 
-# Start time: 00:35:50 on Jan 30,2021
 # ** Note: (vsim-8900) Creating design debug database vsim.dbg.
 # do ../../questa/vsim_stage_compare.tcl
 # /home/thesis/luca.fiore/Repos/core-v-verif
-# tb_top/cv32e40p_tb_wrapper_i
-# gold_ref_cv32e40p_core_hello_world
-# cv32e40p_core
-# 134319
+# tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i
+# gold_ref_if_stage_interrupt_bootstrap
+# gold-ref-if_stage-interrupt_bootstrap
+# if_stage
+# 55619
+# 4
 # 1
-# 1
-# /home/thesis/luca.fiore/Repos/core-v-verif/cv32/sim/core/sim_FT/sim_out/cnt_error_core-hello_world-1-1.txt
-# /home/thesis/luca.fiore/Repos/core-v-verif/cv32/sim/core/sim_FT/sim_out/info_core-hello_world-1-1.txt
-# /home/thesis/luca.fiore/Repos/core-v-verif/cv32/sim/core/sim_FT/sim_out/cycle_core-hello_world-1-1.txt
-# /home/thesis/luca.fiore/Repos/core-v-verif/cv32/sim/core/sim_FT/sim_out/signals_fault_injection_core-hello_world-1-1.txt
-# cv32e40p_core
+# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/cnt_error-if_stage-interrupt_bootstrap-4-1.txt
+# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/info-if_stage-interrupt_bootstrap-4-1.txt
+# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/cycle-if_stage-interrupt_bootstrap-4-1.txt
+# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/signals_fault_injection-if_stage-interrupt_bootstrap-4-1.txt
+# cv32e40p_if_stage
 # 0
 # 0
-# /cv32e40p_core/data_rvalid_i /cv32e40p_core/hart_id_i /cv32e40p_core/irq_i /cv32e40p_core/apu_master_flags_i /cv32e40p_core/debug_req_i /cv32e40p_core/boot_addr_i /cv32e40p_core/scan_cg_en_i /cv32e40p_core/instr_gnt_i /cv32e40p_core/apu_master_gnt_i /cv32e40p_core/dm_exception_addr_i /cv32e40p_core/data_gnt_i /cv32e40p_core/dm_halt_addr_i /cv32e40p_core/instr_rdata_i /cv32e40p_core/data_rdata_i /cv32e40p_core/irq_sec_i /cv32e40p_core/pulp_clock_en_i /cv32e40p_core/apu_master_result_i /cv32e40p_core/fetch_enable_i /cv32e40p_core/apu_master_valid_i /cv32e40p_core/mtvec_addr_i /cv32e40p_core/instr_rvalid_i /cv32e40p_core/clk_i /cv32e40p_core/if_stage_i/prefetch_buffer_i/prefetch_controller_i/flush_cnt_q /cv32e40p_core/cs_registers_i/mcounteren_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/instruction_obi_i/genblk1/obi_be_q /cv32e40p_core/if_stage_i/aligner_i/hwlp_addr_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/instruction_obi_i/genblk1/obi_wdata_q /cv32e40p_core/cs_registers_i/uepc_q /cv32e40p_core/id_stage_i/controller_i/hwlp_end_4_id_q /cv32e40p_core/id_stage_i/controller_i/illegal_insn_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/prefetch_controller_i/hwlp_flush_cnt_delayed_q /cv32e40p_core/load_store_unit_i/data_load_event_q /cv32e40p_core/load_store_unit_i/data_type_q /cv32e40p_core/cs_registers_i/mtvec_mode_q /cv32e40p_core/load_store_unit_i/data_we_q /cv32e40p_core/cs_registers_i/fflags_q /cv32e40p_core/cs_registers_i/id_valid_q /cv32e40p_core/cs_registers_i/depc_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/fifo_i/read_pointer_q /cv32e40p_core/cs_registers_i/priv_lvl_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/instruction_obi_i/genblk1/obi_addr_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/instruction_obi_i/genblk1/obi_atop_q /cv32e40p_core/load_store_unit_i/data_sign_ext_q /cv32e40p_core/id_stage_i/controller_i/debug_mode_q /cv32e40p_core/cs_registers_i/utvec_mode_q /cv32e40p_core/load_store_unit_i/cnt_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/fifo_i/write_pointer_q /cv32e40p_core/cs_registers_i/dcsr_q /cv32e40p_core/cs_registers_i/mcountinhibit_q /cv32e40p_core/cs_registers_i/mscratch_q /cv32e40p_core/if_stage_i/aligner_i/instr_valid_q /cv32e40p_core/cs_registers_i/mcause_q /cv32e40p_core/id_stage_i/controller_i/jump_done_q /cv32e40p_core/if_stage_i/aligner_i/pc_q /cv32e40p_core/cs_registers_i/pmp_reg_q /cv32e40p_core/cs_registers_i/dscratch0_q /cv32e40p_core/id_stage_i/int_controller_i/irq_q /cv32e40p_core/cs_registers_i/ucause_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/prefetch_controller_i/cnt_q /cv32e40p_core/if_stage_i/aligner_i/branch_addr_q /cv32e40p_core/cs_registers_i/mtvec_q /cv32e40p_core/id_stage_i/controller_i/data_err_q /cv32e40p_core/cs_registers_i/fprec_q /cv32e40p_core/cs_registers_i/mstatus_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/prefetch_controller_i/trans_addr_q /cv32e40p_core/sleep_unit_i/p_elw_busy_q /cv32e40p_core/cs_registers_i/utvec_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/fifo_i/mem_q /cv32e40p_core/load_store_unit_i/rdata_offset_q /cv32e40p_core/id_stage_i/controller_i/ebrk_debug_entry_q /cv32e40p_core/load_store_unit_i/data_obi_i/state_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/prefetch_controller_i/state_q /cv32e40p_core/load_store_unit_i/rdata_q /cv32e40p_core/cs_registers_i/dscratch1_q /cv32e40p_core/cs_registers_i/gen_trigger_regs/tmatch_value_q /cv32e40p_core/cs_registers_i/mhpmcounter_q /cv32e40p_core/sleep_unit_i/fetch_enable_q /cv32e40p_core/cs_registers_i/mhpmevent_q /cv32e40p_core/if_stage_i/aligner_i/aligner_ready_q /cv32e40p_core/sleep_unit_i/core_busy_q /cv32e40p_core/id_stage_i/int_controller_i/irq_sec_q /cv32e40p_core/cs_registers_i/gen_trigger_regs/tmatch_control_exec_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/fifo_i/status_cnt_q /cv32e40p_core/if_stage_i/prefetch_buffer_i/instruction_obi_i/state_q /cv32e40p_core/ex_stage_i/mult_i/mulh_carry_q /cv32e40p_core/cs_registers_i/mie_q /cv32e40p_core/id_stage_i/controller_i/debug_req_q /cv32e40p_core/if_stage_i/aligner_i/hwlp_update_pc_q /cv32e40p_core/cs_registers_i/frm_q /cv32e40p_core/cs_registers_i/mepc_q /cv32e40p_core/id_stage_i/register_file_i/mem
+# /cv32e40p_if_stage/trap_addr_mux_i /cv32e40p_if_stage/instr_rdata_i /cv32e40p_if_stage/m_exc_vec_pc_mux_i /cv32e40p_if_stage/uepc_i /cv32e40p_if_stage/hwlp_jump_i /cv32e40p_if_stage/jump_target_ex_i /cv32e40p_if_stage/jump_target_id_i /cv32e40p_if_stage/halt_if_i /cv32e40p_if_stage/m_trap_base_addr_i /cv32e40p_if_stage/id_ready_i /cv32e40p_if_stage/exc_pc_mux_i /cv32e40p_if_stage/dm_halt_addr_i /cv32e40p_if_stage/u_exc_vec_pc_mux_i /cv32e40p_if_stage/pc_mux_i /cv32e40p_if_stage/depc_i /cv32e40p_if_stage/instr_err_pmp_i /cv32e40p_if_stage/mepc_i /cv32e40p_if_stage/clear_instr_valid_i /cv32e40p_if_stage/pc_set_i /cv32e40p_if_stage/boot_addr_i /cv32e40p_if_stage/u_trap_base_addr_i /cv32e40p_if_stage/req_i /cv32e40p_if_stage/instr_gnt_i /cv32e40p_if_stage/instr_err_i /cv32e40p_if_stage/hwlp_target_i /cv32e40p_if_stage/dm_exception_addr_i /cv32e40p_if_stage/instr_rvalid_i /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/flush_cnt_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_addr_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_atop_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q /cv32e40p_if_stage/aligner_i/hwlp_addr_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_be_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_q /cv32e40p_if_stage/aligner_i/aligner_ready_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/write_pointer_q /cv32e40p_if_stage/aligner_i/instr_valid_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_wdata_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/hwlp_flush_cnt_delayed_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/mem_q /cv32e40p_if_stage/aligner_i/pc_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/status_cnt_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/state_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/state_q /cv32e40p_if_stage/aligner_i/hwlp_update_pc_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/read_pointer_q /cv32e40p_if_stage/aligner_i/branch_addr_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/cnt_q
 # 1
-# file18
-# INFO: before cycle CYCLE=1
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_core/load_store_unit_i/#ALWAYS#471 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_load_store_unit.sv Line: 472
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_core/id_stage_i/#ALWAYS#768 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 769
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_core/id_stage_i/#ALWAYS#758 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 759
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_core/id_stage_i/#ALWAYS#752 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 753
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_core/id_stage_i/#ALWAYS#743 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 744
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_core/id_stage_i/#ALWAYS#737 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 738
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_core/id_stage_i/#ALWAYS#601(immediate_a_mux) File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 602
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Process: /cv32e40p_core/id_stage_i/#ALWAYS#516 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 517
-# INFO: cycle 0
-# INFO: Signal index = 41
-# INFO: signal name = /cv32e40p_core/if_stage_i/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q
-# INFO: examine = 1'h0, descr = Register
+# file17
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 21091 ns to 34473 ns
 # 
-# INFO: Bit number = 1
-# INFO: Graffa  = 1
-# INFO: Signal name  = /cv32e40p_core/if_stage_i/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q
-# INFO: Bit choose = 0
-# INFO: row number = 0
-# SIGNAL TO COMPARE: sim:/cv32e40p_core/apu_master_flags_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/apu_master_flags_o
-# Created 1 comparison.
-# SIGNAL TO COMPARE: sim:/cv32e40p_core/apu_master_op_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/apu_master_op_o
-# Created 1 comparison.
-# SIGNAL TO COMPARE: sim:/cv32e40p_core/apu_master_operands_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/apu_master_operands_o
-# Created 1 comparison.
-# SIGNAL TO COMPARE: sim:/cv32e40p_core/apu_master_ready_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/apu_master_ready_o
-# Created 1 comparison.
-# SIGNAL TO COMPARE: sim:/cv32e40p_core/apu_master_req_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/apu_master_req_o
-# Created 1 comparison.
-# SIGNAL TO COMPARE: sim:/cv32e40p_core/apu_master_type_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/apu_master_type_o
-# Created 1 comparison.
-# SIGNAL TO COMPARE: sim:/cv32e40p_core/core_sleep_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/core_sleep_o
-# Created 1 comparison.
-# SIGNAL TO COMPARE: sim:/cv32e40p_core/data_addr_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/data_addr_o
-# Created 1 comparison.
-# SIGNAL TO COMPARE: sim:/cv32e40p_core/data_atop_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/data_atop_o
-# Created 1 comparison.
-# SIGNAL TO COMPARE: sim:/cv32e40p_core/data_be_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/data_be_o
-# Created 1 comparison.
-# SIGNAL TO COMPARE: sim:/cv32e40p_core/data_req_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/data_req_o
-# Created 1 comparison.
-# SIGNAL TO COMPARE: sim:/cv32e40p_core/data_wdata_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/data_wdata_o
-# Created 1 comparison.
-# SIGNAL TO COMPARE: sim:/cv32e40p_core/data_we_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/data_we_o
-# Created 1 comparison.
-# SIGNAL TO COMPARE: sim:/cv32e40p_core/instr_addr_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/instr_addr_o
-# Created 1 comparison.
-# SIGNAL TO COMPARE: sim:/cv32e40p_core/instr_req_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/instr_req_o
-# Created 1 comparison.
-# SIGNAL TO COMPARE: sim:/cv32e40p_core/irq_ack_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/irq_ack_o
-# Created 1 comparison.
-# SIGNAL TO COMPARE: sim:/cv32e40p_core/irq_id_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/irq_id_o
-# Created 1 comparison.
-# SIGNAL TO COMPARE: sim:/cv32e40p_core/regfile_waddr_fw_wb_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/regfile_waddr_fw_wb_o
-# Created 1 comparison.
-# SIGNAL TO COMPARE: sim:/cv32e40p_core/sec_lvl_o      gold_ref_cv32e40p_core_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/sec_lvl_o
-# Created 1 comparison.
-# ENDSIM 134319
-# INFO: Instant = 119807
-# INFO: remaining = 14457
-# Computing waveform differences from time 119807 ns to 120162 ns
-# No differences found.
-# INFO: number of errors: 0
-# Updating waveform differences from time 120162 ns to 121572 ns
-# No new differences found.
-# Updating waveform differences from time 121572 ns to 122982 ns
-# No new differences found.
-# Updating waveform differences from time 122982 ns to 124392 ns
-# No new differences found.
-# Updating waveform differences from time 124392 ns to 125802 ns
-# No new differences found.
-# Updating waveform differences from time 125802 ns to 127212 ns
-# No new differences found.
-# Updating waveform differences from time 127212 ns to 128622 ns
-# No new differences found.
-# Updating waveform differences from time 128622 ns to 130032 ns
-# No new differences found.
-# Updating waveform differences from time 130032 ns to 131442 ns
-# No new differences found.
-# Updating waveform differences from time 131442 ns to 132852 ns
-# No new differences found.
-# Updating waveform differences from time 132852 ns to 134262 ns
-# No new differences found.
-# INFO: current time = 134262
+# Max total difference limit of 1 reached.
+# Found 16191 differences.
 # ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
-# --------------------------------------------------------
-# Open file: file17 serial0 serial1 serial2 file4 sock4ee5ee0 sock4f1f500 sock4f1d160 file8 stdin file11 stdout file12 stderr
-# .------------------------------
-# file19
-# End time: 00:37:03 on Jan 30,2021, Elapsed time: 0:01:13
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 47060 ns to 47415 ns
+# No differences found.
+# Updating waveform differences from time 47415 ns to 48235 ns
+# No new differences found.
+# Updating waveform differences from time 48235 ns to 49055 ns
+# No new differences found.
+# Updating waveform differences from time 49055 ns to 49875 ns
+# No new differences found.
+# Updating waveform differences from time 49875 ns to 50695 ns
+# No new differences found.
+# Updating waveform differences from time 50695 ns to 51515 ns
+# No new differences found.
+# Updating waveform differences from time 51515 ns to 52335 ns
+# No new differences found.
+# Updating waveform differences from time 52335 ns to 53155 ns
+# No new differences found.
+# Updating waveform differences from time 53155 ns to 53975 ns
+# No new differences found.
+# Updating waveform differences from time 53975 ns to 54795 ns
+# No new differences found.
+# Updating waveform differences from time 54795 ns to 55615 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 14662 ns to 40902 ns
+# 
+# Max total difference limit of 1 reached.
+# Found 33819 differences.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 45935 ns to 46290 ns
+# No differences found.
+# Updating waveform differences from time 46290 ns to 47220 ns
+# No new differences found.
+# Updating waveform differences from time 47220 ns to 48150 ns
+# No new differences found.
+# Updating waveform differences from time 48150 ns to 49080 ns
+# No new differences found.
+# Updating waveform differences from time 49080 ns to 50010 ns
+# No new differences found.
+# Updating waveform differences from time 50010 ns to 50940 ns
+# No new differences found.
+# Updating waveform differences from time 50940 ns to 51870 ns
+# No new differences found.
+# Updating waveform differences from time 51870 ns to 52800 ns
+# No new differences found.
+# Updating waveform differences from time 52800 ns to 53730 ns
+# No new differences found.
+# Updating waveform differences from time 53730 ns to 54660 ns
+# No new differences found.
+# Updating waveform differences from time 54660 ns to 55590 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# file18
+# End time: 22:11:49 on Feb 09,2021, Elapsed time: 0:00:05
 # Errors: 0, Warnings: 0
