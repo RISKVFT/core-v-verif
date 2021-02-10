@@ -1,4 +1,4 @@
-CORE_V_VERIF=/home/thesis/elia.ribaldone/Desktop/core-v-verif
+CORE_V_VERIF=/home/thesis/luca.fiore/Repos/core-v-verif
 DIRNAME=$(shell basename ${CURDIR})
 ASM="$(CORE_V_VERIF)/cv32/sim/core/asm"
 $(info $(DIRNAME))

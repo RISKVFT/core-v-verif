@@ -96,7 +96,7 @@ if [ file exists "${signals_filename}" ] {
 			puts "You are tring to simulate a simulation that is already done, if you want to resimulate delete file:"
 			puts "${signals_filename}"
 			puts "################################################################"
-			exit 
+			#exit 
 		}
 		set fp_cycle [ open "${cycle_filename}" "w" ]
 		puts $fp_cycle "$n_fault"
@@ -328,14 +328,20 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 	
 	
 	if { $FI==1 } {
-		compare run $fi_instant $remaining 
-		run 300
+		compare run $fi_instant $remaining
+
+		if { $remaining < 300 } { 
+			run $remaining
+		} else {
+			run 300
+		}
+
 		#set error_number [ lindex [ compare info ] 12 ]
 		set error_number [string map {" " ""} [lindex [ split [lindex [split [compare info] "\n"] 1 ] "=" ] 1]]
 
 			#puts "INFO: compare_info: [compare info]"
 		puts "INFO: number of errors: $error_number"
-		if { $error_number == 0 } {
+		if { $error_number == 0 && $remaining >= 300} {
  			set remaining [expr $ENDSIM-$now]
 			set clock_period 10
 			set num_run_cycles 10 
@@ -348,7 +354,8 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 					break
 				}
 			}
-		} else {
+		} 
+		if { $error_number != 0 } {
 			# If there is at least an error we open error file, read current number of error
 			# and increment it
 			puts "Compare error filename: ${compare_filename}"

@@ -55,7 +55,7 @@ function exit_f () {
 ######################################################################
 
 UsageExit () {
-	cat comp_sim_man
+	man ./comp_sim_man
 	exit 1
 }
 
@@ -313,7 +313,7 @@ verify_upi_vcdwlf () {
 		mkfifo $pipe_in
 		# Creation of vcd that contain input of stage
 		db_becho "PROCESS: Creation of vcd that contains inputs of the stage $stg with program $sw ..."
-		execute_in_terminal "./comp_sim.sh -b atsbv $ARCH_TO_USE $ARCH_TO_COMPARE $sw $stg save_data_in -p $pipe_in" "save_in"
+		execute_in_terminal "./comp_sim.sh -b atsbv $ARCH_TO_COMPARE $ARCH_TO_COMPARE $sw $stg save_data_in -p $pipe_in" "save_in"
 		kill_terminal_when_it_finished "$pipe_in" "save_in"
 		delete_pipe "$pipe_in"
 	fi
@@ -322,7 +322,7 @@ verify_upi_vcdwlf () {
 		mkfifo $pipe_out
 		# Creation of vcd that contain input of stage
 		db_becho "PROCESS: Creation of wlf that contains output of the stage $stg with program $sw ..."
-		execute_in_terminal "./comp_sim.sh -b atsbv $ARCH_TO_USE $ARCH_TO_COMPARE $sw $stg save_data_out -g -p $pipe_out" "save_out"
+		execute_in_terminal "./comp_sim.sh -b atsbv $ARCH_TO_COMPARE $ARCH_TO_COMPARE $sw $stg save_data_out -g -p $pipe_out" "save_out"
 		kill_terminal_when_it_finished "$pipe_out" "save_out"
 		delete_pipe "$pipe_out"
 	fi
@@ -419,10 +419,16 @@ f_make () {
 	export ARCH="_$ARCH_TO_USE"
 	export TEST_FILE="$BENCH_HEX_DIR/${firmware:0:-4}"
 	
+	if [[ $VSIM_EXT == "_save_data_*" ]]; then
+		echo "****** save_data ********" 
+		export ARCH="_$ARCH_TO_COMPARE"
+	fi
+
 	if [[ $SET_UPI -eq 0 ]]; then
 		# If we don't use the previous input GOLD_NAME is only used by save_data_in and 
 		# save_data_out and so the name of the vcd and wlf are related to used architecture
 		export GOLD_NAME="gold-${ARCH_TO_USE}-${STAGE_NAME}-${firmware_converted:0:-4}"
+		export GOLD_NAME_DATASET="gold-${ARCH_TO_COMPARE}-${STAGE_NAME}-${firmware_converted:0:-4}"
 		db_gecho "[INFO] FT=$FT ARCH=$ARCH TEST_FILE=$TEST_FILE GOLD_NAME=$GOLD_NAME"
     		make -C $SIM_FT questa-sim$GUI 
 	else 
@@ -1111,6 +1117,7 @@ function manage_stage_fault_injection_upi () {
 	destroy_scroll_area
 	
 	sleep 2
+	SIM_IDS=$(ls $CORE_V_VERIF/cv32/sim/core/sim_FT/sim_out  | cut -d - -f 2,3,4,5 | sed 's/.txt//g' | sort -u)
 	elaborate_simulation_output "$ID"
 
 	kill_terminal "mail"
@@ -1384,7 +1391,7 @@ function sim_stage_fault_injection_upi () {
 #
 function signals_elaboration () {
 	local id=$1
-	local file_sig="$ERROR_DIR/signals_fault_injection_$id.txt"
+	local file_sig="$ERROR_DIR/$signals_fi_file_prefix$id.txt"
 	local signals=$(grep All_signals $file_sig | cut -d ":" -f 2)
 
 	# TODO: add percentage of fault tolerance for each signal
@@ -1488,7 +1495,23 @@ function elaborate_simulation_output () {
 # FIXED variable       #################################################
 ########################################################################
 
-CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
+CORE_V_VERIF="/home/thesis/luca.fiore/Repos/core-v-verif"
+
+##########################
+# Directly setted by cmd line
+VERBOSE=1
+CLEAROUT=0
+##########################
+
+if [[ "$CORE_V_VERIF" =~ "$USER" ]]; then
+	db_gecho "Variables for CORE_V_VERIF already setted!"
+else
+	cd ./../../../ 
+	CORE_V_VERIF=$(pwd)
+	./set_core_v_verif.sh
+	cd $CORE_V_VERIF/cv32/sim/core
+fi
+
 COMMONMK="$CORE_V_VERIF/cv32/sim/core/sim_FT/Common.mk"
 
 isnumber='^[0-9]+$'
@@ -1545,10 +1568,10 @@ VSIM_EXT=""
 # Setted by -b option
 #
 # Folder that contain the build_all.py program runned to compile all benchmark
-BENCH_BUILD_FILE="$CORE_V_VERIF/cv32/tests/programs/custom_FT/build_all.py"
+BENCH_BUILD_FILE="$CORE_V_VERIF//cv32/tests/programs/custom_FT/build_all.py"
 #BENCH_BUILD_FILE="$CORE_V_VERIF/cv32/tests/programs/custom_FT/coremark/build-coremark.sh"
 # Folder that contain *.hex file of benchmar
-BENCH_HEX_DIR="$CORE_V_VERIF/cv32/tests/programs/custom_FT/out"
+BENCH_HEX_DIR="$CORE_V_VERIF//cv32/tests/programs/custom_FT/out"
 B_TYPE=""
 B_FILE=""
 B_NUM=0
@@ -1563,18 +1586,13 @@ export CYCLE=1
 CHEX_FILE=" "
 export GUI=""
 export SIM_BASE="tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
-export STAGE_NAME="if_stage"
+export STAGE_NAME="ex_stage"
 
-ARCH_TO_USE="ref"
-ARCH_TO_COMPARE="ref"
+ARCH_TO_USE="ft"
+ARCH_TO_COMPARE="ft"
 export $ARCH_TO_USE
 export $ARCH_TO_COMPARE
 
-
-##########################
-# Directly setted by cmd line
-VERBOSE=1
-CLEAROUT=0
 
 ##########################
 # Setted by -a option
@@ -1583,7 +1601,7 @@ A_REF_REPO="https://github.com/RISKVFT/cv32e40p.git"
 A_REF_BRANCH="master"
 A_REF_REPO_NAME="cv32e40p_ref"
 A_FT_REPO="https://github.com/RISKVFT/cv32e40p.git"
-A_FT_BRANCH="master"
+A_FT_BRANCH="FT_Luca"
 A_FT_REPO_NAME="cv32e40p_ft"
 
 
@@ -1592,9 +1610,10 @@ A_FT_REPO_NAME="cv32e40p_ft"
 #  Find all IDS                     #######################################################
 ###########################################################################################
 
-SIM_IDS="if_stage-hello_world-3-1
-if_stage-hello_world-5-1"
-SIM_IDS_SUP=$(ls /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out  | cut -d - -f 2,3,4,5 | sed 's/.txt//g' | sort -u)
+SIM_IDS="ex_stage-hello_world-10-1
+ex_stage-hello_world-20-1"
+SIM_IDS_SUP=$(ls $CORE_V_VERIF/cv32/sim/core/sim_FT/sim_out  | cut -d - -f 2,3,4,5 | sed 's/.txt//g' | sort -u)
+SIM_IDS=$SIM_IDS_SUP
 SetVar "SIM_IDS" "$SIM_IDS_SUP"
 
 ###########################################################################################
