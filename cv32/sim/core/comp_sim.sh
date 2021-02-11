@@ -6,6 +6,17 @@ echo "argomenti: $@"
 # trap ctrl-c and call ctrl_c()
 trap ctrl_c INT
 trap exit_f EXIT
+#######################################################################
+# pipes
+name=$(echo $USER | rt '.' '_')
+pipe_in="/tmp/save_in_$name"
+pipe_out="/tmp/save_out_$name"
+ALL_SW_PIPE="/tmp/pipe_info_all_$name"
+pipe_info="/tmp/pipe_info_$name"
+file_info_mail="/tmp/time_$ID_$name.txt"
+pipe_cov_simulation="/tmp/pipe_simulation_$name"
+
+
 
 #######################################################################
 ## Variable used to configure the closure of the program with ctrl-c
@@ -309,7 +320,6 @@ verify_upi_vcdwlf () {
 	swc=$(echo $sw | tr '-' '_')
 	db_becho "INFO: ./sim_FT/dataset/gold-${ARCH_TO_COMPARE}-${real_stg}-${swc}-in.vcd exists?"
 	if [[ ! -f ./sim_FT/dataset/gold-${ARCH_TO_COMPARE}-${real_stg}-${swc}-in.vcd ]]; then
-		local pipe_in=/tmp/save_in
 		mkfifo $pipe_in
 		# Creation of vcd that contain input of stage
 		db_becho "PROCESS: Creation of vcd that contains inputs of the stage $stg with program $sw ..."
@@ -318,7 +328,6 @@ verify_upi_vcdwlf () {
 		delete_pipe "$pipe_in"
 	fi
 	if [[ ! -f ./sim_FT/dataset/gold-${ARCH_TO_COMPARE}-${real_stg}-${swc}-out.wlf ]]; then
-		local pipe_out=/tmp/save_out
 		mkfifo $pipe_out
 		# Creation of vcd that contain input of stage
 		db_becho "PROCESS: Creation of wlf that contains output of the stage $stg with program $sw ..."
@@ -967,11 +976,9 @@ function manage_stage_fault_injection_upi () {
 		exit 1;
 	fi
 	
-	local pipe_info=/tmp/pipe_info
 	mkfifo $pipe_info
 	local comando="./comp_sim.sh -sfiupi $@ -p $pipe_info"
 	local tname="sfiupi"
-	local file_info_mail="/tmp/time_$ID.txt"
 
 	db_becho "PROCESS: Opening a new terminal to run simulations ... "
 	# Run 
@@ -1338,12 +1345,12 @@ function sim_stage_fault_injection_upi () {
 		delete_pipe $PIPENAME
 		mkfifo $ALL_SW_PIPE
 		PIPENAME=$ALL_SW_PIPE
-		mkfifo "/tmp/pipe_simulation"
+		mkfifo $pipe_cov_simulation
 		for i in $hexfile;do	
 			software=$(echo $i | cut -d "." -f 1) 
 			db_becho "RUN: -sfiupi atsbfc $ARCH_TO_USE $ARCH_TO_COMPARE $software $STG $FI $CYCLE"
-			execute_in_terminal "./comp_sim.sh -sfiupi atsbfc $ARCH_TO_USE $ARCH_TO_COMPARE $software $STG $FI $CYCLE -p /tmp/pipe_simulation" "simulation"
-			kill_terminal_when_it_finished "/tmp/pipe_simulation" "simulation"
+			execute_in_terminal "./comp_sim.sh -sfiupi atsbfc $ARCH_TO_USE $ARCH_TO_COMPARE $software $STG $FI $CYCLE -p $pipe_cov_simulation" "simulation"
+			kill_terminal_when_it_finished $pipe_cov_simulation "simulation"
 			write_PIPENAME "$software"
 		done	
 		sleep 1
@@ -1548,7 +1555,6 @@ TERMINAL_PID=""
 SEND=0
 PIPENAME=""
 SSFIUPI=0
-ALL_SW_PIPE="/tmp/pipe_info_all"
 
 
 ########################################################################
