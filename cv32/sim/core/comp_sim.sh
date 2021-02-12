@@ -8,7 +8,7 @@ trap ctrl_c INT
 trap exit_f EXIT
 #######################################################################
 # pipes
-name=$(echo $USER | rt '.' '_')
+name=$(echo $USER | tr '.' '_')
 pipe_in="/tmp/save_in_$name"
 pipe_out="/tmp/save_out_$name"
 ALL_SW_PIPE="/tmp/pipe_info_all_$name"
@@ -1502,7 +1502,7 @@ function elaborate_simulation_output () {
 # FIXED variable       #################################################
 ########################################################################
 
-CORE_V_VERIF="/home/thesis/luca.fiore/Repos/core-v-verif"
+CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
 
 ##########################
 # Directly setted by cmd line
@@ -1592,10 +1592,10 @@ export CYCLE=1
 CHEX_FILE=" "
 export GUI=""
 export SIM_BASE="tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
-export STAGE_NAME="ex_stage"
+export STAGE_NAME="if_stage"
 
-ARCH_TO_USE="ft"
-ARCH_TO_COMPARE="ft"
+ARCH_TO_USE="ref"
+ARCH_TO_COMPARE="ref"
 export $ARCH_TO_USE
 export $ARCH_TO_COMPARE
 
@@ -1607,7 +1607,7 @@ A_REF_REPO="https://github.com/RISKVFT/cv32e40p.git"
 A_REF_BRANCH="master"
 A_REF_REPO_NAME="cv32e40p_ref"
 A_FT_REPO="https://github.com/RISKVFT/cv32e40p.git"
-A_FT_BRANCH="FT_Luca"
+A_FT_BRANCH="master"
 A_FT_REPO_NAME="cv32e40p_ft"
 
 

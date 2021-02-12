@@ -7,8 +7,8 @@ Target: riscv32-unknown-elf
 Configured with: /software/pulp/master/riscv-gcc/configure --target=riscv32-unknown-elf --prefix=/software/pulp/riscv --disable-shared --disable-threads --enable-languages=c,c++ --with-system-zlib --enable-tls --with-newlib --with-headers=/software/pulp/riscv/riscv32-unknown-elf/include --disable-libmudflap --disable-libssp --disable-libquadmath --disable-libgomp --disable-nls --enable-checking=yes --enable-multilib --with-abi=ilp32 --with-arch=rv32imc 'CFLAGS_FOR_TARGET=-Os  -mcmodel=medlow'
 Thread model: single
 gcc version 7.1.1 20170509 (GCC) 
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_ebreak_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/cc1 -E -lang-asm -quiet -v -I ./../../../../core/asm riscv_ebreak_test_0.S -mabi=ilp32 -march=rv32imc -Wall -Wpedantic -g -fworking-directory -Os -fno-directives-only -o /tmp/ccNA2uZT.s
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_ebreak_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
+ /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/cc1 -E -lang-asm -quiet -v -I ./../../../../core/asm riscv_ebreak_test_0.S -mabi=ilp32 -march=rv32imc -Wall -Wpedantic -g -fworking-directory -Os -fno-directives-only -o /tmp/ccU4y69b.s
 #include "..." search starts here:
 #include <...> search starts here:
  ./../../../../core/asm
@@ -17,14 +17,14 @@ COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' 
  /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/sys-include
  /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/include
 End of search list.
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_ebreak_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/as --gdwarf2 -v -I ./../../../../core/asm --traditional-format -march=rv32imc -mabi=ilp32 -o /tmp/ccv85XGS.o /tmp/ccNA2uZT.s
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_ebreak_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
+ /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/as --gdwarf2 -v -I ./../../../../core/asm --traditional-format -march=rv32imc -mabi=ilp32 -o /tmp/ccHoLakQ.o /tmp/ccU4y69b.s
 GNU assembler version 2.28.0 (riscv32-unknown-elf) using BFD version (GNU Binutils) 2.28.0.20170505
 COMPILER_PATH=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/
 LIBRARY_PATH=/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib/:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_ebreak_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/collect2 -plugin /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/liblto_plugin.so -plugin-opt=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/cch4XkBR.res -melf32lriscv --march=rv32imc -o ./../../out/riscv_ebreak_test_0.elf -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1 -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib /tmp/ccv85XGS.o -lcv-verif --start-group -lc -lgcc -lc -lm --end-group -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_ebreak_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_ebreak_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
+ /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/collect2 -plugin /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/liblto_plugin.so -plugin-opt=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccs3znIu.res -melf32lriscv --march=rv32imc -o ./../../out/riscv_ebreak_test_0.elf -L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp -L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1 -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib /tmp/ccHoLakQ.o -lcv-verif --start-group -lc -lgcc -lc -lm --end-group -lcv-verif -T /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_ebreak_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
 Using built-in specs.
 Reading specs from /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib/nosys.specs
 rename spec link_gcc_c_sequence to nosys_link_gcc_c_sequence
@@ -34,8 +34,8 @@ Target: riscv32-unknown-elf
 Configured with: /software/pulp/master/riscv-gcc/configure --target=riscv32-unknown-elf --prefix=/software/pulp/riscv --disable-shared --disable-threads --enable-languages=c,c++ --with-system-zlib --enable-tls --with-newlib --with-headers=/software/pulp/riscv/riscv32-unknown-elf/include --disable-libmudflap --disable-libssp --disable-libquadmath --disable-libgomp --disable-nls --enable-checking=yes --enable-multilib --with-abi=ilp32 --with-arch=rv32imc 'CFLAGS_FOR_TARGET=-Os  -mcmodel=medlow'
 Thread model: single
 gcc version 7.1.1 20170509 (GCC) 
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_1.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/cc1 -E -lang-asm -quiet -v -I ./../../../../core/asm riscv_arithmetic_basic_test_1.S -mabi=ilp32 -march=rv32imc -Wall -Wpedantic -g -fworking-directory -Os -fno-directives-only -o /tmp/ccg31wwf.s
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_1.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
+ /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/cc1 -E -lang-asm -quiet -v -I ./../../../../core/asm riscv_arithmetic_basic_test_1.S -mabi=ilp32 -march=rv32imc -Wall -Wpedantic -g -fworking-directory -Os -fno-directives-only -o /tmp/ccBhk7jY.s
 #include "..." search starts here:
 #include <...> search starts here:
  ./../../../../core/asm
@@ -44,14 +44,14 @@ COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' 
  /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/sys-include
  /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/include
 End of search list.
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_1.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/as --gdwarf2 -v -I ./../../../../core/asm --traditional-format -march=rv32imc -mabi=ilp32 -o /tmp/cc7KJR1e.o /tmp/ccg31wwf.s
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_1.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
+ /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/as --gdwarf2 -v -I ./../../../../core/asm --traditional-format -march=rv32imc -mabi=ilp32 -o /tmp/cc9CxQKi.o /tmp/ccBhk7jY.s
 GNU assembler version 2.28.0 (riscv32-unknown-elf) using BFD version (GNU Binutils) 2.28.0.20170505
 COMPILER_PATH=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/
 LIBRARY_PATH=/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib/:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_1.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/collect2 -plugin /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/liblto_plugin.so -plugin-opt=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccsz31He.res -melf32lriscv --march=rv32imc -o ./../../out/riscv_arithmetic_basic_test_1.elf -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1 -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib /tmp/cc7KJR1e.o -lcv-verif --start-group -lc -lgcc -lc -lm --end-group -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_1.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_1.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
+ /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/collect2 -plugin /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/liblto_plugin.so -plugin-opt=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccrGHSmD.res -melf32lriscv --march=rv32imc -o ./../../out/riscv_arithmetic_basic_test_1.elf -L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp -L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1 -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib /tmp/cc9CxQKi.o -lcv-verif --start-group -lc -lgcc -lc -lm --end-group -lcv-verif -T /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_1.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
 Using built-in specs.
 Reading specs from /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib/nosys.specs
 rename spec link_gcc_c_sequence to nosys_link_gcc_c_sequence
@@ -61,8 +61,8 @@ Target: riscv32-unknown-elf
 Configured with: /software/pulp/master/riscv-gcc/configure --target=riscv32-unknown-elf --prefix=/software/pulp/riscv --disable-shared --disable-threads --enable-languages=c,c++ --with-system-zlib --enable-tls --with-newlib --with-headers=/software/pulp/riscv/riscv32-unknown-elf/include --disable-libmudflap --disable-libssp --disable-libquadmath --disable-libgomp --disable-nls --enable-checking=yes --enable-multilib --with-abi=ilp32 --with-arch=rv32imc 'CFLAGS_FOR_TARGET=-Os  -mcmodel=medlow'
 Thread model: single
 gcc version 7.1.1 20170509 (GCC) 
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/cv32e40p_csr_access_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/cc1 -E -lang-asm -quiet -v -I ./../../../../core/asm cv32e40p_csr_access_test.S -mabi=ilp32 -march=rv32imc -Wall -Wpedantic -g -fworking-directory -Os -fno-directives-only -o /tmp/ccvyr8Np.s
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/cv32e40p_csr_access_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
+ /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/cc1 -E -lang-asm -quiet -v -I ./../../../../core/asm cv32e40p_csr_access_test.S -mabi=ilp32 -march=rv32imc -Wall -Wpedantic -g -fworking-directory -Os -fno-directives-only -o /tmp/ccGYCArO.s
 #include "..." search starts here:
 #include <...> search starts here:
  ./../../../../core/asm
@@ -71,14 +71,14 @@ COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' 
  /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/sys-include
  /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/include
 End of search list.
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/cv32e40p_csr_access_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/as --gdwarf2 -v -I ./../../../../core/asm --traditional-format -march=rv32imc -mabi=ilp32 -o /tmp/ccTh5GLt.o /tmp/ccvyr8Np.s
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/cv32e40p_csr_access_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
+ /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/as --gdwarf2 -v -I ./../../../../core/asm --traditional-format -march=rv32imc -mabi=ilp32 -o /tmp/ccQd8upp.o /tmp/ccGYCArO.s
 GNU assembler version 2.28.0 (riscv32-unknown-elf) using BFD version (GNU Binutils) 2.28.0.20170505
 COMPILER_PATH=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/
 LIBRARY_PATH=/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib/:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/cv32e40p_csr_access_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/collect2 -plugin /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/liblto_plugin.so -plugin-opt=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccbA2Fiy.res -melf32lriscv --march=rv32imc -o ./../../out/cv32e40p_csr_access_test.elf -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1 -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib /tmp/ccTh5GLt.o -lcv-verif --start-group -lc -lgcc -lc -lm --end-group -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/cv32e40p_csr_access_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/cv32e40p_csr_access_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
+ /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/collect2 -plugin /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/liblto_plugin.so -plugin-opt=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccAB3JU0.res -melf32lriscv --march=rv32imc -o ./../../out/cv32e40p_csr_access_test.elf -L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp -L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1 -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib /tmp/ccQd8upp.o -lcv-verif --start-group -lc -lgcc -lc -lm --end-group -lcv-verif -T /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/cv32e40p_csr_access_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
 dhrystone.c: In function 'Func_1':
 dhrystone.c:1049:21: warning: promoted argument 'Ch_1_Par_Val' doesn't match prototype [-Wpedantic]
      Capital_Letter  Ch_1_Par_Val;
@@ -222,8 +222,8 @@ Target: riscv32-unknown-elf
 Configured with: /software/pulp/master/riscv-gcc/configure --target=riscv32-unknown-elf --prefix=/software/pulp/riscv --disable-shared --disable-threads --enable-languages=c,c++ --with-system-zlib --enable-tls --with-newlib --with-headers=/software/pulp/riscv/riscv32-unknown-elf/include --disable-libmudflap --disable-libssp --disable-libquadmath --disable-libgomp --disable-nls --enable-checking=yes --enable-multilib --with-abi=ilp32 --with-arch=rv32imc 'CFLAGS_FOR_TARGET=-Os  -mcmodel=medlow'
 Thread model: single
 gcc version 7.1.1 20170509 (GCC) 
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/generic_exception_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/cc1 -E -lang-asm -quiet -v -I ./../../../../core/asm general_exception_test.S -mabi=ilp32 -march=rv32imc -Wall -Wpedantic -g -fworking-directory -Os -fno-directives-only -o /tmp/ccgzw3AH.s
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/generic_exception_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
+ /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/cc1 -E -lang-asm -quiet -v -I ./../../../../core/asm general_exception_test.S -mabi=ilp32 -march=rv32imc -Wall -Wpedantic -g -fworking-directory -Os -fno-directives-only -o /tmp/ccP0cEQg.s
 #include "..." search starts here:
 #include <...> search starts here:
  ./../../../../core/asm
@@ -232,14 +232,14 @@ COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' 
  /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/sys-include
  /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/include
 End of search list.
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/generic_exception_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/as --gdwarf2 -v -I ./../../../../core/asm --traditional-format -march=rv32imc -mabi=ilp32 -o /tmp/ccXltsTS.o /tmp/ccgzw3AH.s
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/generic_exception_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
+ /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/as --gdwarf2 -v -I ./../../../../core/asm --traditional-format -march=rv32imc -mabi=ilp32 -o /tmp/ccC6fe1c.o /tmp/ccP0cEQg.s
 GNU assembler version 2.28.0 (riscv32-unknown-elf) using BFD version (GNU Binutils) 2.28.0.20170505
 COMPILER_PATH=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/
 LIBRARY_PATH=/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib/:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/generic_exception_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/collect2 -plugin /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/liblto_plugin.so -plugin-opt=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccmT4Ee4.res -melf32lriscv --march=rv32imc -o ./../../out/generic_exception_test.elf -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1 -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib /tmp/ccXltsTS.o -lcv-verif --start-group -lc -lgcc -lc -lm --end-group -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/generic_exception_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/generic_exception_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
+ /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/collect2 -plugin /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/liblto_plugin.so -plugin-opt=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/cc70Lre9.res -melf32lriscv --march=rv32imc -o ./../../out/generic_exception_test.elf -L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp -L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1 -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib /tmp/ccC6fe1c.o -lcv-verif --start-group -lc -lgcc -lc -lm --end-group -lcv-verif -T /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/generic_exception_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
 Using built-in specs.
 Reading specs from /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib/nosys.specs
 rename spec link_gcc_c_sequence to nosys_link_gcc_c_sequence
@@ -249,8 +249,8 @@ Target: riscv32-unknown-elf
 Configured with: /software/pulp/master/riscv-gcc/configure --target=riscv32-unknown-elf --prefix=/software/pulp/riscv --disable-shared --disable-threads --enable-languages=c,c++ --with-system-zlib --enable-tls --with-newlib --with-headers=/software/pulp/riscv/riscv32-unknown-elf/include --disable-libmudflap --disable-libssp --disable-libquadmath --disable-libgomp --disable-nls --enable-checking=yes --enable-multilib --with-abi=ilp32 --with-arch=rv32imc 'CFLAGS_FOR_TARGET=-Os  -mcmodel=medlow'
 Thread model: single
 gcc version 7.1.1 20170509 (GCC) 
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/cc1 -E -lang-asm -quiet -v -I ./../../../../core/asm riscv_arithmetic_basic_test_0.S -mabi=ilp32 -march=rv32imc -Wall -Wpedantic -g -fworking-directory -Os -fno-directives-only -o /tmp/ccTEKT45.s
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
+ /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/cc1 -E -lang-asm -quiet -v -I ./../../../../core/asm riscv_arithmetic_basic_test_0.S -mabi=ilp32 -march=rv32imc -Wall -Wpedantic -g -fworking-directory -Os -fno-directives-only -o /tmp/ccOypRLd.s
 #include "..." search starts here:
 #include <...> search starts here:
  ./../../../../core/asm
@@ -259,103 +259,18 @@ COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' 
  /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/sys-include
  /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/include
 End of search list.
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/as --gdwarf2 -v -I ./../../../../core/asm --traditional-format -march=rv32imc -mabi=ilp32 -o /tmp/cclDQHyi.o /tmp/ccTEKT45.s
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
+ /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/as --gdwarf2 -v -I ./../../../../core/asm --traditional-format -march=rv32imc -mabi=ilp32 -o /tmp/ccnMmBCc.o /tmp/ccOypRLd.s
 GNU assembler version 2.28.0 (riscv32-unknown-elf) using BFD version (GNU Binutils) 2.28.0.20170505
 COMPILER_PATH=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/
 LIBRARY_PATH=/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib/:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/collect2 -plugin /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/liblto_plugin.so -plugin-opt=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccN3mQfv.res -melf32lriscv --march=rv32imc -o ./../../out/riscv_arithmetic_basic_test_0.elf -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1 -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib /tmp/cclDQHyi.o -lcv-verif --start-group -lc -lgcc -lc -lm --end-group -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
-../riscv32/core_portme.c: In function 'start_time':
-../riscv32/core_portme.c:114:24: warning: ISO C forbids braced-groups within expressions [-Wpedantic]
-     #define read_csr() ({ unsigned int tmp; \
-                        ^
-../riscv32/core_portme.c:118:32: note: in expansion of macro 'read_csr'
-     #define GETMYTIME(_t) (*_t=read_csr())
-                                ^~~~~~~~
-../riscv32/core_portme.c:138:2: note: in expansion of macro 'GETMYTIME'
-  GETMYTIME(&start_time_val );
-  ^~~~~~~~~
-../riscv32/core_portme.c: In function 'stop_time':
-../riscv32/core_portme.c:114:24: warning: ISO C forbids braced-groups within expressions [-Wpedantic]
-     #define read_csr() ({ unsigned int tmp; \
-                        ^
-../riscv32/core_portme.c:118:32: note: in expansion of macro 'read_csr'
-     #define GETMYTIME(_t) (*_t=read_csr())
-                                ^~~~~~~~
-../riscv32/core_portme.c:159:2: note: in expansion of macro 'GETMYTIME'
-  GETMYTIME(&stop_time_val );
-  ^~~~~~~~~
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
+ /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/collect2 -plugin /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/liblto_plugin.so -plugin-opt=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccGDDQBb.res -melf32lriscv --march=rv32imc -o ./../../out/riscv_arithmetic_basic_test_0.elf -L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp -L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1 -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib /tmp/ccnMmBCc.o -lcv-verif --start-group -lc -lgcc -lc -lm --end-group -lcv-verif -T /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld
+COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/bsp/link.ld'
+make[1]: *** No rule to make target `compile'.  Stop.
+mv: cannot stat ‘coremark.elf’: No such file or directory
+make: *** [all] Error 1
+Traceback (most recent call last):
+  File "/home/thesis/elia.ribaldone/Desktop/core-v-verif//cv32/tests/programs/custom_FT/build_all.py", line 51, in <module>
+    raise RuntimeError("Make failed with retcode %s" % ( retcode))
+RuntimeError: Make failed with retcode 2
