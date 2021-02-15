@@ -1,0 +1,458 @@
+All_signals:/cv32e40p_if_stage/trap_addr_mux_i
+All_signals:/cv32e40p_if_stage/instr_rdata_i
+All_signals:/cv32e40p_if_stage/m_exc_vec_pc_mux_i
+All_signals:/cv32e40p_if_stage/uepc_i
+All_signals:/cv32e40p_if_stage/hwlp_jump_i
+All_signals:/cv32e40p_if_stage/jump_target_ex_i
+All_signals:/cv32e40p_if_stage/jump_target_id_i
+All_signals:/cv32e40p_if_stage/halt_if_i
+All_signals:/cv32e40p_if_stage/m_trap_base_addr_i
+All_signals:/cv32e40p_if_stage/id_ready_i
+All_signals:/cv32e40p_if_stage/exc_pc_mux_i
+All_signals:/cv32e40p_if_stage/dm_halt_addr_i
+All_signals:/cv32e40p_if_stage/u_exc_vec_pc_mux_i
+All_signals:/cv32e40p_if_stage/pc_mux_i
+All_signals:/cv32e40p_if_stage/depc_i
+All_signals:/cv32e40p_if_stage/instr_err_pmp_i
+All_signals:/cv32e40p_if_stage/mepc_i
+All_signals:/cv32e40p_if_stage/clear_instr_valid_i
+All_signals:/cv32e40p_if_stage/pc_set_i
+All_signals:/cv32e40p_if_stage/boot_addr_i
+All_signals:/cv32e40p_if_stage/u_trap_base_addr_i
+All_signals:/cv32e40p_if_stage/req_i
+All_signals:/cv32e40p_if_stage/instr_gnt_i
+All_signals:/cv32e40p_if_stage/instr_err_i
+All_signals:/cv32e40p_if_stage/hwlp_target_i
+All_signals:/cv32e40p_if_stage/dm_exception_addr_i
+All_signals:/cv32e40p_if_stage/instr_rvalid_i
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/flush_cnt_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_addr_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_atop_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q
+All_signals:/cv32e40p_if_stage/aligner_i/hwlp_addr_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_be_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_q
+All_signals:/cv32e40p_if_stage/aligner_i/aligner_ready_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/write_pointer_q
+All_signals:/cv32e40p_if_stage/aligner_i/instr_valid_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_wdata_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/hwlp_flush_cnt_delayed_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/mem_q
+All_signals:/cv32e40p_if_stage/aligner_i/pc_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/status_cnt_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/state_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/state_q
+All_signals:/cv32e40p_if_stage/aligner_i/hwlp_update_pc_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/read_pointer_q
+All_signals:/cv32e40p_if_stage/aligner_i/branch_addr_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/cnt_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_err_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_o
+All_signals:/cv32e40p_if_stage/aligner_i/aligner_ready_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/trans_ready_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/busy_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_push_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/full_o
+All_signals:/cv32e40p_if_stage/aligner_i/instr_valid_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_rdata_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/cnt_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_flush_but_first_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_valid_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/empty_o
+All_signals:/cv32e40p_if_stage/aligner_i/pc_o
+All_signals:/cv32e40p_if_stage/aligner_i/instr_aligned_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_req_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_valid_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_wdata_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fetch_valid_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_pop_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/data_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_addr_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_atop_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_we_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_flush_o
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_be_o
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/hwlp_update_pc_q[0] sim_id:[0]4483  value:1  fi_instant:4483 SIM_ERROR:11478 time_for_this_simulation:731
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_o[10] sim_id:[10]13213  value:1  fi_instant:13213 SIM_ERROR:0 time_for_this_simulation:1091
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_err_o[0] sim_id:[0]21273  value:1  fi_instant:21273 SIM_ERROR:0 time_for_this_simulation:457
+sig_fault: signal_name:/cv32e40p_if_stage/instr_err_i[0] sim_id:[0]2739  value:1  fi_instant:2739 SIM_ERROR:14132 time_for_this_simulation:574
+sig_fault: signal_name:/cv32e40p_if_stage/boot_addr_i[8] sim_id:[8]10679  value:1  fi_instant:10679 SIM_ERROR:471 time_for_this_simulation:530
+sig_fault: signal_name:/cv32e40p_if_stage/halt_if_i[0] sim_id:[0]460  value:1  fi_instant:460 SIM_ERROR:24062 time_for_this_simulation:382
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_o[31] sim_id:[31]8222  value:1  fi_instant:8222 SIM_ERROR:5224 time_for_this_simulation:593
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/empty_o[0] sim_id:[0]2587  value:0  fi_instant:2587 SIM_ERROR:12897 time_for_this_simulation:787
+sig_fault: signal_name:/cv32e40p_if_stage/clear_instr_valid_i[0] sim_id:[0]14978  value:0  fi_instant:14978 SIM_ERROR:0 time_for_this_simulation:651
+sig_fault: signal_name:/cv32e40p_if_stage/id_ready_i[0] sim_id:[0]9840  value:0  fi_instant:9840 SIM_ERROR:1 time_for_this_simulation:767
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_we_o[0] sim_id:[0]17422  value:1  fi_instant:17422 SIM_ERROR:0 time_for_this_simulation:1305
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_be_o[3] sim_id:[3]1778  value:0  fi_instant:1778 SIM_ERROR:21330 time_for_this_simulation:855
+sig_fault: signal_name:/cv32e40p_if_stage/u_trap_base_addr_i[5] sim_id:[5]21870  value:1  fi_instant:21870 SIM_ERROR:0 time_for_this_simulation:391
+sig_fault: signal_name:/cv32e40p_if_stage/req_i[0] sim_id:[0]6134  value:1  fi_instant:6134 SIM_ERROR:7160 time_for_this_simulation:369
+sig_fault: signal_name:/cv32e40p_if_stage/m_trap_base_addr_i[15] sim_id:[15]5463  value:1  fi_instant:5463 SIM_ERROR:8022 time_for_this_simulation:818
+sig_fault: signal_name:/cv32e40p_if_stage/uepc_i[9] sim_id:[9]3119  value:1  fi_instant:3119 SIM_ERROR:11847 time_for_this_simulation:348
+sig_fault: signal_name:/cv32e40p_if_stage/mepc_i[15] sim_id:[15]49  value:1  fi_instant:49 SIM_ERROR:22305 time_for_this_simulation:381
+sig_fault: signal_name:/cv32e40p_if_stage/uepc_i[23] sim_id:[23]19627  value:1  fi_instant:19627 SIM_ERROR:0 time_for_this_simulation:679
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_q[21] sim_id:[21]777  value:1  fi_instant:777 SIM_ERROR:24691 time_for_this_simulation:370
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_req_o[0] sim_id:[0]16763  value:1  fi_instant:16763 SIM_ERROR:0 time_for_this_simulation:664
+sig_fault: signal_name:/cv32e40p_if_stage/mepc_i[19] sim_id:[19]9757  value:1  fi_instant:9757 SIM_ERROR:1759 time_for_this_simulation:546
+sig_fault: signal_name:/cv32e40p_if_stage/instr_err_pmp_i[0] sim_id:[0]5816  value:1  fi_instant:5816 SIM_ERROR:9944 time_for_this_simulation:365
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_flush_but_first_o[0] sim_id:[0]3018  value:1  fi_instant:3018 SIM_ERROR:11808 time_for_this_simulation:609
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_addr_q[12] sim_id:[12]21646  value:1  fi_instant:21646 SIM_ERROR:0 time_for_this_simulation:358
+sig_fault: signal_name:/cv32e40p_if_stage/jump_target_id_i[11] sim_id:[11]5430  value:1  fi_instant:5430 SIM_ERROR:8316 time_for_this_simulation:596
+sig_fault: signal_name:/cv32e40p_if_stage/u_exc_vec_pc_mux_i[1] sim_id:[1]3075  value:1  fi_instant:3075 SIM_ERROR:11726 time_for_this_simulation:557
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fetch_valid_o[0] sim_id:[0]7018  value:1  fi_instant:7018 SIM_ERROR:7780 time_for_this_simulation:594
+sig_fault: signal_name:/cv32e40p_if_stage/hwlp_jump_i[0] sim_id:[0]14249  value:1  fi_instant:14249 SIM_ERROR:15 time_for_this_simulation:810
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_be_o[3] sim_id:[3]3116  value:0  fi_instant:3116 SIM_ERROR:11847 time_for_this_simulation:591
+sig_fault: signal_name:/cv32e40p_if_stage/halt_if_i[0] sim_id:[0]4022  value:1  fi_instant:4022 SIM_ERROR:12185 time_for_this_simulation:777
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_q[25] sim_id:[25]10658  value:1  fi_instant:10658 SIM_ERROR:483 time_for_this_simulation:343
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/instr_valid_q[0] sim_id:[0]3757  value:1  fi_instant:3757 SIM_ERROR:10607 time_for_this_simulation:588
+sig_fault: signal_name:/cv32e40p_if_stage/instr_gnt_i[0] sim_id:[0]12240  value:1  fi_instant:12240 SIM_ERROR:0 time_for_this_simulation:769
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_o[30] sim_id:[30]4434  value:1  fi_instant:4434 SIM_ERROR:9905 time_for_this_simulation:635
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_flush_o[0] sim_id:[0]10213  value:1  fi_instant:10213 SIM_ERROR:1331 time_for_this_simulation:980
+sig_fault: signal_name:/cv32e40p_if_stage/u_exc_vec_pc_mux_i[0] sim_id:[0]6830  value:1  fi_instant:6830 SIM_ERROR:6169 time_for_this_simulation:619
+sig_fault: signal_name:/cv32e40p_if_stage/depc_i[31] sim_id:[31]8404  value:1  fi_instant:8404 SIM_ERROR:5184 time_for_this_simulation:661
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_valid_o[0] sim_id:[0]17182  value:1  fi_instant:17182 SIM_ERROR:0 time_for_this_simulation:876
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/trans_ready_o[0] sim_id:[0]19455  value:0  fi_instant:19455 SIM_ERROR:4 time_for_this_simulation:395
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/aligner_ready_q[0] sim_id:[0]4204  value:1  fi_instant:4204 SIM_ERROR:10161 time_for_this_simulation:563
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/read_pointer_q[0] sim_id:[0]11967  value:1  fi_instant:11967 SIM_ERROR:0 time_for_this_simulation:469
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/hwlp_update_pc_q[0] sim_id:[0]15521  value:1  fi_instant:15521 SIM_ERROR:0 time_for_this_simulation:901
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/aligner_ready_q[0] sim_id:[0]20244  value:1  fi_instant:20244 SIM_ERROR:0 time_for_this_simulation:864
+sig_fault: signal_name:/cv32e40p_if_stage/boot_addr_i[30] sim_id:[30]2989  value:1  fi_instant:2989 SIM_ERROR:12113 time_for_this_simulation:798
+sig_fault: signal_name:/cv32e40p_if_stage/instr_err_pmp_i[0] sim_id:[0]2079  value:1  fi_instant:2079 SIM_ERROR:18959 time_for_this_simulation:344
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_q[19] sim_id:[19]2712  value:1  fi_instant:2712 SIM_ERROR:15061 time_for_this_simulation:597
+sig_fault: signal_name:/cv32e40p_if_stage/u_trap_base_addr_i[16] sim_id:[16]4873  value:1  fi_instant:4873 SIM_ERROR:9423 time_for_this_simulation:356
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/write_pointer_q[0] sim_id:[0]9593  value:1  fi_instant:9593 SIM_ERROR:2740 time_for_this_simulation:362
+sig_fault: signal_name:/cv32e40p_if_stage/dm_exception_addr_i[27] sim_id:[27]1031  value:0  fi_instant:1031 SIM_ERROR:19159 time_for_this_simulation:367
+sig_fault: signal_name:/cv32e40p_if_stage/halt_if_i[0] sim_id:[0]11034  value:1  fi_instant:11034 SIM_ERROR:0 time_for_this_simulation:982
+sig_fault: signal_name:/cv32e40p_if_stage/trap_addr_mux_i[0] sim_id:[0]9800  value:1  fi_instant:9800 SIM_ERROR:1684 time_for_this_simulation:556
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_addr_q[27] sim_id:[27]9788  value:1  fi_instant:9788 SIM_ERROR:1666 time_for_this_simulation:772
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/mem_q[0][25] sim_id:[0][25]19955  value:1  fi_instant:19955 SIM_ERROR:5 time_for_this_simulation:676
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_q[1] sim_id:[1]8159  value:1  fi_instant:8159 SIM_ERROR:4801 time_for_this_simulation:584
+sig_fault: signal_name:/cv32e40p_if_stage/m_exc_vec_pc_mux_i[4] sim_id:[4]722  value:1  fi_instant:722 SIM_ERROR:22234 time_for_this_simulation:582
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_wdata_q[11] sim_id:[11]14055  value:1  fi_instant:14055 SIM_ERROR:1 time_for_this_simulation:642
+sig_fault: signal_name:/cv32e40p_if_stage/u_exc_vec_pc_mux_i[0] sim_id:[0]575  value:1  fi_instant:575 SIM_ERROR:22898 time_for_this_simulation:595
+sig_fault: signal_name:/cv32e40p_if_stage/m_exc_vec_pc_mux_i[4] sim_id:[4]17066  value:1  fi_instant:17066 SIM_ERROR:0 time_for_this_simulation:656
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_o[23] sim_id:[23]3555  value:1  fi_instant:3555 SIM_ERROR:12427 time_for_this_simulation:378
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_pop_o[0] sim_id:[0]20852  value:1  fi_instant:20852 SIM_ERROR:0 time_for_this_simulation:1108
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/instr_valid_o[0] sim_id:[0]13624  value:1  fi_instant:13624 SIM_ERROR:0 time_for_this_simulation:556
+sig_fault: signal_name:/cv32e40p_if_stage/instr_rvalid_i[0] sim_id:[0]13274  value:1  fi_instant:13274 SIM_ERROR:0 time_for_this_simulation:895
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_wdata_o[7] sim_id:[7]1382  value:1  fi_instant:1382 SIM_ERROR:17963 time_for_this_simulation:792
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/busy_o[0] sim_id:[0]11683  value:1  fi_instant:11683 SIM_ERROR:0 time_for_this_simulation:704
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/aligner_ready_q[0] sim_id:[0]11212  value:1  fi_instant:11212 SIM_ERROR:0 time_for_this_simulation:741
+sig_fault: signal_name:/cv32e40p_if_stage/uepc_i[7] sim_id:[7]14453  value:1  fi_instant:14453 SIM_ERROR:0 time_for_this_simulation:940
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_addr_o[26] sim_id:[26]11982  value:1  fi_instant:11982 SIM_ERROR:0 time_for_this_simulation:941
+sig_fault: signal_name:/cv32e40p_if_stage/depc_i[28] sim_id:[28]11243  value:1  fi_instant:11243 SIM_ERROR:0 time_for_this_simulation:700
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_wdata_o[21] sim_id:[21]2528  value:1  fi_instant:2528 SIM_ERROR:12817 time_for_this_simulation:996
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/instr_valid_q[0] sim_id:[0]8639  value:1  fi_instant:8639 SIM_ERROR:3444 time_for_this_simulation:582
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_valid_o[0] sim_id:[0]10359  value:1  fi_instant:10359 SIM_ERROR:886 time_for_this_simulation:785
+sig_fault: signal_name:/cv32e40p_if_stage/clear_instr_valid_i[0] sim_id:[0]15879  value:0  fi_instant:15879 SIM_ERROR:0 time_for_this_simulation:449
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_o[29] sim_id:[29]4430  value:1  fi_instant:4430 SIM_ERROR:9905 time_for_this_simulation:405
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/instr_valid_q[0] sim_id:[0]0  value:1  fi_instant:0 SIM_ERROR:26 time_for_this_simulation:744
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/instr_aligned_o[8] sim_id:[8]2374  value:1  fi_instant:2374 SIM_ERROR:14815 time_for_this_simulation:778
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_addr_q[21] sim_id:[21]18547  value:1  fi_instant:18547 SIM_ERROR:0 time_for_this_simulation:441
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_flush_but_first_o[0] sim_id:[0]17958  value:1  fi_instant:17958 SIM_ERROR:0 time_for_this_simulation:638
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/busy_o[0] sim_id:[0]8901  value:1  fi_instant:8901 SIM_ERROR:3866 time_for_this_simulation:407
+sig_fault: signal_name:/cv32e40p_if_stage/instr_err_i[0] sim_id:[0]1262  value:1  fi_instant:1262 SIM_ERROR:20009 time_for_this_simulation:727
+sig_fault: signal_name:/cv32e40p_if_stage/exc_pc_mux_i[2] sim_id:[2]5742  value:1  fi_instant:5742 SIM_ERROR:9929 time_for_this_simulation:441
+sig_fault: signal_name:/cv32e40p_if_stage/id_ready_i[0] sim_id:[0]8165  value:0  fi_instant:8165 SIM_ERROR:3 time_for_this_simulation:365
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_flush_o[0] sim_id:[0]835  value:1  fi_instant:835 SIM_ERROR:23153 time_for_this_simulation:369
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/hwlp_addr_q[27] sim_id:[27]3142  value:1  fi_instant:3142 SIM_ERROR:11550 time_for_this_simulation:549
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/cnt_q[1] sim_id:[1]2093  value:1  fi_instant:2093 SIM_ERROR:22145 time_for_this_simulation:1058
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_valid_o[0] sim_id:[0]19017  value:1  fi_instant:19017 SIM_ERROR:0 time_for_this_simulation:621
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_rdata_o[24] sim_id:[24]19766  value:1  fi_instant:19766 SIM_ERROR:0 time_for_this_simulation:415
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_be_o[0] sim_id:[0]4333  value:0  fi_instant:4333 SIM_ERROR:10244 time_for_this_simulation:544
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_o[19] sim_id:[19]6754  value:1  fi_instant:6754 SIM_ERROR:6479 time_for_this_simulation:494
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/flush_cnt_q[1] sim_id:[1]9365  value:1  fi_instant:9365 SIM_ERROR:2638 time_for_this_simulation:575
+sig_fault: signal_name:/cv32e40p_if_stage/jump_target_id_i[28] sim_id:[28]8470  value:1  fi_instant:8470 SIM_ERROR:4004 time_for_this_simulation:377
+sig_fault: signal_name:/cv32e40p_if_stage/depc_i[14] sim_id:[14]2639  value:1  fi_instant:2639 SIM_ERROR:12514 time_for_this_simulation:544
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/data_o[9] sim_id:[9]6346  value:1  fi_instant:6346 SIM_ERROR:9032 time_for_this_simulation:782
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_we_o[0] sim_id:[0]18896  value:1  fi_instant:18896 SIM_ERROR:0 time_for_this_simulation:1021
+sig_fault: signal_name:/cv32e40p_if_stage/halt_if_i[0] sim_id:[0]18832  value:1  fi_instant:18832 SIM_ERROR:0 time_for_this_simulation:500
+sig_fault: signal_name:/cv32e40p_if_stage/jump_target_id_i[22] sim_id:[22]18891  value:1  fi_instant:18891 SIM_ERROR:0 time_for_this_simulation:939
+sig_fault: signal_name:/cv32e40p_if_stage/jump_target_id_i[20] sim_id:[20]2132  value:1  fi_instant:2132 SIM_ERROR:17759 time_for_this_simulation:1033
+sig_fault: signal_name:/cv32e40p_if_stage/boot_addr_i[15] sim_id:[15]1268  value:1  fi_instant:1268 SIM_ERROR:21181 time_for_this_simulation:591
+sig_fault: signal_name:/cv32e40p_if_stage/halt_if_i[0] sim_id:[0]18534  value:1  fi_instant:18534 SIM_ERROR:0 time_for_this_simulation:1081
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/hwlp_addr_q[9] sim_id:[9]6343  value:1  fi_instant:6343 SIM_ERROR:8336 time_for_this_simulation:851
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/empty_o[0] sim_id:[0]12774  value:0  fi_instant:12774 SIM_ERROR:0 time_for_this_simulation:709
+sig_fault: signal_name:/cv32e40p_if_stage/clear_instr_valid_i[0] sim_id:[0]14790  value:0  fi_instant:14790 SIM_ERROR:0 time_for_this_simulation:546
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_atop_o[0] sim_id:[0]21233  value:1  fi_instant:21233 SIM_ERROR:0 time_for_this_simulation:1056
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_rdata_o[28] sim_id:[28]20579  value:1  fi_instant:20579 SIM_ERROR:0 time_for_this_simulation:929
+sig_fault: signal_name:/cv32e40p_if_stage/instr_rvalid_i[0] sim_id:[0]11473  value:1  fi_instant:11473 SIM_ERROR:0 time_for_this_simulation:542
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_be_o[2] sim_id:[2]21146  value:0  fi_instant:21146 SIM_ERROR:0 time_for_this_simulation:1095
+sig_fault: signal_name:/cv32e40p_if_stage/instr_rvalid_i[0] sim_id:[0]6923  value:1  fi_instant:6923 SIM_ERROR:7209 time_for_this_simulation:862
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/empty_o[0] sim_id:[0]14730  value:0  fi_instant:14730 SIM_ERROR:0 time_for_this_simulation:543
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_addr_q[28] sim_id:[28]17745  value:1  fi_instant:17745 SIM_ERROR:1 time_for_this_simulation:426
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/hwlp_flush_cnt_delayed_q[0] sim_id:[0]19912  value:1  fi_instant:19912 SIM_ERROR:0 time_for_this_simulation:936
+sig_fault: signal_name:/cv32e40p_if_stage/halt_if_i[0] sim_id:[0]6122  value:1  fi_instant:6122 SIM_ERROR:7018 time_for_this_simulation:853
+sig_fault: signal_name:/cv32e40p_if_stage/halt_if_i[0] sim_id:[0]20243  value:1  fi_instant:20243 SIM_ERROR:0 time_for_this_simulation:825
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_rdata_o[11] sim_id:[11]16037  value:1  fi_instant:16037 SIM_ERROR:0 time_for_this_simulation:932
+sig_fault: signal_name:/cv32e40p_if_stage/dm_exception_addr_i[17] sim_id:[17]7356  value:0  fi_instant:7356 SIM_ERROR:5331 time_for_this_simulation:655
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/instr_aligned_o[7] sim_id:[7]14401  value:1  fi_instant:14401 SIM_ERROR:0 time_for_this_simulation:949
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/mem_q[0][29] sim_id:[0][29]15180  value:1  fi_instant:15180 SIM_ERROR:0 time_for_this_simulation:481
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_o[14] sim_id:[14]8051  value:1  fi_instant:8051 SIM_ERROR:4317 time_for_this_simulation:598
+sig_fault: signal_name:/cv32e40p_if_stage/m_exc_vec_pc_mux_i[2] sim_id:[2]3112  value:1  fi_instant:3112 SIM_ERROR:11959 time_for_this_simulation:361
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_rdata_o[1] sim_id:[1]21410  value:1  fi_instant:21410 SIM_ERROR:0 time_for_this_simulation:929
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/busy_o[0] sim_id:[0]5478  value:1  fi_instant:5478 SIM_ERROR:8097 time_for_this_simulation:1038
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/cnt_o[0] sim_id:[0]12306  value:1  fi_instant:12306 SIM_ERROR:1 time_for_this_simulation:482
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/data_o[19] sim_id:[19]20761  value:1  fi_instant:20761 SIM_ERROR:0 time_for_this_simulation:672
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_valid_o[0] sim_id:[0]17317  value:1  fi_instant:17317 SIM_ERROR:0 time_for_this_simulation:565
+sig_fault: signal_name:/cv32e40p_if_stage/boot_addr_i[15] sim_id:[15]11313  value:1  fi_instant:11313 SIM_ERROR:0 time_for_this_simulation:787
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_err_o[0] sim_id:[0]6669  value:1  fi_instant:6669 SIM_ERROR:6543 time_for_this_simulation:610
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_push_o[0] sim_id:[0]20296  value:1  fi_instant:20296 SIM_ERROR:0 time_for_this_simulation:464
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_rdata_o[16] sim_id:[16]20924  value:1  fi_instant:20924 SIM_ERROR:0 time_for_this_simulation:910
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/full_o[0] sim_id:[0]2407  value:1  fi_instant:2407 SIM_ERROR:14681 time_for_this_simulation:1432
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_o[31] sim_id:[31]4319  value:1  fi_instant:4319 SIM_ERROR:10025 time_for_this_simulation:641
+sig_fault: signal_name:/cv32e40p_if_stage/pc_set_i[0] sim_id:[0]14747  value:1  fi_instant:14747 SIM_ERROR:0 time_for_this_simulation:964
+sig_fault: signal_name:/cv32e40p_if_stage/dm_halt_addr_i[17] sim_id:[17]13219  value:1  fi_instant:13219 SIM_ERROR:0 time_for_this_simulation:899
+sig_fault: signal_name:/cv32e40p_if_stage/u_trap_base_addr_i[6] sim_id:[6]13067  value:1  fi_instant:13067 SIM_ERROR:0 time_for_this_simulation:747
+sig_fault: signal_name:/cv32e40p_if_stage/instr_rdata_i[26] sim_id:[26]7112  value:1  fi_instant:7112 SIM_ERROR:7915 time_for_this_simulation:658
+sig_fault: signal_name:/cv32e40p_if_stage/m_exc_vec_pc_mux_i[2] sim_id:[2]4161  value:1  fi_instant:4161 SIM_ERROR:10739 time_for_this_simulation:587
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_atop_q[2] sim_id:[2]3633  value:1  fi_instant:3633 SIM_ERROR:11211 time_for_this_simulation:467
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_q[13] sim_id:[13]19933  value:1  fi_instant:19933 SIM_ERROR:0 time_for_this_simulation:745
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/cnt_q[0] sim_id:[0]9584  value:1  fi_instant:9584 SIM_ERROR:2412 time_for_this_simulation:386
+sig_fault: signal_name:/cv32e40p_if_stage/mepc_i[21] sim_id:[21]5451  value:1  fi_instant:5451 SIM_ERROR:8408 time_for_this_simulation:1018
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/hwlp_flush_cnt_delayed_q[0] sim_id:[0]8073  value:1  fi_instant:8073 SIM_ERROR:4229 time_for_this_simulation:771
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_push_o[0] sim_id:[0]21529  value:1  fi_instant:21529 SIM_ERROR:0 time_for_this_simulation:664
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q[0] sim_id:[0]11242  value:1  fi_instant:11242 SIM_ERROR:0 time_for_this_simulation:973
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/flush_cnt_q[0] sim_id:[0]250  value:1  fi_instant:250 SIM_ERROR:24107 time_for_this_simulation:618
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_push_o[0] sim_id:[0]21246  value:1  fi_instant:21246 SIM_ERROR:0 time_for_this_simulation:1072
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/read_pointer_q[0] sim_id:[0]593  value:1  fi_instant:593 SIM_ERROR:22587 time_for_this_simulation:408
+sig_fault: signal_name:/cv32e40p_if_stage/clear_instr_valid_i[0] sim_id:[0]20527  value:0  fi_instant:20527 SIM_ERROR:0 time_for_this_simulation:682
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fetch_valid_o[0] sim_id:[0]11120  value:1  fi_instant:11120 SIM_ERROR:0 time_for_this_simulation:691
+sig_fault: signal_name:/cv32e40p_if_stage/instr_err_i[0] sim_id:[0]2473  value:1  fi_instant:2473 SIM_ERROR:12988 time_for_this_simulation:574
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_o[27] sim_id:[27]586  value:1  fi_instant:586 SIM_ERROR:22587 time_for_this_simulation:829
+sig_fault: signal_name:/cv32e40p_if_stage/jump_target_id_i[17] sim_id:[17]17087  value:1  fi_instant:17087 SIM_ERROR:0 time_for_this_simulation:894
+sig_fault: signal_name:/cv32e40p_if_stage/instr_rdata_i[31] sim_id:[31]10042  value:1  fi_instant:10042 SIM_ERROR:1767 time_for_this_simulation:582
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/cnt_o[0] sim_id:[0]4182  value:1  fi_instant:4182 SIM_ERROR:1 time_for_this_simulation:336
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/read_pointer_q[0] sim_id:[0]11284  value:1  fi_instant:11284 SIM_ERROR:0 time_for_this_simulation:1193
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_o[8] sim_id:[8]12177  value:1  fi_instant:12177 SIM_ERROR:0 time_for_this_simulation:881
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/aligner_ready_q[0] sim_id:[0]12042  value:1  fi_instant:12042 SIM_ERROR:0 time_for_this_simulation:702
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/flush_cnt_q[1] sim_id:[1]19676  value:1  fi_instant:19676 SIM_ERROR:0 time_for_this_simulation:475
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/branch_addr_q[25] sim_id:[25]2622  value:1  fi_instant:2622 SIM_ERROR:12340 time_for_this_simulation:813
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/cnt_q[0] sim_id:[0]9469  value:1  fi_instant:9469 SIM_ERROR:2770 time_for_this_simulation:581
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/hwlp_addr_q[9] sim_id:[9]2981  value:1  fi_instant:2981 SIM_ERROR:11892 time_for_this_simulation:617
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/full_o[0] sim_id:[0]10558  value:1  fi_instant:10558 SIM_ERROR:609 time_for_this_simulation:811
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_flush_o[0] sim_id:[0]7187  value:1  fi_instant:7187 SIM_ERROR:6653 time_for_this_simulation:674
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_o[11] sim_id:[11]4465  value:1  fi_instant:4465 SIM_ERROR:11291 time_for_this_simulation:449
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/aligner_ready_o[0] sim_id:[0]15389  value:0  fi_instant:15389 SIM_ERROR:0 time_for_this_simulation:507
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/instr_aligned_o[18] sim_id:[18]10720  value:1  fi_instant:10720 SIM_ERROR:409 time_for_this_simulation:816
+sig_fault: signal_name:/cv32e40p_if_stage/instr_err_pmp_i[0] sim_id:[0]8215  value:1  fi_instant:8215 SIM_ERROR:5224 time_for_this_simulation:349
+sig_fault: signal_name:/cv32e40p_if_stage/boot_addr_i[4] sim_id:[4]12183  value:1  fi_instant:12183 SIM_ERROR:0 time_for_this_simulation:1013
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/state_q[0] sim_id:[0]4876  value:1  fi_instant:4876 SIM_ERROR:8981 time_for_this_simulation:850
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_o[8] sim_id:[8]11422  value:1  fi_instant:11422 SIM_ERROR:0 time_for_this_simulation:1215
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_push_o[0] sim_id:[0]6531  value:1  fi_instant:6531 SIM_ERROR:8387 time_for_this_simulation:405
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/hwlp_addr_q[15] sim_id:[15]19067  value:1  fi_instant:19067 SIM_ERROR:0 time_for_this_simulation:883
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_o[20] sim_id:[20]15109  value:1  fi_instant:15109 SIM_ERROR:0 time_for_this_simulation:761
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_o[15] sim_id:[15]3107  value:1  fi_instant:3107 SIM_ERROR:11959 time_for_this_simulation:625
+sig_fault: signal_name:/cv32e40p_if_stage/u_exc_vec_pc_mux_i[2] sim_id:[2]5205  value:1  fi_instant:5205 SIM_ERROR:11258 time_for_this_simulation:1015
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/hwlp_update_pc_q[0] sim_id:[0]17326  value:1  fi_instant:17326 SIM_ERROR:0 time_for_this_simulation:520
+sig_fault: signal_name:/cv32e40p_if_stage/m_exc_vec_pc_mux_i[3] sim_id:[3]11726  value:1  fi_instant:11726 SIM_ERROR:0 time_for_this_simulation:529
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/aligner_ready_q[0] sim_id:[0]18629  value:1  fi_instant:18629 SIM_ERROR:0 time_for_this_simulation:714
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_q[13] sim_id:[13]11868  value:1  fi_instant:11868 SIM_ERROR:0 time_for_this_simulation:467
+sig_fault: signal_name:/cv32e40p_if_stage/uepc_i[25] sim_id:[25]3236  value:1  fi_instant:3236 SIM_ERROR:12336 time_for_this_simulation:403
+sig_fault: signal_name:/cv32e40p_if_stage/u_trap_base_addr_i[7] sim_id:[7]10688  value:1  fi_instant:10688 SIM_ERROR:428 time_for_this_simulation:552
+sig_fault: signal_name:/cv32e40p_if_stage/m_exc_vec_pc_mux_i[4] sim_id:[4]7605  value:1  fi_instant:7605 SIM_ERROR:5549 time_for_this_simulation:780
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_atop_q[0] sim_id:[0]5519  value:1  fi_instant:5519 SIM_ERROR:8194 time_for_this_simulation:1019
+sig_fault: signal_name:/cv32e40p_if_stage/instr_rvalid_i[0] sim_id:[0]18962  value:1  fi_instant:18962 SIM_ERROR:0 time_for_this_simulation:876
+sig_fault: signal_name:/cv32e40p_if_stage/instr_err_i[0] sim_id:[0]6829  value:1  fi_instant:6829 SIM_ERROR:6169 time_for_this_simulation:602
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_req_o[0] sim_id:[0]4564  value:1  fi_instant:4564 SIM_ERROR:13248 time_for_this_simulation:637
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/status_cnt_q[1] sim_id:[1]4852  value:1  fi_instant:4852 SIM_ERROR:9154 time_for_this_simulation:869
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_q[5] sim_id:[5]16705  value:1  fi_instant:16705 SIM_ERROR:1 time_for_this_simulation:615
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_push_o[0] sim_id:[0]12027  value:1  fi_instant:12027 SIM_ERROR:0 time_for_this_simulation:804
+sig_fault: signal_name:/cv32e40p_if_stage/mepc_i[31] sim_id:[31]4567  value:1  fi_instant:4567 SIM_ERROR:3 time_for_this_simulation:782
+sig_fault: signal_name:/cv32e40p_if_stage/pc_set_i[0] sim_id:[0]5149  value:1  fi_instant:5149 SIM_ERROR:11427 time_for_this_simulation:634
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_o[19] sim_id:[19]14929  value:1  fi_instant:14929 SIM_ERROR:0 time_for_this_simulation:631
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/branch_addr_q[28] sim_id:[28]13607  value:1  fi_instant:13607 SIM_ERROR:0 time_for_this_simulation:560
+sig_fault: signal_name:/cv32e40p_if_stage/jump_target_ex_i[17] sim_id:[17]1293  value:1  fi_instant:1293 SIM_ERROR:3 time_for_this_simulation:544
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/trans_ready_o[0] sim_id:[0]5014  value:0  fi_instant:5014 SIM_ERROR:9103 time_for_this_simulation:1273
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/aligner_ready_o[0] sim_id:[0]20529  value:0  fi_instant:20529 SIM_ERROR:2 time_for_this_simulation:689
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/empty_o[0] sim_id:[0]4104  value:0  fi_instant:4104 SIM_ERROR:13216 time_for_this_simulation:440
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/write_pointer_q[0] sim_id:[0]1974  value:1  fi_instant:1974 SIM_ERROR:19456 time_for_this_simulation:848
+sig_fault: signal_name:/cv32e40p_if_stage/boot_addr_i[4] sim_id:[4]5034  value:1  fi_instant:5034 SIM_ERROR:10714 time_for_this_simulation:415
+sig_fault: signal_name:/cv32e40p_if_stage/u_trap_base_addr_i[23] sim_id:[23]12654  value:1  fi_instant:12654 SIM_ERROR:0 time_for_this_simulation:533
+sig_fault: signal_name:/cv32e40p_if_stage/pc_set_i[0] sim_id:[0]2509  value:1  fi_instant:2509 SIM_ERROR:13136 time_for_this_simulation:674
+sig_fault: signal_name:/cv32e40p_if_stage/depc_i[2] sim_id:[2]12627  value:1  fi_instant:12627 SIM_ERROR:0 time_for_this_simulation:545
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/hwlp_flush_cnt_delayed_q[0] sim_id:[0]8623  value:1  fi_instant:8623 SIM_ERROR:3420 time_for_this_simulation:627
+sig_fault: signal_name:/cv32e40p_if_stage/jump_target_ex_i[12] sim_id:[12]17149  value:1  fi_instant:17149 SIM_ERROR:0 time_for_this_simulation:1336
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_we_o[0] sim_id:[0]8604  value:1  fi_instant:8604 SIM_ERROR:3503 time_for_this_simulation:1000
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/hwlp_update_pc_q[0] sim_id:[0]3980  value:1  fi_instant:3980 SIM_ERROR:12366 time_for_this_simulation:1045
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/cnt_o[0] sim_id:[0]5511  value:1  fi_instant:5511 SIM_ERROR:3 time_for_this_simulation:815
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/hwlp_update_pc_q[0] sim_id:[0]19614  value:1  fi_instant:19614 SIM_ERROR:0 time_for_this_simulation:474
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/branch_addr_q[12] sim_id:[12]20383  value:1  fi_instant:20383 SIM_ERROR:0 time_for_this_simulation:813
+sig_fault: signal_name:/cv32e40p_if_stage/req_i[0] sim_id:[0]5507  value:1  fi_instant:5507 SIM_ERROR:8275 time_for_this_simulation:1066
+sig_fault: signal_name:/cv32e40p_if_stage/instr_err_pmp_i[0] sim_id:[0]16290  value:1  fi_instant:16290 SIM_ERROR:0 time_for_this_simulation:1177
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/write_pointer_q[0] sim_id:[0]8956  value:1  fi_instant:8956 SIM_ERROR:3256 time_for_this_simulation:873
+sig_fault: signal_name:/cv32e40p_if_stage/m_exc_vec_pc_mux_i[1] sim_id:[1]18732  value:1  fi_instant:18732 SIM_ERROR:0 time_for_this_simulation:735
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/instr_valid_q[0] sim_id:[0]19924  value:1  fi_instant:19924 SIM_ERROR:0 time_for_this_simulation:925
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/hwlp_flush_cnt_delayed_q[1] sim_id:[1]10340  value:1  fi_instant:10340 SIM_ERROR:927 time_for_this_simulation:812
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/flush_cnt_q[0] sim_id:[0]9199  value:1  fi_instant:9199 SIM_ERROR:2633 time_for_this_simulation:786
+sig_fault: signal_name:/cv32e40p_if_stage/jump_target_id_i[15] sim_id:[15]4188  value:1  fi_instant:4188 SIM_ERROR:10264 time_for_this_simulation:656
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_rdata_o[7] sim_id:[7]4530  value:1  fi_instant:4530 SIM_ERROR:12411 time_for_this_simulation:429
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_valid_o[0] sim_id:[0]8669  value:1  fi_instant:8669 SIM_ERROR:3255 time_for_this_simulation:1210
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/read_pointer_q[0] sim_id:[0]10773  value:1  fi_instant:10773 SIM_ERROR:299 time_for_this_simulation:377
+sig_fault: signal_name:/cv32e40p_if_stage/hwlp_target_i[28] sim_id:[28]12637  value:1  fi_instant:12637 SIM_ERROR:0 time_for_this_simulation:1074
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_req_o[0] sim_id:[0]11817  value:1  fi_instant:11817 SIM_ERROR:0 time_for_this_simulation:893
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_err_o[0] sim_id:[0]5727  value:1  fi_instant:5727 SIM_ERROR:9931 time_for_this_simulation:611
+sig_fault: signal_name:/cv32e40p_if_stage/m_exc_vec_pc_mux_i[3] sim_id:[3]4069  value:1  fi_instant:4069 SIM_ERROR:11863 time_for_this_simulation:859
+sig_fault: signal_name:/cv32e40p_if_stage/jump_target_ex_i[12] sim_id:[12]20544  value:1  fi_instant:20544 SIM_ERROR:0 time_for_this_simulation:675
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q[0] sim_id:[0]14897  value:1  fi_instant:14897 SIM_ERROR:0 time_for_this_simulation:782
+sig_fault: signal_name:/cv32e40p_if_stage/hwlp_jump_i[0] sim_id:[0]14838  value:1  fi_instant:14838 SIM_ERROR:15 time_for_this_simulation:1052
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/data_o[11] sim_id:[11]8916  value:1  fi_instant:8916 SIM_ERROR:3550 time_for_this_simulation:667
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_push_o[0] sim_id:[0]2553  value:1  fi_instant:2553 SIM_ERROR:12950 time_for_this_simulation:872
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_q[19] sim_id:[19]6955  value:1  fi_instant:6955 SIM_ERROR:7908 time_for_this_simulation:444
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/hwlp_update_pc_q[0] sim_id:[0]5971  value:1  fi_instant:5971 SIM_ERROR:8366 time_for_this_simulation:1046
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_addr_q[20] sim_id:[20]20612  value:1  fi_instant:20612 SIM_ERROR:0 time_for_this_simulation:532
+sig_fault: signal_name:/cv32e40p_if_stage/req_i[0] sim_id:[0]3362  value:1  fi_instant:3362 SIM_ERROR:15749 time_for_this_simulation:663
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_push_o[0] sim_id:[0]398  value:1  fi_instant:398 SIM_ERROR:23968 time_for_this_simulation:1154
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/hwlp_addr_q[26] sim_id:[26]21888  value:1  fi_instant:21888 SIM_ERROR:0 time_for_this_simulation:583
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/branch_addr_q[5] sim_id:[5]6500  value:1  fi_instant:6500 SIM_ERROR:8017 time_for_this_simulation:633
+sig_fault: signal_name:/cv32e40p_if_stage/pc_set_i[0] sim_id:[0]10862  value:1  fi_instant:10862 SIM_ERROR:101 time_for_this_simulation:626
+sig_fault: signal_name:/cv32e40p_if_stage/instr_err_i[0] sim_id:[0]11669  value:1  fi_instant:11669 SIM_ERROR:0 time_for_this_simulation:825
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_atop_o[1] sim_id:[1]15138  value:1  fi_instant:15138 SIM_ERROR:0 time_for_this_simulation:540
+sig_fault: signal_name:/cv32e40p_if_stage/boot_addr_i[20] sim_id:[20]2649  value:1  fi_instant:2649 SIM_ERROR:12790 time_for_this_simulation:371
+sig_fault: signal_name:/cv32e40p_if_stage/depc_i[13] sim_id:[13]19474  value:1  fi_instant:19474 SIM_ERROR:0 time_for_this_simulation:682
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_valid_o[0] sim_id:[0]16647  value:1  fi_instant:16647 SIM_ERROR:0 time_for_this_simulation:501
+sig_fault: signal_name:/cv32e40p_if_stage/instr_rvalid_i[0] sim_id:[0]16244  value:1  fi_instant:16244 SIM_ERROR:0 time_for_this_simulation:946
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_o[15] sim_id:[15]973  value:1  fi_instant:973 SIM_ERROR:21516 time_for_this_simulation:661
+sig_fault: signal_name:/cv32e40p_if_stage/dm_exception_addr_i[19] sim_id:[19]9294  value:0  fi_instant:9294 SIM_ERROR:2415 time_for_this_simulation:638
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_o[19] sim_id:[19]7615  value:1  fi_instant:7615 SIM_ERROR:5528 time_for_this_simulation:846
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/instr_valid_o[0] sim_id:[0]15725  value:1  fi_instant:15725 SIM_ERROR:4 time_for_this_simulation:905
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/aligner_ready_o[0] sim_id:[0]17192  value:0  fi_instant:17192 SIM_ERROR:0 time_for_this_simulation:734
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_err_o[0] sim_id:[0]10885  value:1  fi_instant:10885 SIM_ERROR:34 time_for_this_simulation:355
+sig_fault: signal_name:/cv32e40p_if_stage/hwlp_jump_i[0] sim_id:[0]12776  value:1  fi_instant:12776 SIM_ERROR:7 time_for_this_simulation:567
+sig_fault: signal_name:/cv32e40p_if_stage/dm_exception_addr_i[6] sim_id:[6]15322  value:0  fi_instant:15322 SIM_ERROR:0 time_for_this_simulation:481
+sig_fault: signal_name:/cv32e40p_if_stage/instr_gnt_i[0] sim_id:[0]20130  value:1  fi_instant:20130 SIM_ERROR:0 time_for_this_simulation:714
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/full_o[0] sim_id:[0]10913  value:1  fi_instant:10913 SIM_ERROR:0 time_for_this_simulation:812
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_addr_q[6] sim_id:[6]14552  value:1  fi_instant:14552 SIM_ERROR:0 time_for_this_simulation:761
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_push_o[0] sim_id:[0]17277  value:1  fi_instant:17277 SIM_ERROR:0 time_for_this_simulation:713
+sig_fault: signal_name:/cv32e40p_if_stage/instr_rvalid_i[0] sim_id:[0]20435  value:1  fi_instant:20435 SIM_ERROR:5 time_for_this_simulation:667
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_valid_o[0] sim_id:[0]18205  value:1  fi_instant:18205 SIM_ERROR:7 time_for_this_simulation:906
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_rdata_o[5] sim_id:[5]19502  value:1  fi_instant:19502 SIM_ERROR:0 time_for_this_simulation:926
+sig_fault: signal_name:/cv32e40p_if_stage/pc_set_i[0] sim_id:[0]16869  value:1  fi_instant:16869 SIM_ERROR:0 time_for_this_simulation:1561
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_o[23] sim_id:[23]7863  value:1  fi_instant:7863 SIM_ERROR:4850 time_for_this_simulation:1058
+sig_fault: signal_name:/cv32e40p_if_stage/instr_rdata_i[1] sim_id:[1]4561  value:1  fi_instant:4561 SIM_ERROR:13248 time_for_this_simulation:683
+sig_fault: signal_name:/cv32e40p_if_stage/instr_gnt_i[0] sim_id:[0]4878  value:1  fi_instant:4878 SIM_ERROR:8981 time_for_this_simulation:937
+sig_fault: signal_name:/cv32e40p_if_stage/jump_target_id_i[25] sim_id:[25]5095  value:1  fi_instant:5095 SIM_ERROR:9897 time_for_this_simulation:596
+sig_fault: signal_name:/cv32e40p_if_stage/exc_pc_mux_i[1] sim_id:[1]18582  value:1  fi_instant:18582 SIM_ERROR:0 time_for_this_simulation:716
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/mem_q[0][6] sim_id:[0][6]18109  value:1  fi_instant:18109 SIM_ERROR:0 time_for_this_simulation:729
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_flush_but_first_o[0] sim_id:[0]21627  value:1  fi_instant:21627 SIM_ERROR:0 time_for_this_simulation:839
+sig_fault: signal_name:/cv32e40p_if_stage/instr_err_i[0] sim_id:[0]17812  value:1  fi_instant:17812 SIM_ERROR:0 time_for_this_simulation:789
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_flush_o[0] sim_id:[0]14747  value:1  fi_instant:14747 SIM_ERROR:0 time_for_this_simulation:997
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_o[23] sim_id:[23]16063  value:1  fi_instant:16063 SIM_ERROR:0 time_for_this_simulation:532
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/hwlp_addr_q[3] sim_id:[3]9889  value:1  fi_instant:9889 SIM_ERROR:1505 time_for_this_simulation:602
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_pop_o[0] sim_id:[0]10773  value:1  fi_instant:10773 SIM_ERROR:299 time_for_this_simulation:577
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_atop_q[5] sim_id:[5]8705  value:1  fi_instant:8705 SIM_ERROR:3857 time_for_this_simulation:620
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_wdata_o[22] sim_id:[22]2103  value:1  fi_instant:2103 SIM_ERROR:19965 time_for_this_simulation:651
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/branch_addr_q[9] sim_id:[9]2576  value:1  fi_instant:2576 SIM_ERROR:12719 time_for_this_simulation:843
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/status_cnt_q[0] sim_id:[0]21732  value:1  fi_instant:21732 SIM_ERROR:0 time_for_this_simulation:879
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/branch_addr_q[12] sim_id:[12]19607  value:1  fi_instant:19607 SIM_ERROR:0 time_for_this_simulation:941
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/trans_ready_o[0] sim_id:[0]20122  value:0  fi_instant:20122 SIM_ERROR:0 time_for_this_simulation:761
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_be_q[3] sim_id:[3]13016  value:1  fi_instant:13016 SIM_ERROR:0 time_for_this_simulation:954
+sig_fault: signal_name:/cv32e40p_if_stage/req_i[0] sim_id:[0]6007  value:1  fi_instant:6007 SIM_ERROR:8051 time_for_this_simulation:834
+sig_fault: signal_name:/cv32e40p_if_stage/clear_instr_valid_i[0] sim_id:[0]16434  value:0  fi_instant:16434 SIM_ERROR:0 time_for_this_simulation:967
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_err_o[0] sim_id:[0]16681  value:1  fi_instant:16681 SIM_ERROR:0 time_for_this_simulation:855
+sig_fault: signal_name:/cv32e40p_if_stage/halt_if_i[0] sim_id:[0]9629  value:1  fi_instant:9629 SIM_ERROR:2149 time_for_this_simulation:828
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q[0] sim_id:[0]16317  value:1  fi_instant:16317 SIM_ERROR:0 time_for_this_simulation:1331
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_req_o[0] sim_id:[0]5964  value:1  fi_instant:5964 SIM_ERROR:8224 time_for_this_simulation:875
+sig_fault: signal_name:/cv32e40p_if_stage/halt_if_i[0] sim_id:[0]20265  value:1  fi_instant:20265 SIM_ERROR:1 time_for_this_simulation:872
+sig_fault: signal_name:/cv32e40p_if_stage/dm_halt_addr_i[14] sim_id:[14]5911  value:1  fi_instant:5911 SIM_ERROR:10426 time_for_this_simulation:730
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/instr_valid_q[0] sim_id:[0]17160  value:1  fi_instant:17160 SIM_ERROR:0 time_for_this_simulation:762
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/write_pointer_q[0] sim_id:[0]18563  value:1  fi_instant:18563 SIM_ERROR:0 time_for_this_simulation:742
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q[0] sim_id:[0]14243  value:1  fi_instant:14243 SIM_ERROR:0 time_for_this_simulation:752
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_o[20] sim_id:[20]18621  value:1  fi_instant:18621 SIM_ERROR:0 time_for_this_simulation:752
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_req_o[0] sim_id:[0]20528  value:1  fi_instant:20528 SIM_ERROR:2 time_for_this_simulation:1190
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/full_o[0] sim_id:[0]605  value:1  fi_instant:605 SIM_ERROR:21214 time_for_this_simulation:905
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_we_o[0] sim_id:[0]17055  value:1  fi_instant:17055 SIM_ERROR:7 time_for_this_simulation:638
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/empty_o[0] sim_id:[0]20017  value:0  fi_instant:20017 SIM_ERROR:0 time_for_this_simulation:1109
+sig_fault: signal_name:/cv32e40p_if_stage/dm_exception_addr_i[28] sim_id:[28]18607  value:0  fi_instant:18607 SIM_ERROR:0 time_for_this_simulation:1132
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_atop_o[2] sim_id:[2]18330  value:1  fi_instant:18330 SIM_ERROR:0 time_for_this_simulation:669
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_err_o[0] sim_id:[0]15223  value:1  fi_instant:15223 SIM_ERROR:0 time_for_this_simulation:1165
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_push_o[0] sim_id:[0]14302  value:1  fi_instant:14302 SIM_ERROR:0 time_for_this_simulation:810
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/data_o[11] sim_id:[11]5001  value:1  fi_instant:5001 SIM_ERROR:8912 time_for_this_simulation:631
+sig_fault: signal_name:/cv32e40p_if_stage/hwlp_jump_i[0] sim_id:[0]8928  value:1  fi_instant:8928 SIM_ERROR:5 time_for_this_simulation:1050
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/hwlp_flush_cnt_delayed_q[0] sim_id:[0]17896  value:1  fi_instant:17896 SIM_ERROR:0 time_for_this_simulation:775
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_flush_o[0] sim_id:[0]19915  value:1  fi_instant:19915 SIM_ERROR:4 time_for_this_simulation:711
+sig_fault: signal_name:/cv32e40p_if_stage/trap_addr_mux_i[1] sim_id:[1]18  value:1  fi_instant:18 SIM_ERROR:21 time_for_this_simulation:368
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_q[22] sim_id:[22]3582  value:1  fi_instant:3582 SIM_ERROR:12297 time_for_this_simulation:1014
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/cnt_q[1] sim_id:[1]12444  value:1  fi_instant:12444 SIM_ERROR:0 time_for_this_simulation:723
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/aligner_ready_q[0] sim_id:[0]21659  value:1  fi_instant:21659 SIM_ERROR:0 time_for_this_simulation:611
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_addr_q[10] sim_id:[10]14376  value:1  fi_instant:14376 SIM_ERROR:0 time_for_this_simulation:971
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/hwlp_flush_cnt_delayed_q[1] sim_id:[1]5471  value:1  fi_instant:5471 SIM_ERROR:8176 time_for_this_simulation:678
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_we_o[0] sim_id:[0]2944  value:1  fi_instant:2944 SIM_ERROR:12829 time_for_this_simulation:1203
+sig_fault: signal_name:/cv32e40p_if_stage/jump_target_id_i[25] sim_id:[25]8822  value:1  fi_instant:8822 SIM_ERROR:3768 time_for_this_simulation:838
+sig_fault: signal_name:/cv32e40p_if_stage/m_exc_vec_pc_mux_i[1] sim_id:[1]1394  value:1  fi_instant:1394 SIM_ERROR:19903 time_for_this_simulation:467
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/state_q[0] sim_id:[0]21372  value:1  fi_instant:21372 SIM_ERROR:0 time_for_this_simulation:495
+sig_fault: signal_name:/cv32e40p_if_stage/jump_target_id_i[5] sim_id:[5]9852  value:1  fi_instant:9852 SIM_ERROR:1536 time_for_this_simulation:638
+sig_fault: signal_name:/cv32e40p_if_stage/trap_addr_mux_i[1] sim_id:[1]8475  value:1  fi_instant:8475 SIM_ERROR:4041 time_for_this_simulation:884
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_q[29] sim_id:[29]7103  value:1  fi_instant:7103 SIM_ERROR:7247 time_for_this_simulation:499
+sig_fault: signal_name:/cv32e40p_if_stage/instr_rdata_i[12] sim_id:[12]6521  value:1  fi_instant:6521 SIM_ERROR:8400 time_for_this_simulation:713
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/hwlp_flush_cnt_delayed_q[1] sim_id:[1]10563  value:1  fi_instant:10563 SIM_ERROR:609 time_for_this_simulation:618
+sig_fault: signal_name:/cv32e40p_if_stage/m_trap_base_addr_i[3] sim_id:[3]7397  value:1  fi_instant:7397 SIM_ERROR:5375 time_for_this_simulation:659
+sig_fault: signal_name:/cv32e40p_if_stage/instr_err_pmp_i[0] sim_id:[0]20504  value:1  fi_instant:20504 SIM_ERROR:0 time_for_this_simulation:747
+sig_fault: signal_name:/cv32e40p_if_stage/mepc_i[18] sim_id:[18]16552  value:1  fi_instant:16552 SIM_ERROR:2 time_for_this_simulation:1080
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/instr_valid_o[0] sim_id:[0]6573  value:1  fi_instant:6573 SIM_ERROR:6825 time_for_this_simulation:863
+sig_fault: signal_name:/cv32e40p_if_stage/dm_halt_addr_i[31] sim_id:[31]4494  value:1  fi_instant:4494 SIM_ERROR:11928 time_for_this_simulation:703
+sig_fault: signal_name:/cv32e40p_if_stage/pc_set_i[0] sim_id:[0]17696  value:1  fi_instant:17696 SIM_ERROR:0 time_for_this_simulation:583
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_q[12] sim_id:[12]18397  value:1  fi_instant:18397 SIM_ERROR:0 time_for_this_simulation:730
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_flush_o[0] sim_id:[0]19282  value:1  fi_instant:19282 SIM_ERROR:0 time_for_this_simulation:1398
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/hwlp_update_pc_q[0] sim_id:[0]7643  value:1  fi_instant:7643 SIM_ERROR:5900 time_for_this_simulation:1078
+sig_fault: signal_name:/cv32e40p_if_stage/u_exc_vec_pc_mux_i[4] sim_id:[4]21025  value:1  fi_instant:21025 SIM_ERROR:1 time_for_this_simulation:948
+sig_fault: signal_name:/cv32e40p_if_stage/instr_rvalid_i[0] sim_id:[0]21608  value:1  fi_instant:21608 SIM_ERROR:0 time_for_this_simulation:819
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/read_pointer_q[0] sim_id:[0]6144  value:1  fi_instant:6144 SIM_ERROR:7168 time_for_this_simulation:426
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_valid_o[0] sim_id:[0]6070  value:1  fi_instant:6070 SIM_ERROR:7491 time_for_this_simulation:1087
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q[0] sim_id:[0]20067  value:1  fi_instant:20067 SIM_ERROR:0 time_for_this_simulation:594
+sig_fault: signal_name:/cv32e40p_if_stage/clear_instr_valid_i[0] sim_id:[0]3196  value:0  fi_instant:3196 SIM_ERROR:11422 time_for_this_simulation:1015
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_pop_o[0] sim_id:[0]2609  value:1  fi_instant:2609 SIM_ERROR:12604 time_for_this_simulation:905
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_we_o[0] sim_id:[0]15003  value:1  fi_instant:15003 SIM_ERROR:0 time_for_this_simulation:684
+sig_fault: signal_name:/cv32e40p_if_stage/hwlp_target_i[4] sim_id:[4]8843  value:1  fi_instant:8843 SIM_ERROR:4050 time_for_this_simulation:683
+sig_fault: signal_name:/cv32e40p_if_stage/id_ready_i[0] sim_id:[0]7163  value:0  fi_instant:7163 SIM_ERROR:2 time_for_this_simulation:897
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/empty_o[0] sim_id:[0]7431  value:0  fi_instant:7431 SIM_ERROR:5209 time_for_this_simulation:1105
+sig_fault: signal_name:/cv32e40p_if_stage/m_trap_base_addr_i[19] sim_id:[19]11545  value:1  fi_instant:11545 SIM_ERROR:2 time_for_this_simulation:1067
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_q[10] sim_id:[10]8502  value:1  fi_instant:8502 SIM_ERROR:3960 time_for_this_simulation:1324
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_valid_o[0] sim_id:[0]11915  value:1  fi_instant:11915 SIM_ERROR:1 time_for_this_simulation:939
+sig_fault: signal_name:/cv32e40p_if_stage/instr_err_i[0] sim_id:[0]14222  value:1  fi_instant:14222 SIM_ERROR:0 time_for_this_simulation:870
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/status_cnt_q[0] sim_id:[0]106  value:1  fi_instant:106 SIM_ERROR:23884 time_for_this_simulation:481
+sig_fault: signal_name:/cv32e40p_if_stage/m_trap_base_addr_i[0] sim_id:[0]11883  value:1  fi_instant:11883 SIM_ERROR:0 time_for_this_simulation:1042
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/flush_cnt_q[0] sim_id:[0]10646  value:1  fi_instant:10646 SIM_ERROR:500 time_for_this_simulation:718
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/hwlp_addr_q[12] sim_id:[12]3932  value:1  fi_instant:3932 SIM_ERROR:12869 time_for_this_simulation:1112
+sig_fault: signal_name:/cv32e40p_if_stage/pc_set_i[0] sim_id:[0]3050  value:1  fi_instant:3050 SIM_ERROR:12148 time_for_this_simulation:476
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/status_cnt_q[1] sim_id:[1]17804  value:1  fi_instant:17804 SIM_ERROR:0 time_for_this_simulation:999
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_push_o[0] sim_id:[0]18202  value:1  fi_instant:18202 SIM_ERROR:0 time_for_this_simulation:980
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/instr_valid_o[0] sim_id:[0]12184  value:1  fi_instant:12184 SIM_ERROR:0 time_for_this_simulation:677
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/pc_q[28] sim_id:[28]7597  value:1  fi_instant:7597 SIM_ERROR:5956 time_for_this_simulation:635
+sig_fault: signal_name:/cv32e40p_if_stage/exc_pc_mux_i[0] sim_id:[0]8880  value:0  fi_instant:8880 SIM_ERROR:3495 time_for_this_simulation:1316
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/trans_ready_o[0] sim_id:[0]6551  value:0  fi_instant:6551 SIM_ERROR:8358 time_for_this_simulation:1103
+sig_fault: signal_name:/cv32e40p_if_stage/mepc_i[20] sim_id:[20]20475  value:1  fi_instant:20475 SIM_ERROR:2 time_for_this_simulation:727
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/mem_q[0][7] sim_id:[0][7]11487  value:1  fi_instant:11487 SIM_ERROR:0 time_for_this_simulation:790
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_be_q[3] sim_id:[3]16147  value:1  fi_instant:16147 SIM_ERROR:0 time_for_this_simulation:1214
+sig_fault: signal_name:/cv32e40p_if_stage/uepc_i[2] sim_id:[2]17939  value:1  fi_instant:17939 SIM_ERROR:0 time_for_this_simulation:738
+sig_fault: signal_name:/cv32e40p_if_stage/dm_halt_addr_i[17] sim_id:[17]16985  value:1  fi_instant:16985 SIM_ERROR:0 time_for_this_simulation:1238
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/aligner_ready_q[0] sim_id:[0]12248  value:1  fi_instant:12248 SIM_ERROR:0 time_for_this_simulation:863
+sig_fault: signal_name:/cv32e40p_if_stage/exc_pc_mux_i[2] sim_id:[2]18497  value:1  fi_instant:18497 SIM_ERROR:0 time_for_this_simulation:1812
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/instr_valid_q[0] sim_id:[0]4278  value:1  fi_instant:4278 SIM_ERROR:9915 time_for_this_simulation:664
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_err_o[0] sim_id:[0]3142  value:1  fi_instant:3142 SIM_ERROR:11550 time_for_this_simulation:1132
+sig_fault: signal_name:/cv32e40p_if_stage/u_trap_base_addr_i[20] sim_id:[20]15416  value:1  fi_instant:15416 SIM_ERROR:0 time_for_this_simulation:726
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/data_o[14] sim_id:[14]11054  value:1  fi_instant:11054 SIM_ERROR:0 time_for_this_simulation:1482
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_q[14] sim_id:[14]3766  value:1  fi_instant:3766 SIM_ERROR:10835 time_for_this_simulation:933
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/empty_o[0] sim_id:[0]12762  value:0  fi_instant:12762 SIM_ERROR:0 time_for_this_simulation:986
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_valid_o[0] sim_id:[0]12935  value:1  fi_instant:12935 SIM_ERROR:1 time_for_this_simulation:884
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/hwlp_flush_cnt_delayed_q[0] sim_id:[0]12170  value:1  fi_instant:12170 SIM_ERROR:0 time_for_this_simulation:1065
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_pop_o[0] sim_id:[0]3636  value:1  fi_instant:3636 SIM_ERROR:10761 time_for_this_simulation:2110
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_wdata_q[14] sim_id:[14]14801  value:1  fi_instant:14801 SIM_ERROR:0 time_for_this_simulation:744
+sig_fault: signal_name:/cv32e40p_if_stage/dm_halt_addr_i[0] sim_id:[0]12647  value:1  fi_instant:12647 SIM_ERROR:0 time_for_this_simulation:651
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q[0] sim_id:[0]20694  value:1  fi_instant:20694 SIM_ERROR:0 time_for_this_simulation:606
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_o[18] sim_id:[18]8579  value:1  fi_instant:8579 SIM_ERROR:3472 time_for_this_simulation:1148
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/trans_ready_o[0] sim_id:[0]16548  value:0  fi_instant:16548 SIM_ERROR:0 time_for_this_simulation:810
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/mem_q[0][30] sim_id:[0][30]10937  value:1  fi_instant:10937 SIM_ERROR:0 time_for_this_simulation:1543
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/hwlp_addr_q[30] sim_id:[30]12655  value:1  fi_instant:12655 SIM_ERROR:1 time_for_this_simulation:528
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/aligner_ready_q[0] sim_id:[0]1778  value:1  fi_instant:1778 SIM_ERROR:21330 time_for_this_simulation:916
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fetch_valid_o[0] sim_id:[0]20073  value:1  fi_instant:20073 SIM_ERROR:0 time_for_this_simulation:740
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/trans_ready_o[0] sim_id:[0]20140  value:0  fi_instant:20140 SIM_ERROR:0 time_for_this_simulation:979
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_q[13] sim_id:[13]15176  value:1  fi_instant:15176 SIM_ERROR:0 time_for_this_simulation:585
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/mem_q[0][8] sim_id:[0][8]2201  value:1  fi_instant:2201 SIM_ERROR:16351 time_for_this_simulation:714
+sig_fault: signal_name:/cv32e40p_if_stage/instr_err_i[0] sim_id:[0]20349  value:1  fi_instant:20349 SIM_ERROR:0 time_for_this_simulation:980
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/aligner_ready_q[0] sim_id:[0]13878  value:1  fi_instant:13878 SIM_ERROR:0 time_for_this_simulation:997
+sig_fault: signal_name:/cv32e40p_if_stage/instr_rvalid_i[0] sim_id:[0]8098  value:1  fi_instant:8098 SIM_ERROR:4274 time_for_this_simulation:870
+sig_fault: signal_name:/cv32e40p_if_stage/dm_exception_addr_i[27] sim_id:[27]489  value:0  fi_instant:489 SIM_ERROR:23658 time_for_this_simulation:906
+sig_fault: signal_name:/cv32e40p_if_stage/dm_exception_addr_i[24] sim_id:[24]15554  value:0  fi_instant:15554 SIM_ERROR:0 time_for_this_simulation:790
+sig_fault: signal_name:/cv32e40p_if_stage/halt_if_i[0] sim_id:[0]19334  value:1  fi_instant:19334 SIM_ERROR:0 time_for_this_simulation:754
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/empty_o[0] sim_id:[0]8242  value:0  fi_instant:8242 SIM_ERROR:5198 time_for_this_simulation:473
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/read_pointer_q[0] sim_id:[0]13448  value:1  fi_instant:13448 SIM_ERROR:0 time_for_this_simulation:1091

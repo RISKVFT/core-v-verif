@@ -1,274 +1,239 @@
 cd general_test && make
-make[1]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test'
-for dir in /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_ebreak_test_0 /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_1 /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/hello-world /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/perf_counters_instructions /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/counters /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/csr_instructions /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/cv32e40p_csr_access_test /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/dhrystone /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/illegal /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/requested_csr_por /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_bootstrap /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_test /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/modeled_csr_por /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/Makefile /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/generic_exception_test /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/misalign /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_0 /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/fibonacci /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/Makefile_inside /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/copy_make.sh; do \
+make[1]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test'
+for dir in /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_ebreak_test_0 /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_1 /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/hello-world /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/perf_counters_instructions /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/counters /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/csr_instructions /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/cv32e40p_csr_access_test /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/dhrystone /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/illegal /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/requested_csr_por /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_bootstrap /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_test /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/modeled_csr_por /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/Makefile /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/generic_exception_test /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/misalign /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_0 /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/fibonacci /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/Makefile_inside /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/copy_make.sh; do \
 echo $dir; \
 if test -d $dir; then \
 echo "\e[0;91m$dir\e[0m"; \
 cd $dir && make; \
 fi \
 done
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_ebreak_test_0
-\e[0;91m/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_ebreak_test_0\e[0m
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_ebreak_test_0
+\e[0;91m/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_ebreak_test_0\e[0m
 riscv_ebreak_test_0
 "./../../../../core/asm"
-make[2]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_ebreak_test_0'
+make[2]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_ebreak_test_0'
 [0;91mTARGET: riscv_ebreak_test_0_S [0m
 [0;91mS files: riscv_ebreak_test_0.S[0m
 rm -rf *.elf *.o
-make -C /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp
-make[3]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-make[3]: Nothing to be done for `all'.
-make[3]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-#echo -e "\e[0;91m riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -v -o ./../../out/riscv_ebreak_test_0_S.elf -I "./../../../../core/asm" riscv_ebreak_test_0.S -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld \e[0m"
-riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -v -o ./../../out/riscv_ebreak_test_0.elf -I "./../../../../core/asm" riscv_ebreak_test_0.S -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-make[2]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_ebreak_test_0'
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_1
-\e[0;91m/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_1\e[0m
+make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp
+make[3]: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -c crt0.S -o crt0.o
+make[3]: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+make[2]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_ebreak_test_0'
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_1
+\e[0;91m/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_1\e[0m
 riscv_arithmetic_basic_test_1
 "./../../../../core/asm"
-make[2]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_1'
+make[2]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_1'
 [0;91mTARGET: riscv_arithmetic_basic_test_1_S [0m
 [0;91mS files: riscv_arithmetic_basic_test_1.S[0m
 rm -rf *.elf *.o
-make -C /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp
-make[3]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-make[3]: Nothing to be done for `all'.
-make[3]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-#echo -e "\e[0;91m riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -v -o ./../../out/riscv_arithmetic_basic_test_1_S.elf -I "./../../../../core/asm" riscv_arithmetic_basic_test_1.S -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld \e[0m"
-riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -v -o ./../../out/riscv_arithmetic_basic_test_1.elf -I "./../../../../core/asm" riscv_arithmetic_basic_test_1.S -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-make[2]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_1'
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/hello-world
-\e[0;91m/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/hello-world\e[0m
+make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp
+make[3]: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -c crt0.S -o crt0.o
+make[3]: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+make[2]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_1'
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/hello-world
+\e[0;91m/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/hello-world\e[0m
 hello-world
 "./../../../../core/asm"
-make[2]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/hello-world'
+make[2]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/hello-world'
 [0;91mTARGET: hello-world_C[0m
 [0;91mS files: [0m
 rm -rf *.elf *.o
-make -C /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp
-make[3]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-make[3]: Nothing to be done for `all'.
-make[3]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-test_asm_src=
-riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -o ./../../out/hello-world.elf hello-world.c -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-make[2]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/hello-world'
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/perf_counters_instructions
-\e[0;91m/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/perf_counters_instructions\e[0m
+make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp
+make[3]: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -c crt0.S -o crt0.o
+make[3]: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+make[2]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/hello-world'
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/perf_counters_instructions
+\e[0;91m/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/perf_counters_instructions\e[0m
 perf_counters_instructions
 "./../../../../core/asm"
-make[2]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/perf_counters_instructions'
+make[2]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/perf_counters_instructions'
 [0;91mTARGET: perf_counters_instructions_C[0m
 [0;91mS files: [0m
 rm -rf *.elf *.o
-make -C /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp
-make[3]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-make[3]: Nothing to be done for `all'.
-make[3]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-test_asm_src=
-riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -o ./../../out/perf_counters_instructions.elf perf_counters_instructions.c -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-make[2]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/perf_counters_instructions'
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/counters
-\e[0;91m/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/counters\e[0m
+make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp
+make[3]: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -c crt0.S -o crt0.o
+make[3]: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+make[2]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/perf_counters_instructions'
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/counters
+\e[0;91m/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/counters\e[0m
 counters
 "./../../../../core/asm"
-make[2]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/counters'
+make[2]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/counters'
 [0;91mTARGET: counters_C[0m
 [0;91mS files: [0m
 rm -rf *.elf *.o
-make -C /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp
-make[3]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-make[3]: Nothing to be done for `all'.
-make[3]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-test_asm_src=
-riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -o ./../../out/counters.elf counters.c -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-make[2]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/counters'
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/csr_instructions
-\e[0;91m/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/csr_instructions\e[0m
+make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp
+make[3]: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -c crt0.S -o crt0.o
+make[3]: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+make[2]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/counters'
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/csr_instructions
+\e[0;91m/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/csr_instructions\e[0m
 csr_instructions
 "./../../../../core/asm"
-make[2]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/csr_instructions'
+make[2]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/csr_instructions'
 [0;91mTARGET: csr_instructions_C[0m
 [0;91mS files: [0m
 rm -rf *.elf *.o
-make -C /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp
-make[3]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-make[3]: Nothing to be done for `all'.
-make[3]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-test_asm_src=
-riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -o ./../../out/csr_instructions.elf csr_instructions.c -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-make[2]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/csr_instructions'
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/cv32e40p_csr_access_test
-\e[0;91m/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/cv32e40p_csr_access_test\e[0m
+make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp
+make[3]: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -c crt0.S -o crt0.o
+make[3]: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+make[2]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/csr_instructions'
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/cv32e40p_csr_access_test
+\e[0;91m/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/cv32e40p_csr_access_test\e[0m
 cv32e40p_csr_access_test
 "./../../../../core/asm"
-make[2]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/cv32e40p_csr_access_test'
+make[2]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/cv32e40p_csr_access_test'
 [0;91mTARGET: cv32e40p_csr_access_test_S [0m
 [0;91mS files: cv32e40p_csr_access_test.S[0m
 rm -rf *.elf *.o
-make -C /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp
-make[3]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-make[3]: Nothing to be done for `all'.
-make[3]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-#echo -e "\e[0;91m riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -v -o ./../../out/cv32e40p_csr_access_test_S.elf -I "./../../../../core/asm" cv32e40p_csr_access_test.S -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld \e[0m"
-riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -v -o ./../../out/cv32e40p_csr_access_test.elf -I "./../../../../core/asm" cv32e40p_csr_access_test.S -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-make[2]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/cv32e40p_csr_access_test'
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/dhrystone
-\e[0;91m/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/dhrystone\e[0m
+make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp
+make[3]: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -c crt0.S -o crt0.o
+make[3]: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+make[2]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/cv32e40p_csr_access_test'
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/dhrystone
+\e[0;91m/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/dhrystone\e[0m
 dhrystone
 "./../../../../core/asm"
-make[2]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/dhrystone'
+make[2]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/dhrystone'
 [0;91mTARGET: dhrystone_C[0m
 [0;91mS files: [0m
 rm -rf *.elf *.o
-make -C /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp
-make[3]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-make[3]: Nothing to be done for `all'.
-make[3]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-test_asm_src=
-riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -o ./../../out/dhrystone.elf dhrystone.c -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-make[2]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/dhrystone'
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/illegal
-\e[0;91m/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/illegal\e[0m
+make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp
+make[3]: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -c crt0.S -o crt0.o
+make[3]: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+make[2]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/dhrystone'
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/illegal
+\e[0;91m/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/illegal\e[0m
 illegal
 "./../../../../core/asm"
-make[2]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/illegal'
+make[2]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/illegal'
 [0;91mTARGET: illegal_C[0m
 [0;91mS files: [0m
 rm -rf *.elf *.o
-make -C /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp
-make[3]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-make[3]: Nothing to be done for `all'.
-make[3]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-test_asm_src=
-riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -o ./../../out/illegal.elf illegal.c -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-make[2]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/illegal'
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/requested_csr_por
-\e[0;91m/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/requested_csr_por\e[0m
+make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp
+make[3]: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -c crt0.S -o crt0.o
+make[3]: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+make[2]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/illegal'
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/requested_csr_por
+\e[0;91m/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/requested_csr_por\e[0m
 requested_csr_por
 "./../../../../core/asm"
-make[2]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/requested_csr_por'
+make[2]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/requested_csr_por'
 [0;91mTARGET: requested_csr_por_C[0m
 [0;91mS files: [0m
 rm -rf *.elf *.o
-make -C /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp
-make[3]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-make[3]: Nothing to be done for `all'.
-make[3]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-test_asm_src=
-riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -o ./../../out/requested_csr_por.elf requested_csr_por.c -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-make[2]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/requested_csr_por'
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_bootstrap
-\e[0;91m/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_bootstrap\e[0m
+make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp
+make[3]: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -c crt0.S -o crt0.o
+make[3]: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+make[2]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/requested_csr_por'
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_bootstrap
+\e[0;91m/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_bootstrap\e[0m
 interrupt_bootstrap
 "./../../../../core/asm"
-make[2]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_bootstrap'
+make[2]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_bootstrap'
 [0;91mTARGET: interrupt_bootstrap_CS[0m
 [0;91mS files: interrupt_bootstrap.S[0m
 rm -rf *.elf *.o
-make -C /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp
-make[3]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-make[3]: Nothing to be done for `all'.
-make[3]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-test_asm_src=
-riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -o ./../../out/interrupt_bootstrap.elf interrupt_bootstrap.c interrupt_bootstrap.S interrupt_test.h -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-make[2]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_bootstrap'
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_test
-\e[0;91m/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_test\e[0m
+make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp
+make[3]: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -c crt0.S -o crt0.o
+make[3]: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+make[2]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_bootstrap'
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_test
+\e[0;91m/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_test\e[0m
 interrupt_test
 "./../../../../core/asm"
-make[2]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_test'
+make[2]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_test'
 [0;91mTARGET: interrupt_test_C[0m
 [0;91mS files: [0m
 rm -rf *.elf *.o
-make -C /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp
-make[3]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-make[3]: Nothing to be done for `all'.
-make[3]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-test_asm_src=
-riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -o ./../../out/interrupt_test.elf interrupt_test.c interrupt_test.h -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-make[2]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_test'
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/modeled_csr_por
-\e[0;91m/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/modeled_csr_por\e[0m
+make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp
+make[3]: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -c crt0.S -o crt0.o
+make[3]: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+make[2]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/interrupt_test'
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/modeled_csr_por
+\e[0;91m/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/modeled_csr_por\e[0m
 modeled_csr_por
 "./../../../../core/asm"
-make[2]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/modeled_csr_por'
+make[2]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/modeled_csr_por'
 [0;91mTARGET: modeled_csr_por_C[0m
 [0;91mS files: [0m
 rm -rf *.elf *.o
-make -C /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp
-make[3]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-make[3]: Nothing to be done for `all'.
-make[3]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-test_asm_src=
-riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -o ./../../out/modeled_csr_por.elf modeled_csr_por.c -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-make[2]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/modeled_csr_por'
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/Makefile
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/generic_exception_test
-\e[0;91m/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/generic_exception_test\e[0m
+make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp
+make[3]: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -c crt0.S -o crt0.o
+make[3]: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+make[2]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/modeled_csr_por'
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/Makefile
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/generic_exception_test
+\e[0;91m/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/generic_exception_test\e[0m
 generic_exception_test
 "./../../../../core/asm"
-make[2]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/generic_exception_test'
+make[2]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/generic_exception_test'
 [0;91mTARGET: generic_exception_test_S [0m
 [0;91mS files: general_exception_test.S[0m
 rm -rf *.elf *.o
-make -C /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp
-make[3]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-make[3]: Nothing to be done for `all'.
-make[3]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-#echo -e "\e[0;91m riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -v -o ./../../out/generic_exception_test_S.elf -I "./../../../../core/asm" general_exception_test.S -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld \e[0m"
-riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -v -o ./../../out/generic_exception_test.elf -I "./../../../../core/asm" general_exception_test.S -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-make[2]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/generic_exception_test'
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/misalign
-\e[0;91m/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/misalign\e[0m
+make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp
+make[3]: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -c crt0.S -o crt0.o
+make[3]: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+make[2]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/generic_exception_test'
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/misalign
+\e[0;91m/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/misalign\e[0m
 misalign
 "./../../../../core/asm"
-make[2]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/misalign'
+make[2]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/misalign'
 [0;91mTARGET: misalign_C[0m
 [0;91mS files: [0m
 rm -rf *.elf *.o
-make -C /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp
-make[3]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-make[3]: Nothing to be done for `all'.
-make[3]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-test_asm_src=
-riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -o ./../../out/misalign.elf misalign.c -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-make[2]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/misalign'
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_0
-\e[0;91m/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_0\e[0m
+make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp
+make[3]: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -c crt0.S -o crt0.o
+make[3]: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+make[2]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/misalign'
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_0
+\e[0;91m/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_0\e[0m
 riscv_arithmetic_basic_test_0
 "./../../../../core/asm"
-make[2]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_0'
+make[2]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_0'
 [0;91mTARGET: riscv_arithmetic_basic_test_0_S [0m
 [0;91mS files: riscv_arithmetic_basic_test_0.S[0m
 rm -rf *.elf *.o
-make -C /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp
-make[3]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-make[3]: Nothing to be done for `all'.
-make[3]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-#echo -e "\e[0;91m riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -v -o ./../../out/riscv_arithmetic_basic_test_0_S.elf -I "./../../../../core/asm" riscv_arithmetic_basic_test_0.S -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld \e[0m"
-riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -v -o ./../../out/riscv_arithmetic_basic_test_0.elf -I "./../../../../core/asm" riscv_arithmetic_basic_test_0.S -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-make[2]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_0'
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/fibonacci
-\e[0;91m/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/fibonacci\e[0m
+make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp
+make[3]: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -c crt0.S -o crt0.o
+make[3]: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+make[2]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/riscv_arithmetic_basic_test_0'
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/fibonacci
+\e[0;91m/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/fibonacci\e[0m
 fibonacci
 "./../../../../core/asm"
-make[2]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/fibonacci'
+make[2]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/fibonacci'
 [0;91mTARGET: fibonacci_C[0m
 [0;91mS files: [0m
 rm -rf *.elf *.o
-make -C /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp
-make[3]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-make[3]: Nothing to be done for `all'.
-make[3]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp'
-test_asm_src=
-riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -o ./../../out/fibonacci.elf fibonacci.c -nostartfiles --specs=nosys.specs -nostdlib -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -Wl,--start-group -lc -lgcc -lc -lm -Wl,--end-group -L /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-make[2]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/fibonacci'
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/Makefile_inside
-/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/copy_make.sh
-make[1]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test'
+make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp
+make[3]: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic -c crt0.S -o crt0.o
+make[3]: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/bsp'
+make[2]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/fibonacci'
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/Makefile_inside
+/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test/copy_make.sh
+make[1]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/general_test'
 cd coremark && ./build-coremark.sh
 Number of iterations: 1
 Start compilation
-make[1]: Entering directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/coremark/coremark'
-/software/pulp/riscv/bin/riscv32-unknown-elf-gcc -Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic --specs=nosys.specs  -I../riscv32 -I. -DFLAGS_STR=\""-Os -g -static -mabi=ilp32 -march=rv32imc -Wall -pedantic --specs=nosys.specs    -nostartfiles -T ../../../../../bsp/link.ld -L ../../../../../bsp -lcv-verif -nostdlib -lc -lgcc -lm -lc"\" -DITERATIONS=1  core_list_join.c core_main.c core_matrix.c core_state.c core_util.c ../riscv32/core_portme.c  -o ./coremark.elf  -nostartfiles -T ../../../../../bsp/link.ld -L ../../../../../bsp -lcv-verif -nostdlib -lc -lgcc -lm -lc
-make[1]: Leaving directory `/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/tests/programs/custom_FT/coremark/coremark'
+make[1]: Entering directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/coremark/coremark'
+make[1]: Leaving directory `/home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tests/programs/custom_FT/coremark/coremark'

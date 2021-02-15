@@ -1,361 +1,75 @@
-Using built-in specs.
-Reading specs from /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib/nosys.specs
-rename spec link_gcc_c_sequence to nosys_link_gcc_c_sequence
-COLLECT_GCC=riscv32-unknown-elf-gcc
-COLLECT_LTO_WRAPPER=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper
-Target: riscv32-unknown-elf
-Configured with: /software/pulp/master/riscv-gcc/configure --target=riscv32-unknown-elf --prefix=/software/pulp/riscv --disable-shared --disable-threads --enable-languages=c,c++ --with-system-zlib --enable-tls --with-newlib --with-headers=/software/pulp/riscv/riscv32-unknown-elf/include --disable-libmudflap --disable-libssp --disable-libquadmath --disable-libgomp --disable-nls --enable-checking=yes --enable-multilib --with-abi=ilp32 --with-arch=rv32imc 'CFLAGS_FOR_TARGET=-Os  -mcmodel=medlow'
-Thread model: single
-gcc version 7.1.1 20170509 (GCC) 
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_ebreak_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/cc1 -E -lang-asm -quiet -v -I ./../../../../core/asm riscv_ebreak_test_0.S -mabi=ilp32 -march=rv32imc -Wall -Wpedantic -g -fworking-directory -Os -fno-directives-only -o /tmp/ccNA2uZT.s
-#include "..." search starts here:
-#include <...> search starts here:
- ./../../../../core/asm
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/include
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/include-fixed
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/sys-include
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/include
-End of search list.
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_ebreak_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/as --gdwarf2 -v -I ./../../../../core/asm --traditional-format -march=rv32imc -mabi=ilp32 -o /tmp/ccv85XGS.o /tmp/ccNA2uZT.s
-GNU assembler version 2.28.0 (riscv32-unknown-elf) using BFD version (GNU Binutils) 2.28.0.20170505
-COMPILER_PATH=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/
-LIBRARY_PATH=/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib/:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_ebreak_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/collect2 -plugin /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/liblto_plugin.so -plugin-opt=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/cch4XkBR.res -melf32lriscv --march=rv32imc -o ./../../out/riscv_ebreak_test_0.elf -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1 -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib /tmp/ccv85XGS.o -lcv-verif --start-group -lc -lgcc -lc -lm --end-group -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_ebreak_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
-Using built-in specs.
-Reading specs from /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib/nosys.specs
-rename spec link_gcc_c_sequence to nosys_link_gcc_c_sequence
-COLLECT_GCC=riscv32-unknown-elf-gcc
-COLLECT_LTO_WRAPPER=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper
-Target: riscv32-unknown-elf
-Configured with: /software/pulp/master/riscv-gcc/configure --target=riscv32-unknown-elf --prefix=/software/pulp/riscv --disable-shared --disable-threads --enable-languages=c,c++ --with-system-zlib --enable-tls --with-newlib --with-headers=/software/pulp/riscv/riscv32-unknown-elf/include --disable-libmudflap --disable-libssp --disable-libquadmath --disable-libgomp --disable-nls --enable-checking=yes --enable-multilib --with-abi=ilp32 --with-arch=rv32imc 'CFLAGS_FOR_TARGET=-Os  -mcmodel=medlow'
-Thread model: single
-gcc version 7.1.1 20170509 (GCC) 
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_1.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/cc1 -E -lang-asm -quiet -v -I ./../../../../core/asm riscv_arithmetic_basic_test_1.S -mabi=ilp32 -march=rv32imc -Wall -Wpedantic -g -fworking-directory -Os -fno-directives-only -o /tmp/ccg31wwf.s
-#include "..." search starts here:
-#include <...> search starts here:
- ./../../../../core/asm
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/include
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/include-fixed
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/sys-include
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/include
-End of search list.
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_1.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/as --gdwarf2 -v -I ./../../../../core/asm --traditional-format -march=rv32imc -mabi=ilp32 -o /tmp/cc7KJR1e.o /tmp/ccg31wwf.s
-GNU assembler version 2.28.0 (riscv32-unknown-elf) using BFD version (GNU Binutils) 2.28.0.20170505
-COMPILER_PATH=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/
-LIBRARY_PATH=/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib/:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_1.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/collect2 -plugin /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/liblto_plugin.so -plugin-opt=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccsz31He.res -melf32lriscv --march=rv32imc -o ./../../out/riscv_arithmetic_basic_test_1.elf -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1 -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib /tmp/cc7KJR1e.o -lcv-verif --start-group -lc -lgcc -lc -lm --end-group -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_1.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
-Using built-in specs.
-Reading specs from /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib/nosys.specs
-rename spec link_gcc_c_sequence to nosys_link_gcc_c_sequence
-COLLECT_GCC=riscv32-unknown-elf-gcc
-COLLECT_LTO_WRAPPER=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper
-Target: riscv32-unknown-elf
-Configured with: /software/pulp/master/riscv-gcc/configure --target=riscv32-unknown-elf --prefix=/software/pulp/riscv --disable-shared --disable-threads --enable-languages=c,c++ --with-system-zlib --enable-tls --with-newlib --with-headers=/software/pulp/riscv/riscv32-unknown-elf/include --disable-libmudflap --disable-libssp --disable-libquadmath --disable-libgomp --disable-nls --enable-checking=yes --enable-multilib --with-abi=ilp32 --with-arch=rv32imc 'CFLAGS_FOR_TARGET=-Os  -mcmodel=medlow'
-Thread model: single
-gcc version 7.1.1 20170509 (GCC) 
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/cv32e40p_csr_access_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/cc1 -E -lang-asm -quiet -v -I ./../../../../core/asm cv32e40p_csr_access_test.S -mabi=ilp32 -march=rv32imc -Wall -Wpedantic -g -fworking-directory -Os -fno-directives-only -o /tmp/ccvyr8Np.s
-#include "..." search starts here:
-#include <...> search starts here:
- ./../../../../core/asm
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/include
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/include-fixed
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/sys-include
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/include
-End of search list.
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/cv32e40p_csr_access_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/as --gdwarf2 -v -I ./../../../../core/asm --traditional-format -march=rv32imc -mabi=ilp32 -o /tmp/ccTh5GLt.o /tmp/ccvyr8Np.s
-GNU assembler version 2.28.0 (riscv32-unknown-elf) using BFD version (GNU Binutils) 2.28.0.20170505
-COMPILER_PATH=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/
-LIBRARY_PATH=/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib/:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/cv32e40p_csr_access_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/collect2 -plugin /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/liblto_plugin.so -plugin-opt=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccbA2Fiy.res -melf32lriscv --march=rv32imc -o ./../../out/cv32e40p_csr_access_test.elf -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1 -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib /tmp/ccTh5GLt.o -lcv-verif --start-group -lc -lgcc -lc -lm --end-group -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/cv32e40p_csr_access_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
-dhrystone.c: In function 'Func_1':
-dhrystone.c:1049:21: warning: promoted argument 'Ch_1_Par_Val' doesn't match prototype [-Wpedantic]
-     Capital_Letter  Ch_1_Par_Val;
-                     ^~~~~~~~~~~~
-dhrystone.c:537:13: warning: prototype declaration [-Wpedantic]
- Enumeration Func_1(Capital_Letter Ch_1_Par_Val,
-             ^~~~~~
-dhrystone.c:1050:21: warning: promoted argument 'Ch_2_Par_Val' doesn't match prototype [-Wpedantic]
-     Capital_Letter  Ch_2_Par_Val;
-                     ^~~~~~~~~~~~
-dhrystone.c:537:13: warning: prototype declaration [-Wpedantic]
- Enumeration Func_1(Capital_Letter Ch_1_Par_Val,
-             ^~~~~~
-dhrystone.c: In function 'Func_2':
-dhrystone.c:1085:5: warning: this 'while' clause does not guard... [-Wmisleading-indentation]
-     while (Int_Loc <= 2) /* loop body executed once */
-     ^~~~~
-dhrystone.c:1093:2: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'while'
-  Ireport(0x30021);
-  ^~~~~~~
-dhrystone.c:1095:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
-     if (Ch_Loc >= 'W' && Ch_Loc < 'Z')
-     ^~
-dhrystone.c:1098:2: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
-  Ireport(0x30022);
-  ^~~~~~~
-dhrystone.c: In function 'main':
-dhrystone.c:740:3: warning: 'Int_3_Loc' may be used uninitialized in this function [-Wmaybe-uninitialized]
-   printf ("Int_3_Loc:           %d\n", Int_3_Loc);
-   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-requested_csr_por.c: In function 'main':
-requested_csr_por.c:54:83: warning: unused variable 'dscratch1_rval' [-Wunused-variable]
-   unsigned int mcontext_rval, scontext_rval, dcsr_rval, dpc_rval, dscratch0_rval, dscratch1_rval;
-                                                                                   ^~~~~~~~~~~~~~
-requested_csr_por.c:54:67: warning: unused variable 'dscratch0_rval' [-Wunused-variable]
-   unsigned int mcontext_rval, scontext_rval, dcsr_rval, dpc_rval, dscratch0_rval, dscratch1_rval;
-                                                                   ^~~~~~~~~~~~~~
-requested_csr_por.c:54:57: warning: unused variable 'dpc_rval' [-Wunused-variable]
-   unsigned int mcontext_rval, scontext_rval, dcsr_rval, dpc_rval, dscratch0_rval, dscratch1_rval;
-                                                         ^~~~~~~~
-requested_csr_por.c:54:46: warning: unused variable 'dcsr_rval' [-Wunused-variable]
-   unsigned int mcontext_rval, scontext_rval, dcsr_rval, dpc_rval, dscratch0_rval, dscratch1_rval;
-                                              ^~~~~~~~~
-requested_csr_por.c:51:16: warning: unused variable 'mcounteren_rval' [-Wunused-variable]
-   unsigned int mcounteren_rval, mcountinhibit_rval, mphmevent_rval[32];
-                ^~~~~~~~~~~~~~~
-modeled_csr_por.c: In function 'main':
-modeled_csr_por.c:56:16: warning: unused variable 'minstreth_rval' [-Wunused-variable]
-   unsigned int minstreth_rval, mhpmcounterh[32];
-                ^~~~~~~~~~~~~~
-modeled_csr_por.c:55:66: warning: unused variable 'mcycleh_rval' [-Wunused-variable]
-   unsigned int mcycle_rval, minstret_rval, mhpmcounter_rval[32], mcycleh_rval;
-                                                                  ^~~~~~~~~~~~
-modeled_csr_por.c:55:29: warning: unused variable 'minstret_rval' [-Wunused-variable]
-   unsigned int mcycle_rval, minstret_rval, mhpmcounter_rval[32], mcycleh_rval;
-                             ^~~~~~~~~~~~~
-modeled_csr_por.c:55:16: warning: unused variable 'mcycle_rval' [-Wunused-variable]
-   unsigned int mcycle_rval, minstret_rval, mhpmcounter_rval[32], mcycleh_rval;
-                ^~~~~~~~~~~
-modeled_csr_por.c:54:83: warning: unused variable 'dscratch1_rval' [-Wunused-variable]
-   unsigned int mcontext_rval, scontext_rval, dcsr_rval, dpc_rval, dscratch0_rval, dscratch1_rval;
-                                                                                   ^~~~~~~~~~~~~~
-modeled_csr_por.c:54:67: warning: unused variable 'dscratch0_rval' [-Wunused-variable]
-   unsigned int mcontext_rval, scontext_rval, dcsr_rval, dpc_rval, dscratch0_rval, dscratch1_rval;
-                                                                   ^~~~~~~~~~~~~~
-modeled_csr_por.c:54:57: warning: unused variable 'dpc_rval' [-Wunused-variable]
-   unsigned int mcontext_rval, scontext_rval, dcsr_rval, dpc_rval, dscratch0_rval, dscratch1_rval;
-                                                         ^~~~~~~~
-modeled_csr_por.c:54:46: warning: unused variable 'dcsr_rval' [-Wunused-variable]
-   unsigned int mcontext_rval, scontext_rval, dcsr_rval, dpc_rval, dscratch0_rval, dscratch1_rval;
-                                              ^~~~~~~~~
-modeled_csr_por.c:54:31: warning: unused variable 'scontext_rval' [-Wunused-variable]
-   unsigned int mcontext_rval, scontext_rval, dcsr_rval, dpc_rval, dscratch0_rval, dscratch1_rval;
-                               ^~~~~~~~~~~~~
-modeled_csr_por.c:54:16: warning: unused variable 'mcontext_rval' [-Wunused-variable]
-   unsigned int mcontext_rval, scontext_rval, dcsr_rval, dpc_rval, dscratch0_rval, dscratch1_rval;
-                ^~~~~~~~~~~~~
-modeled_csr_por.c:53:69: warning: unused variable 'tinfo_rval' [-Wunused-variable]
-   unsigned int tselect_rval, tdata1_rval, tdata2_rval, tdata3_rval, tinfo_rval;
-                                                                     ^~~~~~~~~~
-modeled_csr_por.c:53:56: warning: unused variable 'tdata3_rval' [-Wunused-variable]
-   unsigned int tselect_rval, tdata1_rval, tdata2_rval, tdata3_rval, tinfo_rval;
-                                                        ^~~~~~~~~~~
-modeled_csr_por.c:53:43: warning: unused variable 'tdata2_rval' [-Wunused-variable]
-   unsigned int tselect_rval, tdata1_rval, tdata2_rval, tdata3_rval, tinfo_rval;
-                                           ^~~~~~~~~~~
-modeled_csr_por.c:53:30: warning: unused variable 'tdata1_rval' [-Wunused-variable]
-   unsigned int tselect_rval, tdata1_rval, tdata2_rval, tdata3_rval, tinfo_rval;
-                              ^~~~~~~~~~~
-modeled_csr_por.c:53:16: warning: unused variable 'tselect_rval' [-Wunused-variable]
-   unsigned int tselect_rval, tdata1_rval, tdata2_rval, tdata3_rval, tinfo_rval;
-                ^~~~~~~~~~~~
-modeled_csr_por.c:51:32: warning: unused variable 'mcountinhibit_rval' [-Wunused-variable]
-  unsigned int mcounteren_rval, mcountinhibit_rval, mphmevent_rval[32];
-                                ^~~~~~~~~~~~~~~~~~
-modeled_csr_por.c:51:15: warning: unused variable 'mcounteren_rval' [-Wunused-variable]
-  unsigned int mcounteren_rval, mcountinhibit_rval, mphmevent_rval[32];
-               ^~~~~~~~~~~~~~~
-modeled_csr_por.c:48:40: warning: unused variable 'uhartid_rval' [-Wunused-variable]
-  unsigned int fprec_rval, privlv_rval, uhartid_rval;
-                                        ^~~~~~~~~~~~
-modeled_csr_por.c:48:27: warning: unused variable 'privlv_rval' [-Wunused-variable]
-  unsigned int fprec_rval, privlv_rval, uhartid_rval;
-                           ^~~~~~~~~~~
-modeled_csr_por.c:48:15: warning: unused variable 'fprec_rval' [-Wunused-variable]
-  unsigned int fprec_rval, privlv_rval, uhartid_rval;
-               ^~~~~~~~~~
-modeled_csr_por.c:47:86: warning: unused variable 'lpcount1_rval' [-Wunused-variable]
-  unsigned int lpstart0_rval, lpend0_rval, lpcount0_rval, lpstart1_rval, lpend1_rval, lpcount1_rval;
-                                                                                      ^~~~~~~~~~~~~
-modeled_csr_por.c:47:73: warning: unused variable 'lpend1_rval' [-Wunused-variable]
-  unsigned int lpstart0_rval, lpend0_rval, lpcount0_rval, lpstart1_rval, lpend1_rval, lpcount1_rval;
-                                                                         ^~~~~~~~~~~
-modeled_csr_por.c:47:58: warning: unused variable 'lpstart1_rval' [-Wunused-variable]
-  unsigned int lpstart0_rval, lpend0_rval, lpcount0_rval, lpstart1_rval, lpend1_rval, lpcount1_rval;
-                                                          ^~~~~~~~~~~~~
-modeled_csr_por.c:47:43: warning: unused variable 'lpcount0_rval' [-Wunused-variable]
-  unsigned int lpstart0_rval, lpend0_rval, lpcount0_rval, lpstart1_rval, lpend1_rval, lpcount1_rval;
-                                           ^~~~~~~~~~~~~
-modeled_csr_por.c:47:30: warning: unused variable 'lpend0_rval' [-Wunused-variable]
-  unsigned int lpstart0_rval, lpend0_rval, lpcount0_rval, lpstart1_rval, lpend1_rval, lpcount1_rval;
-                              ^~~~~~~~~~~
-modeled_csr_por.c:47:15: warning: unused variable 'lpstart0_rval' [-Wunused-variable]
-  unsigned int lpstart0_rval, lpend0_rval, lpcount0_rval, lpstart1_rval, lpend1_rval, lpcount1_rval;
-               ^~~~~~~~~~~~~
-modeled_csr_por.c:45:40: warning: unused variable 'fcsr_rval' [-Wunused-variable]
-    unsigned int fflags_rval, frm_rval, fcsr_rval;
-                                        ^~~~~~~~~
-modeled_csr_por.c:45:30: warning: unused variable 'frm_rval' [-Wunused-variable]
-    unsigned int fflags_rval, frm_rval, fcsr_rval;
-                              ^~~~~~~~
-modeled_csr_por.c:45:17: warning: unused variable 'fflags_rval' [-Wunused-variable]
-    unsigned int fflags_rval, frm_rval, fcsr_rval;
-                 ^~~~~~~~~~~
-Using built-in specs.
-Reading specs from /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib/nosys.specs
-rename spec link_gcc_c_sequence to nosys_link_gcc_c_sequence
-COLLECT_GCC=riscv32-unknown-elf-gcc
-COLLECT_LTO_WRAPPER=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper
-Target: riscv32-unknown-elf
-Configured with: /software/pulp/master/riscv-gcc/configure --target=riscv32-unknown-elf --prefix=/software/pulp/riscv --disable-shared --disable-threads --enable-languages=c,c++ --with-system-zlib --enable-tls --with-newlib --with-headers=/software/pulp/riscv/riscv32-unknown-elf/include --disable-libmudflap --disable-libssp --disable-libquadmath --disable-libgomp --disable-nls --enable-checking=yes --enable-multilib --with-abi=ilp32 --with-arch=rv32imc 'CFLAGS_FOR_TARGET=-Os  -mcmodel=medlow'
-Thread model: single
-gcc version 7.1.1 20170509 (GCC) 
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/generic_exception_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/cc1 -E -lang-asm -quiet -v -I ./../../../../core/asm general_exception_test.S -mabi=ilp32 -march=rv32imc -Wall -Wpedantic -g -fworking-directory -Os -fno-directives-only -o /tmp/ccgzw3AH.s
-#include "..." search starts here:
-#include <...> search starts here:
- ./../../../../core/asm
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/include
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/include-fixed
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/sys-include
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/include
-End of search list.
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/generic_exception_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/as --gdwarf2 -v -I ./../../../../core/asm --traditional-format -march=rv32imc -mabi=ilp32 -o /tmp/ccXltsTS.o /tmp/ccgzw3AH.s
-GNU assembler version 2.28.0 (riscv32-unknown-elf) using BFD version (GNU Binutils) 2.28.0.20170505
-COMPILER_PATH=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/
-LIBRARY_PATH=/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib/:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/generic_exception_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/collect2 -plugin /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/liblto_plugin.so -plugin-opt=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccmT4Ee4.res -melf32lriscv --march=rv32imc -o ./../../out/generic_exception_test.elf -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1 -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib /tmp/ccXltsTS.o -lcv-verif --start-group -lc -lgcc -lc -lm --end-group -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/generic_exception_test.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
-Using built-in specs.
-Reading specs from /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib/nosys.specs
-rename spec link_gcc_c_sequence to nosys_link_gcc_c_sequence
-COLLECT_GCC=riscv32-unknown-elf-gcc
-COLLECT_LTO_WRAPPER=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper
-Target: riscv32-unknown-elf
-Configured with: /software/pulp/master/riscv-gcc/configure --target=riscv32-unknown-elf --prefix=/software/pulp/riscv --disable-shared --disable-threads --enable-languages=c,c++ --with-system-zlib --enable-tls --with-newlib --with-headers=/software/pulp/riscv/riscv32-unknown-elf/include --disable-libmudflap --disable-libssp --disable-libquadmath --disable-libgomp --disable-nls --enable-checking=yes --enable-multilib --with-abi=ilp32 --with-arch=rv32imc 'CFLAGS_FOR_TARGET=-Os  -mcmodel=medlow'
-Thread model: single
-gcc version 7.1.1 20170509 (GCC) 
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/cc1 -E -lang-asm -quiet -v -I ./../../../../core/asm riscv_arithmetic_basic_test_0.S -mabi=ilp32 -march=rv32imc -Wall -Wpedantic -g -fworking-directory -Os -fno-directives-only -o /tmp/ccTEKT45.s
-#include "..." search starts here:
-#include <...> search starts here:
- ./../../../../core/asm
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/include
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/include-fixed
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/sys-include
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/include
-End of search list.
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/as --gdwarf2 -v -I ./../../../../core/asm --traditional-format -march=rv32imc -mabi=ilp32 -o /tmp/cclDQHyi.o /tmp/ccTEKT45.s
-GNU assembler version 2.28.0 (riscv32-unknown-elf) using BFD version (GNU Binutils) 2.28.0.20170505
-COMPILER_PATH=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/bin/
-LIBRARY_PATH=/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/:/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib/:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
- /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/collect2 -plugin /software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/liblto_plugin.so -plugin-opt=/software/pulp/riscv/libexec/gcc/riscv32-unknown-elf/7.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccN3mQfv.res -melf32lriscv --march=rv32imc -o ./../../out/riscv_arithmetic_basic_test_0.elf -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1 -L/software/pulp/riscv/lib/gcc/riscv32-unknown-elf/7.1.1/../../../../riscv32-unknown-elf/lib /tmp/cclDQHyi.o -lcv-verif --start-group -lc -lgcc -lc -lm --end-group -lcv-verif -T /home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld
-COLLECT_GCC_OPTIONS='-Os' '-g' '-static' '-mabi=ilp32' '-march=rv32imc' '-Wall' '-Wpedantic' '-v' '-o' './../../out/riscv_arithmetic_basic_test_0.elf' '-I' './../../../../core/asm' '-nostartfiles' '-specs=nosys.specs' '-nostdlib' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-L/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp' '-T' '/home/thesis/marcello.neri/Desktop/core-v-verif/cv32/bsp/link.ld'
-../riscv32/core_portme.c: In function 'start_time':
-../riscv32/core_portme.c:114:24: warning: ISO C forbids braced-groups within expressions [-Wpedantic]
-     #define read_csr() ({ unsigned int tmp; \
-                        ^
-../riscv32/core_portme.c:118:32: note: in expansion of macro 'read_csr'
-     #define GETMYTIME(_t) (*_t=read_csr())
-                                ^~~~~~~~
-../riscv32/core_portme.c:138:2: note: in expansion of macro 'GETMYTIME'
-  GETMYTIME(&start_time_val );
-  ^~~~~~~~~
-../riscv32/core_portme.c: In function 'stop_time':
-../riscv32/core_portme.c:114:24: warning: ISO C forbids braced-groups within expressions [-Wpedantic]
-     #define read_csr() ({ unsigned int tmp; \
-                        ^
-../riscv32/core_portme.c:118:32: note: in expansion of macro 'read_csr'
-     #define GETMYTIME(_t) (*_t=read_csr())
-                                ^~~~~~~~
-../riscv32/core_portme.c:159:2: note: in expansion of macro 'GETMYTIME'
-  GETMYTIME(&stop_time_val );
-  ^~~~~~~~~
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
+Assembler messages:
+Fatal error: can't create crt0.o: Permission denied
+make[3]: *** [crt0.o] Error 1
+make[2]: *** [riscv_ebreak_test_0_S] Error 2
+Assembler messages:
+Fatal error: can't create crt0.o: Permission denied
+make[3]: *** [crt0.o] Error 1
+make[2]: *** [riscv_arithmetic_basic_test_1_S] Error 2
+Assembler messages:
+Fatal error: can't create crt0.o: Permission denied
+make[3]: *** [crt0.o] Error 1
+make[2]: *** [hello-world_C] Error 2
+Assembler messages:
+Fatal error: can't create crt0.o: Permission denied
+make[3]: *** [crt0.o] Error 1
+make[2]: *** [perf_counters_instructions_C] Error 2
+Assembler messages:
+Fatal error: can't create crt0.o: Permission denied
+make[3]: *** [crt0.o] Error 1
+make[2]: *** [counters_C] Error 2
+Assembler messages:
+Fatal error: can't create crt0.o: Permission denied
+make[3]: *** [crt0.o] Error 1
+make[2]: *** [csr_instructions_C] Error 2
+Assembler messages:
+Fatal error: can't create crt0.o: Permission denied
+make[3]: *** [crt0.o] Error 1
+make[2]: *** [cv32e40p_csr_access_test_S] Error 2
+Assembler messages:
+Fatal error: can't create crt0.o: Permission denied
+make[3]: *** [crt0.o] Error 1
+make[2]: *** [dhrystone_C] Error 2
+Assembler messages:
+Fatal error: can't create crt0.o: Permission denied
+make[3]: *** [crt0.o] Error 1
+make[2]: *** [illegal_C] Error 2
+Assembler messages:
+Fatal error: can't create crt0.o: Permission denied
+make[3]: *** [crt0.o] Error 1
+make[2]: *** [requested_csr_por_C] Error 2
+Assembler messages:
+Fatal error: can't create crt0.o: Permission denied
+make[3]: *** [crt0.o] Error 1
+make[2]: *** [interrupt_bootstrap_CS] Error 2
+Assembler messages:
+Fatal error: can't create crt0.o: Permission denied
+make[3]: *** [crt0.o] Error 1
+make[2]: *** [interrupt_test_C] Error 2
+Assembler messages:
+Fatal error: can't create crt0.o: Permission denied
+make[3]: *** [crt0.o] Error 1
+make[2]: *** [modeled_csr_por_C] Error 2
+Assembler messages:
+Fatal error: can't create crt0.o: Permission denied
+make[3]: *** [crt0.o] Error 1
+make[2]: *** [generic_exception_test_S] Error 2
+Assembler messages:
+Fatal error: can't create crt0.o: Permission denied
+make[3]: *** [crt0.o] Error 1
+make[2]: *** [misalign_C] Error 2
+Assembler messages:
+Fatal error: can't create crt0.o: Permission denied
+make[3]: *** [crt0.o] Error 1
+make[2]: *** [riscv_arithmetic_basic_test_0_S] Error 2
+Assembler messages:
+Fatal error: can't create crt0.o: Permission denied
+make[3]: *** [crt0.o] Error 1
+make[2]: *** [fibonacci_C] Error 2
+make[1]: *** No rule to make target `compile'.  Stop.
+mv: cannot stat ‘coremark.elf’: No such file or directory
+make: *** [all] Error 1
+Traceback (most recent call last):
+  File "/home/thesis/elia.ribaldone/Desktop/core-v-verif//cv32/tests/programs/custom_FT/build_all.py", line 51, in <module>
+    raise RuntimeError("Make failed with retcode %s" % ( retcode))
+RuntimeError: Make failed with retcode 2

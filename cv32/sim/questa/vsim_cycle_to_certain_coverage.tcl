@@ -1,8 +1,9 @@
-set CORE_V_VERIF "/home/thesis/luca.fiore/Repos/core-v-verif"
+set CORE_V_VERIF "/home/thesis/elia.ribaldone/Desktop/core-v-verif"
 set STAGE_NAME "$env(STAGE_NAME)"
 set ENDSIM "$env(T_ENDSIM)"
 set SWC "$env(SWC)" 
 set info_filename "$env(SIM_CYCLE_NUMBER_FILE)"
+
 
 run 10ns
 # find real name of stage, if we simulate core we should give to comp_sim.sh
@@ -13,10 +14,14 @@ if { ${STAGE_NAME} == "cv32e40p_core" } {
 } else {
 	set REAL_STAGE_NAME "cv32e40p_${STAGE_NAME}"
 }
+puts "INFO] CORE_V_VERIF=$CORE_V_VERIF"
+puts "INFO] STAGE_NAME=$STAGE_NAME"
+puts "INFO] SWC=$SWC"
+puts "INFO] info_filename=$info_filename"
 
 # Find all signals that we use in fault injection
 # we use _i to filter out clock and reset 
-set sim_fi_sig [ concat [ concat  [ find nets  "sim:/${REAL_STAGE_NAME}/*_i" ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] 
+set sim_fi_sig [ concat [ concat [ concat  [ find nets  "sim:/${REAL_STAGE_NAME}/*_i" ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*/*_o"] ]
 
 puts "INFO: signals: $sim_fi_sig $REAL_STAGE_NAME"
 
@@ -62,9 +67,9 @@ foreach sig_fi $sim_fi_sig {
 
 # function to calculate the number of cycle
 set P 0.5
-set E 0.01
+set E 0.05
 set N [ expr ($total_bit/10)*$ENDSIM ]
-set T 2.5758
+set T 1.96
 #(1.96 confidence of 95%)
 #(2.5758 confidence of 99%)
 #   N / (1 + (E^2)*(N-1)/(T^2*P*(P-1)))

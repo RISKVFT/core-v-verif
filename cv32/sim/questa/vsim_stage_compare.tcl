@@ -60,7 +60,7 @@ set flag 0
 set n_fault 0
 # Find all signals that we use in fault injection
 # we use _i to filter out clock and reset 
-set sim_fi_sig [ concat [ concat  [ find nets  "sim:/${REAL_STAGE_NAME}/*_i" ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] 
+set sim_fi_sig [ concat [ concat [ concat  [ find nets  "sim:/${REAL_STAGE_NAME}/*_i" ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*/*_o"] ]
 if [ file exists "${signals_filename}" ] {
 	# If the file exist this function enable the script to continue
 	# from where it is stopped !!
@@ -96,7 +96,7 @@ if [ file exists "${signals_filename}" ] {
 			puts "You are tring to simulate a simulation that is already done, if you want to resimulate delete file:"
 			puts "${signals_filename}"
 			puts "################################################################"
-			#exit 
+			exit 
 		}
 		set fp_cycle [ open "${cycle_filename}" "w" ]
 		puts $fp_cycle "$n_fault"
@@ -328,20 +328,28 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 	
 	
 	if { $FI==1 } {
-		compare run $fi_instant $remaining
-
-		if { $remaining < 300 } { 
-			run $remaining
+		if { $remaining < 300 } {
+			if { $remaining > 0 } {
+				compare run $fi_instant $remaining 
+				run $remaining
+			}
 		} else {
+			compare run $fi_instant $remaining 
 			run 300
 		}
 
 		#set error_number [ lindex [ compare info ] 12 ]
 		set error_number [string map {" " ""} [lindex [ split [lindex [split [compare info] "\n"] 1 ] "=" ] 1]]
-
+		#set compare_out [lindex [split [compare info] "\n"] 0 ]
+		#set compare_out [ concat $compare_out [lindex [split [compare info] "\n"] 1 ] ]
+		#puts "######### COMPARE INFO ##################################"
+		#puts "INFO]: compare info ="
+		#puts "$compare_out"
+		#puts "INFO]: error_number = $error_number"
+		#puts "###########################################"
 			#puts "INFO: compare_info: [compare info]"
 		puts "INFO: number of errors: $error_number"
-		if { $error_number == 0 && $remaining >= 300} {
+		if { $error_number == 0 && $remaining > 300 } {
  			set remaining [expr $ENDSIM-$now]
 			set clock_period 10
 			set num_run_cycles 10 
@@ -350,11 +358,18 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 			for {set c 0} {$c < $num_run_cycles} { incr c } {
 				run ${run_time}
 				set error_number [string map {" " ""} [lindex [ split [lindex [split [compare info] "\n"] 1 ] "=" ] 1]]
+				#set compare_out [lindex [split [compare info] "\n"] 0 ]
+				#set compare_out [ concat $compare_out [lindex [split [compare info] "\n"] 1 ] ]
+				#puts "######### COMPARE INFO ##################################"
+				#puts "INFO]: compare info ="
+				#puts "$compare_out"
+				#puts "INFO]: error_number = $error_number"
+				#puts "###############################################"
 				if { $error_number != 0 } {
 					break
 				}
 			}
-		} 
+		}
 		if { $error_number != 0 } {
 			# If there is at least an error we open error file, read current number of error
 			# and increment it
