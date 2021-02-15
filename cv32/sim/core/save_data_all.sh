@@ -2,7 +2,7 @@
 
 if [[ $# -ne 2 ]]; then
 	echo "wrong number of arguments."
-	echo "Usage: ./save_data_all.sh <stage_name> <in/out>"
+	echo "Usage: ./save_data_all.sh <stage_name> <in/out> <ref/ft>"
 	exit 1;
 else
 	stage=$1
@@ -23,8 +23,8 @@ else
 					./comp_sim.sh -b atsbv $arch $arch $file_save $stage save_data_in
 					./comp_sim.sh -b atsbv $arch $arch $file_save $stage save_data_out -g
 				else
-					echo "wrong direction: only 'in', 'out' or ''inout."
-					echo "Usage: ./save_data_all.sh <stage_name> <in/out>"
+					echo "wrong direction: only 'in', 'out' or 'inout'."
+					echo "Usage: ./save_data_all.sh <stage_name> <in/out> <ref/ft>"
 					exit 1;
 				fi
 			fi
