@@ -1574,7 +1574,7 @@ function elaborate_all_sim_output () {
 # FIXED variable       #################################################
 ########################################################################
 
-CORE_V_VERIF="/media/tesla/Storage/Data/Scrivania/AllProject/Fare/Tesi/Esecuzione_tesi/core-v-verif"
+CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
 
 ##########################
 # Directly setted by cmd line
@@ -1592,6 +1592,7 @@ set_core_v_verif () {
 		cd $CORE_V_VERIF/cv32/sim/core
 	fi
 }
+set_core_v_verif
 
 
 COMMONMK="$CORE_V_VERIF/cv32/sim/core/sim_FT/Common.mk"

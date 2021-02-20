@@ -60,12 +60,7 @@ set flag 0
 set n_fault 0
 # Find all signals that we use in fault injection
 # we use _i to filter out clock and reset 
-#set sim_fi_sig_complete1 [ concat [ concat  [ find nets  "sim:/${REAL_STAGE_NAME}/*_i" ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] 
-#set sim_fi_sig_complete2 [lsearch -inline -all -not -regexp $sim_fi_sig_complete1 voted]
-#set sim_fi_sig [lsearch -inline -all -not -regexp $sim_fi_sig_complete2 vector_err]
 set sim_fi_sig [ concat [ concat [ concat  [ find nets  "sim:/${REAL_STAGE_NAME}/*_i" ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*/*_o"] ]
-
-
 if [ file exists "${signals_filename}" ] {
 	# If the file exist this function enable the script to continue
 	# from where it is stopped !!
@@ -101,7 +96,7 @@ if [ file exists "${signals_filename}" ] {
 			puts "You are tring to simulate a simulation that is already done, if you want to resimulate delete file:"
 			puts "${signals_filename}"
 			puts "################################################################"
-			#exit 
+			exit 
 		}
 		set fp_cycle [ open "${cycle_filename}" "w" ]
 		puts $fp_cycle "$n_fault"
@@ -227,7 +222,7 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 				for { set j 0} {$j < $array_depth} {incr j} {
 					set array_dim  [ lindex [ split [ lindex $descr [expr {(int($j)*6)+4} ]] "\]" ] 0 ]
 					puts "INFO: array_dim = $array_dim"
-					set array_dim_rand [expr {int(rand()*$array_dim)}]
+					set array_dim_rand [expr {int(rand())*$array_dim}]
 					append sig_fi "\[$array_dim_rand\]"
 					puts "INFO: appeded signal $sig_fi"
 					
@@ -278,7 +273,6 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 	compare start ${GOLD_NAME}_out sim
 	compare options -maxtotal 1
 	compare options -track
-	compare clock -rising clock_cmp sim:/${REAL_STAGE_NAME}/clk
 	
 	# These two line find gold and current simulation ouput signal and order it using ord_list function 
 	# If you want to compare all internal signal use -r option
@@ -317,8 +311,7 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 		set g_sig_check [ lindex [ split $g_sig "/" ] end ]
 		if { $s_sig_check == $g_sig_check } {
 			puts "SIGNAL TO COMPARE: sim:$s_sig      ${GOLD_NAME}_out:$g_sig"
-			#compare add sim:$s_sig ${GOLD_NAME}_out:$g_sig
-			compare add -clock clock_cmp sim:$s_sig ${GOLD_NAME}_out:$g_sig
+			compare add sim:$s_sig ${GOLD_NAME}_out:$g_sig
 		} else {
 			puts "Skipped:SIGNAL TO COMPARE: sim:$s_sig      ${GOLD_NAME}_out:$g_sig"
 			puts "Skipped: Check the signals, an error may be likely..."
@@ -335,37 +328,48 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 	
 	
 	if { $FI==1 } {
-		compare run $fi_instant $remaining
-
-		if { $remaining < 300 } { 
+		if { $remaining < 300 } {
 			if { $remaining > 0 } {
+				compare run $fi_instant $remaining 
 				run $remaining
 			}
 		} else {
+			compare run $fi_instant $remaining 
 			run 300
 		}
 
 		#set error_number [ lindex [ compare info ] 12 ]
 		set error_number [string map {" " ""} [lindex [ split [lindex [split [compare info] "\n"] 1 ] "=" ] 1]]
-
+		#set compare_out [lindex [split [compare info] "\n"] 0 ]
+		#set compare_out [ concat $compare_out [lindex [split [compare info] "\n"] 1 ] ]
+		#puts "######### COMPARE INFO ##################################"
+		#puts "INFO]: compare info ="
+		#puts "$compare_out"
+		#puts "INFO]: error_number = $error_number"
+		#puts "###########################################"
 			#puts "INFO: compare_info: [compare info]"
 		puts "INFO: number of errors: $error_number"
-		if { $error_number == 0 && $remaining >= 300} {
+		if { $error_number == 0 && $remaining > 300 } {
  			set remaining [expr $ENDSIM-$now]
-			if { $remaining > 0 } {
-				set clock_period 10
-				set num_run_cycles 10 
-				set num_clock_for_cycle [expr $remaining/($clock_period*$num_run_cycles)]
-				set run_time [expr $num_clock_for_cycle*$clock_period ]
-				for {set c 0} {$c < $num_run_cycles} { incr c } {
-					run ${run_time}
-					set error_number [string map {" " ""} [lindex [ split [lindex [split [compare info] "\n"] 1 ] "=" ] 1]]
-					if { $error_number != 0 } {
-						break
-					}
+			set clock_period 10
+			set num_run_cycles 10 
+			set num_clock_for_cycle [expr $remaining/($clock_period*$num_run_cycles)]
+			set run_time [expr $num_clock_for_cycle*$clock_period ]
+			for {set c 0} {$c < $num_run_cycles} { incr c } {
+				run ${run_time}
+				set error_number [string map {" " ""} [lindex [ split [lindex [split [compare info] "\n"] 1 ] "=" ] 1]]
+				#set compare_out [lindex [split [compare info] "\n"] 0 ]
+				#set compare_out [ concat $compare_out [lindex [split [compare info] "\n"] 1 ] ]
+				#puts "######### COMPARE INFO ##################################"
+				#puts "INFO]: compare info ="
+				#puts "$compare_out"
+				#puts "INFO]: error_number = $error_number"
+				#puts "###############################################"
+				if { $error_number != 0 } {
+					break
 				}
 			}
-		} 
+		}
 		if { $error_number != 0 } {
 			# If there is at least an error we open error file, read current number of error
 			# and increment it
@@ -387,17 +391,7 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 	##############################################################################
 	###### Save error if there are
 
-	if {$FI > 0 } {
-		if { $env(GUI) == "-gui" } {
-			add wave *
-			puts "Press a key to continue."
-			if {$error_number != 0} {
-				compare savediffs savediff.txt
-			}			
-			puts [ compare info -signals ]
-			compare info -write savecompare.txt 1 50			
-			set key [ gets stdin ]
-		}
+	if {$FI > 0} {
 		compare end
 		restart -force
 		set end_time [clock milliseconds]
