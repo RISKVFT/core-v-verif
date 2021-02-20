@@ -3,6 +3,9 @@
 source ccommon.sh
 echo "argomenti: $@"
 
+rm -f comp_sim_tmp.sh
+cp comp_sim.sh comp_sim_tmp.sh
+
 # trap ctrl-c and call ctrl_c()
 trap ctrl_c INT
 trap exit_f EXIT
@@ -968,6 +971,11 @@ echo "
 }
 function manage_stage_fault_injection_upi () {
 	# Called by qsfiupi
+
+	FORCE_OVW=""
+	if [[ $OVWRITE_SIM == 1 ]]; then
+		FORCE_OVW="-f"
+	fi
 	
 	if [[ $(check_fio $1 -h -H h -help --help) == 1 ]]; then
 		manage_stage_fault_injection_upi_help
@@ -977,7 +985,7 @@ function manage_stage_fault_injection_upi () {
 	fi
 	
 	mkfifo $pipe_info
-	local comando="./comp_sim.sh -sfiupi $@ -p $pipe_info"
+	local comando="./comp_sim.sh -sfiupi $@ -p $pipe_info $FORCE_OVW"
 	local tname="sfiupi"
 
 	db_becho "PROCESS: Opening a new terminal to run simulations ... "
@@ -1267,6 +1275,7 @@ function sim_stage_fault_injection_upi () {
 			;;
 		esac
 	done
+	
 
 	# If we don't use fault injection is useless do cycle.
 	if [[ $FI -eq 0 ]]; then
@@ -1277,16 +1286,16 @@ function sim_stage_fault_injection_upi () {
 	# If CYCLE is setted to "cov" we should calculate the number of cycle 
         # needed for a certain coverage and set it before the simulation	
 	if  [[ $CALC_CYCLE_ON -eq 1 ]]; then
-		db_becho "ENtered"
+		db_becho "Entered"
 		CYCLE="cov"	
 		if [[ -f "$SIM_CYCLE_NUMBER_FILE" ]]; then
 			line=$(cat "$SIM_CYCLE_NUMBER_FILE" | grep "$SWC-$REAL_STG:")
-			db_becho "ENtered line=$line"
+			db_becho "Entered line=$line"
 			if [[ $line != "" ]]; then
 				CYCLE=$(echo $line | rev | cut -d ":" -f 1 | rev)
 			fi
 		fi
-		db_becho "ENtered CYCLE=$CYCLE"
+		db_becho "Entered CYCLE=$CYCLE"
 		# If CYCLE don't change means that the cycle for this stage
 		# are not already calculated and stored in SIM_CYCLE_NUMBER_FILE file.
 		# In this case we should calculate it
@@ -1300,6 +1309,15 @@ function sim_stage_fault_injection_upi () {
 			db_becho "CYCLE = $CYCLE"
 		fi
 		
+	fi
+
+	
+	# If we want to repeat a benchmark
+	FORCE_OVW=""
+	if [[ $OVWRITE_SIM == 1 ]]; then
+		db_becho "INFO: removing *${STG}-${SWC}-${CYCLE}-${FI}.txt files..."
+		rm -f ./sim_FT/sim_out/*${STG}-${SWC}-${CYCLE}-${FI}.txt
+		FORCE_OVW="-f"
 	fi
 
 	# Set error file used to save number of error of the simulation
@@ -1349,7 +1367,7 @@ function sim_stage_fault_injection_upi () {
 		for i in $hexfile;do	
 			software=$(echo $i | cut -d "." -f 1) 
 			db_becho "RUN: -sfiupi atsbfc $ARCH_TO_USE $ARCH_TO_COMPARE $software $STG $FI $CYCLE"
-			execute_in_terminal "./comp_sim.sh -sfiupi atsbfc $ARCH_TO_USE $ARCH_TO_COMPARE $software $STG $FI $CYCLE -p $pipe_cov_simulation" "simulation"
+			execute_in_terminal "./comp_sim.sh -sfiupi atsbfc $ARCH_TO_USE $ARCH_TO_COMPARE $software $STG $FI $CYCLE -p $pipe_cov_simulation $FORCE_OVW" "simulation"
 			kill_terminal_when_it_finished $pipe_cov_simulation "simulation"
 			write_PIPENAME "$software"
 		done	
@@ -1502,7 +1520,7 @@ function elaborate_simulation_output () {
 # FIXED variable       #################################################
 ########################################################################
 
-CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
+CORE_V_VERIF="/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif"
 
 ##########################
 # Directly setted by cmd line
@@ -1540,6 +1558,7 @@ export SIM_CYCLE_NUMBER_FILE="$ERROR_DIR/cycles_number_coverage.txt"
 # Set variable are used to correctly end program if only
 # this action are done, for example if only git repo 
 # is setted the program should ended since all is done
+OVWRITE_SIM=0
 ARCH=0
 SET_ARCH=0
 SET_DIR=0
@@ -1592,10 +1611,10 @@ export CYCLE=1
 CHEX_FILE=" "
 export GUI=""
 export SIM_BASE="tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
-export STAGE_NAME="if_stage"
+export STAGE_NAME="id_stage"
 
-ARCH_TO_USE="ref"
-ARCH_TO_COMPARE="ref"
+ARCH_TO_USE="ft"
+ARCH_TO_COMPARE="ft"
 export $ARCH_TO_USE
 export $ARCH_TO_COMPARE
 
@@ -1607,7 +1626,7 @@ A_REF_REPO="https://github.com/RISKVFT/cv32e40p.git"
 A_REF_BRANCH="master"
 A_REF_REPO_NAME="cv32e40p_ref"
 A_FT_REPO="https://github.com/RISKVFT/cv32e40p.git"
-A_FT_BRANCH="master"
+A_FT_BRANCH="FT_Marcello"
 A_FT_REPO_NAME="cv32e40p_ft"
 
 
@@ -1880,6 +1899,10 @@ while [[ $1 != "" ]]; do
 			AR_qsfiupi_args=$ARGS
 			echo "qsfiupi args; $AR_qsfiupi_args"
 			shift $N_ARGS
+			;;
+		-f) # to use when vsim_stage_compare is run in order to overwrite a simulation
+			OVWRITE_SIM=1
+			shift			
 			;;
 		
 		########################################################################

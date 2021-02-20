@@ -1,4 +1,4 @@
-set CORE_V_VERIF "/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif"
+set CORE_V_VERIF "/home/thesis/elia.ribaldone/Desktop/core-v-verif"
 set SIM_BASE "$env(SIM_BASE)"
 set GOLD_NAME "$env(GOLD_NAME_SIM)"
 set GOLD_NAME_FILE "$env(GOLD_NAME)"
@@ -60,57 +60,7 @@ set flag 0
 set n_fault 0
 # Find all signals that we use in fault injection
 # we use _i to filter out clock and reset 
-# signals from pipeline IF/ID
-# instr_valid_i, instr_rdata_i, is_compressed_i, illegal_c_insn_i, is_fetch_failed_i, pc_id_i
-
-set arch_used [ lindex [ split $GOLD_NAME "_" ] 1 ]
-set stage_used [ lindex [ split $GOLD_NAME "_" ] 2 ]
-
-if { $stage_used == "id" } {
-	set sim_fi_sig [ find nets  "sim:/${REAL_STAGE_NAME}/instr_valid_i" ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets  "sim:/${REAL_STAGE_NAME}/instr_rdata_i" ] ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets  "sim:/${REAL_STAGE_NAME}/is_compressed_i" ] ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets  "sim:/${REAL_STAGE_NAME}/illegal_c_insn_i" ] ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets  "sim:/${REAL_STAGE_NAME}/is_fetch_failed_i" ] ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets  "sim:/${REAL_STAGE_NAME}/pc_id_i" ] ]
-	#set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] 
-} elseif { $stage_used == "ex" } {
-	set sim_fi_sig_complete1 [ concat [ concat  [ find nets  "sim:/${REAL_STAGE_NAME}/*_i" ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] 
-	set sim_fi_sig_complete2 [lsearch -inline -all -not -regexp $sim_fi_sig_complete1 voted]
-	set sim_fi_sig [lsearch -inline -all -not -regexp $sim_fi_sig_complete2 vector_err]
-} else {
-	set sim_fi_sig [ concat [ concat  [ find nets  "sim:/${REAL_STAGE_NAME}/*_i" ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] 
-}
-set sim_fi_sig_tmp $sim_fi_sig
-set sim_fi_sig ""
-# Copying each signal N times as the number of bits of that signal in order 
-#to respect the probability of the fault
-foreach sig_fi_to_copy $sim_fi_sig_tmp {
-	set sig_width [lindex [ split [ examine -binary -radixenumnumeric sim:$sig_fi_to_copy] "'" ] 0 ]
-	set graffa [string index $sig_width 0]
-	set num_of_bits 1
-	if { "$graffa" == "\{" } {
-		set descr [describe sim:$sig_fi_to_copy]
-		set exam [examine sim:$sig_fi_to_copy]
-		set array_depth [ expr [llength [split $descr "y"]] -1 ]
-		for { set j 0} {$j < $array_depth} {incr j} {
-			set array_dim  [ lindex [ split [ lindex $descr [expr {(int($j)*6)+4} ]] "\]" ] 0 ]
-			set num_of_bits [ expr $num_of_bits*$array_dim ]
-		}
-		#set bit_number [lindex [split [lindex [split $exam "'"] 0] "\{" ] end ]
-		set sig_width [lindex [split [lindex [split $exam "'"] 0] "\{" ] end ]
-	} 
-	#else {
-		#set sig_width [lindex [ split [ examine -binary -radixenumnumeric sim:$sig_fi_to_copy] "'" ] 0 ]
-	#}
-	set num_of_bits [ expr $num_of_bits*$sig_width ]
-	
-	for { set j 0} {$j < $num_of_bits} {incr j} {
-		set sim_fi_sig [ concat $sim_fi_sig $sig_fi_to_copy ]
-	}
-}
-
+set sim_fi_sig [ concat [ concat  [ find nets  "sim:/${REAL_STAGE_NAME}/*_i" ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] 
 if [ file exists "${signals_filename}" ] {
 	# If the file exist this function enable the script to continue
 	# from where it is stopped !!
@@ -231,7 +181,6 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 	# check if the selected bit has been already used in previous fault injection
 	#set fi_instant [expr {int(rand()*($ENDSIM-2*10))} ]	
 	set fi_instant "no fault injection"
-
 	if { $FI == 1 } {
 
 	    set find_n 1
@@ -273,9 +222,9 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 				for { set j 0} {$j < $array_depth} {incr j} {
 					set array_dim  [ lindex [ split [ lindex $descr [expr {(int($j)*6)+4} ]] "\]" ] 0 ]
 					puts "INFO: array_dim = $array_dim"
-					set array_dim_rand [expr {int(rand()*$array_dim)} ]
+					set array_dim_rand [expr {int(rand())*$array_dim}]
 					append sig_fi "\[$array_dim_rand\]"
-					puts "INFO: appended signal $sig_fi"
+					puts "INFO: appeded signal $sig_fi"
 					
 					# for non replacement
 					append bit_choose_array "\[$array_dim_rand\]"
@@ -312,8 +261,8 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 		}
 
 		force -deposit "$sig_fi\[$bit_choose\]" $bit_force_value
-		set fi_instant_real [ expr { $fi_instant-55 } ]
-		run $fi_instant_real ns
+		
+		run $fi_instant ns
 		
 	}
 
@@ -324,7 +273,6 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 	compare start ${GOLD_NAME}_out sim
 	compare options -maxtotal 1
 	compare options -track
-	compare clock -rising clock_cmp sim:/${REAL_STAGE_NAME}/clk
 	
 	# These two line find gold and current simulation ouput signal and order it using ord_list function 
 	# If you want to compare all internal signal use -r option
@@ -346,8 +294,8 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 			lappend g_sig_list $l1
 		}
 	}
-
-
+	
+	set arch_used [ lindex [ split $GOLD_NAME "_" ] 1 ]
 	if { $arch_used=="ref" } {
 		set index_to_remove [ lsearch -all -regexp $s_sig_list _ft_ ]
 		for {set ii [ expr [llength $index_to_remove] -1]} {$ii>-1} {incr ii -1} {
@@ -355,20 +303,6 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 			set s_sig_list [ lreplace $s_sig_list $index_tmp $index_tmp ]
 		}
 	}
-
-	if { $arch_used=="ft" && $stage_used=="id" } {
-		set index_to_remove [ lsearch -all -regexp $s_sig_list _ft_ ]
-		for {set ii [ expr [llength $index_to_remove] -1]} {$ii>-1} {incr ii -1} {
-			set index_tmp [ lindex $index_to_remove $ii ]
-			set s_sig_list [ lreplace $s_sig_list $index_tmp $index_tmp ]
-		}
-		set index_to_remove [ lsearch -all -regexp $g_sig_list _ft_ ]
-		for {set ii [ expr [llength $index_to_remove] -1]} {$ii>-1} {incr ii -1} {
-			set index_tmp [ lindex $index_to_remove $ii ]
-			set g_sig_list [ lreplace $g_sig_list $index_tmp $index_tmp ]
-		}
-	}
-
 	# These cycle set the comparison of all output signals
 	foreach s_sig $s_sig_list  g_sig $g_sig_list {
 		#puts $fp_sim "[ splitPath $s_sig ${REAL_STAGE_NAME} ]" 
@@ -377,7 +311,7 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 		set g_sig_check [ lindex [ split $g_sig "/" ] end ]
 		if { $s_sig_check == $g_sig_check } {
 			puts "SIGNAL TO COMPARE: sim:$s_sig      ${GOLD_NAME}_out:$g_sig"
-			compare add -clock clock_cmp sim:$s_sig ${GOLD_NAME}_out:$g_sig
+			compare add sim:$s_sig ${GOLD_NAME}_out:$g_sig
 		} else {
 			puts "Skipped:SIGNAL TO COMPARE: sim:$s_sig      ${GOLD_NAME}_out:$g_sig"
 			puts "Skipped: Check the signals, an error may be likely..."
@@ -389,9 +323,9 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 	
 	puts "ENDSIM $ENDSIM"
 	puts "INFO: Instant = $fi_instant"
-	puts "INFO: Simulation time now = $now"
  	set remaining [expr $ENDSIM-$now]
 	puts "INFO: remaining = $remaining"
+	
 	
 	if { $FI==1 } {
 		compare run $fi_instant $remaining
@@ -442,18 +376,7 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 	##############################################################################
 	###### Save error if there are
 
-	if { $env(GUI) == "-gui" } {
-		add wave *
-		if {$error_number != 0} {
-			compare savediffs savediff.txt
-		}			
-		puts [ compare info -signals ]
-		compare info -write savecompare.txt 1 50	
-		puts "Press a key to continue."		
-		set key [ gets stdin ]
-	}
-
-	if {$FI > 0 } {
+	if {$FI > 0} {
 		compare end
 		restart -force
 		set end_time [clock milliseconds]
@@ -461,6 +384,7 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 	
 	# Save current cycle and cycle simulation time in cycle_file in order
 	# to cumpute remaining time and percentage of total simulations done
+	
 	
 	if {$FI > 0} {
 		# Print on file informations about faults and errors produced
@@ -475,14 +399,13 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 		puts "--------------------------------------------------------\nOpen file: [file channels]\n.------------------------------" 
 	}
 }
-
 set fp_cycle [ open "${cycle_filename}" "w" ]
 puts $fp_cycle "$i"
 close $fp_cycle	
 
 #############################################################################
 ######## Exit from simulation if we are in batch mode
-if { $env(GUI) != "-gui"}  {
+if { "$env(GUI)" != "-gui"}  {
 	compare end
 	quit -f
 }
