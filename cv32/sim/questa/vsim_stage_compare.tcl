@@ -11,6 +11,8 @@ set info_filename "$env(INFO_FILE)"
 set cycle_filename "$env(CYCLE_FILE)"
 set signals_filename "$env(SIGNALS_FI_FILE)"
 
+set ENDSIM [ expr {$ENDSIM/10} ]
+
 proc ord_list {listain} {
 	set listain_new [ deleteGenblk $listain]
 	set lista_sig []
@@ -56,6 +58,9 @@ if { ${STAGE_NAME} == "cv32e40p_core" } {
 	set REAL_STAGE_NAME "cv32e40p_${STAGE_NAME}"
 }
 
+puts "Setting UserTimeUnit from ${UserTimeUnit} to ns"
+set UserTimeUnit {ns}
+puts "UserTimeUnit = ${UserTimeUnit}"
 set flag 0
 set n_fault 0
 # Find all signals that we use in fault injection
@@ -73,7 +78,7 @@ if { $stage_used == "id" } {
 	set sim_fi_sig [ concat $sim_fi_sig [ find nets  "sim:/${REAL_STAGE_NAME}/illegal_c_insn_i" ] ]
 	set sim_fi_sig [ concat $sim_fi_sig [ find nets  "sim:/${REAL_STAGE_NAME}/is_fetch_failed_i" ] ]
 	set sim_fi_sig [ concat $sim_fi_sig [ find nets  "sim:/${REAL_STAGE_NAME}/pc_id_i" ] ]
-	#set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ]
+	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ]
 	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] 
 } elseif { $stage_used == "ex" } {
 	set sim_fi_sig_complete1 [ concat [ concat  [ find nets  "sim:/${REAL_STAGE_NAME}/*_i" ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] 
@@ -310,13 +315,27 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 		} else {
 		 	set bit_force_value [expr ($bit_value+1)%2 ]
 		}
-
-		force -deposit "$sig_fi\[$bit_choose\]" $bit_force_value
+		puts "INFO SIM: current time $now"
 		set fi_instant_real [ expr { $fi_instant-55 } ]
+		puts "INFO SIM: running for $fi_instant_real"
+
+		puts "INFO SIM: fault injection time $now (fi_instant=$fi_instant)"
+		force -deposit "$sig_fi\[$bit_choose\]" $bit_force_value
 		run $fi_instant_real ns
 		
 	}
-
+    ###da cancellare
+    #puts "INFO SIM: current time $now"
+    #set fi_instant 76770
+	#	
+	#	puts "INFO SIM: fault injection time $now (fi_instant=$fi_instant)"
+    #for {set i 0} {$i < 32} {incr i} {
+	#	force -deposit "sim:/cv32e40p_id_stage/genblk3/register_file_i/register_file_i/mem\[$i\]\[22\]" 1
+    #}
+	#	set fi_instant_real [ expr { $fi_instant-55 } ]
+	#	puts "INFO SIM: running for $fi_instant_real"
+	#	run $fi_instant_real ns
+    ###da cancellare
 	
 	#################################################################
 	###### Begin comparation between gold and current simulation
@@ -324,7 +343,8 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 	compare start ${GOLD_NAME}_out sim
 	compare options -maxtotal 1
 	compare options -track
-	compare clock -rising clock_cmp sim:/${REAL_STAGE_NAME}/clk
+    #compare options -tolTrail {10 ps}
+	compare clock -rising -offset {0.1 ns} clock_cmp sim:/${REAL_STAGE_NAME}/clk
 	
 	# These two line find gold and current simulation ouput signal and order it using ord_list function 
 	# If you want to compare all internal signal use -r option
@@ -390,31 +410,35 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 	puts "ENDSIM $ENDSIM"
 	puts "INFO: Instant = $fi_instant"
 	puts "INFO: Simulation time now = $now"
- 	set remaining [expr $ENDSIM-$now]
+ 	#set remaining [expr $ENDSIM-$now]
+	set remaining [expr $ENDSIM-[lindex [scaleTime $now 1] 0]]
 	puts "INFO: remaining = $remaining"
 	
+	#set error_number [ lindex [ compare info ] 12 ]
+	set error_number [string map {" " ""} [lindex [ split [lindex [split [compare info] "\n"] 1 ] "=" ] 1]]
+
 	if { $FI==1 } {
 		compare run $fi_instant $remaining
 
 		if { $remaining < 300 } { 
-			run $remaining
+			run $remaining ns
 		} else {
-			run 300
+			run 300 ns
 		}
 
-		#set error_number [ lindex [ compare info ] 12 ]
-		set error_number [string map {" " ""} [lindex [ split [lindex [split [compare info] "\n"] 1 ] "=" ] 1]]
 
 			#puts "INFO: compare_info: [compare info]"
 		puts "INFO: number of errors: $error_number"
 		if { $error_number == 0 && $remaining >= 300} {
- 			set remaining [expr $ENDSIM-$now]
+ 			#set remaining [expr $ENDSIM-$now]
+ 			set remaining [expr $ENDSIM-[lindex [scaleTime $now 1] 0]]
+
 			set clock_period 10
 			set num_run_cycles 10 
 			set num_clock_for_cycle [expr $remaining/($clock_period*$num_run_cycles)]
 			set run_time [expr $num_clock_for_cycle*$clock_period ]
 			for {set c 0} {$c < $num_run_cycles} { incr c } {
-				run ${run_time}
+				run ${run_time} ns
 				set error_number [string map {" " ""} [lindex [ split [lindex [split [compare info] "\n"] 1 ] "=" ] 1]]
 				if { $error_number != 0 } {
 					break
@@ -436,7 +460,7 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 		
 	} else {
 		compare run
-		run $remaining
+		run $remaining ns
 		#compare end
 	}
 	##############################################################################
@@ -446,11 +470,13 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 		add wave *
 		if {$error_number != 0} {
 			compare savediffs savediff.txt
+			puts "Press ENTER to continue."		
+			set key [ gets stdin ]
 		}			
 		puts [ compare info -signals ]
 		compare info -write savecompare.txt 1 50	
-		puts "Press a key to continue."		
-		set key [ gets stdin ]
+		#puts "Press a key to continue."		
+		#set key [ gets stdin ]
 	}
 
 	if {$FI > 0 } {
