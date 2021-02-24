@@ -1399,7 +1399,7 @@ function sim_stage_fault_injection_upi () {
 function signals_elaboration () {
 	local id=$1
 	local file_sig="$ERROR_DIR/$signals_fi_file_prefix$id.txt"
-	local signals=$(grep All_signals $file_sig | sort -u | cut -d ":" -f 2)
+	local signals=$(grep All_signals $file_sig | cut -d ":" -f 2)
 
 	# TODO: add percentage of fault tolerance for each signal
 	MEAN_ERROR=""
@@ -1498,7 +1498,7 @@ function elaborate_simulation_output () {
 function signals_total_elaboration () {
 	local id=$1
 	local file_sig="$ERROR_DIR/$signals_fi_file_prefix$id.txt"
-	STE_SIGNALS=$(grep All_signals $file_sig | sort -u | cut -d ":" -f 2)
+	STE_SIGNALS=$(grep All_signals $file_sig | cut -d ":" -f 2)
 	local signals=$STE_SIGNALS
 
 	# TODO: add percentage of fault tolerance for each signal
