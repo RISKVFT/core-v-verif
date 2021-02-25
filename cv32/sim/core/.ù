@@ -1278,10 +1278,10 @@ function sim_stage_fault_injection_upi () {
 	
 
 	# If we don't use fault injection is useless do cycle.
-	#if [[ $FI -eq 0 ]]; then
-	#	export CYCLE=1
-	#	echo "Fault injection is equal to 0 so you can't cycle, CYCLE=1"
-	#fi
+	if [[ $FI -eq 0 ]]; then
+		export CYCLE=1
+		echo "Fault injection is equal to 0 so you can't cycle, CYCLE=1"
+	fi
 
 	# If CYCLE is setted to "cov" we should calculate the number of cycle 
         # needed for a certain coverage and set it before the simulation	
@@ -1345,6 +1345,7 @@ function sim_stage_fault_injection_upi () {
 	# Verifica dei file vcd di input e wlf di output
 	db_becho "[INFO] real_stg: $REAL_STG"
 	db_becho "[INFO] stg: $STG"
+	verify_upi_vcdwlf $SW $STG $REAL_STG
 	
 	############# RUN SIMULATION #############################
 	if [[ $SWC == "all" ]]; then
@@ -1363,21 +1364,16 @@ function sim_stage_fault_injection_upi () {
 		mkfifo $ALL_SW_PIPE
 		PIPENAME=$ALL_SW_PIPE
 		mkfifo $pipe_cov_simulation
-		db_becho "Software: $hexfile"
 		for i in $hexfile;do	
 			software=$(echo $i | cut -d "." -f 1) 
 			db_becho "RUN: -sfiupi atsbfc $ARCH_TO_USE $ARCH_TO_COMPARE $software $STG $FI $CYCLE"
-			write_PIPENAME "$software"
-			db_becho "[INFO]: Write software in pipe"
 			execute_in_terminal "./comp_sim.sh -sfiupi atsbfc $ARCH_TO_USE $ARCH_TO_COMPARE $software $STG $FI $CYCLE -p $pipe_cov_simulation $FORCE_OVW" "simulation"
-			db_becho "[INFO]: we are waiting comp_sim running in background"
 			kill_terminal_when_it_finished $pipe_cov_simulation "simulation"
-			db_becho "[INFO]: Killed terminal"
+			write_PIPENAME "$software"
 		done	
 		sleep 1
 		write_PIPENAME "END"
 	else
-		verify_upi_vcdwlf $SW $STG $REAL_STG
 		############ Save parameter in a log file for -qsfiupi ##########
 		write_PIPENAME "cycle:$CYCLE"
 		db_becho "INFO: send CYCLE through pipe"
@@ -1392,11 +1388,7 @@ function sim_stage_fault_injection_upi () {
 		
 		db_becho "Simulation end time $T_ENDSIM"
 
-		if [[ $CYCLE -ne 0 ]]; then
-			sim_benchmark_programs atsvb $ARCH_TO_USE $ARCH_TO_COMPARE $SW stage_compare $STG
-		else
-			rm $ERROR_DIR/*0-0*
-		fi
+		sim_benchmark_programs atsvb $ARCH_TO_USE $ARCH_TO_COMPARE $SW stage_compare $STG
 		
 		timetwo=$(date +%s)
 		sim_total_time=$(($timetwo-$timeone))
@@ -1714,10 +1706,10 @@ export CYCLE=1
 CHEX_FILE=" "
 export GUI=""
 export SIM_BASE="tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
-export STAGE_NAME="if_stage"
+export STAGE_NAME="id_stage"
 
-ARCH_TO_USE="ref"
-ARCH_TO_COMPARE="ref"
+ARCH_TO_USE="ft"
+ARCH_TO_COMPARE="ft"
 export $ARCH_TO_USE
 export $ARCH_TO_COMPARE
 
@@ -1729,7 +1721,7 @@ A_REF_REPO="https://github.com/RISKVFT/cv32e40p.git"
 A_REF_BRANCH="master"
 A_REF_REPO_NAME="cv32e40p_ref"
 A_FT_REPO="https://github.com/RISKVFT/cv32e40p.git"
-A_FT_BRANCH="master"
+A_FT_BRANCH="FT_Marcello"
 A_FT_REPO_NAME="cv32e40p_ft"
 AESFIUPI=0
 
