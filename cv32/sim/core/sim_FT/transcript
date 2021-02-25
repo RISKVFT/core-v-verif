@@ -1,4 +1,5 @@
-# Reading pref.tcl
+# vsim -modelsimini ../modelsim.ini -wlfcollapsedelta -quiet -c -vcdstim ./dataset/gold-ref-if_stage-misalign-in.vcd -debugDB "+dumpports+nocollapse" cv32e40p_if_stage_vopt -do "../../questa/vsim_stage_compare.tcl" 
+# Start time: 19:02:41 on Feb 25,2021
 # //  Questa Sim-64
 # //  Version 10.7c linux_x86_64 Aug 17 2018
 # //
@@ -13,78 +14,28 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-# vsim "+dumpports+nocollapse" -modelsimini ../modelsim.ini -wlfcollapsedelta -quiet "+firmware=/home/thesis/elia.ribaldone/Desktop/core-v-verif//cv32/tests/programs/custom_FT/out/riscv_ebreak_test_0.hex" "+dumpports+nocollapse" -gui -debugdb tb_top_vopt -do "../../questa/vsim_save_data_out.tcl" 
-# Start time: 18:07:51 on Feb 25,2021
-# ** Warning: (vsim-3015) [PCDPC] - Port size (32) does not match connection size (64) for port 'irq_i'. The port definition is at: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_core.sv(87).
-#    Time: 0 ps  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 77
-# ** Warning: (vsim-3015) [PCDPC] - Port size (5) does not match connection size (6) for port 'irq_id_o'. The port definition is at: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_core.sv(89).
-#    Time: 0 ps  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 77
-# ** Warning: (vsim-3015) [PCDPC] - Port size (32) does not match connection size (34) for port 'instr_addr_i'. The port definition is at: /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/mm_ram.sv(36).
-#    Time: 0 ps  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/ram_i File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 136
-# ** Warning: (vsim-3015) [PCDPC] - Port size (32) does not match connection size (1) for port 'irq_o'. The port definition is at: /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/mm_ram.sv(52).
-#    Time: 0 ps  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/ram_i File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 136
 # ** Note: (vsim-8900) Creating design debug database vsim.dbg.
-# do ../../questa/vsim_save_data_out.tcl
+# do ../../questa/vsim_stage_compare.tcl
 # /home/thesis/elia.ribaldone/Desktop/core-v-verif
 # tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i
-# gold-ref-if_stage-riscv_ebreak_test_0
+# gold_ref_if_stage_misalign
+# gold-ref-if_stage-misalign
 # if_stage
-# ----------------------------------------------------------------
-# UVM-1.1d
-# (C) 2007-2013 Mentor Graphics Corporation
-# (C) 2007-2013 Cadence Design Systems, Inc.
-# (C) 2006-2013 Synopsys, Inc.
-# (C) 2011-2013 Cypress Semiconductor Corp.
-# ----------------------------------------------------------------
-# 
-#   ***********       IMPORTANT RELEASE NOTES         ************
-# 
-#   You are using a version of the UVM library that has been compiled
-#   with `UVM_NO_DEPRECATED undefined.
-#   See http://www.eda.org/svdb/view.php?id=3313 for more details.
-# 
-#   You are using a version of the UVM library that has been compiled
-#   with `UVM_OBJECT_MUST_HAVE_CONSTRUCTOR undefined.
-#   See http://www.eda.org/svdb/view.php?id=3770 for more details.
-# 
-#       (Specify +UVM_NO_RELNOTES to turn off this notice)
-# 
-# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(215) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
-# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(216) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ps  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/load_store_unit_i/#ALWAYS#471 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_load_store_unit.sv Line: 472
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ps  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#768 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 769
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ps  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#758 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 759
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ps  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#752 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 753
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ps  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#743 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 744
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ps  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#737 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 738
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ps  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#601(immediate_a_mux) File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 602
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ps  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#516 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_id_stage.sv Line: 517
-# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
-#    Time: 0 ps  Iteration: 2  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/load_store_unit_i/#ALWAYS#471 File: /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p_ref/rtl/cv32e40p_load_store_unit.sv Line: 472
-# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall enable: 0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall mode:   0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall gnt:    0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall valid:  0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall max:    0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall enable:  0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall mode:    0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall gnt:     0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall valid:   0
-# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall max:     0
-# EXIT SUCCESS
-# ** Note: $finish    : /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/tb_top.sv(177)
-#    Time: 417700 ns  Iteration: 1  Instance: /tb_top
+# 35879799
+# 10
 # 1
-# Break in Module tb_top at /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/tb/core/tb_top.sv line 177
-# gold-ref-if_stage-riscv_ebreak_test_0
-# Dataset "sim" exported as WLF file: ./dataset/gold-ref-if_stage-riscv_ebreak_test_0-out.wlf.
-# End time: 18:09:01 on Feb 25,2021, Elapsed time: 0:01:10
-# Errors: 0, Warnings: 13
+# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/cnt_error-if_stage-misalign-10-1.txt
+# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/info-if_stage-misalign-10-1.txt
+# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/cycle-if_stage-misalign-10-1.txt
+# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/signals_fault_injection-if_stage-misalign-10-1.txt
+# 3587979
+# cv32e40p_if_stage
+# ns
+# 0
+# 0
+# ref
+# if
+# /cv32e40p_if_stage/trap_addr_mux_i /cv32e40p_if_stage/instr_rdata_i /cv32e40p_if_stage/m_exc_vec_pc_mux_i /cv32e40p_if_stage/uepc_i /cv32e40p_if_stage/hwlp_jump_i /cv32e40p_if_stage/jump_target_ex_i /cv32e40p_if_stage/jump_target_id_i /cv32e40p_if_stage/halt_if_i /cv32e40p_if_stage/m_trap_base_addr_i /cv32e40p_if_stage/id_ready_i /cv32e40p_if_stage/exc_pc_mux_i /cv32e40p_if_stage/dm_halt_addr_i /cv32e40p_if_stage/u_exc_vec_pc_mux_i /cv32e40p_if_stage/pc_mux_i /cv32e40p_if_stage/depc_i /cv32e40p_if_stage/instr_err_pmp_i /cv32e40p_if_stage/mepc_i /cv32e40p_if_stage/clear_instr_valid_i /cv32e40p_if_stage/pc_set_i /cv32e40p_if_stage/boot_addr_i /cv32e40p_if_stage/u_trap_base_addr_i /cv32e40p_if_stage/req_i /cv32e40p_if_stage/instr_gnt_i /cv32e40p_if_stage/instr_err_i /cv32e40p_if_stage/hwlp_target_i /cv32e40p_if_stage/dm_exception_addr_i /cv32e40p_if_stage/instr_rvalid_i /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/flush_cnt_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_addr_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_atop_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q /cv32e40p_if_stage/aligner_i/hwlp_addr_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_be_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_q /cv32e40p_if_stage/aligner_i/aligner_ready_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/write_pointer_q /cv32e40p_if_stage/aligner_i/instr_valid_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_wdata_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/hwlp_flush_cnt_delayed_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/mem_q /cv32e40p_if_stage/aligner_i/pc_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/status_cnt_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/state_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/state_q /cv32e40p_if_stage/aligner_i/hwlp_update_pc_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/read_pointer_q /cv32e40p_if_stage/aligner_i/branch_addr_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/cnt_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_err_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_o /cv32e40p_if_stage/aligner_i/aligner_ready_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/trans_ready_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/busy_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_push_o /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/full_o /cv32e40p_if_stage/aligner_i/instr_valid_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_rdata_o /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/cnt_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_flush_but_first_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_valid_o /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/empty_o /cv32e40p_if_stage/aligner_i/pc_o /cv32e40p_if_stage/aligner_i/instr_aligned_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_req_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_valid_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_wdata_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fetch_valid_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_pop_o /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/data_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_addr_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_atop_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_we_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_flush_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_be_o
+# /cv32e40p_if_stage/trap_addr_mux_i /cv32e40p_if_stage/instr_rdata_i /cv32e40p_if_stage/m_exc_vec_pc_mux_i /cv32e40p_if_stage/uepc_i /cv32e40p_if_stage/hwlp_jump_i /cv32e40p_if_stage/jump_target_ex_i /cv32e40p_if_stage/jump_target_id_i /cv32e40p_if_stage/halt_if_i /cv32e40p_if_stage/m_trap_base_addr_i /cv32e40p_if_stage/id_ready_i /cv32e40p_if_stage/exc_pc_mux_i /cv32e40p_if_stage/dm_halt_addr_i /cv32e40p_if_stage/u_exc_vec_pc_mux_i /cv32e40p_if_stage/pc_mux_i /cv32e40p_if_stage/depc_i /cv32e40p_if_stage/instr_err_pmp_i /cv32e40p_if_stage/mepc_i /cv32e40p_if_stage/clear_instr_valid_i /cv32e40p_if_stage/pc_set_i /cv32e40p_if_stage/boot_addr_i /cv32e40p_if_stage/u_trap_base_addr_i /cv32e40p_if_stage/req_i /cv32e40p_if_stage/instr_gnt_i /cv32e40p_if_stage/instr_err_i /cv32e40p_if_stage/hwlp_target_i /cv32e40p_if_stage/dm_exception_addr_i /cv32e40p_if_stage/instr_rvalid_i /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/flush_cnt_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_addr_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_atop_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q /cv32e40p_if_stage/aligner_i/hwlp_addr_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_be_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_q /cv32e40p_if_stage/aligner_i/aligner_ready_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/write_pointer_q /cv32e40p_if_stage/aligner_i/instr_valid_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_wdata_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/hwlp_flush_cnt_delayed_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/mem_q /cv32e40p_if_stage/aligner_i/pc_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/status_cnt_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/state_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/state_q /cv32e40p_if_stage/aligner_i/hwlp_update_pc_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/read_pointer_q /cv32e40p_if_stage/aligner_i/branch_addr_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/cnt_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_err_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_o /cv32e40p_if_stage/aligner_i/aligner_ready_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/trans_ready_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/busy_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_push_o /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/full_o /cv32e40p_if_stage/aligner_i/instr_valid_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_rdata_o /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/cnt_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_flush_but_first_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_valid_o /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/empty_o /cv32e40p_if_stage/aligner_i/pc_o /cv32e40p_if_stage/aligner_i/instr_aligned_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_req_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_valid_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_wdata_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fetch_valid_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_pop_o /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/data_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_addr_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_atop_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_we_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_flush_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_be_o
+# 1
+# file17

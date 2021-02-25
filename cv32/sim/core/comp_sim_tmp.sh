@@ -1369,7 +1369,7 @@ function sim_stage_fault_injection_upi () {
 			db_becho "RUN: -sfiupi atsbfc $ARCH_TO_USE $ARCH_TO_COMPARE $software $STG $FI $CYCLE"
 			write_PIPENAME "$software"
 			db_becho "[INFO]: Write software in pipe"
-			execute_in_terminal "./comp_sim.sh -sfiupi atsbfc $ARCH_TO_USE $ARCH_TO_COMPARE $software $STG $FI $CYCLE -p $pipe_cov_simulation $FORCE_OVW" "simulation"
+			execute_in_terminal "./comp_sim.sh -qsfiupi atsbfc $ARCH_TO_USE $ARCH_TO_COMPARE $software $STG $FI $CYCLE -p $pipe_cov_simulation $FORCE_OVW" "simulation"
 			db_becho "[INFO]: we are waiting comp_sim running in background"
 			kill_terminal_when_it_finished $pipe_cov_simulation "simulation"
 			db_becho "[INFO]: Killed terminal"
