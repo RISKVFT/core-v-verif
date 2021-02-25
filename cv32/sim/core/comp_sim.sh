@@ -1512,6 +1512,77 @@ function elaborate_simulation_output () {
 	db_gecho "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 }
 
+function signals_total_elaboration () {
+        local id=$1
+        local file_sig="$ERROR_DIR/$signals_fi_file_prefix$id.txt"
+        STE_SIGNALS=$(grep All_signals $file_sig | sort -u | cut -d ":" -f 2)
+        local signals=$STE_SIGNALS
+
+        # TODO: add percentage of fault tolerance for each signal
+        for sig in $signals; do
+                local l_errors=$(grep $sig $file_sig | grep sig_fault | tr -s " " |\
+                        cut -d " " -f 6 | cut -d ":" -f 2)
+                local tot_sim_n=$(echo $l_errors | wc -w )
+                local no_err_n=$(echo $l_errors | tr " " "\n" | grep ^0$ | wc -l )
+                if [[ $tot_sim_n -gt 0 ]]; then
+                        local tot_gen_errors=0
+                        for err in $l_errors; do
+                                let tot_gen_errors=tot_gen_errors+$err
+                        done
+                        local mean_gen_errors=$( echo "scale=2; $tot_gen_errors/$tot_sim_n" | bc -l)
+                        local percentage_errors=$(echo "scale=3; ($tot_sim_n-$no_err_n)/$tot_sim_n " | bc -l)
+                        err_n=$(echo "scale=3; $tot_sim_n-$no_err_n" | bc -l)
+                        ERROR_ELAB="$ERROR_ELAB $sig#mean_gen_err:$mean_gen_errors#perc_err:$percentage_errors#err:$err_n#sim:$tot_sim_n"
+                else
+                        ERROR_ELAB="$ERROR_ELAB $sig#mean_gen_err:0#perc_err:0#err:0#sim:0"
+                fi
+        done
+}
+
+function elaborate_all_sim_output () {
+        local stage=$1
+        local cycle=$2
+
+        local ids=$(echo $SIM_IDS | grep "$stage-.*-$cycle-1")
+        db_gecho "[INFO] ids elaborated: $ids"
+        ERROR_ELAB=""
+        for id in $ids; do
+                signals_total_elaboration $id
+        done
+        #signals_total_elaboration if_stage-csr_instructions-384-1
+        #echo $ERROR_ELAB
+        #echo $STE_SIGNALS
+        db_gecho "[INFO] Elaboration ..."
+        TOT_SIM_ERR_ELAB=""
+        for sig in $STE_SIGNALS; do
+                sig_elab=$(echo $ERROR_ELAB | tr " " "\n" | grep $sig)
+                db_becho "[INFO] elaboration of $sig"
+                local tot_sim=0
+                local tot_err=0
+                for se in $sig_elab; do
+                        tot_sim=$(echo "$(echo $se | tr "#" "\n" | grep sim | cut -d ":" -f 2)+$tot_sim" | bc -l)
+                        tot_err=$(echo "$(echo $se | tr "#" "\n" | grep ^err: | cut -d ":" -f 2)+$tot_err" | bc -l)
+                done
+                local percentage_errors=$(echo "scale=3; $tot_err/$tot_sim" | bc -l)
+                TOT_SIM_ERR_ELAB="$TOT_SIM_ERR_ELAB $sig#[perc_err:$percentage_errors#[err:$tot_err#[sim:$tot_sim"
+                #db_gecho $TOT_SIM_ERR_ELAB | tr " " "\n"
+        done
+        SIM_ERR_ELAB_ORD=$(echo $TOT_SIM_ERR_ELAB | tr " " "\n" | tr "#" " " | sed 's/:\./:0\./g' | sort -k 2.12,2.17 -n -r | tr " " "#")
+
+        echo "" > $ERROR_DIR/elab-$stage-all-$cycle-1.txt
+        printf "%-90s %5s %5s %5s\n" "Signal_name" "err %" "err_n" "sim_n"\
+                >> $ERROR_DIR/elab-$stage-all-$cycle-1.txt
+        printf "%-90s %5s %5s %5s\n" "Signal_name" "err %" "err_n" "sim_n"
+        for line in $SIM_ERR_ELAB_ORD; do
+                arr=($(echo $line | tr "#" " "  | tr ":" "\n" | tr " " "\n" | grep -v "\["))
+                printf "%-90s %5s %5s %5s\n" ${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} \
+                        >> $ERROR_DIR/elab-$stage-all-$cycle-1.txt
+                printf "%-90s %5s %5s %5s\n" ${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]}
+        done
+}
+
+
+
 ###########################################################################################
 #  SETTING VARIABLES      #################################################################
 ###########################################################################################
@@ -1528,14 +1599,17 @@ VERBOSE=1
 CLEAROUT=0
 ##########################
 
-if [[ "$CORE_V_VERIF" =~ "$USER" ]]; then
-	db_gecho "Variables for CORE_V_VERIF already setted!"
-else
-	cd ./../../../ 
-	CORE_V_VERIF=$(pwd)
-	./set_core_v_verif.sh
-	cd $CORE_V_VERIF/cv32/sim/core
-fi
+function set_core_v_verif() {
+	if [[ "$CORE_V_VERIF" =~ "$USER" ]]; then
+		db_gecho "Variables for CORE_V_VERIF already setted!"
+	else
+		cd ./../../../ 
+		CORE_V_VERIF=$(pwd)
+		./set_core_v_verif.sh
+		cd $CORE_V_VERIF/cv32/sim/core
+	fi
+}
+set_core_v_verif
 
 COMMONMK="$CORE_V_VERIF/cv32/sim/core/sim_FT/Common.mk"
 
@@ -1628,7 +1702,7 @@ A_REF_REPO_NAME="cv32e40p_ref"
 A_FT_REPO="https://github.com/RISKVFT/cv32e40p.git"
 A_FT_BRANCH="FT_Marcello"
 A_FT_REPO_NAME="cv32e40p_ft"
-
+AESFIUPI=0
 
 
 ###########################################################################################
@@ -1917,6 +1991,15 @@ while [[ $1 != "" ]]; do
 			shift $N_ARGS
 			;;
 
+		-aesfiupi)
+                        AESFIUPI=1
+                        elab_par $1
+                        shift
+                        find_args $@
+                        AR_aesfiupi_args=$ARGS
+                        shift $N_ARGS
+                        ;;
+
 
 		########################################################################
 		# OPTION ERROR handle
@@ -1968,6 +2051,11 @@ for par in $ELABPAR;do
 			# AR_esfiupi_args
 			elaborate_simulation_output $AR_esfiupi_args
 			;;
+		-aesfiupi)
+                        # AR_aesfiupi_args
+                        elaborate_all_sim_output $AR_aesfiupi_args
+                        ;;
+
 		*)
 			db_recho "ERROR: something goes wrong in the script!! in the for of elaboration"
 			exit
