@@ -12,68 +12,14 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-ls
-# bench_log
-# ccommon.sh
-# change_word.sh
-# compile
-# comp_sim_prova.sh
-# comp_sim.sh
-# cv32e40p_temp_manifest.flist
-# error_log.txt
-# error_monitor.txt
-# Makefile
-# README.md
-# sim_FT
-# trace_command.txt
-# transcript
-cd sim_FT
-ls
-# Common.mk
-# compile.sh
-# dataset
-# delete.sh
-# diffs.txt
-# f1.txt
-# f2.txt
-# gold_in.vcd
-# gold_out.vcd
-# gold_out.wlf
-# Makefile
-# Makefile_Compile.mk
-# rules.txt
-# saved_signals
-# transcript
-# vsim.dbg
-# vsim.wlf
-# wlftCvkXkB
-# work
-cd dataset
-ls
-# gold_id_stage_hello_world_in.vcd
-# gold_id_stage_hello_world_out.wlf
-dataset open gold_id_stage_hello_world_out.wlf
-# gold_id_stage_hello_world_out.wlf opened as dataset "gold_id_stage_hello_world_out"
-view -new wave
-# .main_pane.wave.interior.cs.body.pw.wf
-add wave -position insertpoint  \
-gold_id_stage_hello_world_out:/tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/branch_in_ex_o
-wlf2vcd old_id_stage_hello_world_out.wlf old_id_stage_hello_world_out.vcd
-# ** Error: Unrecognized argument "old_id_stage_hello_world_out.vcd".
-# Usage: wlf2vcd [<Options>...] [-o <outfile>] <wlffile>
-# Options:
-#     -help        Print this message
-#     -quiet       Don't report warnings
-wlf2vcd gold_id_stage_hello_world_out.wlf old_id_stage_hello_world_out.vcd
-# ** Error: Unrecognized argument "old_id_stage_hello_world_out.vcd".
-# Usage: wlf2vcd [<Options>...] [-o <outfile>] <wlffile>
-# Options:
-#     -help        Print this message
-#     -quiet       Don't report warnings
-wlf2vcd gold_id_stage_hello_world_out.wlf -o old_id_stage_hello_world_out.vcd
-ld
-# /usr/bin/ld: no input files
-ls
-# gold_id_stage_hello_world_in.vcd
-# gold_id_stage_hello_world_out.wlf
-# old_id_stage_hello_world_out.vcd
+vlib work
+touch .lib-rtl
+vlog -O0 -work work  -pedanticerrors -suppress 2577 -suppress 2583 -f /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p_ref/cv32e40p_manifest.flist
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:17:02 on Mar 03,2021
+# vlog -reportprogress 300 -O0 -work work -pedanticerrors -suppress 2577 -suppress 2583 -f /home/thesis/elia.ribaldone/Desktop/core-v-verif/core-v-cores/cv32e40p_ref/cv32e40p_manifest.flist 
+# ** Error: (vlog-7) Failed to open design unit file "/include/cv32e40p_apu_core_pkg.sv" in read mode.
+# No such file or directory. (errno = ENOENT)
+# End time: 12:17:02 on Mar 03,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/europractice-release-2019/mentor/questa10.7c/questasim/linux_x86_64/vlog failed.

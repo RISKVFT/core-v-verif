@@ -1,5 +1,5 @@
-# vsim -modelsimini ../modelsim.ini -wlfcollapsedelta -quiet -c -vcdstim ./dataset/gold-ref-if_stage-misalign-in.vcd -debugDB "+dumpports+nocollapse" cv32e40p_if_stage_vopt -do "../../questa/vsim_stage_compare.tcl" 
-# Start time: 19:02:41 on Feb 25,2021
+# vsim -modelsimini ../modelsim.ini -wlfcollapsedelta -quiet -c -vcdstim ./dataset/gold-ref-if_stage-cv32e40p_csr_access_test-in.vcd -debugDB "+dumpports+nocollapse" cv32e40p_if_stage_vopt -do "../../questa/vsim_stage_compare.tcl" 
+# Start time: 21:51:31 on Feb 28,2021
 # //  Questa Sim-64
 # //  Version 10.7c linux_x86_64 Aug 17 2018
 # //
@@ -18,17 +18,17 @@
 # do ../../questa/vsim_stage_compare.tcl
 # /home/thesis/elia.ribaldone/Desktop/core-v-verif
 # tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i
-# gold_ref_if_stage_misalign
-# gold-ref-if_stage-misalign
+# gold_ref_if_stage_cv32e40p_csr_access_test
+# gold-ref-if_stage-cv32e40p_csr_access_test
 # if_stage
-# 35879799
-# 10
+# 94999
+# 680
 # 1
-# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/cnt_error-if_stage-misalign-10-1.txt
-# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/info-if_stage-misalign-10-1.txt
-# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/cycle-if_stage-misalign-10-1.txt
-# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/signals_fault_injection-if_stage-misalign-10-1.txt
-# 3587979
+# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/cnt_error-if_stage-cv32e40p_csr_access_test-680-1.txt
+# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/info-if_stage-cv32e40p_csr_access_test-680-1.txt
+# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/cycle-if_stage-cv32e40p_csr_access_test-680-1.txt
+# /home/thesis/elia.ribaldone/Desktop/core-v-verif/cv32/sim/core/sim_FT/sim_out/signals_fault_injection-if_stage-cv32e40p_csr_access_test-680-1.txt
+# 9499
 # cv32e40p_if_stage
 # ns
 # 0
@@ -39,3 +39,1123 @@
 # /cv32e40p_if_stage/trap_addr_mux_i /cv32e40p_if_stage/instr_rdata_i /cv32e40p_if_stage/m_exc_vec_pc_mux_i /cv32e40p_if_stage/uepc_i /cv32e40p_if_stage/hwlp_jump_i /cv32e40p_if_stage/jump_target_ex_i /cv32e40p_if_stage/jump_target_id_i /cv32e40p_if_stage/halt_if_i /cv32e40p_if_stage/m_trap_base_addr_i /cv32e40p_if_stage/id_ready_i /cv32e40p_if_stage/exc_pc_mux_i /cv32e40p_if_stage/dm_halt_addr_i /cv32e40p_if_stage/u_exc_vec_pc_mux_i /cv32e40p_if_stage/pc_mux_i /cv32e40p_if_stage/depc_i /cv32e40p_if_stage/instr_err_pmp_i /cv32e40p_if_stage/mepc_i /cv32e40p_if_stage/clear_instr_valid_i /cv32e40p_if_stage/pc_set_i /cv32e40p_if_stage/boot_addr_i /cv32e40p_if_stage/u_trap_base_addr_i /cv32e40p_if_stage/req_i /cv32e40p_if_stage/instr_gnt_i /cv32e40p_if_stage/instr_err_i /cv32e40p_if_stage/hwlp_target_i /cv32e40p_if_stage/dm_exception_addr_i /cv32e40p_if_stage/instr_rvalid_i /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/flush_cnt_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_addr_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_atop_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q /cv32e40p_if_stage/aligner_i/hwlp_addr_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_be_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_q /cv32e40p_if_stage/aligner_i/aligner_ready_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/write_pointer_q /cv32e40p_if_stage/aligner_i/instr_valid_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_wdata_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/hwlp_flush_cnt_delayed_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/mem_q /cv32e40p_if_stage/aligner_i/pc_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/status_cnt_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/state_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/state_q /cv32e40p_if_stage/aligner_i/hwlp_update_pc_q /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/read_pointer_q /cv32e40p_if_stage/aligner_i/branch_addr_q /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/cnt_q /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_err_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_o /cv32e40p_if_stage/aligner_i/aligner_ready_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/trans_ready_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/busy_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_push_o /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/full_o /cv32e40p_if_stage/aligner_i/instr_valid_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_rdata_o /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/cnt_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_flush_but_first_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_valid_o /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/empty_o /cv32e40p_if_stage/aligner_i/pc_o /cv32e40p_if_stage/aligner_i/instr_aligned_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_req_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/resp_valid_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_wdata_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fetch_valid_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_pop_o /cv32e40p_if_stage/prefetch_buffer_i/fifo_i/data_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_addr_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_atop_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_we_o /cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/fifo_flush_o /cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/obi_be_o
 # 1
 # file17
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 6161 ns to 6461 ns
+# No differences found.
+# Updating waveform differences from time 6461 ns to 6761 ns
+# No new differences found.
+# Updating waveform differences from time 6761 ns to 7061 ns
+# No new differences found.
+# Updating waveform differences from time 7061 ns to 7361 ns
+# No new differences found.
+# Updating waveform differences from time 7361 ns to 7661 ns
+# No new differences found.
+# Updating waveform differences from time 7661 ns to 7961 ns
+# No new differences found.
+# Updating waveform differences from time 7961 ns to 8261 ns
+# No new differences found.
+# Updating waveform differences from time 8261 ns to 8561 ns
+# No new differences found.
+# Updating waveform differences from time 8561 ns to 8861 ns
+# No new differences found.
+# Updating waveform differences from time 8861 ns to 9161 ns
+# No new differences found.
+# Updating waveform differences from time 9161 ns to 9461 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 2919 ns to 6580 ns
+# No differences found.
+# Updating waveform differences from time 6580100 ps to 6939 ns
+# No new differences found.
+# Updating waveform differences from time 6939 ns to 7559 ns
+# No new differences found.
+# Updating waveform differences from time 7559 ns to 8179 ns
+# No new differences found.
+# Updating waveform differences from time 8179 ns to 8799 ns
+# No new differences found.
+# Updating waveform differences from time 8799 ns to 9419 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 3720 ns to 5779 ns
+# No differences found.
+# Updating waveform differences from time 5779100 ps to 6180 ns
+# No new differences found.
+# Updating waveform differences from time 6180 ns to 6720 ns
+# No new differences found.
+# Updating waveform differences from time 6720 ns to 7260 ns
+# No new differences found.
+# Updating waveform differences from time 7260 ns to 7800 ns
+# No new differences found.
+# Updating waveform differences from time 7800 ns to 8340 ns
+# No new differences found.
+# Updating waveform differences from time 8340 ns to 8880 ns
+# No new differences found.
+# Updating waveform differences from time 8880 ns to 9420 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 9448 ns to 9499 ns
+# No differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 4052 ns to 5447 ns
+# No differences found.
+# Updating waveform differences from time 5447100 ps to 5882 ns
+# No new differences found.
+# Updating waveform differences from time 5882 ns to 6392 ns
+# No new differences found.
+# Updating waveform differences from time 6392 ns to 6902 ns
+# No new differences found.
+# Updating waveform differences from time 6902 ns to 7412 ns
+# No new differences found.
+# Updating waveform differences from time 7412 ns to 7922 ns
+# No new differences found.
+# Updating waveform differences from time 7922 ns to 8432 ns
+# No new differences found.
+# Updating waveform differences from time 8432 ns to 8942 ns
+# No new differences found.
+# Updating waveform differences from time 8942 ns to 9452 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 8889 ns to 9189 ns
+# No differences found.
+# Updating waveform differences from time 9189 ns to 9219 ns
+# No new differences found.
+# Updating waveform differences from time 9219 ns to 9249 ns
+# No new differences found.
+# Updating waveform differences from time 9249 ns to 9279 ns
+# No new differences found.
+# Updating waveform differences from time 9279 ns to 9309 ns
+# No new differences found.
+# Updating waveform differences from time 9309 ns to 9339 ns
+# No new differences found.
+# Updating waveform differences from time 9339 ns to 9369 ns
+# No new differences found.
+# Updating waveform differences from time 9369 ns to 9399 ns
+# No new differences found.
+# Updating waveform differences from time 9399 ns to 9429 ns
+# No new differences found.
+# Updating waveform differences from time 9429 ns to 9459 ns
+# No new differences found.
+# Updating waveform differences from time 9459 ns to 9489 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 6370 ns to 6670 ns
+# No differences found.
+# Updating waveform differences from time 6670 ns to 6950 ns
+# No new differences found.
+# Updating waveform differences from time 6950 ns to 7230 ns
+# No new differences found.
+# Updating waveform differences from time 7230 ns to 7510 ns
+# No new differences found.
+# Updating waveform differences from time 7510 ns to 7790 ns
+# No new differences found.
+# Updating waveform differences from time 7790 ns to 8070 ns
+# No new differences found.
+# Updating waveform differences from time 8070 ns to 8350 ns
+# No new differences found.
+# Updating waveform differences from time 8350 ns to 8630 ns
+# No new differences found.
+# Updating waveform differences from time 8630 ns to 8910 ns
+# No new differences found.
+# Updating waveform differences from time 8910 ns to 9190 ns
+# No new differences found.
+# Updating waveform differences from time 9190 ns to 9470 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 6910 ns to 7210 ns
+# 
+# Max total difference limit of 1 reached.
+# Comparison reached total difference limit at time 6920100 ps
+# Found 1 difference.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 9442 ns to 9499 ns
+# No differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 2815 ns to 6684 ns
+# No differences found.
+# Updating waveform differences from time 6684100 ps to 6895 ns
+# No new differences found.
+# Updating waveform differences from time 6895 ns to 7525 ns
+# No new differences found.
+# Updating waveform differences from time 7525 ns to 8155 ns
+# No new differences found.
+# Updating waveform differences from time 8155 ns to 8785 ns
+# No new differences found.
+# Updating waveform differences from time 8785 ns to 9415 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 6760 ns to 7060 ns
+# No differences found.
+# Updating waveform differences from time 7060 ns to 7300 ns
+# No new differences found.
+# Updating waveform differences from time 7300 ns to 7540 ns
+# No new differences found.
+# Updating waveform differences from time 7540 ns to 7780 ns
+# No new differences found.
+# Updating waveform differences from time 7780 ns to 8020 ns
+# No new differences found.
+# Updating waveform differences from time 8020 ns to 8260 ns
+# No new differences found.
+# Updating waveform differences from time 8260 ns to 8500 ns
+# No new differences found.
+# Updating waveform differences from time 8500 ns to 8740 ns
+# No new differences found.
+# Updating waveform differences from time 8740 ns to 8980 ns
+# No new differences found.
+# Updating waveform differences from time 8980 ns to 9220 ns
+# No new differences found.
+# Updating waveform differences from time 9220 ns to 9460 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 6677 ns to 6977 ns
+# No differences found.
+# Updating waveform differences from time 6977 ns to 7227 ns
+# No new differences found.
+# Updating waveform differences from time 7227 ns to 7477 ns
+# No new differences found.
+# Updating waveform differences from time 7477 ns to 7727 ns
+# No new differences found.
+# Updating waveform differences from time 7727 ns to 7977 ns
+# No new differences found.
+# Updating waveform differences from time 7977 ns to 8227 ns
+# No new differences found.
+# Updating waveform differences from time 8227 ns to 8477 ns
+# No new differences found.
+# Updating waveform differences from time 8477 ns to 8727 ns
+# No new differences found.
+# Updating waveform differences from time 8727 ns to 8977 ns
+# No new differences found.
+# Updating waveform differences from time 8977 ns to 9227 ns
+# No new differences found.
+# Updating waveform differences from time 9227 ns to 9477 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 3780 ns to 5719 ns
+# No differences found.
+# Updating waveform differences from time 5719100 ps to 6240 ns
+# No new differences found.
+# Updating waveform differences from time 6240 ns to 6780 ns
+# No new differences found.
+# Updating waveform differences from time 6780 ns to 7320 ns
+# No new differences found.
+# Updating waveform differences from time 7320 ns to 7860 ns
+# No new differences found.
+# Updating waveform differences from time 7860 ns to 8400 ns
+# No new differences found.
+# Updating waveform differences from time 8400 ns to 8940 ns
+# No new differences found.
+# Updating waveform differences from time 8940 ns to 9480 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 1186 ns to 8313 ns
+# No differences found.
+# Updating waveform differences from time 8313100 ps to 8686 ns
+# No new differences found.
+# Updating waveform differences from time 8686 ns to 9486 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 147 ns to 9352 ns
+# No differences found.
+# Updating waveform differences from time 9352100 ps to 9447 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 7767 ns to 8067 ns
+# No differences found.
+# Updating waveform differences from time 8067 ns to 8207 ns
+# No new differences found.
+# Updating waveform differences from time 8207 ns to 8347 ns
+# No new differences found.
+# Updating waveform differences from time 8347 ns to 8487 ns
+# No new differences found.
+# Updating waveform differences from time 8487 ns to 8627 ns
+# No new differences found.
+# Updating waveform differences from time 8627 ns to 8767 ns
+# No new differences found.
+# Updating waveform differences from time 8767 ns to 8907 ns
+# No new differences found.
+# Updating waveform differences from time 8907 ns to 9047 ns
+# No new differences found.
+# Updating waveform differences from time 9047 ns to 9187 ns
+# No new differences found.
+# Updating waveform differences from time 9187 ns to 9327 ns
+# No new differences found.
+# Updating waveform differences from time 9327 ns to 9467 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 8655 ns to 8955 ns
+# No differences found.
+# Updating waveform differences from time 8955 ns to 9005 ns
+# No new differences found.
+# Updating waveform differences from time 9005 ns to 9055 ns
+# No new differences found.
+# Updating waveform differences from time 9055 ns to 9105 ns
+# No new differences found.
+# Updating waveform differences from time 9105 ns to 9155 ns
+# No new differences found.
+# Updating waveform differences from time 9155 ns to 9205 ns
+# No new differences found.
+# Updating waveform differences from time 9205 ns to 9255 ns
+# No new differences found.
+# Updating waveform differences from time 9255 ns to 9305 ns
+# No new differences found.
+# Updating waveform differences from time 9305 ns to 9355 ns
+# No new differences found.
+# Updating waveform differences from time 9355 ns to 9405 ns
+# No new differences found.
+# Updating waveform differences from time 9405 ns to 9455 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 3405 ns to 6094 ns
+# No differences found.
+# Updating waveform differences from time 6094100 ps to 6555 ns
+# No new differences found.
+# Updating waveform differences from time 6555 ns to 7125 ns
+# No new differences found.
+# Updating waveform differences from time 7125 ns to 7695 ns
+# No new differences found.
+# Updating waveform differences from time 7695 ns to 8265 ns
+# No new differences found.
+# Updating waveform differences from time 8265 ns to 8835 ns
+# No new differences found.
+# Updating waveform differences from time 8835 ns to 9405 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 2957 ns to 6542 ns
+# No differences found.
+# Updating waveform differences from time 6542100 ps to 6977 ns
+# No new differences found.
+# Updating waveform differences from time 6977 ns to 7597 ns
+# No new differences found.
+# Updating waveform differences from time 7597 ns to 8217 ns
+# No new differences found.
+# Updating waveform differences from time 8217 ns to 8837 ns
+# No new differences found.
+# Updating waveform differences from time 8837 ns to 9457 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 9334 ns to 9499 ns
+# No differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 4528 ns to 4971 ns
+# No differences found.
+# Updating waveform differences from time 4971100 ps to 5288 ns
+# No new differences found.
+# Updating waveform differences from time 5288 ns to 5748 ns
+# No new differences found.
+# Updating waveform differences from time 5748 ns to 6208 ns
+# No new differences found.
+# Updating waveform differences from time 6208 ns to 6668 ns
+# No new differences found.
+# Updating waveform differences from time 6668 ns to 7128 ns
+# No new differences found.
+# Updating waveform differences from time 7128 ns to 7588 ns
+# No new differences found.
+# Updating waveform differences from time 7588 ns to 8048 ns
+# No new differences found.
+# Updating waveform differences from time 8048 ns to 8508 ns
+# No new differences found.
+# Updating waveform differences from time 8508 ns to 8968 ns
+# No new differences found.
+# Updating waveform differences from time 8968 ns to 9428 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 787 ns to 8712 ns
+# No differences found.
+# Updating waveform differences from time 8712100 ps to 9487 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 1906 ns to 7593 ns
+# No differences found.
+# Updating waveform differences from time 7593100 ps to 7966 ns
+# No new differences found.
+# Updating waveform differences from time 7966 ns to 8686 ns
+# No new differences found.
+# Updating waveform differences from time 8686 ns to 9406 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 4837 ns to 5137 ns
+# No differences found.
+# Updating waveform differences from time 5137 ns to 5567 ns
+# No new differences found.
+# Updating waveform differences from time 5567 ns to 5997 ns
+# No new differences found.
+# Updating waveform differences from time 5997 ns to 6427 ns
+# No new differences found.
+# Updating waveform differences from time 6427 ns to 6857 ns
+# No new differences found.
+# Updating waveform differences from time 6857 ns to 7287 ns
+# No new differences found.
+# Updating waveform differences from time 7287 ns to 7717 ns
+# No new differences found.
+# Updating waveform differences from time 7717 ns to 8147 ns
+# No new differences found.
+# Updating waveform differences from time 8147 ns to 8577 ns
+# No new differences found.
+# Updating waveform differences from time 8577 ns to 9007 ns
+# No new differences found.
+# Updating waveform differences from time 9007 ns to 9437 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 3777 ns to 5722 ns
+# No differences found.
+# Updating waveform differences from time 5722100 ps to 6237 ns
+# No new differences found.
+# Updating waveform differences from time 6237 ns to 6777 ns
+# No new differences found.
+# Updating waveform differences from time 6777 ns to 7317 ns
+# No new differences found.
+# Updating waveform differences from time 7317 ns to 7857 ns
+# No new differences found.
+# Updating waveform differences from time 7857 ns to 8397 ns
+# No new differences found.
+# Updating waveform differences from time 8397 ns to 8937 ns
+# No new differences found.
+# Updating waveform differences from time 8937 ns to 9477 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 5401 ns to 5701 ns
+# No differences found.
+# Updating waveform differences from time 5701 ns to 6071 ns
+# No new differences found.
+# Updating waveform differences from time 6071 ns to 6441 ns
+# No new differences found.
+# Updating waveform differences from time 6441 ns to 6811 ns
+# No new differences found.
+# Updating waveform differences from time 6811 ns to 7181 ns
+# No new differences found.
+# Updating waveform differences from time 7181 ns to 7551 ns
+# No new differences found.
+# Updating waveform differences from time 7551 ns to 7921 ns
+# No new differences found.
+# Updating waveform differences from time 7921 ns to 8291 ns
+# No new differences found.
+# Updating waveform differences from time 8291 ns to 8661 ns
+# No new differences found.
+# Updating waveform differences from time 8661 ns to 9031 ns
+# No new differences found.
+# Updating waveform differences from time 9031 ns to 9401 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 964 ns to 8535 ns
+# No differences found.
+# Updating waveform differences from time 8535100 ps to 8644 ns
+# No new differences found.
+# Updating waveform differences from time 8644 ns to 9464 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 188 ns to 9311 ns
+# No differences found.
+# Updating waveform differences from time 9311100 ps to 9488 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 2600 ns to 6899 ns
+# No differences found.
+# Updating waveform differences from time 6899100 ps to 7450 ns
+# 
+# Max total difference limit of 1 reached.
+# Comparison reached total difference limit at time 6900100 ps
+# Found 1 new difference.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 2043 ns to 7456 ns
+# No differences found.
+# Updating waveform differences from time 7456100 ps to 8023 ns
+# No new differences found.
+# Updating waveform differences from time 8023 ns to 8733 ns
+# No new differences found.
+# Updating waveform differences from time 8733 ns to 9443 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 3977 ns to 5522 ns
+# No differences found.
+# Updating waveform differences from time 5522100 ps to 5837 ns
+# No new differences found.
+# Updating waveform differences from time 5837 ns to 6357 ns
+# No new differences found.
+# Updating waveform differences from time 6357 ns to 6877 ns
+# No new differences found.
+# Updating waveform differences from time 6877 ns to 7397 ns
+# No new differences found.
+# Updating waveform differences from time 7397 ns to 7917 ns
+# No new differences found.
+# Updating waveform differences from time 7917 ns to 8437 ns
+# No new differences found.
+# Updating waveform differences from time 8437 ns to 8957 ns
+# No new differences found.
+# Updating waveform differences from time 8957 ns to 9477 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 3816 ns to 5683 ns
+# No differences found.
+# Updating waveform differences from time 5683100 ps to 5706 ns
+# No new differences found.
+# Updating waveform differences from time 5706 ns to 6236 ns
+# No new differences found.
+# Updating waveform differences from time 6236 ns to 6766 ns
+# No new differences found.
+# Updating waveform differences from time 6766 ns to 7296 ns
+# No new differences found.
+# Updating waveform differences from time 7296 ns to 7826 ns
+# No new differences found.
+# Updating waveform differences from time 7826 ns to 8356 ns
+# No new differences found.
+# Updating waveform differences from time 8356 ns to 8886 ns
+# No new differences found.
+# Updating waveform differences from time 8886 ns to 9416 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 3916 ns to 5583 ns
+# No differences found.
+# Updating waveform differences from time 5583100 ps to 5776 ns
+# No new differences found.
+# Updating waveform differences from time 5776 ns to 6296 ns
+# No new differences found.
+# Updating waveform differences from time 6296 ns to 6816 ns
+# No new differences found.
+# Updating waveform differences from time 6816 ns to 7336 ns
+# No new differences found.
+# Updating waveform differences from time 7336 ns to 7856 ns
+# No new differences found.
+# Updating waveform differences from time 7856 ns to 8376 ns
+# No new differences found.
+# Updating waveform differences from time 8376 ns to 8896 ns
+# No new differences found.
+# Updating waveform differences from time 8896 ns to 9416 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 5296 ns to 5596 ns
+# No differences found.
+# Updating waveform differences from time 5596 ns to 5986 ns
+# No new differences found.
+# Updating waveform differences from time 5986 ns to 6376 ns
+# No new differences found.
+# Updating waveform differences from time 6376 ns to 6766 ns
+# No new differences found.
+# Updating waveform differences from time 6766 ns to 7156 ns
+# No new differences found.
+# Updating waveform differences from time 7156 ns to 7546 ns
+# No new differences found.
+# Updating waveform differences from time 7546 ns to 7936 ns
+# No new differences found.
+# Updating waveform differences from time 7936 ns to 8326 ns
+# No new differences found.
+# Updating waveform differences from time 8326 ns to 8716 ns
+# No new differences found.
+# Updating waveform differences from time 8716 ns to 9106 ns
+# No new differences found.
+# Updating waveform differences from time 9106 ns to 9496 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 1353 ns to 8146 ns
+# No differences found.
+# Updating waveform differences from time 8146100 ps to 8673 ns
+# No new differences found.
+# Updating waveform differences from time 8673 ns to 9453 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 390 ns to 9109 ns
+# No differences found.
+# Updating waveform differences from time 9109100 ps to 9490 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 7046 ns to 7346 ns
+# No differences found.
+# Updating waveform differences from time 7346 ns to 7556 ns
+# No new differences found.
+# Updating waveform differences from time 7556 ns to 7766 ns
+# No new differences found.
+# Updating waveform differences from time 7766 ns to 7976 ns
+# No new differences found.
+# Updating waveform differences from time 7976 ns to 8186 ns
+# No new differences found.
+# Updating waveform differences from time 8186 ns to 8396 ns
+# No new differences found.
+# Updating waveform differences from time 8396 ns to 8606 ns
+# No new differences found.
+# Updating waveform differences from time 8606 ns to 8816 ns
+# No new differences found.
+# Updating waveform differences from time 8816 ns to 9026 ns
+# No new differences found.
+# Updating waveform differences from time 9026 ns to 9236 ns
+# No new differences found.
+# Updating waveform differences from time 9236 ns to 9446 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 5977 ns to 6277 ns
+# No differences found.
+# Updating waveform differences from time 6277 ns to 6597 ns
+# No new differences found.
+# Updating waveform differences from time 6597 ns to 6917 ns
+# No new differences found.
+# Updating waveform differences from time 6917 ns to 7237 ns
+# No new differences found.
+# Updating waveform differences from time 7237 ns to 7557 ns
+# No new differences found.
+# Updating waveform differences from time 7557 ns to 7877 ns
+# No new differences found.
+# Updating waveform differences from time 7877 ns to 8197 ns
+# No new differences found.
+# Updating waveform differences from time 8197 ns to 8517 ns
+# No new differences found.
+# Updating waveform differences from time 8517 ns to 8837 ns
+# No new differences found.
+# Updating waveform differences from time 8837 ns to 9157 ns
+# No new differences found.
+# Updating waveform differences from time 9157 ns to 9477 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 9102 ns to 9402 ns
+# No differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 8065 ns to 8365 ns
+# No differences found.
+# Updating waveform differences from time 8365 ns to 8475 ns
+# No new differences found.
+# Updating waveform differences from time 8475 ns to 8585 ns
+# No new differences found.
+# Updating waveform differences from time 8585 ns to 8695 ns
+# No new differences found.
+# Updating waveform differences from time 8695 ns to 8805 ns
+# No new differences found.
+# Updating waveform differences from time 8805 ns to 8915 ns
+# No new differences found.
+# Updating waveform differences from time 8915 ns to 9025 ns
+# No new differences found.
+# Updating waveform differences from time 9025 ns to 9135 ns
+# No new differences found.
+# Updating waveform differences from time 9135 ns to 9245 ns
+# No new differences found.
+# Updating waveform differences from time 9245 ns to 9355 ns
+# No new differences found.
+# Updating waveform differences from time 9355 ns to 9465 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 2528 ns to 6971 ns
+# No differences found.
+# Updating waveform differences from time 6971100 ps to 7448 ns
+# No new differences found.
+# Updating waveform differences from time 7448 ns to 8108 ns
+# No new differences found.
+# Updating waveform differences from time 8108 ns to 8768 ns
+# No new differences found.
+# Updating waveform differences from time 8768 ns to 9428 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 5624 ns to 5924 ns
+# 
+# Max total difference limit of 1 reached.
+# Comparison reached total difference limit at time 5630100 ps
+# Found 1 difference.
+# ** Note: (vsim-8716) Reusing existing debug database vsim.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.

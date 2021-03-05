@@ -1366,7 +1366,7 @@ function sim_stage_fault_injection_upi () {
 		db_becho "Software: $hexfile"
 		for i in $hexfile;do	
 			software=$(echo $i | cut -d "." -f 1) 
-			db_becho "RUN: -sfiupi atsbfc $ARCH_TO_USE $ARCH_TO_COMPARE $software $STG $FI $CYCLE"
+			db_becho "RUN: -qsfiupi atsbfc $ARCH_TO_USE $ARCH_TO_COMPARE $software $STG $FI $CYCLE"
 			write_PIPENAME "$software"
 			db_becho "[INFO]: Write software in pipe"
 			execute_in_terminal "./comp_sim.sh -qsfiupi atsbfc $ARCH_TO_USE $ARCH_TO_COMPARE $software $STG $FI $CYCLE -p $pipe_cov_simulation $FORCE_OVW" "simulation"
