@@ -62,7 +62,7 @@ foreach sig_fi $sim_fi_sig {
 
 # function to calculate the number of cycle
 set P 0.5
-set E 0.01
+set E 0.05
 set N [ expr ($total_bit/10)*$ENDSIM ]
 set T 2.5758
 #(1.96 confidence of 95%)

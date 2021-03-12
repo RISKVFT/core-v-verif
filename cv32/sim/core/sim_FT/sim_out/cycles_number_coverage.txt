@@ -1,0 +1,6 @@
+fibonacci-ex_stage: n_bits:3773 n_cycles:663
+coremark_1-ex_stage: n_bits:3773 n_cycles:663
+counters-ex_stage: n_bits:3773 n_cycles:663
+csr_instructions-ex_stage: n_bits:3773 n_cycles:663
+cv32e40p_csr_access_test-ex_stage: n_bits:3773 n_cycles:663
+dhrystone-ex_stage: n_bits:3773 n_cycles:663

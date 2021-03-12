@@ -70,7 +70,7 @@ repMakeFile () {
                 else \
                         print $0}' \
          $file > $file.t
-         mv $file{.t,}	
+         cp $file.t $file	
 }
 # Replace default TEST_DIR with desired directory 
 repfile () {
@@ -83,7 +83,7 @@ repfile () {
                 else \
                         print $0}' \
          $file > $file.t
-         mv $file{.t,}
+         cp $file.t $file
          chmod 777 $file
 }
 
@@ -240,6 +240,7 @@ mon_run (){
 	   # $4 è l'eventuale numero di riga
 	   echo "Comando:|$1|"
 	   echo "Line $4: $1" >> trace_command.txt
+	   echo $2
 	   mkdir -p $(dirname $2)
 	   touch $2
 	   err_file=$(delExt $2)_err.txt

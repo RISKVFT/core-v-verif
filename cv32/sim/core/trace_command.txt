@@ -70,3 +70,5 @@ Line 524: make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tests/programs
 Line 534: make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/sim/core/sim_FT questa-sim TEST_FILE=/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tests/programs/custom_FT/general_test/fibonacci/fibonacci 			FT= ARCH=_ft
 Line 522: make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tests/programs/custom_FT/general_test/fibonacci -f /home/thesis/luca.fiore/Repos/core-v-verif/cv32/sim/core/sim_FT/Makefile_Compile.mk
 Line 522: make -C /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tests/programs/custom_FT/general_test/fibonacci -f /home/thesis/luca.fiore/Repos/core-v-verif/cv32/sim/core/sim_FT/Makefile_Compile.mk
+Line 1: make -C /home/thesis/luca.fiore/Repos/core-v-verif//cv32/tests/programs/custom_FT/general_test/requested_csr_por -f /home/thesis/luca.fiore/Repos/core-v-verif/cv32/sim/core/sim_FT/Makefile_Compile.mk
+Line 1: make -C /home/thesis/luca.fiore/Repos/core-v-verif//cv32/tests/programs/custom_FT/general_test/requested_csr_por -f /home/thesis/luca.fiore/Repos/core-v-verif/cv32/sim/core/sim_FT/Makefile_Compile.mk

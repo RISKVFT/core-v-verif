@@ -65,7 +65,7 @@ VOPT_FLAGS    = -debugdb -fsmdebug -pedanticerrors +acc #=mnprft
 
 VSIM              = vsim
 VSIM_HOME         = /usr/pack/modelsim-$(VVERSION)-kgf/questasim
-VSIM_FLAGS       ?= -nowlfcollapse -quiet # user defined
+VSIM_FLAGS       ?= -modelsimini ../modelsim.ini -wlfcollapsedelta -quiet # user defined
 ALL_VSIM_FLAGS    = $(VSIM_FLAGS)
 VSIM_DEBUG_FLAGS  = -debugdb
 VSIM_GUI_FLAGS    = -gui -debugdb

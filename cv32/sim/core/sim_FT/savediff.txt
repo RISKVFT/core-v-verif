@@ -1,0 +1,7 @@
+1
+{Internal Model Technology file format, subject to change without notice}
+1 1
+{108140 ns} 1 {108440 ns} 5
+{108440 ns} 6 {111020 ns} 7
+1 /cv32e40p_ex_stage/\\cv32e40p_ex_stage/regfile_alu_wdata_fw_o<>tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/regfile_alu_wdata_fw_o\\ {111020 ns} 7 32'h003ffd6c 32'h003ffd70 0 0
+

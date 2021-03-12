@@ -3,12 +3,15 @@
 source ccommon.sh
 echo "argomenti: $@"
 
+rm -f comp_sim_tmp.sh
+cp comp_sim.sh comp_sim_tmp.sh
+
 # trap ctrl-c and call ctrl_c()
 trap ctrl_c INT
 trap exit_f EXIT
 #######################################################################
 # pipes
-name=$(echo $USER | rt '.' '_')
+name=$(echo $USER | tr '.' '_')
 pipe_in="/tmp/save_in_$name"
 pipe_out="/tmp/save_out_$name"
 ALL_SW_PIPE="/tmp/pipe_info_all_$name"
@@ -968,6 +971,11 @@ echo "
 }
 function manage_stage_fault_injection_upi () {
 	# Called by qsfiupi
+
+	FORCE_OVW=""
+	if [[ $OVWRITE_SIM == 1 ]]; then
+		FORCE_OVW="-f"
+	fi
 	
 	if [[ $(check_fio $1 -h -H h -help --help) == 1 ]]; then
 		manage_stage_fault_injection_upi_help
@@ -977,7 +985,7 @@ function manage_stage_fault_injection_upi () {
 	fi
 	
 	mkfifo $pipe_info
-	local comando="./comp_sim.sh -sfiupi $@ -p $pipe_info"
+	local comando="./comp_sim.sh -sfiupi $@ -p $pipe_info $FORCE_OVW"
 	local tname="sfiupi"
 
 	db_becho "PROCESS: Opening a new terminal to run simulations ... "
@@ -1267,26 +1275,27 @@ function sim_stage_fault_injection_upi () {
 			;;
 		esac
 	done
+	
 
 	# If we don't use fault injection is useless do cycle.
-	if [[ $FI -eq 0 ]]; then
-		export CYCLE=1
-		echo "Fault injection is equal to 0 so you can't cycle, CYCLE=1"
-	fi
+	#if [[ $FI -eq 0 ]]; then
+	#	export CYCLE=1
+	#	echo "Fault injection is equal to 0 so you can't cycle, CYCLE=1"
+	#fi
 
 	# If CYCLE is setted to "cov" we should calculate the number of cycle 
         # needed for a certain coverage and set it before the simulation	
 	if  [[ $CALC_CYCLE_ON -eq 1 ]]; then
-		db_becho "ENtered"
+		db_becho "Entered"
 		CYCLE="cov"	
 		if [[ -f "$SIM_CYCLE_NUMBER_FILE" ]]; then
 			line=$(cat "$SIM_CYCLE_NUMBER_FILE" | grep "$SWC-$REAL_STG:")
-			db_becho "ENtered line=$line"
+			db_becho "Entered line=$line"
 			if [[ $line != "" ]]; then
 				CYCLE=$(echo $line | rev | cut -d ":" -f 1 | rev)
 			fi
 		fi
-		db_becho "ENtered CYCLE=$CYCLE"
+		db_becho "Entered CYCLE=$CYCLE"
 		# If CYCLE don't change means that the cycle for this stage
 		# are not already calculated and stored in SIM_CYCLE_NUMBER_FILE file.
 		# In this case we should calculate it
@@ -1300,6 +1309,15 @@ function sim_stage_fault_injection_upi () {
 			db_becho "CYCLE = $CYCLE"
 		fi
 		
+	fi
+
+	
+	# If we want to repeat a benchmark
+	FORCE_OVW=""
+	if [[ $OVWRITE_SIM == 1 ]]; then
+		db_becho "INFO: removing *${STG}-${SWC}-${CYCLE}-${FI}.txt files..."
+		rm -f ./sim_FT/sim_out/*${STG}-${SWC}-${CYCLE}-${FI}.txt
+		FORCE_OVW="-f"
 	fi
 
 	# Set error file used to save number of error of the simulation
@@ -1327,7 +1345,6 @@ function sim_stage_fault_injection_upi () {
 	# Verifica dei file vcd di input e wlf di output
 	db_becho "[INFO] real_stg: $REAL_STG"
 	db_becho "[INFO] stg: $STG"
-	verify_upi_vcdwlf $SW $STG $REAL_STG
 	
 	############# RUN SIMULATION #############################
 	if [[ $SWC == "all" ]]; then
@@ -1346,16 +1363,21 @@ function sim_stage_fault_injection_upi () {
 		mkfifo $ALL_SW_PIPE
 		PIPENAME=$ALL_SW_PIPE
 		mkfifo $pipe_cov_simulation
+		db_becho "Software: $hexfile"
 		for i in $hexfile;do	
 			software=$(echo $i | cut -d "." -f 1) 
 			db_becho "RUN: -sfiupi atsbfc $ARCH_TO_USE $ARCH_TO_COMPARE $software $STG $FI $CYCLE"
-			execute_in_terminal "./comp_sim.sh -sfiupi atsbfc $ARCH_TO_USE $ARCH_TO_COMPARE $software $STG $FI $CYCLE -p $pipe_cov_simulation" "simulation"
-			kill_terminal_when_it_finished $pipe_cov_simulation "simulation"
 			write_PIPENAME "$software"
+			db_becho "[INFO]: Write software in pipe"
+			execute_in_terminal "./comp_sim.sh -sfiupi atsbfc $ARCH_TO_USE $ARCH_TO_COMPARE $software $STG $FI $CYCLE -p $pipe_cov_simulation $FORCE_OVW" "simulation"
+			db_becho "[INFO]: we are waiting comp_sim running in background"
+			kill_terminal_when_it_finished $pipe_cov_simulation "simulation"
+			db_becho "[INFO]: Killed terminal"
 		done	
 		sleep 1
 		write_PIPENAME "END"
 	else
+		verify_upi_vcdwlf $SW $STG $REAL_STG
 		############ Save parameter in a log file for -qsfiupi ##########
 		write_PIPENAME "cycle:$CYCLE"
 		db_becho "INFO: send CYCLE through pipe"
@@ -1370,7 +1392,11 @@ function sim_stage_fault_injection_upi () {
 		
 		db_becho "Simulation end time $T_ENDSIM"
 
-		sim_benchmark_programs atsvb $ARCH_TO_USE $ARCH_TO_COMPARE $SW stage_compare $STG
+		if [[ $CYCLE -ne 0 ]]; then
+			sim_benchmark_programs atsvb $ARCH_TO_USE $ARCH_TO_COMPARE $SW stage_compare $STG
+		else
+			rm $ERROR_DIR/*0-0*
+		fi
 		
 		timetwo=$(date +%s)
 		sim_total_time=$(($timetwo-$timeone))
@@ -1487,11 +1513,101 @@ function elaborate_simulation_output () {
 		db_gecho "Total number of signals that could be used" 
 		db_gecho "	for fault injection : $n_of_signal"
 		db_gecho "Fault tolerance ${fault_tolerance:0:6}%"
-		for sig_mean in $signals_mean; do
-			db_gecho "$(echo $sig_mean )"  #| sed -e 's/\#/ sig\:/g')"
-		done
+		#for sig_mean in $signals_mean; do
+			#db_gecho "$(echo $sig_mean )"  #| sed -e 's/\#/ sig\:/g')"
+		#done
 	fi	
 	db_gecho "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+}
+
+function signals_total_elaboration () {
+        local id=$1
+        local file_sig="$ERROR_DIR/$signals_fi_file_prefix$id.txt"
+        STE_SIGNALS=$(grep All_signals $file_sig | sort -u | cut -d ":" -f 2)
+        local signals=$STE_SIGNALS
+
+        # TODO: add percentage of fault tolerance for each signal
+        for sig in $signals; do
+                local l_errors=$(grep $sig $file_sig | grep sig_fault | tr -s " " |\
+                        cut -d " " -f 6 | cut -d ":" -f 2)
+                local tot_sim_n=$(echo $l_errors | wc -w )
+                local no_err_n=$(echo $l_errors | tr " " "\n" | grep ^0$ | wc -l )
+                if [[ $tot_sim_n -gt 0 ]]; then
+                        local tot_gen_errors=0
+                        for err in $l_errors; do
+                                let tot_gen_errors=tot_gen_errors+$err
+                        done
+                        local mean_gen_errors=$( echo "scale=2; $tot_gen_errors/$tot_sim_n" | bc -l)
+                        local percentage_errors=$(echo "scale=3; ($tot_sim_n-$no_err_n)/$tot_sim_n " | bc -l)
+                        err_n=$(echo "scale=3; $tot_sim_n-$no_err_n" | bc -l)
+                        ERROR_ELAB="$ERROR_ELAB $sig#mean_gen_err:$mean_gen_errors#perc_err:$percentage_errors#err:$err_n#sim:$tot_sim_n"
+                else
+                        ERROR_ELAB="$ERROR_ELAB $sig#mean_gen_err:0#perc_err:0#err:0#sim:0"
+                fi
+        done
+}
+
+elaborate_all_sim_output_help() { 
+echo -e "
+# Called by -aesfiupi
+# This function elaborate all output caming from a simulation with:
+#	- Same stage
+#	- Same cycle number
+# In this way we could mix many simulation with different software in
+# an unique static.
+# General form:
+#	comp_sim.sh -aesfiupi [h] stage_name cycle_number
+# Option:
+#	h -> call this man
+#
+"
+}
+function elaborate_all_sim_output () {
+
+	if [[ $(check_fio $1 -h -H h -help --help) == 1 ]]; then
+		elaborate_all_sim_output_help
+		exit 1;
+	fi
+
+        local stage=$1
+        local cycle=$2
+
+        local ids=$(echo $SIM_IDS | grep "$stage-.*-$cycle-1")
+        db_gecho "[INFO] ids elaborated: $ids"
+        ERROR_ELAB=""
+        for id in $ids; do
+                signals_total_elaboration $id
+        done
+        #signals_total_elaboration if_stage-csr_instructions-384-1
+        #echo $ERROR_ELAB
+        #echo $STE_SIGNALS
+        db_gecho "[INFO] Elaboration ..."
+        TOT_SIM_ERR_ELAB=""
+        for sig in $STE_SIGNALS; do
+                sig_elab=$(echo $ERROR_ELAB | tr " " "\n" | grep $sig)
+                db_becho "[INFO] elaboration of $sig"
+                local tot_sim=0
+                local tot_err=0
+                for se in $sig_elab; do
+                        tot_sim=$(echo "$(echo $se | tr "#" "\n" | grep sim | cut -d ":" -f 2)+$tot_sim" | bc -l)
+                        tot_err=$(echo "$(echo $se | tr "#" "\n" | grep ^err: | cut -d ":" -f 2)+$tot_err" | bc -l)
+                done
+                local percentage_errors=$(echo "scale=3; $tot_err/$tot_sim" | bc -l)
+                TOT_SIM_ERR_ELAB="$TOT_SIM_ERR_ELAB $sig#[perc_err:$percentage_errors#[err:$tot_err#[sim:$tot_sim"
+                #db_gecho $TOT_SIM_ERR_ELAB | tr " " "\n"
+        done
+        SIM_ERR_ELAB_ORD=$(echo $TOT_SIM_ERR_ELAB | tr " " "\n" | tr "#" " " | sed 's/:\./:0\./g' | sort -k 2.12,2.17 -n -r | tr " " "#")
+
+        echo "" > $ERROR_DIR/elab-$stage-all-$cycle-1.txt
+        printf "%-90s %5s %5s %5s\n" "Signal_name" "err %" "err_n" "sim_n"\
+                >> $ERROR_DIR/elab-$stage-all-$cycle-1.txt
+        printf "%-90s %5s %5s %5s\n" "Signal_name" "err %" "err_n" "sim_n"
+        for line in $SIM_ERR_ELAB_ORD; do
+                arr=($(echo $line | tr "#" " "  | tr ":" "\n" | tr " " "\n" | grep -v "\["))
+                printf "%-90s %5s %5s %5s\n" ${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} \
+                        >> $ERROR_DIR/elab-$stage-all-$cycle-1.txt
+                printf "%-90s %5s %5s %5s\n" ${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]}
+        done
 }
 
 ###########################################################################################
@@ -1510,14 +1626,18 @@ VERBOSE=1
 CLEAROUT=0
 ##########################
 
-if [[ "$CORE_V_VERIF" =~ "$USER" ]]; then
-	db_gecho "Variables for CORE_V_VERIF already setted!"
-else
-	cd ./../../../ 
-	CORE_V_VERIF=$(pwd)
-	./set_core_v_verif.sh
-	cd $CORE_V_VERIF/cv32/sim/core
-fi
+function set_core_v_verif() {
+	if [[ "$CORE_V_VERIF" =~ "$USER" ]]; then
+		db_gecho "Variables for CORE_V_VERIF already setted!"
+	else
+		cd ./../../../ 
+		CORE_V_VERIF=$(pwd)
+		./set_core_v_verif.sh
+		cd $CORE_V_VERIF/cv32/sim/core
+	fi
+}
+set_core_v_verif
+
 
 COMMONMK="$CORE_V_VERIF/cv32/sim/core/sim_FT/Common.mk"
 
@@ -1540,6 +1660,7 @@ export SIM_CYCLE_NUMBER_FILE="$ERROR_DIR/cycles_number_coverage.txt"
 # Set variable are used to correctly end program if only
 # this action are done, for example if only git repo 
 # is setted the program should ended since all is done
+OVWRITE_SIM=0
 ARCH=0
 SET_ARCH=0
 SET_DIR=0
@@ -1609,6 +1730,7 @@ A_REF_REPO_NAME="cv32e40p_ref"
 A_FT_REPO="https://github.com/RISKVFT/cv32e40p.git"
 A_FT_BRANCH="FT_Luca"
 A_FT_REPO_NAME="cv32e40p_ft"
+AESFIUPI=0
 
 
 
@@ -1881,6 +2003,10 @@ while [[ $1 != "" ]]; do
 			echo "qsfiupi args; $AR_qsfiupi_args"
 			shift $N_ARGS
 			;;
+		-f) # to use when vsim_stage_compare is run in order to overwrite a simulation
+			OVWRITE_SIM=1
+			shift			
+			;;
 		
 		########################################################################
 		# ELABORATION option
@@ -1893,6 +2019,15 @@ while [[ $1 != "" ]]; do
 			AR_esfiupi_args=$ARGS
 			shift $N_ARGS
 			;;
+
+		-aesfiupi)
+                        AESFIUPI=1
+                        elab_par $1
+                        shift
+                        find_args $@
+                        AR_aesfiupi_args=$ARGS
+                        shift $N_ARGS
+                        ;;
 
 
 		########################################################################
@@ -1945,6 +2080,10 @@ for par in $ELABPAR;do
 			# AR_esfiupi_args
 			elaborate_simulation_output $AR_esfiupi_args
 			;;
+		-aesfiupi)
+                        # AR_aesfiupi_args
+                        elaborate_all_sim_output $AR_aesfiupi_args
+                        ;;
 		*)
 			db_recho "ERROR: something goes wrong in the script!! in the for of elaboration"
 			exit
