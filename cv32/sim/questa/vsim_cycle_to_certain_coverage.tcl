@@ -1,4 +1,4 @@
-set CORE_V_VERIF "/home/thesis/elia.ribaldone/Desktop/core-v-verif"
+set CORE_V_VERIF "/home/elia.ribaldone/Desktop/core-v-verif"
 set STAGE_NAME "$env(STAGE_NAME)"
 set ENDSIM "$env(T_ENDSIM)"
 set SWC "$env(SWC)" 

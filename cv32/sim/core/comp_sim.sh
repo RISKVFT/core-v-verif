@@ -711,6 +711,7 @@ function sim_unique_program () {
 	if [[ $SIMULATION -eq 1 ]]; then
 		#rm -rf $CORE_V_VERIF/cv32/sim/core/sim_FT/work	
 		source /software/europractice-release-2019/scripts/init_questa10.7c	
+		source /software/scripts/init_questa10.7c
 		# full simulation path without extension 
 		mon_run "make -C $SIM_FT questa-sim$GUI TEST_FILE=$UNIQUE_CHEX_DIR/$CHEX_FILE \
 			FT=$VSIM_EXT ARCH=_$ARCH_TO_USE" $U_LOG_DIR/${CHEX_FILE}_sim.txt 1 $LINENO
@@ -913,6 +914,7 @@ function sim_benchmark_programs () {
 	if [[ $SIMULATION -eq 1 ]]; then
 		# simulation of all file in out directory of mibench
 		source /software/europractice-release-2019/scripts/init_questa10.7c
+		source /software/scripts/init_questa10.7c
 	
 		hexfiles=$(cd $BENCH_HEX_DIR; ls *.hex)
 		db_gecho "This are the *.hex file in $BENCH_HEX_DIR:"
@@ -1381,11 +1383,14 @@ function sim_stage_fault_injection_upi () {
 		############ Save parameter in a log file for -qsfiupi ##########
 		write_PIPENAME "cycle:$CYCLE"
 		db_becho "INFO: send CYCLE through pipe"
+		sleep 0.5
 		write_PIPENAME "cycle_file:$CYCLE_FILE"
 		db_becho "INFO: send CYCLE_FILE through pipe"
+		sleep 0.5
 		timeone=$(date +%s)
 		write_PIPENAME "start_time:$timeone"
 
+		sleep 1
 		
 		findEndsim $SWC $REAL_STG
 		export T_ENDSIM=$endsim
@@ -1620,7 +1625,7 @@ function elaborate_all_sim_output () {
 # FIXED variable       #################################################
 ########################################################################
 
-CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
+CORE_V_VERIF="/home/elia.ribaldone/Desktop/core-v-verif"
 
 ##########################
 # Directly setted by cmd line
