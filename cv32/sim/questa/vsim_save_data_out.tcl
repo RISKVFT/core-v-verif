@@ -1,4 +1,4 @@
-set CORE_V_VERIF "/home/thesis/luca.fiore/Repos/core-v-verif"
+set CORE_V_VERIF "/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif"
 set SIM_BASE "$env(SIM_BASE)"
 set GOLD_NAME "$env(GOLD_NAME_DATASET)"
 set STAGE_NAME "$env(STAGE_NAME)"

@@ -1,8 +1,10 @@
-set CORE_V_VERIF "/home/thesis/luca.fiore/Repos/core-v-verif"
+set CORE_V_VERIF "/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif"
 set STAGE_NAME "$env(STAGE_NAME)"
 set ENDSIM "$env(T_ENDSIM)"
 set SWC "$env(SWC)" 
 set info_filename "$env(SIM_CYCLE_NUMBER_FILE)"
+
+set ENDSIM [ expr {$ENDSIM/10} ]
 
 run 10ns
 # find real name of stage, if we simulate core we should give to comp_sim.sh
@@ -62,7 +64,7 @@ foreach sig_fi $sim_fi_sig {
 
 # function to calculate the number of cycle
 set P 0.5
-set E 0.01
+set E 0.05
 set N [ expr ($total_bit/10)*$ENDSIM ]
 set T 2.5758
 #(1.96 confidence of 95%)

@@ -1,0 +1,16 @@
+coremark_1-id_stage: n_bits:1774 n_cycles:663
+counters-id_stage: n_bits:1560 n_cycles:663
+csr_instructions-id_stage: n_bits:1560 n_cycles:663
+cv32e40p_csr_access_test-id_stage: n_bits:1560 n_cycles:663
+dhrystone-id_stage: n_bits:1560 n_cycles:663
+fibonacci-id_stage: n_bits:1560 n_cycles:663
+generic_exception_test-id_stage: n_bits:1560 n_cycles:663
+hello_world-id_stage: n_bits:1560 n_cycles:663
+illegal-id_stage: n_bits:1560 n_cycles:663
+interrupt_bootstrap-id_stage: n_bits:1560 n_cycles:663
+interrupt_test-id_stage: n_bits:1560 n_cycles:663
+misalign-id_stage: n_bits:1560 n_cycles:663
+modeled_csr_por-id_stage: n_bits:1560 n_cycles:663
+perf_counters_instructions-id_stage: n_bits:1560 n_cycles:663
+requested_csr_por-id_stage: n_bits:1560 n_cycles:663
+riscv_arithmetic_basic_test_0-id_stage: n_bits:1560 n_cycles:663

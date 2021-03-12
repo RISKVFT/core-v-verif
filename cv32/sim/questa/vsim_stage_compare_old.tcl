@@ -72,6 +72,7 @@ set arch_used [ lindex [ split $GOLD_NAME "_" ] 1 ]
 set stage_used [ lindex [ split $GOLD_NAME "_" ] 2 ]
 
 if { $stage_used == "id" } {
+	#set sim_fi_sig [ find nets  "sim:/${REAL_STAGE_NAME}/*_i" ]
 	set sim_fi_sig [ find nets  "sim:/${REAL_STAGE_NAME}/instr_valid_i" ]
 	set sim_fi_sig [ concat $sim_fi_sig [ find nets  "sim:/${REAL_STAGE_NAME}/instr_rdata_i" ] ]
 	set sim_fi_sig [ concat $sim_fi_sig [ find nets  "sim:/${REAL_STAGE_NAME}/is_compressed_i" ] ]
@@ -326,7 +327,7 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 	}
     ###da cancellare
     #puts "INFO SIM: current time $now"
-    #set fi_instant 76770
+    #set fi_instant 30000
 	#	
 	#	puts "INFO SIM: fault injection time $now (fi_instant=$fi_instant)"
     #for {set i 0} {$i < 32} {incr i} {
