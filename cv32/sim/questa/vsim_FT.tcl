@@ -1,4 +1,4 @@
-set CORE_V_VERIF "/home/thesis/luca.fiore/Repos/core-v-verif"
+set CORE_V_VERIF "/home/luca.fiore/Repos/core-v-verif"
 
 #add list -out /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/ex_stage_i/*
 #do $CORE_V_VERIF/cv32/sim/questa/vsim_FT.do

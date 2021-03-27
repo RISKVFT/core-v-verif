@@ -1,0 +1,12 @@
+generic_exception_test-ex_stage: n_bits:3773 n_cycles:663
+hello_world-ex_stage: n_bits:3773 n_cycles:663
+illegal-ex_stage: n_bits:3773 n_cycles:663
+interrupt_bootstrap-ex_stage: n_bits:3773 n_cycles:663
+interrupt_test-ex_stage: n_bits:3773 n_cycles:663
+misalign-ex_stage: n_bits:3773 n_cycles:663
+modeled_csr_por-ex_stage: n_bits:3773 n_cycles:663
+perf_counters_instructions-ex_stage: n_bits:3773 n_cycles:663
+requested_csr_por-ex_stage: n_bits:3773 n_cycles:663
+riscv_arithmetic_basic_test_0-ex_stage: n_bits:3773 n_cycles:663
+riscv_arithmetic_basic_test_1-ex_stage: n_bits:3773 n_cycles:663
+riscv_ebreak_test_0-ex_stage: n_bits:3773 n_cycles:663
