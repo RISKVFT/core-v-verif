@@ -1,0 +1,1067 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/cv32/sim/core/sim_FT
+vcv32e40p_3voter
+Z1 DXx6 sv_std 3 std 0 22 d=_JfHTnXCN[H5FjiaJJc0
+Z2 !s110 1616958226
+!i10b 1
+!s100 Od:7A^5eUY2V2EL@d]HQ51
+I5oO6?N0NZHJ5GiIhK18Qh0
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+!s105 cv32e40p_3voter_sv_unit
+S1
+R0
+Z4 w1613406463
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_3voter.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_3voter.sv
+Z5 L0 19
+Z6 OL;L;10.7c;67
+r1
+!s85 0
+31
+Z7 !s108 1616958226.000000
+Z8 !s107 /home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/../bhv/cv32e40p_core_log.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_core.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_if_stage.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_id_stage.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_controller_FT.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_controller_feedback.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_decoder_FT.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_register_file_ff_FT.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_register_file_ff_FT_hard.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_hsiao_secded_decoder.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_hsiao_secded_encoder.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_3voter.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/../bhv/cv32e40p_wrapper.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/../bhv/cv32e40p_sim_clock_gate.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_sleep_unit.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_prefetch_controller.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_obi_interface.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_controller.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_apu_disp.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_popcnt.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_ff_one.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_alu.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_alu_div.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_ex_stage.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_int_controller.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_mult.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_hwloop_regs.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_prefetch_buffer.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_fifo.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_compressed_decoder.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_decoder.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_aligner.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_load_store_unit.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_register_file_ff.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_cs_registers.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/../bhv/include/cv32e40p_tracer_pkg.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/include/cv32e40p_pkg.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/fpnew/src/fpnew_pkg.sv|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/include/cv32e40p_apu_core_pkg.sv|
+Z9 !s90 -O0|-work|work|-pedanticerrors|-suppress|2577|-suppress|2583|-f|/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/cv32e40p_manifest.flist|
+!s101 -O0
+!i113 0
+Z10 o-suppress 2577 -suppress 2583 -O0 -work work -pedanticerrors -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z11 !s92 -suppress 2577 -suppress 2583 -O0 -work work -pedanticerrors +incdir+/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/include +incdir+/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/../bhv +incdir+/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/../bhv/include +incdir+/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/../sva -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z12 tCvgOpt 0
+vcv32e40p_aligner
+R1
+R2
+!i10b 1
+!s100 L7V?l^<FGc0ijcJ08_Lo;3
+I8QEg@=IA76?7bAEZ@R9]Y3
+R3
+!s105 cv32e40p_aligner_sv_unit
+S1
+R0
+w1613406460
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_aligner.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_aligner.sv
+L0 23
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_alu
+R1
+Z13 DXx4 work 9 fpnew_pkg 0 22 YQ43NgMM>GWT`T@n2iim^3
+Z14 DXx4 work 12 cv32e40p_pkg 0 22 <HhI9kKB_g1M^=L]G1:kn0
+R2
+!i10b 1
+!s100 j;9`io<@c9GVXg3ajTSfi3
+IOE9iO@ICFVR7i>DPBPJBL3
+R3
+!s105 cv32e40p_alu_sv_unit
+S1
+R0
+Z15 w1613406461
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_alu.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_alu.sv
+Z16 L0 28
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_alu_div
+R1
+R2
+!i10b 1
+!s100 92X86?:oeV;[9zHFo1Sn=3
+I@E`mQl2b0^h>7kn657n=>2
+R3
+!s105 cv32e40p_alu_div_sv_unit
+S1
+R0
+R15
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_alu_div.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_alu_div.sv
+Z17 L0 26
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+Xcv32e40p_apu_core_pkg
+R1
+R2
+!i10b 1
+!s100 bSa9m:^9z51=hiSPKFYll1
+I2eZDLIS5Rh9e:3SYi4l^12
+V2eZDLIS5Rh9e:3SYi4l^12
+S1
+R0
+Z18 w1613406462
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/include/cv32e40p_apu_core_pkg.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/include/cv32e40p_apu_core_pkg.sv
+L0 22
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_apu_disp
+R1
+R2
+!i10b 1
+!s100 E[SDY?2TQ=oS>I=8Ag2RG1
+InTeUDG]Y3eKUgTgfnL?dg0
+R3
+!s105 cv32e40p_apu_disp_sv_unit
+S1
+R0
+R15
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_apu_disp.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_apu_disp.sv
+Z19 L0 25
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_clock_gate
+R1
+R2
+!i10b 1
+!s100 91`=6Wa1W_Mf[J7OY6J8g0
+InUK:0dRTT0Go2a^<K6Uz52
+R3
+!s105 cv32e40p_sim_clock_gate_sv_unit
+S1
+R0
+Z20 w1613406457
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/../bhv/cv32e40p_sim_clock_gate.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/../bhv/cv32e40p_sim_clock_gate.sv
+Z21 L0 15
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_compressed_decoder
+R1
+R13
+R14
+R2
+!i10b 1
+!s100 TBc:eDZ`@9am;YYJ_lnS41
+IdAR=kT_`2n`6LJ;mjfB891
+R3
+!s105 cv32e40p_compressed_decoder_sv_unit
+S1
+R0
+R15
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_compressed_decoder.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_compressed_decoder.sv
+Z22 L0 27
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_controller
+R1
+R13
+R14
+R2
+!i10b 1
+!s100 ki5SWBQ>AE`MT5;6mW>3F1
+I2ADciZ0Ezl<>c[P]N1l[e1
+R3
+!s105 cv32e40p_controller_sv_unit
+S1
+R0
+R15
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_controller.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_controller.sv
+Z23 L0 31
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_controller_feedback
+R1
+R13
+R14
+R2
+!i10b 1
+!s100 z0moJQIWdU^`PO<TV003j0
+I9mCT>AC`Ha0SDXVaA]h6<1
+R3
+!s105 cv32e40p_controller_feedback_sv_unit
+S1
+R0
+R4
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_controller_feedback.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_controller_feedback.sv
+R23
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_controller_ft
+R1
+R13
+R14
+R2
+!i10b 1
+!s100 mGS:hHLf_emg8R2QX[SYK2
+IVB?BX8K=J_CGKAWYO=V0Z0
+R3
+!s105 cv32e40p_controller_FT_sv_unit
+S1
+R0
+R4
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_controller_FT.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_controller_FT.sv
+R23
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_core
+R1
+Z24 DXx4 work 21 cv32e40p_apu_core_pkg 0 22 2eZDLIS5Rh9e:3SYi4l^12
+R13
+R14
+R2
+!i10b 1
+!s100 AH4U<a><@[Jn46akUQE8d2
+I_QWWL>:SlDk4coM_cje=a0
+R3
+!s105 cv32e40p_core_sv_unit
+S1
+R0
+w1616323926
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_core.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_core.sv
+R23
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_core_log
+R1
+R2
+!i10b 1
+!s100 >LBFQL6TKQnz4z]m^c>F>3
+I8fIULB7nX[94kGX>Eak3W0
+R3
+Z25 !s105 cv32e40p_wrapper_sv_unit
+S1
+R0
+R20
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/../bhv/cv32e40p_core_log.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/../bhv/cv32e40p_core_log.sv
+L0 39
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_cs_registers
+R1
+R13
+R14
+R2
+!i10b 1
+!s100 I4h3^N3TlPiId=:odUR[O2
+IcUo`8VY:j5zoaZA6PHA5:2
+R3
+!s105 cv32e40p_cs_registers_sv_unit
+S1
+R0
+R15
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_cs_registers.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_cs_registers.sv
+Z26 L0 30
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_decoder
+R1
+R13
+R14
+R24
+R2
+!i10b 1
+!s100 ci6_^WiF6ezkJPdG_[`ie1
+I=gZ2zH5nCE0`QgYA5alOY3
+R3
+!s105 cv32e40p_decoder_sv_unit
+S1
+R0
+R15
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_decoder.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_decoder.sv
+R16
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_decoder_ft
+R1
+R13
+R14
+R24
+R2
+!i10b 1
+!s100 zg;JPO1b_[VQ;58]0W2F63
+I<IQg_`BX3mo;I5b31m>Go3
+R3
+!s105 cv32e40p_decoder_FT_sv_unit
+S1
+R0
+R4
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_decoder_FT.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_decoder_FT.sv
+R21
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_ex_stage
+R1
+R13
+R14
+R24
+R2
+!i10b 1
+!s100 P9[`2W1lBkNSgzoEgLX4K1
+Ija`LT^DQOc0GoEYkA0f0@3
+R3
+!s105 cv32e40p_ex_stage_sv_unit
+S1
+R0
+R15
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_ex_stage.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_ex_stage.sv
+L0 32
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_ff_one
+R1
+R2
+!i10b 1
+!s100 jU;8zk@h^BA9WokzoI5U@3
+IoD5hl58h::<1j=JWf_OFO0
+R3
+!s105 cv32e40p_ff_one_sv_unit
+S1
+R0
+R15
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_ff_one.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_ff_one.sv
+R19
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_fifo
+R1
+R2
+!i10b 1
+!s100 `[HXhZXD@zhP6I86ToMF[1
+IGTfVXaaE?0aCMOQo70_P62
+R3
+!s105 cv32e40p_fifo_sv_unit
+S1
+R0
+R15
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_fifo.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_fifo.sv
+R21
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_hsiao_secded_decoder
+R1
+R2
+!i10b 1
+!s100 n?:jo5QB5M=_]N<kZZ9ha2
+Ime34h?Wi8fFVoa]mH:E[<2
+R3
+!s105 cv32e40p_hsiao_secded_decoder_sv_unit
+S1
+R0
+w1615540034
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_hsiao_secded_decoder.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_hsiao_secded_decoder.sv
+Z27 L0 16
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_hsiao_secded_encoder
+R1
+R2
+!i10b 1
+!s100 NH[XgEFCL2R9bYAG=2_342
+I=1^XROD0RZPbg2MO^>TNl2
+R3
+!s105 cv32e40p_hsiao_secded_encoder_sv_unit
+S1
+R0
+w1615540000
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_hsiao_secded_encoder.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_hsiao_secded_encoder.sv
+R27
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_hwloop_regs
+R1
+R2
+!i10b 1
+!s100 dClGZWnL^cR`^bnzh`G8o1
+I7kzMG85e0SE2WN?ljD2H51
+R3
+!s105 cv32e40p_hwloop_regs_sv_unit
+S1
+R0
+R15
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_hwloop_regs.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_hwloop_regs.sv
+R19
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_id_stage
+R1
+R13
+R14
+R24
+R2
+!i10b 1
+!s100 H_d2OoZVlg;5Jz0XJ7`m20
+IWaRL[_f]_61E0hjWI76_d2
+R3
+!s105 cv32e40p_id_stage_sv_unit
+S1
+R0
+w1616958223
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_id_stage.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_id_stage.sv
+R26
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+Tcv32e40p_id_stage_vopt
+!s110 1616958227
+VONG89mXB]Pi6fMMkFY9A51
+04 17 4 work cv32e40p_id_stage fast 0
+o-work work -debugdb -fsmdebug -pedanticerrors +acc
+R12
+ncv32e40p_id_stage_vopt
+OL;O;10.7c;67
+vcv32e40p_if_stage
+R1
+R13
+R14
+R2
+!i10b 1
+!s100 HlXzE4Q[0>nkR6kEKS;F21
+IJW19CbB=@7lPegdgeAXe[2
+R3
+!s105 cv32e40p_if_stage_sv_unit
+S1
+R0
+R4
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_if_stage.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_if_stage.sv
+R16
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_int_controller
+R1
+R13
+R14
+R2
+!i10b 1
+!s100 GC4KVcL315LCOU<^c9l<h3
+I2C6?U5zbChh=aR7Kf_F2U0
+R3
+!s105 cv32e40p_int_controller_sv_unit
+S1
+R0
+R15
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_int_controller.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_int_controller.sv
+L0 24
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_load_store_unit
+R1
+R2
+!i10b 1
+!s100 CPPa^9I840h<[fZ91>k[P3
+IQhBofD3=CD52T>beAE3i[0
+R3
+!s105 cv32e40p_load_store_unit_sv_unit
+S1
+R0
+R18
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_load_store_unit.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_load_store_unit.sv
+R17
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_mult
+R1
+R13
+R14
+R2
+!i10b 1
+!s100 l>:L^8bnY[<He]XeOVEgS0
+IMacWBKQS1j=XBM7::hGH^2
+R3
+!s105 cv32e40p_mult_sv_unit
+S1
+R0
+R18
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_mult.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_mult.sv
+R17
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_obi_interface
+R1
+R2
+!i10b 1
+!s100 kzzHW[_V]mN;Q37T;7bOE3
+I@5iIb3:O4SoB[S][X[8750
+R3
+!s105 cv32e40p_obi_interface_sv_unit
+S1
+R0
+R18
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_obi_interface.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_obi_interface.sv
+L0 38
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+Xcv32e40p_pkg
+R1
+R13
+R2
+!i10b 1
+!s100 8XJSW@]P6;gTTzbJ^Y`lE0
+I<HhI9kKB_g1M^=L]G1:kn0
+V<HhI9kKB_g1M^=L]G1:kn0
+S1
+R0
+R18
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/include/cv32e40p_pkg.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/include/cv32e40p_pkg.sv
+R17
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_popcnt
+R1
+R2
+!i10b 1
+!s100 @z9bZI8X;74i2T`LND_HE2
+I^5e_D=:c;Q;TC0MNFYVFF1
+R3
+!s105 cv32e40p_popcnt_sv_unit
+S1
+R0
+R18
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_popcnt.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_popcnt.sv
+R19
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_prefetch_buffer
+R1
+R2
+!i10b 1
+!s100 <a]IolQPRHY5Yd^zRR2@?1
+I1P4ii<^RHHVO]d?SHI_Fo2
+R3
+!s105 cv32e40p_prefetch_buffer_sv_unit
+S1
+R0
+R18
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_prefetch_buffer.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_prefetch_buffer.sv
+R22
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_prefetch_controller
+R1
+R2
+!i10b 1
+!s100 f65g2><65A_=oTJzPgYo01
+I2IJDU0oRbEhL=B4SDaFni0
+R3
+!s105 cv32e40p_prefetch_controller_sv_unit
+S1
+R0
+R18
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_prefetch_controller.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_prefetch_controller.sv
+L0 40
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_register_file
+R1
+R2
+!i10b 1
+!s100 I0aU]C7a=Y8NM2ea@N;k^3
+I9_ajhl4gDbU=;mencS7CC2
+R3
+!s105 cv32e40p_register_file_ff_sv_unit
+S1
+R0
+w1616325715
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_register_file_ff.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_register_file_ff.sv
+R26
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_register_file_ft
+R1
+R2
+!i10b 1
+!s100 Y62j^;_O9@KN@@3K<jiQc1
+IkO^NT[0iA=nKa;Fo_ZV^C3
+R3
+!s105 cv32e40p_register_file_ff_FT_sv_unit
+S1
+R0
+w1616094085
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_register_file_ff_FT.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_register_file_ff_FT.sv
+R5
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_register_file_ft_hard
+R1
+R2
+!i10b 1
+!s100 _d@Rg9Se?Qo<6N2gTbz:U1
+I=P[@Bm8j5oU?P;Io`klPh0
+R3
+!s105 cv32e40p_register_file_ff_FT_hard_sv_unit
+S1
+R0
+w1616880565
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_register_file_ff_FT_hard.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/rtl_FT/cv32e40p_register_file_ff_FT_hard.sv
+R5
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_sleep_unit
+R1
+R13
+R14
+R2
+!i10b 1
+!s100 I0@7__YG;Y?c1`z`2E1[W3
+I;UZL2U[D>ZF>8=Sbz2=I>3
+R3
+!s105 cv32e40p_sleep_unit_sv_unit
+S1
+R0
+R18
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_sleep_unit.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/cv32e40p_sleep_unit.sv
+L0 56
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+Xcv32e40p_tracer_pkg
+R1
+R13
+R14
+R2
+!i10b 1
+!s100 0ejJ;>M`GiUOEgU;3Q`6V1
+IZ5^QMH:Sd=B:8A0Yn=4V92
+VZ5^QMH:Sd=B:8A0Yn=4V92
+S1
+R0
+R20
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/../bhv/include/cv32e40p_tracer_pkg.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/../bhv/include/cv32e40p_tracer_pkg.sv
+L0 12
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+vcv32e40p_wrapper
+R1
+R24
+R2
+!i10b 1
+!s100 RC8?lEA2JbN;89jPVkVfK0
+IgXDzC8RKAhl4MIn[EUF6n3
+R3
+R25
+S1
+R0
+R20
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/../bhv/cv32e40p_wrapper.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/../bhv/cv32e40p_wrapper.sv
+R16
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12
+Xfpnew_pkg
+R1
+R2
+!i10b 1
+!s100 3JEO8do>;JBo3ZQB@EzDz2
+IYQ43NgMM>GWT`T@n2iim^3
+VYQ43NgMM>GWT`T@n2iim^3
+S1
+R0
+w1613406473
+8/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/fpnew/src/fpnew_pkg.sv
+F/home/thesis/marcello.neri/Desktop/core_marcello/core-v-verif_again/core-v-cores/cv32e40p_ft/rtl/fpnew/src/fpnew_pkg.sv
+L0 14
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+!i113 0
+R10
+R11
+R12

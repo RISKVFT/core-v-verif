@@ -1,0 +1,369 @@
+make: Entering directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/sim/core/sim_FT'
+vlog -O0 \
+	-work work \
+	-pedanticerrors -suppress 2577 -suppress 2583 \
+	-f /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/cv32e40p_manifest.flist \
+	/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/include/perturbation_defines.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_top.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/mm_ram.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/dp_ram.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_stall.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_rvalid_stall.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_gnt_stall.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_interrupt_generator.sv 
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+Start time: 00:19:35 on Jan 19,2021
+vlog -O0 -work work -pedanticerrors -suppress 2577 -suppress 2583 -f /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/cv32e40p_manifest.flist /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/include/perturbation_defines.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_top.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/mm_ram.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/dp_ram.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_stall.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_rvalid_stall.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_gnt_stall.sv /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_interrupt_generator.sv 
+-- Compiling package cv32e40p_apu_core_pkg
+-- Compiling package fpnew_pkg
+-- Compiling package cv32e40p_pkg
+-- Importing package fpnew_pkg
+-- Compiling package cv32e40p_tracer_pkg
+-- Importing package cv32e40p_pkg
+-- Compiling module cv32e40p_if_stage
+-- Compiling module cv32e40p_cs_registers
+-- Compiling module cv32e40p_register_file
+-- Compiling module cv32e40p_load_store_unit
+-- Compiling module cv32e40p_id_stage
+-- Importing package cv32e40p_apu_core_pkg
+-- Compiling module cv32e40p_aligner
+-- Compiling module cv32e40p_decoder
+-- Compiling module cv32e40p_compressed_decoder
+-- Compiling module cv32e40p_fifo
+-- Compiling module cv32e40p_prefetch_buffer
+-- Compiling module cv32e40p_hwloop_regs
+-- Compiling module cv32e40p_mult
+-- Compiling module cv32e40p_int_controller
+-- Compiling module cv32e40p_ex_stage
+-- Compiling module cv32e40p_alu_div
+-- Compiling module cv32e40p_alu
+-- Compiling module cv32e40p_ff_one
+-- Compiling module cv32e40p_popcnt
+-- Compiling module cv32e40p_apu_disp
+-- Compiling module cv32e40p_controller
+-- Compiling module cv32e40p_obi_interface
+-- Compiling module cv32e40p_prefetch_controller
+-- Compiling module cv32e40p_sleep_unit
+-- Compiling module cv32e40p_core
+-- Compiling module cv32e40p_clock_gate
+-- Compiling module cv32e40p_core_log
+-- Compiling module cv32e40p_wrapper
+-- Compiling module cv32e40p_3voter
+-- Compiling module cv32e40p_alu_ft
+-- Compiling module cv32e40p_mult_ft
+-- Compiling module cv32e40p_dispatcher_ft
+-- Compiling module cv32e40p_ID_EX_pipeline
+-- Compiling module cv32e40p_alu_err_counter_ft
+-- Compiling module cv32e40p_mult_err_counter_ft
+-- Compiling package perturbation_defines
+-- Compiling module tb_top
+-- Compiling module cv32e40p_tb_wrapper
+-- Compiling module mm_ram
+-- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
+-- Compiling module dp_ram
+** Warning: /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_stall.sv(26): (vlog-13233) Design unit "riscv_random_stall_sv_unit" already exists and will be overwritten. Design unit compiled with different set of options.
+-- Compiling package riscv_random_stall_sv_unit
+-- Importing package perturbation_defines
+-- Compiling module riscv_random_stall
+-- Compiling module riscv_rvalid_stall
+-- Compiling module riscv_gnt_stall
+** Warning: /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_riscv/riscv_random_interrupt_generator.sv(27): (vlog-13233) Design unit "riscv_random_interrupt_generator_sv_unit" already exists and will be overwritten. Design unit compiled with different set of options.
+-- Compiling package riscv_random_interrupt_generator_sv_unit
+-- Importing package perturbation_defines
+-- Compiling module riscv_random_interrupt_generator
+
+Top level modules:
+	cv32e40p_wrapper
+	tb_top
+	riscv_random_stall
+End time: 00:19:41 on Jan 19,2021, Elapsed time: 0:00:06
+Errors: 0, Warnings: 2, Suppressed Warnings: 788
+vopt -work work -debugdb -fsmdebug -pedanticerrors +acc  tb_top -o tb_top_vopt
+QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+Start time: 00:19:41 on Jan 19,2021
+vopt -work work -debugdb -fsmdebug -pedanticerrors "+acc" tb_top -o tb_top_vopt 
+
+Top level modules:
+	tb_top
+
+Analyzing design...
+** Warning: (vopt-2009) At least one design unit was compiled with optimization level -O0 or -O1.
+Use vdir -l command to find such design units.
+-- Loading module tb_top
+-- Loading module cv32e40p_tb_wrapper
+-- Loading module cv32e40p_core
+-- Importing package cv32e40p_apu_core_pkg
+-- Importing package cv32e40p_pkg
+-- Importing package fpnew_pkg
+-- Loading module cv32e40p_sleep_unit
+-- Loading module cv32e40p_clock_gate
+-- Loading module cv32e40p_if_stage
+-- Loading module cv32e40p_prefetch_buffer
+-- Loading module cv32e40p_prefetch_controller
+-- Loading module cv32e40p_fifo
+-- Loading module cv32e40p_obi_interface
+-- Loading module cv32e40p_aligner
+-- Loading module cv32e40p_compressed_decoder
+-- Loading module cv32e40p_id_stage
+-- Loading module cv32e40p_register_file
+-- Loading module cv32e40p_decoder
+-- Loading module cv32e40p_controller
+-- Loading module cv32e40p_int_controller
+-- Loading module cv32e40p_ex_stage
+-- Loading module cv32e40p_alu_ft
+-- Loading module cv32e40p_mult_ft
+-- Loading module cv32e40p_load_store_unit
+-- Loading module cv32e40p_cs_registers
+-- Loading module mm_ram
+-- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
+-- Loading module dp_ram
+-- Loading module riscv_rvalid_stall
+-- Importing package perturbation_defines
+-- Loading module riscv_gnt_stall
+-- Loading module riscv_random_interrupt_generator
+-- Loading package mtiUvm.questa_uvm_pkg
+-- Loading module cv32e40p_dispatcher_ft
+-- Loading module cv32e40p_ID_EX_pipeline
+-- Loading module cv32e40p_3voter
+-- Loading module cv32e40p_alu
+-- Loading module cv32e40p_alu_err_counter_ft
+-- Loading module cv32e40p_mult
+-- Loading module cv32e40p_mult_err_counter_ft
+-- Loading module cv32e40p_popcnt
+-- Loading module cv32e40p_ff_one
+-- Loading module cv32e40p_alu_div
+Incremental compilation check found 2 design-units (out of 50) may be reused.
+Optimizing 48 design-units (inlining 0/101 module instances):
+-- Optimizing module cv32e40p_3voter(fast__3)
+-- Processing module cv32e40p_3voter(fast__3) for debug
+-- Optimizing module cv32e40p_3voter(fast__4)
+-- Processing module cv32e40p_3voter(fast__4) for debug
+-- Optimizing module cv32e40p_3voter(fast__5)
+-- Processing module cv32e40p_3voter(fast__5) for debug
+-- Optimizing module cv32e40p_tb_wrapper(fast)
+** Warning: /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv(111): (vopt-2685) [TFMPC] - Too few port connections for 'cv32e40p_core_i'.  Expected 38, found 36.
+** Warning: /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv(111): (vopt-2718) [TFMPC] - Missing connection for port 'dm_exception_addr_i'.
+** Warning: /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv(111): (vopt-2718) [TFMPC] - Missing connection for port 'mtvec_addr_i'.
+-- Processing module cv32e40p_tb_wrapper(fast) for debug
+-- Optimizing module cv32e40p_prefetch_buffer(fast)
+-- Processing module cv32e40p_prefetch_buffer(fast) for debug
+-- Optimizing module riscv_gnt_stall(fast)
+-- Processing module riscv_gnt_stall(fast) for debug
+-- Optimizing module cv32e40p_sleep_unit(fast)
+-- Processing module cv32e40p_sleep_unit(fast) for debug
+-- Optimizing module cv32e40p_clock_gate(fast)
+-- Processing module cv32e40p_clock_gate(fast) for debug
+-- Optimizing package perturbation_defines(fast)
+-- Optimizing package fpnew_pkg(fast)
+-- Optimizing package cv32e40p_apu_core_pkg(fast)
+-- Optimizing package riscv_random_interrupt_generator_sv_unit(fast)
+-- Optimizing package cv32e40p_pkg(fast)
+-- Optimizing module cv32e40p_alu_err_counter_ft(fast)
+-- Processing module cv32e40p_alu_err_counter_ft(fast) for debug
+-- Optimizing module cv32e40p_id_stage(fast)
+-- Processing module cv32e40p_id_stage(fast) for debug
+-- Optimizing module cv32e40p_cs_registers(fast)
+-- Processing module cv32e40p_cs_registers(fast) for debug
+-- Optimizing module cv32e40p_alu(fast)
+-- Processing module cv32e40p_alu(fast) for debug
+-- Optimizing module cv32e40p_decoder(fast)
+-- Processing module cv32e40p_decoder(fast) for debug
+-- Optimizing module cv32e40p_mult_err_counter_ft(fast)
+-- Processing module cv32e40p_mult_err_counter_ft(fast) for debug
+-- Optimizing module cv32e40p_controller(fast)
+-- Processing module cv32e40p_controller(fast) for debug
+** Note: (vopt-143) Recognized 1 FSM in module "cv32e40p_controller(fast)".
+-- Optimizing module cv32e40p_ff_one(fast)
+-- Processing module cv32e40p_ff_one(fast) for debug
+-- Optimizing module mm_ram(fast)
+-- Processing module mm_ram(fast) for debug
+-- Optimizing module cv32e40p_register_file(fast)
+-- Processing module cv32e40p_register_file(fast) for debug
+-- Optimizing module cv32e40p_core(fast)
+-- Processing module cv32e40p_core(fast) for debug
+-- Optimizing module cv32e40p_alu_div(fast)
+-- Processing module cv32e40p_alu_div(fast) for debug
+** Note: (vopt-143) Recognized 1 FSM in module "cv32e40p_alu_div(fast)".
+-- Optimizing module cv32e40p_alu_ft(fast)
+-- Processing module cv32e40p_alu_ft(fast) for debug
+-- Optimizing module cv32e40p_mult_ft(fast)
+-- Processing module cv32e40p_mult_ft(fast) for debug
+-- Optimizing module cv32e40p_ex_stage(fast)
+-- Processing module cv32e40p_ex_stage(fast) for debug
+-- Optimizing module cv32e40p_load_store_unit(fast)
+-- Processing module cv32e40p_load_store_unit(fast) for debug
+-- Optimizing module cv32e40p_mult(fast)
+-- Processing module cv32e40p_mult(fast) for debug
+** Note: (vopt-143) Recognized 1 FSM in module "cv32e40p_mult(fast)".
+-- Optimizing module cv32e40p_ID_EX_pipeline(fast)
+-- Processing module cv32e40p_ID_EX_pipeline(fast) for debug
+-- Optimizing module cv32e40p_compressed_decoder(fast)
+-- Processing module cv32e40p_compressed_decoder(fast) for debug
+-- Optimizing module cv32e40p_popcnt(fast)
+-- Processing module cv32e40p_popcnt(fast) for debug
+-- Optimizing module cv32e40p_prefetch_controller(fast)
+-- Processing module cv32e40p_prefetch_controller(fast) for debug
+-- Optimizing module cv32e40p_dispatcher_ft(fast)
+-- Processing module cv32e40p_dispatcher_ft(fast) for debug
+-- Optimizing module cv32e40p_if_stage(fast)
+-- Processing module cv32e40p_if_stage(fast) for debug
+-- Optimizing module riscv_random_interrupt_generator(fast)
+-- Processing module riscv_random_interrupt_generator(fast) for debug
+-- Optimizing module cv32e40p_aligner(fast)
+-- Processing module cv32e40p_aligner(fast) for debug
+** Note: (vopt-143) Recognized 1 FSM in module "cv32e40p_aligner(fast)".
+-- Optimizing module cv32e40p_fifo(fast)
+-- Processing module cv32e40p_fifo(fast) for debug
+-- Optimizing module riscv_rvalid_stall(fast)
+-- Processing module riscv_rvalid_stall(fast) for debug
+-- Optimizing module cv32e40p_int_controller(fast)
+-- Processing module cv32e40p_int_controller(fast) for debug
+-- Optimizing module cv32e40p_obi_interface(fast)
+-- Processing module cv32e40p_obi_interface(fast) for debug
+-- Optimizing module cv32e40p_obi_interface(fast__1)
+-- Processing module cv32e40p_obi_interface(fast__1) for debug
+-- Optimizing module dp_ram(fast)
+-- Processing module dp_ram(fast) for debug
+-- Optimizing module tb_top(fast)
+-- Processing module tb_top(fast) for debug
+-- Optimizing module cv32e40p_3voter(fast)
+-- Processing module cv32e40p_3voter(fast) for debug
+-- Optimizing module cv32e40p_3voter(fast__1)
+-- Processing module cv32e40p_3voter(fast__1) for debug
+-- Optimizing module cv32e40p_3voter(fast__2)
+-- Processing module cv32e40p_3voter(fast__2) for debug
+Optimized design name is tb_top_vopt
+End time: 00:21:17 on Jan 19,2021, Elapsed time: 0:01:36
+Errors: 0, Warnings: 4
+touch .opt-rtl
+vsim -work work +dumpports+nocollapse -nowlfcollapse -quiet  +firmware=/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tests/programs/custom_FT/general_test/fibonacci/fibonacci.hex +dumpports+nocollapse -c \
+tb_top_vopt -do ../../questa/vsim.tcl 
+Reading pref.tcl
+
+# 10.7c
+
+# vsim "+dumpports+nocollapse" -nowlfcollapse -quiet "+firmware=/home/thesis/luca.fiore/Repos/core-v-verif/cv32/tests/programs/custom_FT/general_test/fibonacci/fibonacci.hex" "+dumpports+nocollapse" -c tb_top_vopt -do "../../questa/vsim.tcl" 
+# Start time: 00:21:21 on Jan 19,2021
+# //  Questa Sim-64
+# //  Version 10.7c linux_x86_64 Aug 17 2018
+# //
+# //  Copyright 1991-2018 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# ** Warning: (vsim-3015) [PCDPC] - Port size (32) does not match connection size (64) for port 'irq_i'. The port definition is at: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_core.sv(92).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i File: /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 111
+# ** Warning: (vsim-3015) [PCDPC] - Port size (5) does not match connection size (6) for port 'irq_id_o'. The port definition is at: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_core.sv(94).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i File: /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 111
+# ** Warning: (vsim-3015) [PCDPC] - Port size (32) does not match connection size (34) for port 'instr_addr_i'. The port definition is at: /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/mm_ram.sv(36).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/ram_i File: /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 170
+# ** Warning: (vsim-3015) [PCDPC] - Port size (32) does not match connection size (1) for port 'irq_o'. The port definition is at: /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/mm_ram.sv(52).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_top/cv32e40p_tb_wrapper_i/ram_i File: /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/cv32e40p_tb_wrapper.sv Line: 170
+# do ../../questa/vsim.tcl
+# ----------------------------------------------------------------
+# UVM-1.1d
+# (C) 2007-2013 Mentor Graphics Corporation
+# (C) 2007-2013 Cadence Design Systems, Inc.
+# (C) 2006-2013 Synopsys, Inc.
+# (C) 2011-2013 Cypress Semiconductor Corp.
+# ----------------------------------------------------------------
+# 
+#   ***********       IMPORTANT RELEASE NOTES         ************
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_NO_DEPRECATED undefined.
+#   See http://www.eda.org/svdb/view.php?id=3313 for more details.
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_OBJECT_MUST_HAVE_CONSTRUCTOR undefined.
+#   See http://www.eda.org/svdb/view.php?id=3770 for more details.
+# 
+#       (Specify +UVM_NO_RELNOTES to turn off this notice)
+# 
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(215) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(216) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
+# 
+# 
+#############################################################
+#############################################################
+##### CORE FAULT TOLERANT LEVEL --->           0 #####
+#############################################################
+##  CODE		   CONTROLLER				DECODER			PIPELINE(IF/ID) 		REGFILE
+##	0			X			X			X			X
+##	1			YES			X			X			X
+##	2			X			YES			X			X
+##	3			YES			YES			X			X
+##	4			X			X			YES			X
+##	5			YES			X			YES			X
+##	6			X			YES			YES			X
+##	7			YES			YES			YES			X
+##	8			X			X			X			YES
+##	9			YES			X			X			YES
+##	10			X			YES			X			YES
+##	11			YES			YES			X			YES
+##	12			X			X			YES			YES
+##	13			YES			X			YES			YES
+##	14			X			YES			YES			YES
+##	15			YES			YES			YES			YES
+##	16			X			X			X			HARD
+##  ALL INTERMEDIATE COMBINATIONS WITH HARD REGILE
+##	31			YES			YES			YES			HARD
+##   OTHERS CODES LIKE 0
+#############################################################
+#############################################################
+# 
+# 
+# 
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/load_store_unit_i/#ALWAYS#471 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_load_store_unit.sv Line: 472
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#993 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_id_stage.sv Line: 994
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#983 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_id_stage.sv Line: 984
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#977 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_id_stage.sv Line: 978
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#968 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_id_stage.sv Line: 969
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#962 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_id_stage.sv Line: 963
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#826(immediate_a_mux) File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_id_stage.sv Line: 827
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/id_stage_i/#ALWAYS#741 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_id_stage.sv Line: 742
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 2  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/load_store_unit_i/#ALWAYS#471 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_load_store_unit.sv Line: 472
+# ** Warning: (vsim-8315) No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 4  Process: /tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i/load_store_unit_i/#ALWAYS#471 File: /home/thesis/luca.fiore/Repos/core-v-verif/core-v-cores/cv32e40p_ft/rtl/cv32e40p_load_store_unit.sv Line: 472
+# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall enable: 0
+# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall mode:   0
+# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall gnt:    0
+# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall valid:  0
+# UVM_INFO @ 1ns: reporter [RNDSTALL] INSTR stall max:    0
+# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall enable:  0
+# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall mode:    0
+# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall gnt:     0
+# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall valid:   0
+# UVM_INFO @ 1ns: reporter [RNDSTALL] DATA stall max:     0
+# starting fib(15)...
+# fib(0) = 0
+# fib(1) = 1
+# fib(2) = 1
+# fib(3) = 2
+# fib(4) = 3
+# fib(5) = 5
+# fib(6) = 8
+# fib(7) = 13
+# fib(8) = 21
+# fib(9) = 34
+# fib(10) = 55
+# fib(11) = 89
+# fib(12) = 144
+# fib(13) = 233
+# fib(14) = 377
+# finishing...
+# EXIT SUCCESS
+# ** Note: $finish    : /home/thesis/luca.fiore/Repos/core-v-verif/cv32/tb/core/tb_top.sv(177)
+#    Time: 985 us  Iteration: 1  Instance: /tb_top
+# End time: 00:24:21 on Jan 19,2021, Elapsed time: 0:03:00
+# Errors: 0, Warnings: 14
+make: Leaving directory `/home/thesis/luca.fiore/Repos/core-v-verif/cv32/sim/core/sim_FT'

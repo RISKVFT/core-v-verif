@@ -1,0 +1,58 @@
+All_signals:/cv32e40p_if_stage/trap_addr_mux_i
+All_signals:/cv32e40p_if_stage/instr_rdata_i
+All_signals:/cv32e40p_if_stage/m_exc_vec_pc_mux_i
+All_signals:/cv32e40p_if_stage/uepc_i
+All_signals:/cv32e40p_if_stage/hwlp_jump_i
+All_signals:/cv32e40p_if_stage/jump_target_ex_i
+All_signals:/cv32e40p_if_stage/jump_target_id_i
+All_signals:/cv32e40p_if_stage/halt_if_i
+All_signals:/cv32e40p_if_stage/m_trap_base_addr_i
+All_signals:/cv32e40p_if_stage/id_ready_i
+All_signals:/cv32e40p_if_stage/exc_pc_mux_i
+All_signals:/cv32e40p_if_stage/dm_halt_addr_i
+All_signals:/cv32e40p_if_stage/u_exc_vec_pc_mux_i
+All_signals:/cv32e40p_if_stage/pc_mux_i
+All_signals:/cv32e40p_if_stage/depc_i
+All_signals:/cv32e40p_if_stage/instr_err_pmp_i
+All_signals:/cv32e40p_if_stage/mepc_i
+All_signals:/cv32e40p_if_stage/clear_instr_valid_i
+All_signals:/cv32e40p_if_stage/pc_set_i
+All_signals:/cv32e40p_if_stage/boot_addr_i
+All_signals:/cv32e40p_if_stage/u_trap_base_addr_i
+All_signals:/cv32e40p_if_stage/req_i
+All_signals:/cv32e40p_if_stage/instr_gnt_i
+All_signals:/cv32e40p_if_stage/instr_err_i
+All_signals:/cv32e40p_if_stage/hwlp_target_i
+All_signals:/cv32e40p_if_stage/dm_exception_addr_i
+All_signals:/cv32e40p_if_stage/instr_rvalid_i
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/flush_cnt_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_addr_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_atop_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q
+All_signals:/cv32e40p_if_stage/aligner_i/hwlp_addr_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_be_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_q
+All_signals:/cv32e40p_if_stage/aligner_i/aligner_ready_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/write_pointer_q
+All_signals:/cv32e40p_if_stage/aligner_i/instr_valid_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_wdata_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/hwlp_flush_cnt_delayed_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/mem_q
+All_signals:/cv32e40p_if_stage/aligner_i/pc_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/status_cnt_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/state_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/state_q
+All_signals:/cv32e40p_if_stage/aligner_i/hwlp_update_pc_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/read_pointer_q
+All_signals:/cv32e40p_if_stage/aligner_i/branch_addr_q
+All_signals:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/cnt_q
+sig_fault: signal_name:/cv32e40p_if_stage/boot_addr_i[4] sim_id:[4]150522  value:1  fi_instant:150522 SIM_ERROR:716402 time_for_this_simulation:5931
+sig_fault: signal_name:/cv32e40p_if_stage/instr_err_pmp_i[0] sim_id:[0]259875  value:1  fi_instant:259875 SIM_ERROR:484319 time_for_this_simulation:5631
+sig_fault: signal_name:/cv32e40p_if_stage/hwlp_target_i[31] sim_id:[31]561293  value:1  fi_instant:561293 SIM_ERROR:0 time_for_this_simulation:8246
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/fifo_i/write_pointer_q[0] sim_id:[0]380157  value:1  fi_instant:380157 SIM_ERROR:232894 time_for_this_simulation:6585
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_we_q[0] sim_id:[0]856670  value:1  fi_instant:856670 SIM_ERROR:0 time_for_this_simulation:9482
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/instruction_obi_i/genblk1/obi_be_q[1] sim_id:[1]631688  value:1  fi_instant:631688 SIM_ERROR:0 time_for_this_simulation:9054
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_q[19] sim_id:[19]813892  value:1  fi_instant:813892 SIM_ERROR:0 time_for_this_simulation:9038
+sig_fault: signal_name:/cv32e40p_if_stage/prefetch_buffer_i/prefetch_controller_i/trans_addr_q[3] sim_id:[3]520104  value:1  fi_instant:520104 SIM_ERROR:0 time_for_this_simulation:7968
+sig_fault: signal_name:/cv32e40p_if_stage/aligner_i/hwlp_update_pc_q[0] sim_id:[0]788412  value:1  fi_instant:788412 SIM_ERROR:0 time_for_this_simulation:6894
+sig_fault: signal_name:/cv32e40p_if_stage/instr_rvalid_i[0] sim_id:[0]367839  value:1  fi_instant:367839 SIM_ERROR:289194 time_for_this_simulation:7968

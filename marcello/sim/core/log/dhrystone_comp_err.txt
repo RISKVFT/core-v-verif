@@ -1,0 +1,34 @@
+dhrystone.c: In function 'Func_1':
+dhrystone.c:1049:21: warning: promoted argument 'Ch_1_Par_Val' doesn't match prototype [-Wpedantic]
+     Capital_Letter  Ch_1_Par_Val;
+                     ^~~~~~~~~~~~
+dhrystone.c:537:13: warning: prototype declaration [-Wpedantic]
+ Enumeration Func_1(Capital_Letter Ch_1_Par_Val,
+             ^~~~~~
+dhrystone.c:1050:21: warning: promoted argument 'Ch_2_Par_Val' doesn't match prototype [-Wpedantic]
+     Capital_Letter  Ch_2_Par_Val;
+                     ^~~~~~~~~~~~
+dhrystone.c:537:13: warning: prototype declaration [-Wpedantic]
+ Enumeration Func_1(Capital_Letter Ch_1_Par_Val,
+             ^~~~~~
+dhrystone.c: In function 'Func_2':
+dhrystone.c:1085:5: warning: this 'while' clause does not guard... [-Wmisleading-indentation]
+     while (Int_Loc <= 2) /* loop body executed once */
+     ^~~~~
+dhrystone.c:1093:2: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'while'
+  Ireport(0x30021);
+  ^~~~~~~
+dhrystone.c:1095:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+     if (Ch_Loc >= 'W' && Ch_Loc < 'Z')
+     ^~
+dhrystone.c:1098:2: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  Ireport(0x30022);
+  ^~~~~~~
+dhrystone.c: In function 'main':
+dhrystone.c:740:3: warning: 'Int_3_Loc' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   printf ("Int_3_Loc:           %d\n", Int_3_Loc);
+   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
+/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
+/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
+/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used
