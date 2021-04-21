@@ -1436,7 +1436,7 @@ function signals_elaboration () {
 	MEAN_ERROR=""
 	for sig in $signals; do
 		local l_errors=$(grep $sig $file_sig | grep sig_fault | tr -s " " |\
-		       	cut -d " " -f 5 | cut -d ":" -f 2)
+		       	cut -d " " -f 6 | cut -d ":" -f 2)
 		local err_n=$(echo $l_errors | wc -w )
 		if [[ $err_n -gt 0 ]]; then
 			local tot_errors=0
@@ -1625,7 +1625,7 @@ function elaborate_all_sim_output () {
 # FIXED variable       #################################################
 ########################################################################
 
-CORE_V_VERIF="/home/elia.ribaldone/Desktop/core-v-verif"
+CORE_V_VERIF="/home/thesis/elia.ribaldone/Desktop/core-v-verif"
 
 ##########################
 # Directly setted by cmd line
@@ -1721,7 +1721,7 @@ export GUI=""
 export SIM_BASE="tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
 export STAGE_NAME="if_stage"
 
-ARCH_TO_USE="ref"
+ARCH_TO_USE="ft"
 ARCH_TO_COMPARE="ref"
 export $ARCH_TO_USE
 export $ARCH_TO_COMPARE
@@ -1734,7 +1734,7 @@ A_REF_REPO="https://github.com/RISKVFT/cv32e40p.git"
 A_REF_BRANCH="master"
 A_REF_REPO_NAME="cv32e40p_ref"
 A_FT_REPO="https://github.com/RISKVFT/cv32e40p.git"
-A_FT_BRANCH="master"
+A_FT_BRANCH="FT_Elia"
 A_FT_REPO_NAME="cv32e40p_ft"
 AESFIUPI=0
 

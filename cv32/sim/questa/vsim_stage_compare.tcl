@@ -1,4 +1,4 @@
-set CORE_V_VERIF "/home/elia.ribaldone/Desktop/core-v-verif"
+set CORE_V_VERIF "/home/thesis/elia.ribaldone/Desktop/core-v-verif"
 set SIM_BASE "$env(SIM_BASE)"
 set GOLD_NAME "$env(GOLD_NAME_SIM)"
 set GOLD_NAME_FILE "$env(GOLD_NAME)"
@@ -70,24 +70,24 @@ set n_fault 0
 
 set arch_used [ lindex [ split $GOLD_NAME "_" ] 1 ]
 set stage_used [ lindex [ split $GOLD_NAME "_" ] 2 ]
+set test "compressed_decoder"
 
-if { $stage_used == "id" } {
-	set sim_fi_sig [ find nets  "sim:/${REAL_STAGE_NAME}/instr_valid_i" ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets  "sim:/${REAL_STAGE_NAME}/instr_rdata_i" ] ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets  "sim:/${REAL_STAGE_NAME}/is_compressed_i" ] ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets  "sim:/${REAL_STAGE_NAME}/illegal_c_insn_i" ] ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets  "sim:/${REAL_STAGE_NAME}/is_fetch_failed_i" ] ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets  "sim:/${REAL_STAGE_NAME}/pc_id_i" ] ]
+if { "$test" == "all" } {
+	set sim_fi_sig [  find nets  "sim:/${REAL_STAGE_NAME}/*_i" ]
 	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] 
-} elseif { $stage_used == "ex" } {
-	set sim_fi_sig_complete1 [ concat [ concat  [ find nets  "sim:/${REAL_STAGE_NAME}/*_i" ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] 
-	set sim_fi_sig_complete2 [lsearch -inline -all -not -regexp $sim_fi_sig_complete1 voted]
-	set sim_fi_sig [lsearch -inline -all -not -regexp $sim_fi_sig_complete2 vector_err]
-} elseif { $stage_used == "if" } {
-	set sim_fi_sig [ concat [ concat [ concat  [ find nets  "sim:/${REAL_STAGE_NAME}/*_i" ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*/*_o"] ]
+	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ]
+	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*_i" ] ]
+	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*_q" ] ]
+	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*/*_i" ] ]
+	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*/*_q" ] ]
+	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/prefetch_buffer_i/fetch_fifo_i/*_i" ] ]
+	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/prefetch_buffer_i/fifo_i/*_q" ] ]	
 } else {
-	set sim_fi_sig [ concat [ concat  [ find nets  "sim:/${REAL_STAGE_NAME}/*_i" ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] 
+	set sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*_i" ]
+	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*_q" ]]
+	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*_n" ]]
+	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*/*" ]]
+	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*/*/*" ]]
 }
 set sim_fi_sig_tmp $sim_fi_sig
 set sim_fi_sig ""
@@ -222,7 +222,7 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 	force -freeze $Clock 1'hx 0 -can 5
 	run 5 ns
 	# The until 60ns clock is at 0
-	force -freeze $Clock 0 0 -can {@60}
+	force -freeze $Clock 0 0 -can {60}
 	run 50 ns
 	# Finally clock run until the end of simulation
 	#force -freeze $Clock 0 0 , 1 5 -r 10 -can ${ENDSIM}
@@ -247,6 +247,7 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 			# Find instant time in which inject, this instant
 			# will be selected between 0 and ENDSIM/2
 			set fi_instant [expr {int(rand()*($ENDSIM-2*10))} ] 	
+			#set fi_instant 1000	
 			
 			puts "INFO: cycle $i"
 			# index of signal in which inject signal
@@ -323,9 +324,9 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 		puts "INFO SIM: running for $fi_instant_real"
 
 		puts "INFO SIM: fault injection time $now (fi_instant=$fi_instant)"
-		force -deposit "$sig_fi\[$bit_choose\]" $bit_force_value
 		#force -freeze "$sig_fi\[$bit_choose\]" $bit_force_value
 		run $fi_instant_real ns
+		force -deposit "$sig_fi\[$bit_choose\]" $bit_force_value
 		
 	}
     ###da cancellare
@@ -479,8 +480,8 @@ for {set i $n_fault} {$i<$CYCLE} {incr i} {
 		}			
 		puts [ compare info -signals ]
 		compare info -write savecompare.txt 1 50	
-		#puts "Press a key to continue."		
-		#set key [ gets stdin ]
+		puts "Press a key to continue."		
+		set key [ gets stdin ]
 	}
 
 	if {$FI > 0 } {

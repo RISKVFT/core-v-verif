@@ -1,0 +1,4 @@
+#!/bin/bash
+
+pkill -9 comp_sim.sh
+rm sim_FT/sim_out/*
