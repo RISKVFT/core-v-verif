@@ -2125,3 +2125,305 @@
 # Computing waveform differences from time 320018 ns to 6086431 ns
 # No differences found.
 # Updating waveform differences from time 6086431100 ps to 6406418 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database ./dataset/gold-ref-if_stage-coremark_1-out.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 2867356 ns to 3539093 ns
+# No differences found.
+# Updating waveform differences from time 3539093100 ps to 3575396 ns
+# No new differences found.
+# Updating waveform differences from time 3575396 ns to 3929266 ns
+# No new differences found.
+# Updating waveform differences from time 3929266 ns to 4283136 ns
+# No new differences found.
+# Updating waveform differences from time 4283136 ns to 4637006 ns
+# No new differences found.
+# Updating waveform differences from time 4637006 ns to 4990876 ns
+# No new differences found.
+# Updating waveform differences from time 4990876 ns to 5344746 ns
+# No new differences found.
+# Updating waveform differences from time 5344746 ns to 5698616 ns
+# No new differences found.
+# Updating waveform differences from time 5698616 ns to 6052486 ns
+# No new differences found.
+# Updating waveform differences from time 6052486 ns to 6406356 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database ./dataset/gold-ref-if_stage-coremark_1-out.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 122461 ns to 6283988 ns
+# No differences found.
+# Updating waveform differences from time 6283988100 ps to 6406361 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database ./dataset/gold-ref-if_stage-coremark_1-out.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 5736265 ns to 5736565 ns
+# No differences found.
+# Updating waveform differences from time 5736565 ns to 5803545 ns
+# No new differences found.
+# Updating waveform differences from time 5803545 ns to 5870525 ns
+# No new differences found.
+# Updating waveform differences from time 5870525 ns to 5937505 ns
+# No new differences found.
+# Updating waveform differences from time 5937505 ns to 6004485 ns
+# No new differences found.
+# Updating waveform differences from time 6004485 ns to 6071465 ns
+# No new differences found.
+# Updating waveform differences from time 6071465 ns to 6138445 ns
+# No new differences found.
+# Updating waveform differences from time 6138445 ns to 6205425 ns
+# No new differences found.
+# Updating waveform differences from time 6205425 ns to 6272405 ns
+# No new differences found.
+# Updating waveform differences from time 6272405 ns to 6339385 ns
+# No new differences found.
+# Updating waveform differences from time 6339385 ns to 6406365 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database ./dataset/gold-ref-if_stage-coremark_1-out.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 4357499 ns to 4357799 ns
+# No differences found.
+# Updating waveform differences from time 4357799 ns to 4562659 ns
+# No new differences found.
+# Updating waveform differences from time 4562659 ns to 4767519 ns
+# No new differences found.
+# Updating waveform differences from time 4767519 ns to 4972379 ns
+# No new differences found.
+# Updating waveform differences from time 4972379 ns to 5177239 ns
+# No new differences found.
+# Updating waveform differences from time 5177239 ns to 5382099 ns
+# No new differences found.
+# Updating waveform differences from time 5382099 ns to 5586959 ns
+# No new differences found.
+# Updating waveform differences from time 5586959 ns to 5791819 ns
+# No new differences found.
+# Updating waveform differences from time 5791819 ns to 5996679 ns
+# No new differences found.
+# Updating waveform differences from time 5996679 ns to 6201539 ns
+# No new differences found.
+# Updating waveform differences from time 6201539 ns to 6406399 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database ./dataset/gold-ref-if_stage-coremark_1-out.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 2441522 ns to 3964927 ns
+# No differences found.
+# Updating waveform differences from time 3964927100 ps to 4027662 ns
+# 
+# Max total difference limit of 1 reached.
+# Comparison reached total difference limit at time 3964930100 ps
+# Found 1 new difference.
+# ** Note: (vsim-8716) Reusing existing debug database ./dataset/gold-ref-if_stage-coremark_1-out.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 2740821 ns to 3665628 ns
+# No differences found.
+# Updating waveform differences from time 3665628100 ps to 3840711 ns
+# No new differences found.
+# Updating waveform differences from time 3840711 ns to 4207241 ns
+# No new differences found.
+# Updating waveform differences from time 4207241 ns to 4573771 ns
+# No new differences found.
+# Updating waveform differences from time 4573771 ns to 4940301 ns
+# No new differences found.
+# Updating waveform differences from time 4940301 ns to 5306831 ns
+# No new differences found.
+# Updating waveform differences from time 5306831 ns to 5673361 ns
+# No new differences found.
+# Updating waveform differences from time 5673361 ns to 6039891 ns
+# No new differences found.
+# Updating waveform differences from time 6039891 ns to 6406421 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database ./dataset/gold-ref-if_stage-coremark_1-out.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 6177984 ns to 6178284 ns
+# 
+# Max total difference limit of 1 reached.
+# Comparison reached total difference limit at time 6178010100 ps
+# Found 1 difference.
+# ** Note: (vsim-8716) Reusing existing debug database ./dataset/gold-ref-if_stage-coremark_1-out.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 575134 ns to 5831315 ns
+# No differences found.
+# Updating waveform differences from time 5831315100 ps to 6406434 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database ./dataset/gold-ref-if_stage-coremark_1-out.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 3970835 ns to 3971135 ns
+# 
+# Max total difference limit of 1 reached.
+# Comparison reached total difference limit at time 3970840100 ps
+# Found 1 difference.
+# ** Note: (vsim-8716) Reusing existing debug database ./dataset/gold-ref-if_stage-coremark_1-out.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 1363441 ns to 5043008 ns
+# No differences found.
+# Updating waveform differences from time 5043008100 ps to 5397901 ns
+# No new differences found.
+# Updating waveform differences from time 5397901 ns to 5902171 ns
+# No new differences found.
+# Updating waveform differences from time 5902171 ns to 6406441 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database ./dataset/gold-ref-if_stage-coremark_1-out.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 2176066 ns to 4230383 ns
+# No differences found.
+# Updating waveform differences from time 4230383100 ps to 4291366 ns
+# 
+# Max total difference limit of 1 reached.
+# Comparison reached total difference limit at time 4230390100 ps
+# Found 1 new difference.
+# ** Note: (vsim-8716) Reusing existing debug database ./dataset/gold-ref-if_stage-coremark_1-out.dbg.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Created 1 comparison.
+# Computing waveform differences from time 3406336 ns to 3406636 ns
+# No differences found.
+# Updating waveform differences from time 3406636 ns to 3706616 ns
+# No new differences found.
+# Updating waveform differences from time 3706616 ns to 4006596 ns
+# No new differences found.
+# Updating waveform differences from time 4006596 ns to 4306576 ns
+# No new differences found.
+# Updating waveform differences from time 4306576 ns to 4606556 ns
+# No new differences found.
+# Updating waveform differences from time 4606556 ns to 4906536 ns
+# No new differences found.
+# Updating waveform differences from time 4906536 ns to 5206516 ns
+# No new differences found.
+# Updating waveform differences from time 5206516 ns to 5506496 ns
+# No new differences found.
+# Updating waveform differences from time 5506496 ns to 5806476 ns
+# No new differences found.
+# Updating waveform differences from time 5806476 ns to 6106456 ns
+# No new differences found.
+# Updating waveform differences from time 6106456 ns to 6406436 ns
+# No new differences found.
+# ** Note: (vsim-8716) Reusing existing debug database ./dataset/gold-ref-if_stage-coremark_1-out.dbg.
