@@ -260,7 +260,7 @@ questa-sim-gui: vsim-run-gui &
 
 .PHONY: questa-sim-stage-gui
 questa-sim-stage-gui: ALL_VSIM_FLAGS += $(VSIM_GUI_FLAGS)
-questa-sim-stage-gui: ALL_VSIM_FLAGS += -vcdstim ./dataset/$(GOLD_NAME)-in.vcd -debugDB
+questa-sim-stage-gui: ALL_VSIM_FLAGS += -vcdstim ./dataset/$(GOLD_NAME)-in.vcd -debugDB=./dataset/$(GOLD_NAME)-out.dbg
 questa-sim-stage-gui: ALL_VSIM_FLAGS += +dumpports+nocollapse
 questa-sim-stage-gui:
 				$(VLIB) $(VWORK)
@@ -272,7 +272,7 @@ questa-sim-stage-gui:
 
 .PHONY: questa-sim-stage
 questa-sim-stage: ALL_VSIM_FLAGS += -c
-questa-sim-stage: ALL_VSIM_FLAGS += -vcdstim ./dataset/$(GOLD_NAME)-in.vcd -debugDB
+questa-sim-stage: ALL_VSIM_FLAGS += -vcdstim ./dataset/$(GOLD_NAME)-in.vcd -debugDB=./dataset/$(GOLD_NAME)-out.dbg
 questa-sim-stage: ALL_VSIM_FLAGS += +dumpports+nocollapse
 questa-sim-stage:
 				$(VLIB) $(VWORK)

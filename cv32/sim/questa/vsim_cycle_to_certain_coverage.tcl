@@ -21,7 +21,37 @@ puts "INFO] info_filename=$info_filename"
 
 # Find all signals that we use in fault injection
 # we use _i to filter out clock and reset 
-set sim_fi_sig [ concat [ concat [ concat  [ find nets  "sim:/${REAL_STAGE_NAME}/*_i" ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ] [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*/*_o"] ]
+
+set test "register_all"
+
+if { "$test" == "in" } {  
+        set sim_fi_sig [  find nets  "sim:/${REAL_STAGE_NAME}/*_i" ]
+} else {
+        if { "$test" == "register_in" } {
+                set sim_fi_sig [  find nets  "sim:/${REAL_STAGE_NAME}/*_i" ]
+                set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ]
+                set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ]
+                set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*_i" ] ]
+                set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*_q" ] ] 
+                set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*/*_i" ] ]
+                set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*/*_q" ] ]
+                set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/prefetch_buffer_i/fetch_fifo_i/*_i" ] ]
+                set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/prefetch_buffer_i/fifo_i/*_q" ] ]
+        } else {
+                if { "$test" == "register_compressed_decoder" } {
+                        set sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*_i" ]
+                        set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*_q" ]]
+                        set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*_n" ]]
+                        set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*/*" ]]
+                        set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*/*/*" ]]
+               } else {
+                        set sim_fi_sig [  find nets  -r "sim:/${REAL_STAGE_NAME}/*/*" ]
+                        set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*/*/*" ] ]
+                        set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_tr" ] ]
+               }
+        }
+}
+
 
 puts "INFO: signals: $sim_fi_sig $REAL_STAGE_NAME"
 
@@ -67,7 +97,7 @@ foreach sig_fi $sim_fi_sig {
 
 # function to calculate the number of cycle
 set P 0.5
-set E 0.05
+set E 0.04
 set N [ expr ($total_bit/10)*$ENDSIM ]
 set T 1.96
 #(1.96 confidence of 95%)

@@ -459,7 +459,7 @@ print_bar_text() {
     local time_left=$2
     local cycle_t=$3
     local cols=$(tput cols)
-    let bar_size=$cols-50
+    let bar_size=$cols-55
 
     local color="${COLOR_FG}${COLOR_BG}"
     if [ "$PROGRESS_BLOCKED" = "true" ]; then

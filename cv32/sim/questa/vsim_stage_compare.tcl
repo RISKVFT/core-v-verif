@@ -70,25 +70,49 @@ set n_fault 0
 
 set arch_used [ lindex [ split $GOLD_NAME "_" ] 1 ]
 set stage_used [ lindex [ split $GOLD_NAME "_" ] 2 ]
-set test "compressed_decoder"
+set test "register_all"
 
-if { "$test" == "all" } {
+if { "$test" == "in" } {
 	set sim_fi_sig [  find nets  "sim:/${REAL_STAGE_NAME}/*_i" ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*_i" ] ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*_q" ] ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*/*_i" ] ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*/*_q" ] ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/prefetch_buffer_i/fetch_fifo_i/*_i" ] ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/prefetch_buffer_i/fifo_i/*_q" ] ]	
 } else {
-	set sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*_i" ]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*_q" ]]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*_n" ]]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*/*" ]]
-	set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*/*/*" ]]
+	if { "$test" == "register_in" } {
+		set sim_fi_sig [  find nets  "sim:/${REAL_STAGE_NAME}/*_i" ]
+		set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_q" ] ]
+		set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*mem" ] ]
+		set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*_i" ] ]
+		set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*_q" ] ]
+		set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*/*_i" ] ]
+		set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*/*_q" ] ]
+		set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/prefetch_buffer_i/fetch_fifo_i/*_i" ] ]
+		set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/prefetch_buffer_i/fifo_i/*_q" ] ]	
+	} else {
+	 	if { "$test" == "register_compressed_decoder" } {
+			set sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*_i" ]
+			set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*_q" ]]
+			set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*_n" ]]
+			set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*/*" ]]
+			set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*/*/*" ]]	
+	       } else {
+			set sim_fi_sig [  find nets  -r "sim:/${REAL_STAGE_NAME}/*/*" ]
+			set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*/*/*" ] ]
+			set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_tr" ] ]
+	       }
+	}
 }
+
+set new_data_list []
+puts "----- START SIM_FI_SIG----------------------------------------"
+foreach line $sim_fi_sig {
+	if {! [string match *clk* $line]} {
+		lappend new_data_list $line 
+		puts $line
+	}   
+}
+set sim_fi_sig $new_data_list
+
+puts "----- SIM_FI_SIG----------------------------------------"
+puts $sim_fi_sig
+puts "END SIM_FI_SIG----------------------------------------"
 set sim_fi_sig_tmp $sim_fi_sig
 set sim_fi_sig ""
 # Copying each signal N times as the number of bits of that signal in order 

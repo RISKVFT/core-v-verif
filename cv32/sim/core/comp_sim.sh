@@ -9,6 +9,9 @@ cp comp_sim.sh comp_sim_tmp.sh
 # trap ctrl-c and call ctrl_c()
 trap ctrl_c INT
 trap exit_f EXIT
+
+HARD_ELABORATION=0
+
 #######################################################################
 # pipes
 name=$(echo $USER | tr '.' '_')
@@ -1135,7 +1138,8 @@ function manage_stage_fault_injection_upi () {
 	
 	sleep 2
 	SIM_IDS=$(ls $CORE_V_VERIF/cv32/sim/core/sim_FT/sim_out  | cut -d - -f 2,3,4,5 | sed 's/.txt//g' | sort -u)
-	elaborate_simulation_output "$ID"
+	#elaborate_simulation_output "$ID"
+	echo "To more info run: ./comp_sim.sh -esfiupi $ID"
 
 	kill_terminal "mail"
 	exit 
@@ -1296,6 +1300,8 @@ function sim_stage_fault_injection_upi () {
 			if [[ $line != "" ]]; then
 				CYCLE=$(echo $line | rev | cut -d ":" -f 1 | rev)
 			fi
+			db_becho "CYCLE = $CYCLE"
+			exit 
 		fi
 		db_becho "Entered CYCLE=$CYCLE"
 		# If CYCLE don't change means that the cycle for this stage
@@ -1309,6 +1315,7 @@ function sim_stage_fault_injection_upi () {
 				CYCLE=$(echo $line | rev | cut -d ":" -f 1 | rev)
 			fi
 			db_becho "CYCLE = $CYCLE"
+			exit 
 		fi
 		
 	fi
@@ -1502,9 +1509,11 @@ function elaborate_simulation_output () {
 
 	if [[ $fi > 0 ]]; then 
 		local fault_tolerance=$(echo "100*(1-$error/$tot_cycle)" | bc -l )
-		signals_elaboration $id
-		local signals_mean=$(echo $MEAN_ERROR | tr " " "\n" | \
-			sort -k 1.6,1.20 -n -r)
+		if [[ $HARD_ELABORATION == 1 ]]; then
+			signals_elaboration $id
+			local signals_mean=$(echo $MEAN_ERROR | tr " " "\n" | \
+				sort -k 1.6,1.20 -n -r)
+		fi
 	fi
 
 	# CLEAROUT variable said when to print an putput clean from color, used for send mail
@@ -1518,9 +1527,11 @@ function elaborate_simulation_output () {
 		db_gecho "Total number of signals that could be used" 
 		db_gecho "	for fault injection : $n_of_signal"
 		db_gecho "Fault tolerance ${fault_tolerance:0:6}%"
-		for sig_mean in $signals_mean; do
-			db_gecho "$(echo $sig_mean )"  #| sed -e 's/\#/ sig\:/g')"
-		done
+		if [[ $HARD_ELABORATION == 1 ]]; then
+			for sig_mean in $signals_mean; do
+				db_gecho "$(echo $sig_mean )"  #| sed -e 's/\#/ sig\:/g')"
+			done
+		fi
 	fi	
 	db_gecho "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 }
@@ -1721,7 +1732,7 @@ export GUI=""
 export SIM_BASE="tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
 export STAGE_NAME="if_stage"
 
-ARCH_TO_USE="ft"
+ARCH_TO_USE="ref"
 ARCH_TO_COMPARE="ref"
 export $ARCH_TO_USE
 export $ARCH_TO_COMPARE
