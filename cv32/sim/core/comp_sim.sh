@@ -1588,42 +1588,77 @@ function elaborate_all_sim_output () {
         local stage=$1
         local cycle=$2
 
-        local ids=$(echo $SIM_IDS | grep "$stage-.*-$cycle-1")
-        db_gecho "[INFO] ids elaborated: $ids"
-        ERROR_ELAB=""
-        for id in $ids; do
-                signals_total_elaboration $id
-        done
-        #signals_total_elaboration if_stage-csr_instructions-384-1
-        #echo $ERROR_ELAB
-        #echo $STE_SIGNALS
-        db_gecho "[INFO] Elaboration ..."
-        TOT_SIM_ERR_ELAB=""
-        for sig in $STE_SIGNALS; do
-                sig_elab=$(echo $ERROR_ELAB | tr " " "\n" | grep $sig)
-                db_becho "[INFO] elaboration of $sig"
-                local tot_sim=0
-                local tot_err=0
-                for se in $sig_elab; do
-                        tot_sim=$(echo "$(echo $se | tr "#" "\n" | grep sim | cut -d ":" -f 2)+$tot_sim" | bc -l)
-                        tot_err=$(echo "$(echo $se | tr "#" "\n" | grep ^err: | cut -d ":" -f 2)+$tot_err" | bc -l)
-                done
-                local percentage_errors=$(echo "scale=3; $tot_err/$tot_sim" | bc -l)
-                TOT_SIM_ERR_ELAB="$TOT_SIM_ERR_ELAB $sig#[perc_err:$percentage_errors#[err:$tot_err#[sim:$tot_sim"
-                #db_gecho $TOT_SIM_ERR_ELAB | tr " " "\n"
-        done
-        SIM_ERR_ELAB_ORD=$(echo $TOT_SIM_ERR_ELAB | tr " " "\n" | tr "#" " " | sed 's/:\./:0\./g' | sort -k 2.12,2.17 -n -r | tr " " "#")
+	if test -f $ERROR_DIR/elab-$stage-all-$cycle-1.txt; then	
+		cat $ERROR_DIR/elab-$stage-all-$cycle-1.txt
+		#local glob_tot_sim=0
+		#local glob_tot_err=0
+	 	#glob_tot_sim=$(echo $(cat $ERROR_DIR/elab-$stage-all-$cycle-1.txt  | grep SIMRES | tr -s " " | cut -d " " -f 5) | sed 's/ / + /g' | bc -l)	
+	 	#glob_tot_err=$(echo $(cat $ERROR_DIR/elab-$stage-all-$cycle-1.txt  | grep SIMRES | tr -s " " | cut -d " " -f 4) | sed 's/ / + /g' | bc -l)	
+	else
+		local ids=$(echo $SIM_IDS | grep "$stage-.*-$cycle-1")
+		db_gecho "[INFO] ids elaborated: $ids"
+		ERROR_ELAB=""
+		for id in $ids; do
+			signals_total_elaboration $id
+		done
+		#signals_total_elaboration if_stage-csr_instructions-384-1
+		#echo $ERROR_ELAB
+		#echo $STE_SIGNALS
+		db_gecho "[INFO] Elaboration ..."
+		TOT_SIM_ERR_ELAB=""
+		local glob_tot_sim=0
+		local glob_tot_err=0
+		for sig in $STE_SIGNALS; do
+			sig_elab=$(echo $ERROR_ELAB | tr " " "\n" | grep $sig)
+			db_becho "[INFO] elaboration of $sig"
+			local tot_sim=0
+			local tot_err=0
+			for se in $sig_elab; do
+				tot_sim=$(echo "$(echo $se | tr "#" "\n" | grep sim | cut -d ":" -f 2)+$tot_sim" | bc -l)
+				tot_err=$(echo "$(echo $se | tr "#" "\n" | grep ^err: | cut -d ":" -f 2)+$tot_err" | bc -l)
+			done
+			local percentage_errors=$(echo "scale=3; $tot_err/$tot_sim" | bc -l)
+			glob_tot_sim=$(echo "$glob_tot_sim+$tot_sim" | bc -l )
+			glob_tot_err=$(echo "$glob_tot_err+$tot_err" | bc -l )
+			TOT_SIM_ERR_ELAB="$TOT_SIM_ERR_ELAB $sig#[perc_err:$percentage_errors#[err:$tot_err#[sim:$tot_sim"
+			#db_gecho $TOT_SIM_ERR_ELAB | tr " " "\n"
+		done
+		SIM_ERR_ELAB_ORD=$(echo $TOT_SIM_ERR_ELAB | tr " " "\n" | tr "#" " " | sed 's/:\./:0\./g' | sort -k 2.12,2.17 -n -r | tr " " "#")
 
-        echo "" > $ERROR_DIR/elab-$stage-all-$cycle-1.txt
-        printf "%-90s %5s %5s %5s\n" "Signal_name" "err %" "err_n" "sim_n"\
-                >> $ERROR_DIR/elab-$stage-all-$cycle-1.txt
-        printf "%-90s %5s %5s %5s\n" "Signal_name" "err %" "err_n" "sim_n"
-        for line in $SIM_ERR_ELAB_ORD; do
-                arr=($(echo $line | tr "#" " "  | tr ":" "\n" | tr " " "\n" | grep -v "\["))
-                printf "%-90s %5s %5s %5s\n" ${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} \
-                        >> $ERROR_DIR/elab-$stage-all-$cycle-1.txt
-                printf "%-90s %5s %5s %5s\n" ${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]}
-        done
+		echo "" > $ERROR_DIR/elab-$stage-all-$cycle-1.txt
+		printf "TITLE:  %-90s %5s %5s %5s\n" "Signal_name" "err %" "err_n" "sim_n"\
+			>> $ERROR_DIR/elab-$stage-all-$cycle-1.txt
+		printf "%-90s %5s %5s %5s\n" "Signal_name" "err %" "err_n" "sim_n"
+		for line in $SIM_ERR_ELAB_ORD; do
+			arr=($(echo $line | tr "#" " "  | tr ":" "\n" | tr " " "\n" | grep -v "\["))
+			printf "SIMRES: %-90s %5s %5s %5s\n" ${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} \
+				>> $ERROR_DIR/elab-$stage-all-$cycle-1.txt
+			printf "%-90s %5s %5s %5s\n" ${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]}
+		done
+		local glob_perc=$(echo "scale=3; (1-$glob_tot_err/$glob_tot_sim)*100" | bc -l )
+		echo "Global Fault Tolerance from all benchmark: $glob_perc"
+		echo "Global Fault Tolerance from all benchmark: $glob_perc" >> $ERROR_DIR/elab-$stage-all-$cycle-1.txt
+		
+		err_files=$(ls $ERROR_DIR/cnt_error*$stage*$cycle*.txt)
+
+		printf "%-20s %-30s  %-7s %-18s %20s\n" " " "Benchmark" "FT%" "Sim Time" "Sig Number"
+		printf "%-20s %-30s  %-7s %-18s %20s\n" " " "Benchmark" "FT%" "Sim Time" "Sig Number" >>  $ERROR_DIR/elab-$stage-all-$cycle-1.txt
+		for file in $err_files; do
+			bench=$(echo $file | rev | cut -d "-" -f 3 | rev)
+			info_file=$(ls $ERROR_DIR/info*$stage*$cycle*.txt | grep $bench)
+			sig_n=$(cat $info_file | grep "Number_of_signal" | cut -d ":" -f 2)
+			sim_sec_time=$(cat $info_file | grep "Total_sim_time" | cut -d ":" -f 2)
+
+			if [[ $bench != "all" ]]; then
+				err=$(cat $file | bc -l)
+				ft=$(echo "scale=3; (1-$err/$cycle)*100" | bc -l)
+				printf "%-20s %-30s  %-7s %-18s %20s\n" "BENCH_FT:" "$bench" "$ft" "$(show_time sim_sec_time)" "$sig_n"
+				printf "%-20s %-30s  %-7s %-18s %20s\n" "BENCH_FT:" "$bench" "$ft" "$(show_time sim_sec_time)" "$sig_n" >>  $ERROR_DIR/elab-$stage-all-$cycle-1.txt
+			fi
+		done
+
+	fi
+
 }
 
 
@@ -1732,8 +1767,8 @@ export GUI=""
 export SIM_BASE="tb_top/cv32e40p_tb_wrapper_i/cv32e40p_core_i"
 export STAGE_NAME="if_stage"
 
-ARCH_TO_USE="ref"
-ARCH_TO_COMPARE="ref"
+ARCH_TO_USE="ft"
+ARCH_TO_COMPARE="ft"
 export $ARCH_TO_USE
 export $ARCH_TO_COMPARE
 
