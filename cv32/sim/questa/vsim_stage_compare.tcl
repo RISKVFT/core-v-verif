@@ -85,19 +85,22 @@ if { "$test" == "in" } {
 		set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_i/*/*_q" ] ]
 		set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/prefetch_buffer_i/fetch_fifo_i/*_i" ] ]
 		set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/prefetch_buffer_i/fifo_i/*_q" ] ]	
-	} else {
-	 	if { "$test" == "register_compressed_decoder" } {
-			set sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*_i" ]
-			set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*_q" ]]
-			set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*_n" ]]
-			set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*/*" ]]
-			set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*/*/*" ]]	
-	       } else {
-			set sim_fi_sig [  find nets  -r "sim:/${REAL_STAGE_NAME}/*/*" ]
-			set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*/*/*" ] ]
-			set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_tr" ] ]
-	       }
 	}
+	if { "$test" == "register_compressed_decoder" } {
+		set sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*_i" ]
+		set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*_q" ]]
+		set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*_n" ]]
+		set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*/*" ]]
+		set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/compressed_decoder_i/*/*/*" ]]	
+       	} 
+	if { "$test" == "register_all" } {
+		set sim_fi_sig [  find nets  -r "sim:/${REAL_STAGE_NAME}/*/*" ]
+		set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*/*/*" ] ]
+		set sim_fi_sig [ concat $sim_fi_sig [ find nets -r "sim:/${REAL_STAGE_NAME}/*_tr" ] ]
+       	}
+	if { "$test" == "output" } {
+		set sim_fi_sig [  find nets  -r "sim:/${REAL_STAGE_NAME}/*_o" ]
+       	}
 }
 
 set new_data_list []

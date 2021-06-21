@@ -1,4 +1,0 @@
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger_exception=0x00000000003fc800 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-vma .debugger=0x00000000003fc000 never used
-/software/pulp/riscv/bin/riscv32-unknown-elf-objcopy: --change-section-lma .debugger=0x00000000003fc000 never used

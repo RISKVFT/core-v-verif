@@ -1357,7 +1357,12 @@ function sim_stage_fault_injection_upi () {
 	
 	############# RUN SIMULATION #############################
 	if [[ $SWC == "all" ]]; then
-		hexfile=$(cd $BENCH_HEX_DIR; ls *.hex)
+		hexfile1=$(cd $BENCH_HEX_DIR; ls *.hex)
+
+	 	hexfile=$(for i in $hexfile1; do if [[ $(ls ./sim_FT/sim_out/ | grep $(echo $i | cut -d "." -f 1)| wc -l) -eq 0 ]]; then echo $i; fi; done)
+
+		db_gecho "$hexfile"
+
 
 		write_PIPENAME "cycle:all"
 		db_becho "INFO: send CYCLE through pipe"
@@ -2142,5 +2147,6 @@ for par in $ELABPAR;do
 			;;
 	esac
 done
+
 
 

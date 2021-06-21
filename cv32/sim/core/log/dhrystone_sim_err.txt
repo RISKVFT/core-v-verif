@@ -1,4 +1,0 @@
-Error: BadAccess (attempt to access private resource denied)
-Display=0x2091960 type=0 resourceid=0 serial=195350
-error_code=10 request_code=88 minor_code=0
-make: *** No rule to make target `&', needed by `questa-sim-gui'.  Stop.
